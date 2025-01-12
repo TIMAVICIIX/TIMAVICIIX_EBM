@@ -114,3 +114,11 @@ The following log is only written in Chinese! If you don't understand, please us
 * #### 书梯轨道\[book_stair_orbit\]：没有这个东西你可能把书梯骑着跑了
 
 #### 好了就这俩了，不画图标了。明天见
+
+## <br> 2025.01.12
+#### &emsp;书本白膜还差小型书籍，但是今天又想加入一个书本类型
+
+### Block
+* #### 期刊本\[periodical\]：制作简单，印刷方便，适合刊登周期更新的文章
+
+#### 好了好了，今天就先到这儿，明天把小型书籍模型建好，就可以先进行Item开发测试了
