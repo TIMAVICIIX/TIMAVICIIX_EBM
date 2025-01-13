@@ -1,4 +1,4 @@
-package cn.timaviciix.ebm
+package cn.timaviciix.ebm.data_generators
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator

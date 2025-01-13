@@ -23,7 +23,7 @@
 		],
 		"fabric-datagen": [
 			{
-				"value": "cn.timaviciix.ebm.TIMAVICIIXEBMDataGenerator",
+				"value": "cn.timaviciix.ebm.data_generators.TIMAVICIIXEBMDataGenerator",
 				"adapter": "kotlin"
 			}
 		]
