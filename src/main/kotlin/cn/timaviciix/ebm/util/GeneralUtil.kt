@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.util
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-13  23:32
- *@Description: TODO
+ *@Description: 全局方法包
  *@Version: 1.0
  */
 
