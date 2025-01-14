@@ -51,7 +51,7 @@ object GeneralUtil {
     //Nbt Operations final class
     object Nbt {
 
-        fun <T : Any> setNbtValue(stack: ItemStack, key: NbtKey<T>) {
+        fun <T : Any> setNbtValue(stack: ItemStack, key: NbtKey<T>, value: T) {
             stack.put(key, value)
         }
 

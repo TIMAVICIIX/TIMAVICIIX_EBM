@@ -34,23 +34,23 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
         class BookAttributes(private val stack: ItemStack) {
             var bookId: String = GeneralUtil.Nbt.getNbtValue(stack, BOOK_ID_KEY, "")
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, BOOK_ID_KEY)
+                    GeneralUtil.Nbt.setNbtValue(stack, BOOK_ID_KEY, value)
                     field = value
                 }
-            var pageCount:Int = GeneralUtil.Nbt.getNbtValue(stack, PAGE_COUNT_KEY,0)
-                set(value){
-                    GeneralUtil.Nbt.setNbtValue(stack, PAGE_COUNT_KEY)
-                    field = value
-                }
-            var copyPermission:Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY,false)
+            var pageCount: Int = GeneralUtil.Nbt.getNbtValue(stack, PAGE_COUNT_KEY, 0)
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, COPY_PERMISSION_KEY)
+                    GeneralUtil.Nbt.setNbtValue(stack, PAGE_COUNT_KEY, value)
+                    field = value
+                }
+            var copyPermission: Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY, false)
+                set(value) {
+                    GeneralUtil.Nbt.setNbtValue(stack, COPY_PERMISSION_KEY, value)
                     field = value
                 }
 
-            var author:String = GeneralUtil.Nbt.getNbtValue(stack, AUTHOR_KEY,"Unknown Author")
+            var author: String = GeneralUtil.Nbt.getNbtValue(stack, AUTHOR_KEY, "Unknown Author")
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, AUTHOR_KEY)
+                    GeneralUtil.Nbt.setNbtValue(stack, AUTHOR_KEY, value)
                     field = value
                 }
         }
