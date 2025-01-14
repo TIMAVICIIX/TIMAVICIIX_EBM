@@ -15,7 +15,7 @@ object GlobalData {
     const val MOD_ID = "timaviciix's_easy_book_management"
 
     //Books attributes
-    const val PAGE_COUNT_KEY = "page_count"
+    const val PAGE_COUNT = "page_count"
     const val AUTHOR = "author"
     const val COPY_PERMISSION = "copy_permission"
     const val BOOK_ID = "book_id"

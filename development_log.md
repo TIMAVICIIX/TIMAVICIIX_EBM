@@ -122,3 +122,7 @@ The following log is only written in Chinese! If you don't understand, please us
 * #### 期刊本\[periodical\]：制作简单，印刷方便，适合刊登周期更新的文章
 
 #### 好了好了，今天就先到这儿，明天把小型书籍模型建好，就可以先进行Item开发测试了
+
+## <br>2025.01.13
+#### &emsp; 完成了基本书抽象类的编写，整理了项目架构（又重温了一遍编程，还是Java（悲）
+#### &emsp;明天继续了，每天也就四五个小时拿来写Mod，太累了

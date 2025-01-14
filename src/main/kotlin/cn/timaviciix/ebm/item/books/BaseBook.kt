@@ -13,10 +13,7 @@ import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.nbt.NbtKey
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ItemStack
-import net.minecraft.text.Text
-import net.minecraft.world.World
 
 
 open class BaseBook(settings: Settings) : BaseItem(settings) {
@@ -29,9 +26,34 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
         //default attributes
         //Nbt Storage
         private val BOOK_ID_KEY = NbtKey(GlobalData.BOOK_ID, NbtKey.Type.STRING)
-        private val PAGE_COUNT_KEY = NbtKey(GlobalData.PAGE_COUNT_KEY, NbtKey.Type.INT)
+        private val PAGE_COUNT_KEY = NbtKey(GlobalData.PAGE_COUNT, NbtKey.Type.INT)
         private val COPY_PERMISSION_KEY = NbtKey(GlobalData.COPY_PERMISSION, NbtKey.Type.BOOLEAN)
         private val AUTHOR_KEY = NbtKey(GlobalData.AUTHOR, NbtKey.Type.STRING)
+
+
+        class BookAttributes(private val stack: ItemStack) {
+            var bookId: String = GeneralUtil.Nbt.getNbtValue(stack, BOOK_ID_KEY, "")
+                set(value) {
+                    GeneralUtil.Nbt.setNbtValue(stack, BOOK_ID_KEY)
+                    field = value
+                }
+            var pageCount:Int = GeneralUtil.Nbt.getNbtValue(stack, PAGE_COUNT_KEY,0)
+                set(value){
+                    GeneralUtil.Nbt.setNbtValue(stack, PAGE_COUNT_KEY)
+                    field = value
+                }
+            var copyPermission:Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY,false)
+                set(value) {
+                    GeneralUtil.Nbt.setNbtValue(stack, COPY_PERMISSION_KEY)
+                    field = value
+                }
+
+            var author:String = GeneralUtil.Nbt.getNbtValue(stack, AUTHOR_KEY,"Unknown Author")
+                set(value) {
+                    GeneralUtil.Nbt.setNbtValue(stack, AUTHOR_KEY)
+                    field = value
+                }
+        }
 
 
         /**
@@ -41,7 +63,7 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
          */
         private fun ensureBooID(stack: ItemStack): Boolean {
             if (!stack.has(BOOK_ID_KEY)) {
-                stack.put(BOOK_ID_KEY, GeneralUtil.generateShortUUID())
+                stack.put(BOOK_ID_KEY, GeneralUtil.Uuid.generateShortUUID())
                 return false
             }
             return true
@@ -52,10 +74,10 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
 
             val pages = splitContentIntoPages(bookContent)
 
-            for(i in 0.. pages.size){
-                stack.put(NbtKey(GlobalData.PAGE_STORAGE_SUFFIX+(i+1).toString(),NbtKey.Type.STRING),pages[i])
+            for (i in 0..pages.size) {
+                stack.put(NbtKey(GlobalData.PAGE_STORAGE_SUFFIX + (i + 1).toString(), NbtKey.Type.STRING), pages[i])
             }
-            stack.put(PAGE_COUNT_KEY,pages.size)
+            stack.put(PAGE_COUNT_KEY, pages.size)
         }
 
         /**
@@ -99,27 +121,27 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
             return pages
         }
 
+        fun isBookEmpty(stack: ItemStack): Boolean {
+            return BookAttributes(stack).pageCount == 0
+        }
+
         //default getters
 
-        fun getPageCount(stack: ItemStack): Int {
-            return stack.getOr(PAGE_COUNT_KEY, 0)
-        }
-
-        fun getAuthor(stack: ItemStack): String {
-            return stack.getOr(AUTHOR_KEY, "Unknown_Author")
-        }
-
-        fun canCopy(stack: ItemStack): Boolean {
-            return stack.getOr(COPY_PERMISSION_KEY, false)
-        }
-
-        fun isBookEmpty(stack: ItemStack): Boolean {
-            return getPageCount(stack) == 0
-        }
-
-        fun getBookId(stack: ItemStack): String {
-            return stack.get(BOOK_ID_KEY)
-        }
+//        fun getPageCount(stack: ItemStack): Int {
+//            return stack.getOr(PAGE_COUNT_KEY, 0)
+//        }
+//
+//        fun getAuthor(stack: ItemStack): String {
+//            return stack.getOr(AUTHOR_KEY, "Unknown_Author")
+//        }
+//
+//        fun canCopy(stack: ItemStack): Boolean {
+//            return stack.getOr(COPY_PERMISSION_KEY, false)
+//        }
+//
+//        fun getBookId(stack: ItemStack): String {
+//            return stack.get(BOOK_ID_KEY)
+//        }
 
         //tooltip
 //        fun appendTooltip(stack: ItemStack?, world: World?, tooltip: MutableList<Text?>, context: TooltipContext?) {
