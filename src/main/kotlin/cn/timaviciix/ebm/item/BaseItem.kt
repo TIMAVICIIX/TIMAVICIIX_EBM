@@ -9,6 +9,17 @@
 
 package cn.timaviciix.ebm.item
 
+import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.item.Item
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
+import net.minecraft.util.Identifier
 
-open class BaseItem(settings:Settings): Item(settings)
+open class BaseItem(settings: Settings) : Item(settings) {
+
+    //RegistryHandler
+    fun registryMe(name: String): Item {
+        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), this)
+    }
+
+}

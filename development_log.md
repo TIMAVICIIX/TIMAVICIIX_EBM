@@ -126,3 +126,9 @@ The following log is only written in Chinese! If you don't understand, please us
 ## <br>2025.01.13
 #### &emsp; 完成了基本书抽象类的编写，整理了项目架构（又重温了一遍编程，还是Java（悲）
 #### &emsp;明天继续了，每天也就四五个小时拿来写Mod，太累了
+
+## <br>2025.01.14
+#### &emsp;14号居然没写日志？补上补上~
+
+## <br>2025.01.15
+#### &emsp;今天在进行Item导入测试，看看图标是否清晰，需不需要重绘。而且还有近半的图标没有绘制，螺旋开发能够避免颠覆性错误 \(￣▽￣\)

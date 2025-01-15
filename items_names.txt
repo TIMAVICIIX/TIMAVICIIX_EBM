@@ -6,7 +6,7 @@ Refined Leather Book
 Luxurious Gilded Book
 
 3.石晶金边书本
-Opulent Quartz-Gilded Book
+Quartz-Gilded Book
 
 4.曜石金边书本
 Sturdy Obsidian-Gilded Book
@@ -31,3 +31,5 @@ Golden Bough Forest Book
 
 11.赤焰金边书册
 Crimson Flame Gilded Book
+
+物品名录（不包含可放置item）：

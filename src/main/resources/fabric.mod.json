@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
 	"id": "timaviciix-ebm",
-	"version": "${version}",
+	"version": "1.0.1",
 	"name": "TIMAVICIIX-EBM",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"TIMAVICIIX"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",

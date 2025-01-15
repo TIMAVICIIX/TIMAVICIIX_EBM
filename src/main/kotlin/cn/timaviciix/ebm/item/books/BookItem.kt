@@ -12,11 +12,12 @@ package cn.timaviciix.ebm.item.books
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
+import io.wispforest.owo.itemgroup.OwoItemSettings
 import io.wispforest.owo.nbt.NbtKey
 import net.minecraft.item.ItemStack
 
 
-open class BaseBook(settings: Settings) : BaseItem(settings) {
+open class BookItem :BaseItem(OwoItemSettings().group(GlobalData.EBM_ITEM_GROUP).maxCount(64)) {
     companion object {
         //final configurations
         // Max charsets per page
@@ -32,26 +33,25 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
 
 
         class BookAttributes(private val stack: ItemStack) {
-            var bookId: String = GeneralUtil.Nbt.getNbtValue(stack, BOOK_ID_KEY, "")
+            var bookId: String = GeneralUtil.Nbt.getNbtValue(stack, BOOK_ID_KEY, "") {
+                ensureBooID(stack)
+            }
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, BOOK_ID_KEY, value)
-                    field = value
+                    field = GeneralUtil.Nbt.setNbtValue(stack, BOOK_ID_KEY, value, null)
                 }
-            var pageCount: Int = GeneralUtil.Nbt.getNbtValue(stack, PAGE_COUNT_KEY, 0)
+            var pageCount: Int = GeneralUtil.Nbt.getNbtValue(stack, PAGE_COUNT_KEY, 0, null)
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, PAGE_COUNT_KEY, value)
-                    field = value
+                    field = GeneralUtil.Nbt.setNbtValue(stack, PAGE_COUNT_KEY, value, null)
                 }
-            var copyPermission: Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY, false)
+            var copyPermission: Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY, false, null)
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, COPY_PERMISSION_KEY, value)
-                    field = value
+                    var copyPermission: Boolean = GeneralUtil.Nbt.getNbtValue(stack, COPY_PERMISSION_KEY, false, null)
+                    field = GeneralUtil.Nbt.setNbtValue(stack, COPY_PERMISSION_KEY, value, null)
                 }
 
-            var author: String = GeneralUtil.Nbt.getNbtValue(stack, AUTHOR_KEY, "Unknown Author")
+            var author: String = GeneralUtil.Nbt.getNbtValue(stack, AUTHOR_KEY, "Unknown Author", null)
                 set(value) {
-                    GeneralUtil.Nbt.setNbtValue(stack, AUTHOR_KEY, value)
-                    field = value
+                    field = GeneralUtil.Nbt.setNbtValue(stack, AUTHOR_KEY, value, null)
                 }
         }
 
@@ -108,7 +108,7 @@ open class BaseBook(settings: Settings) : BaseItem(settings) {
          * @param bookContent all Strings In TheBook
          * @return returns A List Of Pages With words
          */
-        fun splitContentIntoPages(bookContent: String): List<String> {
+        private fun splitContentIntoPages(bookContent: String): List<String> {
             val pages: MutableList<String> = mutableListOf()
             val charNumber = bookContent.length
 

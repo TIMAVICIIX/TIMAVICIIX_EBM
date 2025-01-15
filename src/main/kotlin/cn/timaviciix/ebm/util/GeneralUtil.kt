@@ -9,9 +9,11 @@
 
 package cn.timaviciix.ebm.util
 
+import cn.timaviciix.ebm.item.BaseItem
 import io.wispforest.owo.nbt.NbtKey
 import net.minecraft.item.ItemStack
 import java.util.*
+import kotlin.reflect.KProperty
 
 
 object GeneralUtil {
@@ -49,17 +51,36 @@ object GeneralUtil {
     }
 
     //Nbt Operations final class
+    //@Imp: extendsOperations It can be used to accompany the operation empty, and the overall situation of the code is evaluated later to consider deletion and modification
     object Nbt {
 
-        fun <T : Any> setNbtValue(stack: ItemStack, key: NbtKey<T>, value: T) {
+        fun <T : Any> setNbtValue(
+            stack: ItemStack,
+            key: NbtKey<T>,
+            value: T,
+            extendsOperation: ((value: ItemStack) -> Unit)?
+        ): T {
+            extendsOperation?.let { extendsOperation(stack) }
             stack.put(key, value)
+            return value
         }
 
-        fun <T : Any> getNbtValue(stack: ItemStack, key: NbtKey<T>, default: T): T {
+        fun <T : Any> getNbtValue(
+            stack: ItemStack,
+            key: NbtKey<T>,
+            default: T,
+            extendsOperation: ((value: ItemStack) -> Unit)?
+        ): T {
+            extendsOperation?.let { extendsOperation(stack) }
             return if (stack.has(key)) stack.get(key) else default
         }
 
     }
 
+
+    //Kotlin Reflect
+    fun <T> getPropertyName(property: KProperty<T>): String {
+        return property.name.lowercase(Locale.getDefault())
+    }
 
 }
