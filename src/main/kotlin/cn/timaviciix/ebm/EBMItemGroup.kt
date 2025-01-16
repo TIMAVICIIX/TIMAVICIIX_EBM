@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-16  12:55
- *@Description: TODO
+ *@Description: EBM的Item Group
  *@Version: 1.0
  */
 
