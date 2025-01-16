@@ -9,6 +9,7 @@
 
 package cn.timaviciix.ebm.item.books
 
+import cn.timaviciix.ebm.EBMItemGroup
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
@@ -17,7 +18,7 @@ import io.wispforest.owo.nbt.NbtKey
 import net.minecraft.item.ItemStack
 
 
-open class BookItem :BaseItem(OwoItemSettings().group(GlobalData.EBM_ITEM_GROUP).maxCount(64)) {
+open class BookItem :BaseItem(OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)) {
     companion object {
         //final configurations
         // Max charsets per page

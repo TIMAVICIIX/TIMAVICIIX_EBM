@@ -18,7 +18,10 @@ import net.minecraft.util.Identifier
 object GlobalData {
 
     // Mod ID
-    const val MOD_ID = "timaviciix_easy_book_management"
+    const val MOD_ID = "timaviciix_ebm"
+    const val ITEM_GROUP_ID = "ebm"
+    const val MOD_NAME_KEY = "item.timaviciix-ebm-group"
+
 
     //Books attributes
     const val PAGE_COUNT = "page_count"
@@ -28,11 +31,12 @@ object GlobalData {
     const val PAGE_STORAGE_SUFFIX = "page_"
 
     //Item Group
-    val EBM_ITEM_GROUP: OwoItemGroup = OwoItemGroup.builder(
-        Identifier(MOD_ID, "book")
-    ) {
-        Icon.of(ItemStack(BookRegister.CLASSIC_JOURNAL_BOOK))
-    }.build()
+    //@Imp:Deprecated
+//    val EBM_ITEM_GROUP: OwoItemGroup = OwoItemGroup.builder(
+//        Identifier(MOD_ID, "book")
+//    ) {
+//        Icon.of(ItemStack(BookRegister.REFINED_LEATHER_BOOK))
+//    }.build()
 
     // Item id
     object ItemId {

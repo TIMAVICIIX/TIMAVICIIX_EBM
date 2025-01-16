@@ -9,6 +9,4 @@
 
 package cn.timaviciix.ebm.item.books
 
-class LightBook : BookItem() {
-    //TODO
-}
+class LightBook : BookItem()

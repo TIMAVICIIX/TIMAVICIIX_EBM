@@ -9,6 +9,4 @@
 
 package cn.timaviciix.ebm.item.books
 
-class JournalBook:BookItem() {
-    //TODO
-}
+class JournalBook:BookItem()
