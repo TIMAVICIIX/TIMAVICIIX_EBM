@@ -3,7 +3,7 @@
 	"id": "timaviciix_ebm",
 	"version": "1.0.1",
 	"name": "TIMAVICIIX-EBM",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This mod enables simple and efficient book management, making your world even more colorful!",
 	"authors": [
 		"TIMAVICIIX"
 	],
@@ -12,7 +12,7 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/timaviciix-ebm/icon.png",
+	"icon": "assets/timaviciix_ebm/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -29,7 +29,7 @@
 		]
 	},
 	"mixins": [
-		"timaviciix-ebm.mixins.json"
+		"timaviciix_ebm.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",

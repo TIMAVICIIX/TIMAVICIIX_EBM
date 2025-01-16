@@ -19,8 +19,7 @@ object GlobalData {
 
     // Mod ID
     const val MOD_ID = "timaviciix_ebm"
-    const val ITEM_GROUP_ID = "ebm"
-    const val MOD_NAME_KEY = "item.timaviciix-ebm-group"
+    const val ITEM_GROUP_ID = "timaviciix_ebm_group"
 
 
     //Books attributes
@@ -40,7 +39,7 @@ object GlobalData {
 
     // Item id
     object ItemId {
-        const val CLASSIC_JOURNAL_BOOK = "class_journal_book"
+        const val CLASSIC_JOURNAL_BOOK = "classic_journal_book"
         const val REFINED_LEATHER_BOOK = "refined_leather_book"
         const val LUXURIOUS_GILDED_BOOK = "luxurious_gilded_book"
         const val QUARTZ_GILDED_BOOK = "quartz_gilded_book"

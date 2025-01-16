@@ -18,7 +18,7 @@ import io.wispforest.owo.nbt.NbtKey
 import net.minecraft.item.ItemStack
 
 
-open class BookItem :BaseItem(OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)) {
+interface BookItem :BaseItem {
     companion object {
         //final configurations
         // Max charsets per page

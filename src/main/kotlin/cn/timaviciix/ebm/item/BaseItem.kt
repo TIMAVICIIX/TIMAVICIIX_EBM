@@ -15,11 +15,11 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
-open class BaseItem(settings: Settings) : Item(settings) {
+interface BaseItem {
 
     //RegistryHandler
-    fun registryMe(name: String): Item {
-        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), this)
+    fun registryMe(name: String, self:Item): Item {
+        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name),self )
     }
 
 }

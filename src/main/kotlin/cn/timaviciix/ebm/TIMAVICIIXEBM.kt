@@ -5,6 +5,8 @@ import cn.timaviciix.ebm.item.books.LargeBook
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
+import net.minecraft.item.ItemGroups
 import org.slf4j.LoggerFactory
 
 object TIMAVICIIXEBM : ModInitializer {
@@ -17,18 +19,13 @@ object TIMAVICIIXEBM : ModInitializer {
         // Proceed with mild caution.
         logger.info("Welcome back TIMAVICIIX's EBM")
 
-        //Test Area
-        val book:LargeBook = BookRegister.RUBY_GILDED_BOOK
-        if (book!=null){
-            logger.info("Book is init!")
-        }
-
         //OWO lib cant cast kotlin construction and object class ?
-        //@Imp:Resolved
+        //@Imp:Resolved !!!
         FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
 
         //buildItemGroup
         EBMItemGroup(null,null).buildAndInitItemGroup()
+
     }
 
 

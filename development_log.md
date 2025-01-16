@@ -132,3 +132,6 @@ The following log is only written in Chinese! If you don't understand, please us
 
 ## <br>2025.01.15
 #### &emsp;今天在进行Item导入测试，看看图标是否清晰，需不需要重绘。而且还有近半的图标没有绘制，螺旋开发能够避免颠覆性错误 \(￣▽￣\)
+
+## <br>2025.01.16
+#### &emsp;错误这不就来了吗，Item注册时发生错误，用Kotlin+Owo库开发风险还是太高了，Kotlin低普适性和Owo太哈人了,,, mad 17号了<br> &emsp;改好了卧槽，17号凌晨2点了
