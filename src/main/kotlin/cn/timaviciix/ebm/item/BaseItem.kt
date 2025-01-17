@@ -9,13 +9,13 @@
 
 package cn.timaviciix.ebm.item
 
-import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.item.Item
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
+import net.minecraft.item.ItemStack
+import net.minecraft.text.Style
+import net.minecraft.text.Text
+import net.minecraft.text.TextColor
 
-interface BaseItem {
+open class BaseItem(nameColor: Int, settings: Settings) : Item(settings) {
 
 //    RegistryHandler
 //    @Imp: Deprecated
@@ -23,5 +23,15 @@ interface BaseItem {
 //    fun registryMe(name: String, self:Item): Item {
 //        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name),self )
 //    }
+
+    private var nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
+
+    override fun getName(): Text {
+        return super.getName().copy().setStyle(nameStyle)
+    }
+
+    override fun getName(stack: ItemStack?): Text {
+        return super.getName(stack).copy().setStyle(nameStyle)
+    }
 
 }

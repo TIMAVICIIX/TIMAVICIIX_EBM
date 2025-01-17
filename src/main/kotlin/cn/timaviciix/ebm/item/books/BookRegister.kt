@@ -24,7 +24,11 @@ class BookRegister() : ItemRegistryContainer {
         //Book Items
         val CLASSIC_JOURNAL_BOOK = registryMe(GlobalData.ItemId.CLASSIC_JOURNAL_BOOK, JournalBook())
 
+        val CRIMSON_FLAME_GILDED_BOOK = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOK, LightBook())
+        val GOLDEN_BOUGH_FOREST_BOOK = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOK, LightBook())
+
         val REFINED_LEATHER_BOOK = registryMe(GlobalData.ItemId.REFINED_LEATHER_BOOK, GeneralBook())
+        val QUARTZ_LEATHER_BOOK = registryMe(GlobalData.ItemId.QUARTZ_LEATHER_BOOK,GeneralBook())
         val LUXURIOUS_GILDED_BOOK = registryMe(GlobalData.ItemId.LUXURIOUS_GILDED_BOOK, GeneralBook())
         val QUART_GILDED_BOOK = registryMe(GlobalData.ItemId.QUARTZ_GILDED_BOOK, GeneralBook())
         val STURDY_OBSIDIAN_GILDED_BOOK = registryMe(GlobalData.ItemId.STURDY_OBSIDIAN_GILDED_BOOK, GeneralBook())
@@ -33,9 +37,6 @@ class BookRegister() : ItemRegistryContainer {
         val QUARTZ_RUBY_ENCRUSTED_BOOK = registryMe(GlobalData.ItemId.QUARTZ_RUBY_ENCRUSTED_BOOK, LargeBook())
         val SAPPHIRE_GILDED_BOOK = registryMe(GlobalData.ItemId.SAPPHIRE_GILDED_BOOK, LargeBook())
         val RUBY_GILDED_BOOK = registryMe(GlobalData.ItemId.RUBY_GILDED_BOOK, LargeBook())
-
-        val CRIMSON_FLAME_GILDED_BOOK = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOK, LightBook())
-        val GOLDEN_BOUGH_FOREST_BOOK = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOK, LightBook())
 
         private fun registryMe(name: String, item: Item): Item {
             return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), item)

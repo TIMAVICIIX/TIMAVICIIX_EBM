@@ -14,4 +14,6 @@ import io.wispforest.owo.itemgroup.OwoItemSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 
-class LargeBook:BookItem,Item(OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64))
+class LargeBook:BookItem(0xfa4659,OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)){
+
+}

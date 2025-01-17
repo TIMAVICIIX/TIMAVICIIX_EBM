@@ -9,16 +9,20 @@
 
 package cn.timaviciix.ebm.item.books
 
-import cn.timaviciix.ebm.EBMItemGroup
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
-import io.wispforest.owo.itemgroup.OwoItemSettings
 import io.wispforest.owo.nbt.NbtKey
 import net.minecraft.item.ItemStack
 
 
-interface BookItem :BaseItem {
+open class BookItem(
+    nameColor: Int,
+    settings: Settings
+) : BaseItem(nameColor,settings) {
+
+    //Base methods
+
     companion object {
         //final configurations
         // Max charsets per page

@@ -42,6 +42,7 @@ object GlobalData {
     object ItemId {
         const val CLASSIC_JOURNAL_BOOK = "classic_journal_book"
         const val REFINED_LEATHER_BOOK = "refined_leather_book"
+        const val QUARTZ_LEATHER_BOOK = "quartz_leather_book"
         const val LUXURIOUS_GILDED_BOOK = "luxurious_gilded_book"
         const val QUARTZ_GILDED_BOOK = "quartz_gilded_book"
         const val STURDY_OBSIDIAN_GILDED_BOOK = "sturdy_obsidian_gilded_book"

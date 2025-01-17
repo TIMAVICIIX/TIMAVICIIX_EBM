@@ -11,25 +11,28 @@ Quartz-Gilded Book
 4.曜石金边书本
 Sturdy Obsidian-Gilded Book
 
-5.坤舆金乌书典
+5.石晶皮革书本
+Quartz Leather Book
+
+6.坤舆金乌书典
 Majestic Gilded Book
 
-6.玛瑙石晶书典
+7.玛瑙石晶书典
 Quartz-Ruby Encrusted Book
 
-7.蓝晶金辉书典
+8.蓝晶金辉书典
 Sapphire-Gilded Book
 
-8.赤宝金辉书典
+9.赤宝金辉书典
 Ruby-Gilded Book
 
-9.经典期刊本
+10.经典期刊本
 Classic Journal Book
 
-10.金枝密林书册
+11.金枝密林书册
 Golden Bough Forest Book
 
-11.赤焰金边书册
+12.赤焰金边书册
 Crimson Flame Gilded Book
 
 物品名录（不包含可放置item）：

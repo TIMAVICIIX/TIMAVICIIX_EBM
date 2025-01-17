@@ -11,7 +11,6 @@ package cn.timaviciix.ebm.item.books
 
 import cn.timaviciix.ebm.EBMItemGroup
 import io.wispforest.owo.itemgroup.OwoItemSettings
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.minecraft.item.Item
 
-class LightBook : BookItem,Item(OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64))
+class LightBook : BookItem(0x55e9bc,OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)) {
+}

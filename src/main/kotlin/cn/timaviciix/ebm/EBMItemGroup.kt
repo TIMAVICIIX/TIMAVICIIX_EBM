@@ -31,6 +31,7 @@ class EBMItemGroup(
             it.addButton(ItemGroupButton.github(it, "https://github.com/TIMAVICIIX/TIMAVICIIX_EBM"))
         }.build()
 
+        //@Imp:Deprecated
 //        fun addItemsToIG(entries:FabricItemGroupEntries){
 //            entries.apply {
 //                add(BookRegister.CLASSIC_JOURNAL_BOOK)
