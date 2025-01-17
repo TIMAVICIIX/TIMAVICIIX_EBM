@@ -1,6 +1,7 @@
 {
-  "itemGroup.timaviciix_ebm.timaviciix_ebm_group": "Timaviciix的简单图书管理",
+  "itemGroup.timaviciix_ebm.timaviciix_ebm_group": "TIMAVICIIX的简单图书管理",
   "item.timaviciix_ebm.classic_journal_book": "经典期刊本",
+  "item.timaviciix_ebm.classic_journal_book_desc": "思想深处如泉涌，书中自有千年话。",
   "item.timaviciix_ebm.refined_leather_book": "精致皮革书本",
   "item.timaviciix_ebm.luxurious_gilded_book": "精致金边书本",
   "item.timaviciix_ebm.quartz_gilded_book": "石晶金边书本",

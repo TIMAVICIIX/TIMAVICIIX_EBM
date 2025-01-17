@@ -17,9 +17,11 @@ import net.minecraft.util.Identifier
 
 interface BaseItem {
 
-    //RegistryHandler
-    fun registryMe(name: String, self:Item): Item {
-        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name),self )
-    }
+//    RegistryHandler
+//    @Imp: Deprecated
+
+//    fun registryMe(name: String, self:Item): Item {
+//        return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name),self )
+//    }
 
 }

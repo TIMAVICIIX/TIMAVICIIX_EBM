@@ -28,6 +28,7 @@ object GlobalData {
     const val COPY_PERMISSION = "copy_permission"
     const val BOOK_ID = "book_id"
     const val PAGE_STORAGE_SUFFIX = "page_"
+    const val DESC_SUFFIX = "_desc"
 
     //Item Group
     //@Imp:Deprecated

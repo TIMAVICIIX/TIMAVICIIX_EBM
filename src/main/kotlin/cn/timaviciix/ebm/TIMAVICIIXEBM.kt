@@ -2,6 +2,7 @@ package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.item.books.BookRegister
 import cn.timaviciix.ebm.item.books.LargeBook
+import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
@@ -23,8 +24,12 @@ object TIMAVICIIXEBM : ModInitializer {
         //@Imp:Resolved !!!
         FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
 
+        //ToolTip Init
+        ToolTipBus.initAllTooltip()
+
         //buildItemGroup
         EBMItemGroup(null,null).buildAndInitItemGroup()
+
 
     }
 
