@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "timaviciix_ebm:item/sturdy_obsidian_gilded_bookcase"
+  }
+}

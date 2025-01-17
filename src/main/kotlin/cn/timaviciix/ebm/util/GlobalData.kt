@@ -9,12 +9,6 @@
 
 package cn.timaviciix.ebm.util
 
-import cn.timaviciix.ebm.item.books.BookRegister
-import io.wispforest.owo.itemgroup.Icon
-import io.wispforest.owo.itemgroup.OwoItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.util.Identifier
-
 object GlobalData {
 
     // Mod ID
@@ -52,6 +46,18 @@ object GlobalData {
         const val RUBY_GILDED_BOOK = "ruby_gilded_book"
         const val GOLDEN_BOUGH_FOREST_BOOK = "golden_bough_forest_book"
         const val CRIMSON_FLAME_GILDED_BOOK = "crimson_flame_gilded_book"
+
+        const val REFINED_LEATHER_BOOKCASE = "refined_leather_bookcase"
+        const val QUARTZ_LEATHER_BOOKCASE = "quartz_leather_bookcase"
+        const val LUXURIOUS_GILDED_BOOKCASE = "luxurious_gilded_bookcase"
+        const val QUARTZ_GILDED_BOOKCASE = "quartz_gilded_bookcase"
+        const val STURDY_OBSIDIAN_GILDED_BOOKCASE = "sturdy_obsidian_gilded_bookcase"
+        const val MAJESTIC_GILDED_BOOKCASE = "majestic_gilded_bookcase"
+        const val QUARTZ_RUBY_ENCRUSTED_BOOKCASE = "quartz_ruby_encrusted_bookcase"
+        const val SAPPHIRE_GILDED_BOOKCASE = "sapphire_gilded_bookcase"
+        const val RUBY_GILDED_BOOKCASE = "ruby_gilded_bookcase"
+        const val GOLDEN_BOUGH_FOREST_BOOKCASE = "golden_bough_forest_bookcase"
+        const val CRIMSON_FLAME_GILDED_BOOKCASE = "crimson_flame_gilded_bookcase"
     }
 
 

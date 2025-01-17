@@ -137,5 +137,5 @@ The following log is only written in Chinese! If you don't understand, please us
 #### &emsp;错误这不就来了吗，Item注册时发生错误，用Kotlin+Owo库开发风险还是太高了，Kotlin低普适性和Owo太哈人了,,, mad 17号了<br> &emsp;改好了卧槽，17号凌晨2点了
 
 ## <br>2025.01.17
-#### &emsp;画书壳素材中，重绘了icon，还行吧？
+#### &emsp;画书壳素材中，重绘了icon，还行吧？明天看看成就系统怎么写！睡觉！！！
 ![icon](/display_files/icon.png)

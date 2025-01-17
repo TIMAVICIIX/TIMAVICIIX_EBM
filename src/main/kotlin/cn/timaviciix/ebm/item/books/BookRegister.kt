@@ -38,6 +38,22 @@ class BookRegister() : ItemRegistryContainer {
         val SAPPHIRE_GILDED_BOOK = registryMe(GlobalData.ItemId.SAPPHIRE_GILDED_BOOK, LargeBook())
         val RUBY_GILDED_BOOK = registryMe(GlobalData.ItemId.RUBY_GILDED_BOOK, LargeBook())
 
+
+        //Bookcase Items
+        val CRIMSON_FLAME_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOKCASE, BookcaseItem())
+        val GOLDEN_BOUGH_FOREST_BOOKCASE = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOKCASE, BookcaseItem())
+
+        val REFINED_LEATHER_BOOKCASE = registryMe(GlobalData.ItemId.REFINED_LEATHER_BOOKCASE, BookcaseItem())
+        val QUARTZ_LEATHER_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_LEATHER_BOOKCASE,BookcaseItem())
+        val LUXURIOUS_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.LUXURIOUS_GILDED_BOOKCASE, BookcaseItem())
+        val QUART_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_GILDED_BOOKCASE, BookcaseItem())
+        val STURDY_OBSIDIAN_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.STURDY_OBSIDIAN_GILDED_BOOKCASE, BookcaseItem())
+
+        val MAJESTIC_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.MAJESTIC_GILDED_BOOKCASE, BookcaseItem())
+        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_RUBY_ENCRUSTED_BOOKCASE, BookcaseItem())
+        val SAPPHIRE_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.SAPPHIRE_GILDED_BOOKCASE, BookcaseItem())
+        val RUBY_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.RUBY_GILDED_BOOKCASE, BookcaseItem())
+
         private fun registryMe(name: String, item: Item): Item {
             return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), item)
         }
