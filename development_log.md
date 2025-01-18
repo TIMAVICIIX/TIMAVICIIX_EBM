@@ -139,3 +139,6 @@ The following log is only written in Chinese! If you don't understand, please us
 ## <br>2025.01.17
 #### &emsp;画书壳素材中，重绘了icon，还行吧？明天看看成就系统怎么写！睡觉！！！
 ![icon](/display_files/icon.png)
+
+## <br>2025.01.18
+#### &emsp;今天和自动注册斗智斗勇了一天，Kotlin的AnnotationProcessor有点抽风，以后再解决了，注册就先硬编码了，不然赶不上进度！
