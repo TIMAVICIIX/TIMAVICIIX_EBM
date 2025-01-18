@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.item.books
 
 import cn.timaviciix.ebm.util.GlobalData
+import cn.timaviciix.ebm.util.annotations.RegistryItem
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
@@ -23,6 +24,8 @@ class BookRegister() : ItemRegistryContainer {
     companion object {
         //Book Items
         val CLASSIC_JOURNAL_BOOK = registryMe(GlobalData.ItemId.CLASSIC_JOURNAL_BOOK, JournalBook())
+
+        val CUT_SIZE_BOOK_PAPER = registryMe(GlobalData.ItemId.CUT_SIZE_BOOK_PAPER, GeneralBook())
 
         val CRIMSON_FLAME_GILDED_BOOK = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOK, LightBook())
         val GOLDEN_BOUGH_FOREST_BOOK = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOK, LightBook())
