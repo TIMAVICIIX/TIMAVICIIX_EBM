@@ -34,6 +34,7 @@ object GlobalData {
 
     // Item id
     object ItemId {
+        const val CUT_SIZE_BOOK_PAPER = "cut_size_book_paper"
         const val CLASSIC_JOURNAL_BOOK = "classic_journal_book"
         const val REFINED_LEATHER_BOOK = "refined_leather_book"
         const val QUARTZ_LEATHER_BOOK = "quartz_leather_book"
