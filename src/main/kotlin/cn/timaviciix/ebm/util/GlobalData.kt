@@ -10,11 +10,6 @@
 package cn.timaviciix.ebm.util
 
 import cn.timaviciix.ebm.EBMItemGroup
-import cn.timaviciix.ebm.item.books.BookcaseItem
-import cn.timaviciix.ebm.item.books.books.GeneralBook
-import cn.timaviciix.ebm.item.books.books.JournalBook
-import cn.timaviciix.ebm.item.books.books.LargeBook
-import cn.timaviciix.ebm.item.books.books.LightBook
 import io.wispforest.owo.itemgroup.OwoItemSettings
 
 object GlobalData {

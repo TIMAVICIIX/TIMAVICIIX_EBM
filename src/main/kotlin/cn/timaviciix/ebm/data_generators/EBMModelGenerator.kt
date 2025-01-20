@@ -10,7 +10,6 @@
 package cn.timaviciix.ebm.data_generators
 
 import cn.timaviciix.ebm.item.copiers.CopierRegister
-import cn.timaviciix.ebm.item.copiers.VerticalCopier
 import cn.timaviciix.ebm.item.others.OtherItemRegister
 import cn.timaviciix.ebm.item.stuff.StuffRegister
 import cn.timaviciix.ebm.item.worktables.WorkTablesRegister
@@ -18,9 +17,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.Model
 import net.minecraft.data.client.Models
-import javax.print.attribute.standard.MediaSize.Other
 
 class EBMModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) {
 
@@ -34,19 +31,19 @@ class EBMModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) 
         p0?.apply {
 
             register(CopierRegister.PORTABLE_COPIER, Models.GENERATED)
-            register(CopierRegister.VERTICAL_COPIER,Models.GENERATED)
+            register(CopierRegister.VERTICAL_COPIER, Models.GENERATED)
 
-            register(OtherItemRegister.FEATHER_DUSTER,Models.GENERATED)
-            register(OtherItemRegister.BLUE_CAT_PENDANT,Models.GENERATED)
-            register(OtherItemRegister.EUROPEAN_STYLE_CERAMIC_TEA_SET,Models.GENERATED)
+            register(OtherItemRegister.FEATHER_DUSTER, Models.GENERATED)
+            register(OtherItemRegister.BLUE_CAT_PENDANT, Models.GENERATED)
+            register(OtherItemRegister.EUROPEAN_STYLE_CERAMIC_TEA_SET, Models.GENERATED)
 
-            register(StuffRegister.COPIER_BODY,Models.GENERATED)
-            register(StuffRegister.TONER_CARTRIDGE,Models.GENERATED)
-            register(StuffRegister.INK_BOX,Models.GENERATED)
+            register(StuffRegister.COPIER_BODY, Models.GENERATED)
+            register(StuffRegister.TONER_CARTRIDGE, Models.GENERATED)
+            register(StuffRegister.INK_BOX, Models.GENERATED)
 
-            register(WorkTablesRegister.LIBRARIAN_DESK,Models.GENERATED)
-            register(WorkTablesRegister.STAMPING_DESK,Models.GENERATED)
-            register(WorkTablesRegister.BINDING_MACHINE,Models.GENERATED)
+            register(WorkTablesRegister.LIBRARIAN_DESK, Models.GENERATED)
+            register(WorkTablesRegister.STAMPING_DESK, Models.GENERATED)
+            register(WorkTablesRegister.BINDING_MACHINE, Models.GENERATED)
 
         }
     }
