@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.item.others
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  13:18
- *@Description: TODO
+ *@Description: 欧式陶瓷茶具
  *@Version: 1.0
  */
 

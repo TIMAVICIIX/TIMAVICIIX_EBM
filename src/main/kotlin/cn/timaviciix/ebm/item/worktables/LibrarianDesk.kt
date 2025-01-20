@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.item.worktables
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  13:20
- *@Description: TODO
+ *@Description: 图书管理员的书桌
  *@Version: 1.0
  */
 

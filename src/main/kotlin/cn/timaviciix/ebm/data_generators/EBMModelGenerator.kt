@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.data_generators
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  12:43
- *@Description: TODO
+ *@Description: Model数据据生成器
  *@Version: 1.0
  */
 

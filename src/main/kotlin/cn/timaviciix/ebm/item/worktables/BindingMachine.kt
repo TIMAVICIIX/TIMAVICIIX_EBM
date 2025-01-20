@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.item.worktables
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  13:21
- *@Description: TODO
+ *@Description: 装订器
  *@Version: 1.0
  */
 

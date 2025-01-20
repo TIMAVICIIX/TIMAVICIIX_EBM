@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.item.worktables
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  13:26
- *@Description: TODO
+ *@Description: 工作台注册器
  *@Version: 1.0
  */
 

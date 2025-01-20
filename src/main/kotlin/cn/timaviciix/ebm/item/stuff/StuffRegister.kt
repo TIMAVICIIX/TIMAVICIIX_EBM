@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.item.stuff
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-01-20  13:15
- *@Description: TODO
+ *@Description: 耗材注册
  *@Version: 1.0
  */
 
