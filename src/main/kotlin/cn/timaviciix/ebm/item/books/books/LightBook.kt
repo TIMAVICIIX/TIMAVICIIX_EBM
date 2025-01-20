@@ -9,10 +9,8 @@
 
 package cn.timaviciix.ebm.item.books.books
 
-import cn.timaviciix.ebm.EBMItemGroup
 import cn.timaviciix.ebm.item.books.BookItem
 import cn.timaviciix.ebm.util.GlobalData
-import io.wispforest.owo.itemgroup.OwoItemSettings
 
-class LightBook : BookItem(0x55e9bc, GlobalData.OWO_BASE_64SETTING) {
+class LightBook : BookItem(0x55e9bc, GlobalData.OWO_ITEM_BASE_64SETTING) {
 }

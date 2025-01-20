@@ -165,3 +165,4 @@ val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(::CLASSIC_JOURNAL_BOOK)
 
 ```
 #### 这样就不用显示声明ID了，还简化了类型声明
+

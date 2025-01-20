@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.tooltip
 
-import cn.timaviciix.ebm.item.books.BookRegister
+import cn.timaviciix.ebm.registers.items.BookRegister
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 
 object ItemsTooltip {

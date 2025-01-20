@@ -11,6 +11,9 @@ package cn.timaviciix.ebm.util
 
 import cn.timaviciix.ebm.EBMItemGroup
 import io.wispforest.owo.itemgroup.OwoItemSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.block.enums.Instrument
+import net.minecraft.util.DyeColor
 
 object GlobalData {
 
@@ -28,8 +31,24 @@ object GlobalData {
     const val DESC_SUFFIX = "_desc"
 
     //default Owo Setting
-    val OWO_BASE_64SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)!!
-    val OWO_SIGNAL_SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(1)!!
+    val OWO_ITEM_BASE_64SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)!!
+    val OWO_ITEM_SIGNAL_SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(1)!!
+
+    fun getGeneralBlockSetting(mapColor: DyeColor?): FabricBlockSettings {
+
+        var targetColor = DyeColor.GRAY
+
+        mapColor?.let {
+            targetColor = mapColor
+        }
+
+        return FabricBlockSettings.create().apply {
+            collidable(true)
+            mapColor(targetColor)
+            instrument(Instrument.BASEDRUM)
+            strength(1.2F, 6.0F)
+        }
+    }
 
     //Item Group
     //@Imp:Deprecated

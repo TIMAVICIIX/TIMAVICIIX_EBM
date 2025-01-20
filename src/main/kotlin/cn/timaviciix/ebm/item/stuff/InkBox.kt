@@ -12,6 +12,6 @@ package cn.timaviciix.ebm.item.stuff
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class InkBox:BaseItem(0x625772,GlobalData.OWO_BASE_64SETTING) {
+class InkBox:BaseItem(0x625772,GlobalData.OWO_ITEM_BASE_64SETTING) {
 
 }

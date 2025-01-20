@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.others
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class EuropeanStyleCeramicTeaSet:BaseItem(0xfdffba,GlobalData.OWO_SIGNAL_SETTING) {
+class EuropeanStyleCeramicTeaSet:BaseItem(0xfdffba,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }

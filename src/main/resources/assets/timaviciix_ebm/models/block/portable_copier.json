@@ -1,0 +1,6 @@
+{
+  "parent": "all_cube",
+  "textures": {
+    "all": "timaviciix_ebm:block/portable_copier"
+  }
+}

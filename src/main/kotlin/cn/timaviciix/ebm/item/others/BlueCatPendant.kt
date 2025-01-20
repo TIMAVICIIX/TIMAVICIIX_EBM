@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.others
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class BlueCatPendant:BaseItem(0x1891ac,GlobalData.OWO_SIGNAL_SETTING) {
+class BlueCatPendant:BaseItem(0x1891ac,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }

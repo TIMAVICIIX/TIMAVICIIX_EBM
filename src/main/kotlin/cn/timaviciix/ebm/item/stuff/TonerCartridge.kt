@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.stuff
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class TonerCartridge:BaseItem(0x52616b,GlobalData.OWO_BASE_64SETTING) {
+class TonerCartridge:BaseItem(0x52616b,GlobalData.OWO_ITEM_BASE_64SETTING) {
 }

@@ -10,7 +10,6 @@
 package cn.timaviciix.ebm.item.copiers
 
 import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.structure.OceanMonumentGenerator.Base
 
-class VerticalCopier:BaseCopier(0xa4750,GlobalData.OWO_SIGNAL_SETTING) {
+class VerticalCopier:BaseCopier(0xa4750,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }

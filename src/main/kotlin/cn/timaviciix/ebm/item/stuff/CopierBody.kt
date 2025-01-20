@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.stuff
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class CopierBody:BaseItem(0xdbe2ef,GlobalData.OWO_BASE_64SETTING) {
+class CopierBody:BaseItem(0xdbe2ef,GlobalData.OWO_ITEM_BASE_64SETTING) {
 }

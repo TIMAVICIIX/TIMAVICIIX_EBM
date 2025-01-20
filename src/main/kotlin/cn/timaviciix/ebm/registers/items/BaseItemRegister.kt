@@ -7,10 +7,11 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.item
+package cn.timaviciix.ebm.registers.items
 
+import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
-import io.wispforest.owo.registration.reflect.ItemRegistryContainer
+import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -19,7 +20,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.createInstance
 
-interface BaseRegister {
+interface BaseItemRegister {
 
     companion object {
 
@@ -32,7 +33,7 @@ interface BaseRegister {
             return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), context)
         }
 
-        inline fun <reified T : Item> registrySelf(property: KProperty<*>,): T {
+        inline fun <reified T : Item> registrySelf(property: KProperty<*>): T {
 
             val itemId = property.name.lowercase()
             val targetItem = T::class.createInstance()

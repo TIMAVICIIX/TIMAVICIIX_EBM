@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.worktables
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class StampingDesk:BaseItem(0x4ecca3,GlobalData.OWO_SIGNAL_SETTING) {
+class StampingDesk:BaseItem(0x4ecca3,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }

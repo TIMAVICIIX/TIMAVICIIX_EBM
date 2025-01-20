@@ -12,5 +12,5 @@ package cn.timaviciix.ebm.item.others
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
 
-class FeatherDuster:BaseItem(0xf08a5d,GlobalData.OWO_SIGNAL_SETTING) {
+class FeatherDuster:BaseItem(0xf08a5d,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }
