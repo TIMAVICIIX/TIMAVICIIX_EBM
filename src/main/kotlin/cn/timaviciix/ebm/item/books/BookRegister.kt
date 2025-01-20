@@ -9,57 +9,52 @@
 
 package cn.timaviciix.ebm.item.books
 
+import cn.timaviciix.ebm.item.BaseRegister.Companion.registrySelf
+import cn.timaviciix.ebm.item.books.books.GeneralBook
+import cn.timaviciix.ebm.item.books.books.JournalBook
+import cn.timaviciix.ebm.item.books.books.LargeBook
+import cn.timaviciix.ebm.item.books.books.LightBook
 import cn.timaviciix.ebm.util.GlobalData
-import cn.timaviciix.ebm.util.annotations.RegistryItem
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
-import net.minecraft.item.Item
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 
 
 //@Imp:Necessary Parameterless Constructors
-class BookRegister() : ItemRegistryContainer {
-
+class BookRegister : ItemRegistryContainer {
     companion object {
-        //Book Items
-        val CLASSIC_JOURNAL_BOOK = registryMe(GlobalData.ItemId.CLASSIC_JOURNAL_BOOK, JournalBook())
+        // Book Items
+        val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(::CLASSIC_JOURNAL_BOOK)
 
-        val CUT_SIZE_BOOK_PAPER = registryMe(GlobalData.ItemId.CUT_SIZE_BOOK_PAPER, GeneralBook())
+        val CUT_SIZE_BOOK_PAPER: GeneralBook = registrySelf(::CUT_SIZE_BOOK_PAPER)
 
-        val CRIMSON_FLAME_GILDED_BOOK = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOK, LightBook())
-        val GOLDEN_BOUGH_FOREST_BOOK = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOK, LightBook())
+        val CRIMSON_FLAME_GILDED_BOOK: LightBook = registrySelf(::CRIMSON_FLAME_GILDED_BOOK)
+        val GOLDEN_BOUGH_FOREST_BOOK: LightBook = registrySelf(::GOLDEN_BOUGH_FOREST_BOOK)
 
-        val REFINED_LEATHER_BOOK = registryMe(GlobalData.ItemId.REFINED_LEATHER_BOOK, GeneralBook())
-        val QUARTZ_LEATHER_BOOK = registryMe(GlobalData.ItemId.QUARTZ_LEATHER_BOOK,GeneralBook())
-        val LUXURIOUS_GILDED_BOOK = registryMe(GlobalData.ItemId.LUXURIOUS_GILDED_BOOK, GeneralBook())
-        val QUART_GILDED_BOOK = registryMe(GlobalData.ItemId.QUARTZ_GILDED_BOOK, GeneralBook())
-        val STURDY_OBSIDIAN_GILDED_BOOK = registryMe(GlobalData.ItemId.STURDY_OBSIDIAN_GILDED_BOOK, GeneralBook())
+        val REFINED_LEATHER_BOOK: GeneralBook = registrySelf(::REFINED_LEATHER_BOOK)
+        val QUARTZ_LEATHER_BOOK: GeneralBook = registrySelf(::QUARTZ_LEATHER_BOOK)
+        val LUXURIOUS_GILDED_BOOK: GeneralBook = registrySelf(::LUXURIOUS_GILDED_BOOK)
+        val QUARTZ_GILDED_BOOK: GeneralBook = registrySelf(::QUARTZ_GILDED_BOOK)
+        val STURDY_OBSIDIAN_GILDED_BOOK: GeneralBook = registrySelf(::STURDY_OBSIDIAN_GILDED_BOOK)
 
-        val MAJESTIC_GILDED_BOOK = registryMe(GlobalData.ItemId.MAJESTIC_GILDED_BOOK, LargeBook())
-        val QUARTZ_RUBY_ENCRUSTED_BOOK = registryMe(GlobalData.ItemId.QUARTZ_RUBY_ENCRUSTED_BOOK, LargeBook())
-        val SAPPHIRE_GILDED_BOOK = registryMe(GlobalData.ItemId.SAPPHIRE_GILDED_BOOK, LargeBook())
-        val RUBY_GILDED_BOOK = registryMe(GlobalData.ItemId.RUBY_GILDED_BOOK, LargeBook())
+        val MAJESTIC_GILDED_BOOK: LargeBook = registrySelf(::MAJESTIC_GILDED_BOOK)
+        val QUARTZ_RUBY_ENCRUSTED_BOOK: LargeBook = registrySelf(::QUARTZ_RUBY_ENCRUSTED_BOOK)
+        val SAPPHIRE_GILDED_BOOK: LargeBook = registrySelf(::SAPPHIRE_GILDED_BOOK)
+        val RUBY_GILDED_BOOK: LargeBook = registrySelf(::RUBY_GILDED_BOOK)
+
+        // Bookcase Items
+        val CRIMSON_FLAME_GILDED_BOOKCASE: BookcaseItem = registrySelf(::CRIMSON_FLAME_GILDED_BOOKCASE)
+        val GOLDEN_BOUGH_FOREST_BOOKCASE: BookcaseItem = registrySelf(::GOLDEN_BOUGH_FOREST_BOOKCASE)
+
+        val REFINED_LEATHER_BOOKCASE: BookcaseItem = registrySelf(::REFINED_LEATHER_BOOKCASE)
+        val QUARTZ_LEATHER_BOOKCASE: BookcaseItem = registrySelf(::QUARTZ_LEATHER_BOOKCASE)
+        val LUXURIOUS_GILDED_BOOKCASE: BookcaseItem = registrySelf(::LUXURIOUS_GILDED_BOOKCASE)
+        val QUARTZ_GILDED_BOOKCASE: BookcaseItem = registrySelf(::QUARTZ_GILDED_BOOKCASE)
+        val STURDY_OBSIDIAN_GILDED_BOOKCASE: BookcaseItem = registrySelf(::STURDY_OBSIDIAN_GILDED_BOOKCASE)
+
+        val MAJESTIC_GILDED_BOOKCASE: BookcaseItem = registrySelf(::MAJESTIC_GILDED_BOOKCASE)
+        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE: BookcaseItem = registrySelf(::QUARTZ_RUBY_ENCRUSTED_BOOKCASE)
+        val SAPPHIRE_GILDED_BOOKCASE: BookcaseItem = registrySelf(::SAPPHIRE_GILDED_BOOKCASE)
+        val RUBY_GILDED_BOOKCASE: BookcaseItem = registrySelf(::RUBY_GILDED_BOOKCASE)
 
 
-        //Bookcase Items
-        val CRIMSON_FLAME_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.CRIMSON_FLAME_GILDED_BOOKCASE, BookcaseItem())
-        val GOLDEN_BOUGH_FOREST_BOOKCASE = registryMe(GlobalData.ItemId.GOLDEN_BOUGH_FOREST_BOOKCASE, BookcaseItem())
-
-        val REFINED_LEATHER_BOOKCASE = registryMe(GlobalData.ItemId.REFINED_LEATHER_BOOKCASE, BookcaseItem())
-        val QUARTZ_LEATHER_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_LEATHER_BOOKCASE,BookcaseItem())
-        val LUXURIOUS_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.LUXURIOUS_GILDED_BOOKCASE, BookcaseItem())
-        val QUART_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_GILDED_BOOKCASE, BookcaseItem())
-        val STURDY_OBSIDIAN_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.STURDY_OBSIDIAN_GILDED_BOOKCASE, BookcaseItem())
-
-        val MAJESTIC_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.MAJESTIC_GILDED_BOOKCASE, BookcaseItem())
-        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE = registryMe(GlobalData.ItemId.QUARTZ_RUBY_ENCRUSTED_BOOKCASE, BookcaseItem())
-        val SAPPHIRE_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.SAPPHIRE_GILDED_BOOKCASE, BookcaseItem())
-        val RUBY_GILDED_BOOKCASE = registryMe(GlobalData.ItemId.RUBY_GILDED_BOOKCASE, BookcaseItem())
-
-        private fun registryMe(name: String, item: Item): Item {
-            return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, name), item)
-        }
     }
-
 }

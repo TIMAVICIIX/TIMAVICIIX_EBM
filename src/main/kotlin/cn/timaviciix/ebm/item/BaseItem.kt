@@ -9,11 +9,17 @@
 
 package cn.timaviciix.ebm.item
 
+import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
+import net.minecraft.util.Identifier
+import kotlin.reflect.KClass
+import kotlin.reflect.full.createInstance
 
 open class BaseItem(nameColor: Int, settings: Settings) : Item(settings) {
 

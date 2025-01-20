@@ -142,3 +142,10 @@ The following log is only written in Chinese! If you don't understand, please us
 
 ## <br>2025.01.18
 #### &emsp;今天和自动注册斗智斗勇了一天，Kotlin的AnnotationProcessor有点抽风，以后再解决了，注册就先硬编码了，不然赶不上进度！
+
+## <br>2025.01.19
+#### &emsp;好好好，现在我的物品注册流程感觉很畸形，一方面是采用了owo的自动注册框架却要自己注册，另一方面是采用了注解APT却不生效，现在真是进退两难，难道说要交给后人的智慧了吗
+
+## <br>2025.01.20
+#### &emsp;现在是20号凌晨12点14分，kapt仍然不能够解决自动注册，我正在尝试使用KSP<br>&emsp;KSP不能解决，正在导入其他素材，就这样了，先把状态机图画出来
+![状态机图](display_files/stateDiagram.png)

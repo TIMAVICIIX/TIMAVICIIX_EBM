@@ -1,13 +1,10 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.item.books.BookRegister
-import cn.timaviciix.ebm.item.books.LargeBook
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
-import net.minecraft.item.ItemGroups
 import org.slf4j.LoggerFactory
 
 object TIMAVICIIXEBM : ModInitializer {
@@ -28,7 +25,7 @@ object TIMAVICIIXEBM : ModInitializer {
         ToolTipBus.initAllTooltip()
 
         //buildItemGroup
-        EBMItemGroup(null,null).buildAndInitItemGroup()
+        EBMItemGroup(null, null).buildAndInitItemGroup()
 
 
     }

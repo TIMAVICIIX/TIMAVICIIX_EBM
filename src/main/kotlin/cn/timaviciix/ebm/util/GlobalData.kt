@@ -9,6 +9,14 @@
 
 package cn.timaviciix.ebm.util
 
+import cn.timaviciix.ebm.EBMItemGroup
+import cn.timaviciix.ebm.item.books.BookcaseItem
+import cn.timaviciix.ebm.item.books.books.GeneralBook
+import cn.timaviciix.ebm.item.books.books.JournalBook
+import cn.timaviciix.ebm.item.books.books.LargeBook
+import cn.timaviciix.ebm.item.books.books.LightBook
+import io.wispforest.owo.itemgroup.OwoItemSettings
+
 object GlobalData {
 
     // Mod ID
@@ -24,6 +32,10 @@ object GlobalData {
     const val PAGE_STORAGE_SUFFIX = "page_"
     const val DESC_SUFFIX = "_desc"
 
+    //default Owo Setting
+    val OWO_BASE_64SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)!!
+    val OWO_SIGNAL_SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(1)!!
+
     //Item Group
     //@Imp:Deprecated
 //    val EBM_ITEM_GROUP: OwoItemGroup = OwoItemGroup.builder(
@@ -34,31 +46,36 @@ object GlobalData {
 
     // Item id
     object ItemId {
-        const val CUT_SIZE_BOOK_PAPER = "cut_size_book_paper"
-        const val CLASSIC_JOURNAL_BOOK = "classic_journal_book"
-        const val REFINED_LEATHER_BOOK = "refined_leather_book"
-        const val QUARTZ_LEATHER_BOOK = "quartz_leather_book"
-        const val LUXURIOUS_GILDED_BOOK = "luxurious_gilded_book"
-        const val QUARTZ_GILDED_BOOK = "quartz_gilded_book"
-        const val STURDY_OBSIDIAN_GILDED_BOOK = "sturdy_obsidian_gilded_book"
-        const val MAJESTIC_GILDED_BOOK = "majestic_gilded_book"
-        const val QUARTZ_RUBY_ENCRUSTED_BOOK = "quartz_ruby_encrusted_book"
-        const val SAPPHIRE_GILDED_BOOK = "sapphire_gilded_book"
-        const val RUBY_GILDED_BOOK = "ruby_gilded_book"
-        const val GOLDEN_BOUGH_FOREST_BOOK = "golden_bough_forest_book"
-        const val CRIMSON_FLAME_GILDED_BOOK = "crimson_flame_gilded_book"
+        //books id
+        val CUT_SIZE_BOOK_PAPER = Pair("cut_size_book_paper",JournalBook::class)
+        val CLASSIC_JOURNAL_BOOK = Pair("classic_journal_book",JournalBook::class)
+        val REFINED_LEATHER_BOOK = Pair("refined_leather_book",GeneralBook::class)
+        val QUARTZ_LEATHER_BOOK = Pair("quartz_leather_book",GeneralBook::class)
+        val LUXURIOUS_GILDED_BOOK = Pair("luxurious_gilded_book",GeneralBook::class)
+        val QUARTZ_GILDED_BOOK = Pair("quartz_gilded_book",GeneralBook::class)
+        val STURDY_OBSIDIAN_GILDED_BOOK = Pair("sturdy_obsidian_gilded_book",GeneralBook::class)
+        val MAJESTIC_GILDED_BOOK = Pair("majestic_gilded_book",LargeBook::class)
+        val QUARTZ_RUBY_ENCRUSTED_BOOK = Pair("quartz_ruby_encrusted_book",LargeBook::class)
+        val SAPPHIRE_GILDED_BOOK = Pair("sapphire_gilded_book",LargeBook::class)
+        val RUBY_GILDED_BOOK = Pair("ruby_gilded_book",LargeBook::class)
+        val GOLDEN_BOUGH_FOREST_BOOK = Pair("golden_bough_forest_book",LightBook::class)
+        val CRIMSON_FLAME_GILDED_BOOK = Pair("crimson_flame_gilded_book",LightBook::class)
 
-        const val REFINED_LEATHER_BOOKCASE = "refined_leather_bookcase"
-        const val QUARTZ_LEATHER_BOOKCASE = "quartz_leather_bookcase"
-        const val LUXURIOUS_GILDED_BOOKCASE = "luxurious_gilded_bookcase"
-        const val QUARTZ_GILDED_BOOKCASE = "quartz_gilded_bookcase"
-        const val STURDY_OBSIDIAN_GILDED_BOOKCASE = "sturdy_obsidian_gilded_bookcase"
-        const val MAJESTIC_GILDED_BOOKCASE = "majestic_gilded_bookcase"
-        const val QUARTZ_RUBY_ENCRUSTED_BOOKCASE = "quartz_ruby_encrusted_bookcase"
-        const val SAPPHIRE_GILDED_BOOKCASE = "sapphire_gilded_bookcase"
-        const val RUBY_GILDED_BOOKCASE = "ruby_gilded_bookcase"
-        const val GOLDEN_BOUGH_FOREST_BOOKCASE = "golden_bough_forest_bookcase"
-        const val CRIMSON_FLAME_GILDED_BOOKCASE = "crimson_flame_gilded_bookcase"
+        //bookcases id
+        val REFINED_LEATHER_BOOKCASE = Pair("refined_leather_bookcase",BookcaseItem::class)
+        val QUARTZ_LEATHER_BOOKCASE = Pair("quartz_leather_bookcase",BookcaseItem::class)
+        val LUXURIOUS_GILDED_BOOKCASE = Pair("luxurious_gilded_bookcase",BookcaseItem::class)
+        val QUARTZ_GILDED_BOOKCASE = Pair("quartz_gilded_bookcase",BookcaseItem::class)
+        val STURDY_OBSIDIAN_GILDED_BOOKCASE = Pair("sturdy_obsidian_gilded_bookcase",BookcaseItem::class)
+        val MAJESTIC_GILDED_BOOKCASE = Pair("majestic_gilded_bookcase",BookcaseItem::class)
+        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE = Pair("quartz_ruby_encrusted_bookcase",BookcaseItem::class)
+        val SAPPHIRE_GILDED_BOOKCASE = Pair("sapphire_gilded_bookcase",BookcaseItem::class)
+        val RUBY_GILDED_BOOKCASE = Pair("ruby_gilded_bookcase",BookcaseItem::class)
+        val GOLDEN_BOUGH_FOREST_BOOKCASE = Pair("golden_bough_forest_bookcase",BookcaseItem::class)
+        val CRIMSON_FLAME_GILDED_BOOKCASE = Pair("crimson_flame_gilded_bookcase",BookcaseItem::class)
+
+        //other things id
+
     }
 
 
