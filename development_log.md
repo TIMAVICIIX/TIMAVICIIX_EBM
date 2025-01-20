@@ -149,3 +149,19 @@ The following log is only written in Chinese! If you don't understand, please us
 ## <br>2025.01.20
 #### &emsp;现在是20号凌晨12点14分，kapt仍然不能够解决自动注册，我正在尝试使用KSP<br>&emsp;KSP不能解决，正在导入其他素材，就这样了，先把状态机图画出来
 ![状态机图](display_files/stateDiagram.png)
+#### &emsp;目前采用了reified类型推理与KProperty进行实例化注册推断，这是Kotlin在属性反射机制KSP以及KAPT不能使用的情况下的最佳解了：
+```kotlin
+
+inline fun <reified T : Item> registrySelf(property: KProperty<*>,): T {
+
+    val itemId = property.name.lowercase()
+    val targetItem = T::class.createInstance()
+
+    return Registry.register(Registries.ITEM, Identifier(GlobalData.MOD_ID, itemId), targetItem)
+
+}
+
+val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(::CLASSIC_JOURNAL_BOOK)
+
+```
+#### 这样就不用显示声明ID了，还简化了类型声明
