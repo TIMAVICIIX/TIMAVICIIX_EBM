@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "timaviciix_ebm:item/copier_body"
+  }
+}

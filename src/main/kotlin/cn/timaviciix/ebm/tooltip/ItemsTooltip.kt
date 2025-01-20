@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.tooltip
 
 import cn.timaviciix.ebm.item.books.BookRegister
+import cn.timaviciix.ebm.item.others.FeatherDuster
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 
 object ItemsTooltip {
@@ -19,7 +20,6 @@ object ItemsTooltip {
         ItemTooltipCallback.EVENT.register { stack, context, lines ->
             BookRegister.apply {
                 when (stack.item) {
-                    //TODO
                 }
             }
 

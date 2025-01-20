@@ -1,6 +1,10 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.item.books.BookRegister
+import cn.timaviciix.ebm.item.copiers.CopierRegister
+import cn.timaviciix.ebm.item.others.OtherItemRegister
+import cn.timaviciix.ebm.item.stuff.StuffRegister
+import cn.timaviciix.ebm.item.worktables.WorkTablesRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -19,7 +23,12 @@ object TIMAVICIIXEBM : ModInitializer {
 
         //OWO lib cant cast kotlin construction and object class ?
         //@Imp:Resolved !!!
+        FieldRegistrationHandler.register(CopierRegister::class.java,GlobalData.MOD_ID,false)
+        FieldRegistrationHandler.register(WorkTablesRegister::class.java,GlobalData.MOD_ID,false)
+        FieldRegistrationHandler.register(StuffRegister::class.java,GlobalData.MOD_ID,false)
         FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
+        FieldRegistrationHandler.register(OtherItemRegister::class.java,GlobalData.MOD_ID,false)
+
 
         //ToolTip Init
         ToolTipBus.initAllTooltip()
