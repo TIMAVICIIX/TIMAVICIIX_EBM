@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "timaviciix_ebm:block/portable_copier"
+    },
+    "facing=east": {
+      "model": "timaviciix_ebm:block/portable_copier",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "timaviciix_ebm:block/portable_copier",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "timaviciix_ebm:block/portable_copier",
+      "y": 270
+    }
+  }
+}

@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.block.copiers
 
-import cn.timaviciix.ebm.block.BaseBlock
+import cn.timaviciix.ebm.block.BaseDirectBlock
 import cn.timaviciix.ebm.block.blockentitys.PortableCopierBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.BlockEntityProvider
@@ -23,10 +23,20 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-class PortableCopierBlock : BaseBlock(GlobalData.getGeneralBlockSetting(DyeColor.GRAY)), BlockEntityProvider {
+class PortableCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.GRAY)), BlockEntityProvider {
 
-    private val bodyShape = VoxelShapes.cuboid(0.125, 0.125, 0.0, 0.875, 0.875, 0.9)
+    private val bodyShape = VoxelShapes.cuboid(0.125, 0.0, 0.125, 0.875, 0.75, 0.875)
     private lateinit var blockState: BlockState
+
+
+    override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
+        if (pos != null && state !== null) {
+
+            blockState = state
+            return PortableCopierBlockEntity(pos, state)
+        }
+        return null
+    }
 
     @Deprecated("Deprecated in Java")
     @Suppress("Don't find reason to deprecated this method")
@@ -45,14 +55,17 @@ class PortableCopierBlock : BaseBlock(GlobalData.getGeneralBlockSetting(DyeColor
         return BlockRenderType.MODEL
     }
 
-    override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
-        if (pos != null && state !== null) {
 
-            blockState = state
-            return PortableCopierBlockEntity(pos, state)
-        }
-        return null
+    @Deprecated("Deprecated in Java")
+    override fun getOutlineShape(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        context: ShapeContext?
+    ): VoxelShape {
+        return bodyShape
     }
+
 
 
 }

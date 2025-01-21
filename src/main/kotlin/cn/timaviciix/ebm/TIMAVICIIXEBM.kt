@@ -32,8 +32,9 @@ object TIMAVICIIXEBM : ModInitializer {
         FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
 
         //block registers
-        FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
         FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+        FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
+
 
 
         //ToolTip Init
