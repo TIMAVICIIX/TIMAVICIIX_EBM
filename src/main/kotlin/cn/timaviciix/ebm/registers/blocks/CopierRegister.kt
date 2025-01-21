@@ -9,8 +9,8 @@
 
 package cn.timaviciix.ebm.registers.blocks
 
-import cn.timaviciix.ebm.block.blockentitys.PortableCopierBlockEntity
-import cn.timaviciix.ebm.block.blockentitys.VerticalCopierBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.copierentitys.PortableCopierBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.block.copiers.PortableCopierBlock
 import cn.timaviciix.ebm.block.copiers.VerticalCopierBlock
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
@@ -23,8 +23,8 @@ import net.minecraft.block.entity.BlockEntityType
 class CopierRegister() : BlockRegistryContainer {
 
     companion object {
-        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER,0xa2d5f2)
-        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER,0xc9d6df)
+        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER, 0xa2d5f2)
+        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER, 0xc9d6df)
     }
 
 //    override fun createBlockItem(block: Block?, identifier: String?): BlockItem {

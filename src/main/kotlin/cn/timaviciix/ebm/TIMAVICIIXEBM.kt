@@ -1,7 +1,6 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
-import cn.timaviciix.ebm.registers.items.BookRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.registers.items.WorkTablesRegister
@@ -15,6 +14,12 @@ object TIMAVICIIXEBM : ModInitializer {
 
     private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
 
+    //use sort registryFeather
+    class RegistryPair(val registryOperation: () -> Unit, val sort: Int)
+
+    private val mutableRegistryPairList: MutableList<RegistryPair> = mutableListOf()
+
+
     override fun onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
@@ -25,17 +30,30 @@ object TIMAVICIIXEBM : ModInitializer {
         //@Imp:Resolved !!!
 
         //item registers
-        FieldRegistrationHandler.register(WorkTablesRegister::class.java, GlobalData.MOD_ID, false)
-        //FieldRegistrationHandler.register(CopierRegister::class.java,GlobalData.MOD_ID,false)
-        FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
-        FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
-        FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+        //@Imp: Will Resolve it then!
+        //FieldRegistrationHandler.register(WorkTablesRegister::class.java, GlobalData.MOD_ID, false)
 
-        //block registers
-        FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
-        FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
+        //@Imp:Books also is Blocks!!! use block entity instead
+        //FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
 
 
+
+        //Use New Registry Method by registry sorted
+        addRegistrySortPair(0){
+            FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
+        }
+
+        addRegistrySortPair(1){
+            //block registers
+            FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
+        }
+
+        addRegistrySortPair(2){
+            FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+        }
+
+        launchAutoRegistry()
 
         //ToolTip Init
         ToolTipBus.initAllTooltip()
@@ -44,6 +62,18 @@ object TIMAVICIIXEBM : ModInitializer {
         EBMItemGroup(null, null).buildAndInitItemGroup()
 
 
+    }
+
+    private fun addRegistrySortPair(sort: Int = 0,registryOperation: () -> Unit) {
+        mutableRegistryPairList.add(RegistryPair(registryOperation, sort))
+    }
+
+    private fun launchAutoRegistry() {
+        mutableRegistryPairList.sortBy { it.sort }
+
+        for (consist in mutableRegistryPairList) {
+            consist.registryOperation()
+        }
     }
 
 

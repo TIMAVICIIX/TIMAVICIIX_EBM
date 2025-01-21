@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.block.blockentitys
+package cn.timaviciix.ebm.block.blockentitys.copierentitys
 
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import net.minecraft.block.BlockState

@@ -19,6 +19,7 @@ import io.wispforest.owo.registration.reflect.ItemRegistryContainer
 
 
 //@Imp:Necessary Parameterless Constructors
+@Deprecated("use Block instead")
 class BookRegister : ItemRegistryContainer {
     companion object {
         // Book Items

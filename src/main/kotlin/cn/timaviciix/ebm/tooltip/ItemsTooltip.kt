@@ -9,7 +9,6 @@
 
 package cn.timaviciix.ebm.tooltip
 
-import cn.timaviciix.ebm.registers.items.BookRegister
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 
 object ItemsTooltip {
@@ -17,10 +16,6 @@ object ItemsTooltip {
     fun initializeTooltip() {
 
         ItemTooltipCallback.EVENT.register { stack, context, lines ->
-            BookRegister.apply {
-                when (stack.item) {
-                }
-            }
 
 
         }

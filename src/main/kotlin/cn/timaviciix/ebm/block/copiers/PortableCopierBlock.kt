@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.block.copiers
 
 import cn.timaviciix.ebm.block.BaseDirectBlock
-import cn.timaviciix.ebm.block.blockentitys.PortableCopierBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.copierentitys.PortableCopierBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockRenderType

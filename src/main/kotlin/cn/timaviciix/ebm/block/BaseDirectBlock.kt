@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory
 abstract class BaseDirectBlock(settings: FabricBlockSettings) : BlockWithEntity(settings) {
 
     companion object {
-        val logger: Logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
+        //val logger: Logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
     }
 
