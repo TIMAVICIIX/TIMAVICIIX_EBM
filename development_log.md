@@ -166,3 +166,7 @@ val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(::CLASSIC_JOURNAL_BOOK)
 ```
 #### 这样就不用显示声明ID了，还简化了类型声明
 
+## <br>2025.01.21
+#### &emsp;今天实现了放置方块，并重构了书籍类，将书籍从item中迁移到block中，目前在考虑是否抽象blockEntity到更高级别，将同种类型的书本属性对齐
+
+
