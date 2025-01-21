@@ -11,5 +11,7 @@ package cn.timaviciix.ebm.item.copiers
 
 import cn.timaviciix.ebm.util.GlobalData
 
+
+@Deprecated("Changed in Block")
 class VerticalCopier:BaseCopier(0xa4750,GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 }

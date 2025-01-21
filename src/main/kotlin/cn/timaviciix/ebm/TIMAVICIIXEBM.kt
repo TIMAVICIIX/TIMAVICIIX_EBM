@@ -1,7 +1,10 @@
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.registers.blocks.BlockRegister
-import cn.timaviciix.ebm.registers.items.*
+import cn.timaviciix.ebm.registers.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.items.BookRegister
+import cn.timaviciix.ebm.registers.items.OtherItemRegister
+import cn.timaviciix.ebm.registers.items.StuffRegister
+import cn.timaviciix.ebm.registers.items.WorkTablesRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -23,13 +26,14 @@ object TIMAVICIIXEBM : ModInitializer {
 
         //item registers
         FieldRegistrationHandler.register(WorkTablesRegister::class.java, GlobalData.MOD_ID, false)
-        FieldRegistrationHandler.register(CopierRegister::class.java,GlobalData.MOD_ID,false)
+        //FieldRegistrationHandler.register(CopierRegister::class.java,GlobalData.MOD_ID,false)
         FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
         FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
         FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
 
         //block registers
-        //BlockRegister.blockRegistryInterface()
+        FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
+        FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
 
 
         //ToolTip Init

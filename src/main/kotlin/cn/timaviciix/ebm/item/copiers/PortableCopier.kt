@@ -14,6 +14,7 @@ import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.util.ActionResult
 
+@Deprecated("changed in Block")
 class PortableCopier : BaseCopier(0x3f72af, GlobalData.OWO_ITEM_SIGNAL_SETTING) {
 
     override fun useOnBlock(context: ItemUsageContext?): ActionResult {

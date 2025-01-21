@@ -11,6 +11,7 @@ package cn.timaviciix.ebm.item.copiers
 
 import cn.timaviciix.ebm.item.BaseItem
 
+@Deprecated("changed in Block")
 open class BaseCopier(nameColor:Int, setting:Settings):BaseItem(nameColor,setting) {
 
 
