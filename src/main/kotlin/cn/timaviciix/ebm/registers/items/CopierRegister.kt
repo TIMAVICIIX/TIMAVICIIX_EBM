@@ -14,7 +14,7 @@ import cn.timaviciix.ebm.item.copiers.VerticalCopier
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
 import cn.timaviciix.ebm.registers.items.BaseItemRegister.Companion.registrySelf
 
-//@Deprecated("Testing!")
+@Deprecated("Testing!")
 class CopierRegister:ItemRegistryContainer {
 
     companion object{

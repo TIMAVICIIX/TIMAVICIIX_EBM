@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.registers.items.BookRegister
+import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.itemgroup.Icon
 import io.wispforest.owo.itemgroup.OwoItemGroup

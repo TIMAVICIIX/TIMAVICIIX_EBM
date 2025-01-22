@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.block.copiers
 
 import cn.timaviciix.ebm.block.BaseDirectBlock
-import cn.timaviciix.ebm.block.blockentitys.VerticalCopierBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
@@ -27,13 +27,11 @@ class VerticalCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
     private val bodyShape = VoxelShapes.cuboid(0.0625, 0.0, 0.0625, 0.9375, 1.5, 0.9375)
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
-        if (pos != null && state !== null) {
-
+        return if (pos != null && state !== null) {
             return VerticalCopierBlockEntity(pos, state)
-
+        } else {
+            null
         }
-
-        return null
     }
 
     @Deprecated("Deprecated in Java")

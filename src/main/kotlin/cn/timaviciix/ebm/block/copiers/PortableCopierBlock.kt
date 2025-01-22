@@ -30,12 +30,12 @@ class PortableCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
 
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
-        if (pos != null && state !== null) {
+        return if (pos != null && state !== null) {
 
-            blockState = state
             return PortableCopierBlockEntity(pos, state)
+        } else {
+            null
         }
-        return null
     }
 
     @Deprecated("Deprecated in Java")
@@ -65,7 +65,6 @@ class PortableCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
     ): VoxelShape {
         return bodyShape
     }
-
 
 
 }

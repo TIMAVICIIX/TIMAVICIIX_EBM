@@ -9,7 +9,6 @@
 
 package cn.timaviciix.ebm.data_generators
 
-import cn.timaviciix.ebm.registers.items.CopierRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.registers.items.WorkTablesRegister
@@ -30,8 +29,8 @@ class EBMModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) 
     override fun generateItemModels(p0: ItemModelGenerator?) {
         p0?.apply {
 
-            register(CopierRegister.PORTABLE_COPIER, Models.GENERATED)
-            register(CopierRegister.VERTICAL_COPIER, Models.GENERATED)
+            //register(CopierRegister.PORTABLE_COPIER, Models.GENERATED)
+            //register(CopierRegister.VERTICAL_COPIER, Models.GENERATED)
 
             register(OtherItemRegister.FEATHER_DUSTER, Models.GENERATED)
             register(OtherItemRegister.BLUE_CAT_PENDANT, Models.GENERATED)

@@ -1,5 +1,6 @@
 package cn.timaviciix.ebm
 
+import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
@@ -49,8 +50,13 @@ object TIMAVICIIXEBM : ModInitializer {
             FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(2){
+        addRegistrySortPair(3){
             FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+        }
+
+        addRegistrySortPair(2){
+            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java,GlobalData.MOD_ID,false)
+            FieldRegistrationHandler.register(BookRegister::class.java,GlobalData.MOD_ID,false)
         }
 
         launchAutoRegistry()
