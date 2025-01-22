@@ -71,7 +71,7 @@ object GlobalData {
 //        val MAJESTIC_GILDED_BOOK = Pair("majestic_gilded_book",LargeBook::class)
 //        val QUARTZ_RUBY_ENCRUSTED_BOOK = Pair("quartz_ruby_encrusted_book",LargeBook::class)
 //        val SAPPHIRE_GILDED_BOOK = Pair("sapphire_gilded_book",LargeBook::class)
-//        val RUBY_GILDED_BOOK = Pair("ruby_gilded_book",LargeBook::class)
+//        val RUBY_GILDED_BOOK = Pair("ruby_gilded_book.json",LargeBook::class)
 //        val GOLDEN_BOUGH_FOREST_BOOK = Pair("golden_bough_forest_book",LightBook::class)
 //        val CRIMSON_FLAME_GILDED_BOOK = Pair("crimson_flame_gilded_book",LightBook::class)
 //

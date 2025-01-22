@@ -12,7 +12,6 @@ package cn.timaviciix.ebm.block.copiers
 import cn.timaviciix.ebm.block.BaseDirectBlock
 import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
@@ -52,11 +51,6 @@ class VerticalCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
         context: ShapeContext?
     ): VoxelShape {
         return bodyShape
-    }
-
-    @Deprecated("Deprecated in Java", ReplaceWith("BlockRenderType.MODEL", "net.minecraft.block.BlockRenderType"))
-    override fun getRenderType(state: BlockState?): BlockRenderType {
-        return BlockRenderType.MODEL
     }
 
 }

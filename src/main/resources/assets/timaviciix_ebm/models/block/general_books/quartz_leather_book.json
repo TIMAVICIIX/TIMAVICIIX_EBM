@@ -1,0 +1,7 @@
+{
+  "parent": "timaviciix_ebm:block/general_book",
+  "textures": {
+    "0": "timaviciix_ebm:block/books/general_books/quartz_leather_book",
+    "particle": "timaviciix_ebm:block/books/book_particle"
+  }
+}

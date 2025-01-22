@@ -2,9 +2,9 @@ package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
-import cn.timaviciix.ebm.registers.items.WorkTablesRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -38,25 +38,25 @@ object TIMAVICIIXEBM : ModInitializer {
         //FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
 
 
-
         //Use New Registry Method by registry sorted
-        addRegistrySortPair(0){
+        addRegistrySortPair(0) {
             FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(1){
+        addRegistrySortPair(1) {
             //block registers
             FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(3){
+        addRegistrySortPair(3) {
+            FieldRegistrationHandler.register(BookcaseRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(2){
-            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java,GlobalData.MOD_ID,false)
-            FieldRegistrationHandler.register(BookRegister::class.java,GlobalData.MOD_ID,false)
+        addRegistrySortPair(2) {
+            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
         }
 
         launchAutoRegistry()
@@ -70,7 +70,7 @@ object TIMAVICIIXEBM : ModInitializer {
 
     }
 
-    private fun addRegistrySortPair(sort: Int = 0,registryOperation: () -> Unit) {
+    private fun addRegistrySortPair(sort: Int = 0, registryOperation: () -> Unit) {
         mutableRegistryPairList.add(RegistryPair(registryOperation, sort))
     }
 

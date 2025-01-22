@@ -170,3 +170,25 @@ val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(::CLASSIC_JOURNAL_BOOK)
 #### &emsp;今天实现了放置方块，并重构了书籍类，将书籍从item中迁移到block中，目前在考虑是否抽象blockEntity到更高级别，将同种类型的书本属性对齐
 
 
+## <br>2025.01.22
+#### &emsp;写这篇日志的时候已经是23号凌晨3点了，22号完成了所有书本模型的导入以及Block的声明<br>&emsp;利用三种BlockEntity类实例化了多种BlockEntityType，这种声明方式有利于统一书本种类，多样化书本纹理
+
+```kotlin
+//详见cn.timaviciix.ebm.registers.blocks.BookRegister
+val REFINED_LEATHER_BOOK: RefinedLeatherBookBlock = registrySelf(::REFINED_LEATHER_BOOK, 0xff8264, true)
+
+val GENERAL_REFINED_LEATHER_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+    FabricBlockEntityTypeBuilder.create({ pos, state ->
+        GeneralBookBlockEntity(
+            ParamEntityTypes.GENERAL_REFINED_LEATHER_BOOK_TYPE.blockEntityType,
+            pos, state
+        )
+    }, REFINED_LEATHER_BOOK).build()
+
+enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
+    GENERAL_REFINED_LEATHER_BOOK_TYPE(EntityTypes.GENERAL_REFINED_LEATHER_BOOK_TYPE)
+}
+```
+
+#### 明天...哦不对，今天见！！！
+

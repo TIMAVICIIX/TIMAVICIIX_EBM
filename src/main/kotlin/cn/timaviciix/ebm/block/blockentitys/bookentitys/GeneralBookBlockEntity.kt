@@ -16,5 +16,4 @@ import net.minecraft.util.math.BlockPos
 
 class GeneralBookBlockEntity(entityType: BlockEntityType<*>, pos: BlockPos, state: BlockState) :
     BlockEntity(entityType, pos, state) {
-
 }

@@ -9,5 +9,8 @@
 
 package cn.timaviciix.ebm.block.books
 
+import net.minecraft.util.shape.VoxelShapes
+
 interface BookBlockInterface {
+
 }

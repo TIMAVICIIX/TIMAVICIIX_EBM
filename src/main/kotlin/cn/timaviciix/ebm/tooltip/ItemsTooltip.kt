@@ -10,13 +10,15 @@
 package cn.timaviciix.ebm.tooltip
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+import net.minecraft.item.BlockItem
+import net.minecraft.text.LiteralTextContent
+import net.minecraft.text.Text
 
 object ItemsTooltip {
 
     fun initializeTooltip() {
 
         ItemTooltipCallback.EVENT.register { stack, context, lines ->
-
 
         }
 

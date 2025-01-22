@@ -1,0 +1,7 @@
+{
+  "parent": "timaviciix_ebm:block/large_book",
+  "textures": {
+    "0": "timaviciix_ebm:block/books/large_books/sapphire_gilded_book",
+    "particle": "timaviciix_ebm:block/books/book_particle"
+  }
+}

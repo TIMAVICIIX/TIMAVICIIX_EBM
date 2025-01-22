@@ -50,11 +50,6 @@ class PortableCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
     }
 
 
-    @Deprecated("Deprecated in Java", ReplaceWith("BlockRenderType.MODEL", "net.minecraft.block.BlockRenderType"))
-    override fun getRenderType(state: BlockState?): BlockRenderType {
-        return BlockRenderType.MODEL
-    }
-
 
     @Deprecated("Deprecated in Java")
     override fun getOutlineShape(

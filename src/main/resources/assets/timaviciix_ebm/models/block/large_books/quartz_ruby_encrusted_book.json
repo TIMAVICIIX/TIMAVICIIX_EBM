@@ -1,0 +1,7 @@
+{
+  "parent": "timaviciix_ebm:block/large_book",
+  "textures": {
+    "0": "timaviciix_ebm:block/books/large_books/quartz_ruby_encrusted_book",
+    "particle": "timaviciix_ebm:block/books/book_particle"
+  }
+}

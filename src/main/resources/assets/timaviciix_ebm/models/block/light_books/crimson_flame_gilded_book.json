@@ -1,0 +1,7 @@
+{
+  "parent": "timaviciix_ebm:block/light_book",
+  "textures": {
+    "0": "timaviciix_ebm:block/books/light_books/crimson_flame_gilded_book",
+    "particle": "timaviciix_ebm:block/books/book_particle"
+  }
+}

@@ -12,6 +12,7 @@ package cn.timaviciix.ebm.block
 import cn.timaviciix.ebm.util.GlobalData
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
+import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
 import net.minecraft.block.BlockWithEntity
 import net.minecraft.item.ItemPlacementContext
@@ -38,6 +39,11 @@ abstract class BaseDirectBlock(settings: FabricBlockSettings) : BlockWithEntity(
     override fun getPlacementState(ctx: ItemPlacementContext?): BlockState? {
         return defaultState.with(FACING, ctx?.horizontalPlayerFacing?.opposite)
         //logger.info("Block Direction:${tempBlockState.get(FACING)}")
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("BlockRenderType.MODEL", "net.minecraft.block.BlockRenderType"))
+    override fun getRenderType(state: BlockState?): BlockRenderType {
+        return BlockRenderType.MODEL
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith("", ""))
