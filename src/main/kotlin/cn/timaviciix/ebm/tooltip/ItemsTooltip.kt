@@ -9,18 +9,32 @@
 
 package cn.timaviciix.ebm.tooltip
 
+import cn.timaviciix.ebm.registers.items.OtherItemRegister
+import cn.timaviciix.ebm.util.GlobalData
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
-import net.minecraft.item.BlockItem
-import net.minecraft.text.LiteralTextContent
 import net.minecraft.text.Text
 
 object ItemsTooltip {
 
     fun initializeTooltip() {
 
-        ItemTooltipCallback.EVENT.register { stack, context, lines ->
+        ItemTooltipCallback.EVENT.register { stack, _, lines ->
+
+            when (stack.item) {
+
+                OtherItemRegister.FEATHER_DUSTER -> {
+                    lines.add(Text.translatable(generateDescPath("feather_duster")))
+                }
+
+            }
 
         }
+
+    }
+
+    private fun generateDescPath(name: String): String {
+
+        return "item." + GlobalData.MOD_ID +"."+ name +  GlobalData.DESC_SUFFIX
 
     }
 

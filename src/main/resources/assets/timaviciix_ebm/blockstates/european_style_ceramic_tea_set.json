@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "timaviciix_ebm:block/others/european_style_ceramic_tea_set"
+    },
+    "facing=east": {
+      "model": "timaviciix_ebm:block/others/european_style_ceramic_tea_set",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "timaviciix_ebm:block/others/european_style_ceramic_tea_set",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "timaviciix_ebm:block/others/european_style_ceramic_tea_set",
+      "y": 270
+    }
+  }
+}

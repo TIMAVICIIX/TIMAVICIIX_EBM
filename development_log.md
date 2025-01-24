@@ -192,3 +192,10 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 #### 明天...哦不对，今天见！！！
 
+## <br>2025.01.23
+#### &emsp;补上23号的日志，23号干了什么来着？哦哦修复了BlockEntity注册问题
+
+
+## <br>2025.01.24
+#### &emsp;导入多个物品模型，正在尝试制作武器
+

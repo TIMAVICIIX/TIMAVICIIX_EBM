@@ -1,0 +1,14 @@
+{
+  "whip_crack": {
+    "subtitle": "sound.timaviciix_ebm.whip_crack",
+    "sounds": [
+      "timaviciix_ebm:whip_crack"
+    ]
+  },
+  "whip_swhoo": {
+    "subtitle": "sound.timaviciix_ebm.whip_swhoo",
+    "sounds": [
+      "timaviciix_ebm:whip_swhoo"
+    ]
+  }
+}

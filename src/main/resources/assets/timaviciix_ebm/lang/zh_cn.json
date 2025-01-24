@@ -35,5 +35,9 @@
   "item.timaviciix_ebm.toner_cartridge": "硒鼓",
   "item.timaviciix_ebm.blue_cat_pendant": "蓝色猫猫铃",
   "item.timaviciix_ebm.european_style_ceramic_tea_set": "欧式陶瓷茶具套装",
-  "item.timaviciix_ebm.feather_duster": "鸡毛掸子"
+  "item.timaviciix_ebm.feather_duster": "鸡毛掸子",
+  "item.timaviciix_ebm.feather_duster_desc": "抱头蹲防!!!",
+  "message.timaviciix_ebm.feather_duster": "只能掸灰吗?",
+  "sound.timaviciix_ebm.whip_swhoo": "鸡毛掸子挥动声",
+  "sound.timaviciix_ebm.whip_crack": "鸡毛掸子命中声"
 }

@@ -5,6 +5,7 @@ import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
+import cn.timaviciix.ebm.registers.others.SoundRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -40,7 +41,10 @@ object TIMAVICIIXEBM : ModInitializer {
 
         //Use New Registry Method by registry sorted
         addRegistrySortPair(0) {
+            //Sound Register
+            SoundRegister.soundRegistryInterface()
             FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
         }
 
         addRegistrySortPair(1) {
@@ -51,7 +55,7 @@ object TIMAVICIIXEBM : ModInitializer {
 
         addRegistrySortPair(3) {
             FieldRegistrationHandler.register(BookcaseRegister::class.java, GlobalData.MOD_ID, false)
-            FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+            //FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
         }
 
         addRegistrySortPair(2) {

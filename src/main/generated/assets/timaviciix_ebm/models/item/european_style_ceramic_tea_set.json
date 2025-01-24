@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "timaviciix_ebm:item/european_style_ceramic_tea_set"
-  }
-}

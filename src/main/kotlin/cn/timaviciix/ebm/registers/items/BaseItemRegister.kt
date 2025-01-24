@@ -24,7 +24,7 @@ interface BaseItemRegister {
 
     companion object {
 
-        @Deprecated("you can use new RegistryMethod to do this")
+        @Deprecated("you can use new RegistryMethod to do this ↓ ")
         fun <T : BaseItem> registrySelf(registryConsist: Pair<String, KClass<T>>): T {
 
             val name = registryConsist.first

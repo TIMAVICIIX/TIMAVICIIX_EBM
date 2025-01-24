@@ -33,8 +33,6 @@ class EBMModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) 
             //register(CopierRegister.VERTICAL_COPIER, Models.GENERATED)
 
             register(OtherItemRegister.FEATHER_DUSTER, Models.GENERATED)
-            register(OtherItemRegister.BLUE_CAT_PENDANT, Models.GENERATED)
-            register(OtherItemRegister.EUROPEAN_STYLE_CERAMIC_TEA_SET, Models.GENERATED)
 
             register(StuffRegister.COPIER_BODY, Models.GENERATED)
             register(StuffRegister.TONER_CARTRIDGE, Models.GENERATED)
