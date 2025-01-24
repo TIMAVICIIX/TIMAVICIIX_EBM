@@ -45,8 +45,8 @@ object TIMAVICIIXEBM : ModInitializer {
 
         addRegistrySortPair(1) {
             //block registers
-            FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
         }
 
         addRegistrySortPair(3) {
@@ -55,8 +55,8 @@ object TIMAVICIIXEBM : ModInitializer {
         }
 
         addRegistrySortPair(2) {
-            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
         }
 
         launchAutoRegistry()

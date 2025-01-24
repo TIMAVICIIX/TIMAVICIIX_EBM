@@ -25,7 +25,7 @@ import net.minecraft.util.math.Direction
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-abstract class BaseDirectBlock(settings: FabricBlockSettings) : BlockWithEntity(settings) {
+abstract class BaseDirectBlock(settings: FabricBlockSettings) : Block(settings) {
 
     companion object {
         //val logger: Logger = LoggerFactory.getLogger(GlobalData.MOD_ID)

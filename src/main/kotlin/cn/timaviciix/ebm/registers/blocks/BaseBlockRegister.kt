@@ -11,6 +11,7 @@ package cn.timaviciix.ebm.registers.blocks
 
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
@@ -107,6 +108,21 @@ interface BaseBlockRegister {
             )
 
             return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, blockId), targetBlock)
+
+        }
+
+        fun <T : BlockEntityType<*>> registryEntitySelf(
+            property: KProperty<*>,
+            targetEntityType: T
+        ): T {
+
+            val entityId = property.name.lowercase()
+
+            return Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                Identifier(GlobalData.MOD_ID, entityId),
+                targetEntityType
+            )
 
         }
 

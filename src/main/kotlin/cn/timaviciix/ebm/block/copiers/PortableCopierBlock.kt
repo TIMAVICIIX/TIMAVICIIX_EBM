@@ -26,12 +26,9 @@ import net.minecraft.world.BlockView
 class PortableCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.GRAY)), BlockEntityProvider {
 
     private val bodyShape = VoxelShapes.cuboid(0.125, 0.0, 0.125, 0.875, 0.75, 0.875)
-    private lateinit var blockState: BlockState
-
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
         return if (pos != null && state !== null) {
-
             return PortableCopierBlockEntity(pos, state)
         } else {
             null

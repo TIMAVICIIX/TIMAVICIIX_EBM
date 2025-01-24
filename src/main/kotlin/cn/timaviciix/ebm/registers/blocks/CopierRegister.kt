@@ -13,6 +13,7 @@ import cn.timaviciix.ebm.block.blockentitys.copierentitys.PortableCopierBlockEnt
 import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.block.copiers.PortableCopierBlock
 import cn.timaviciix.ebm.block.copiers.VerticalCopierBlock
+import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
@@ -41,10 +42,15 @@ class CopierRegister() : BlockRegistryContainer {
     class EntityTypes() : BlockEntityRegistryContainer {
         companion object {
 
-            val PORTABLE_COPIER_TYPE: BlockEntityType<PortableCopierBlockEntity> =
+            val PORTABLE_COPIER_TYPE: BlockEntityType<PortableCopierBlockEntity> = registryEntitySelf(
+                ::PORTABLE_COPIER,
                 FabricBlockEntityTypeBuilder.create(::PortableCopierBlockEntity, PORTABLE_COPIER).build()
-            val VERTICAL_COPIER_TYPE: BlockEntityType<VerticalCopierBlockEntity> =
+            )
+
+            val VERTICAL_COPIER_TYPE: BlockEntityType<VerticalCopierBlockEntity> = registryEntitySelf(
+                ::VERTICAL_COPIER,
                 FabricBlockEntityTypeBuilder.create(::VerticalCopierBlockEntity, VERTICAL_COPIER).build()
+            )
 
         }
     }

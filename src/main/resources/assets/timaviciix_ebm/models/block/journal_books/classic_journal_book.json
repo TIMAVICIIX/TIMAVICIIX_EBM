@@ -1,0 +1,7 @@
+{
+  "parent": "timaviciix_ebm:block/journal_book",
+  "textures": {
+    "0": "timaviciix_ebm:block/books/journal_books/classic_journal_book",
+    "particle": "timaviciix_ebm:block/books/book_particle"
+  }
+}

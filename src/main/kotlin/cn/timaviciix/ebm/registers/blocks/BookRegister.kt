@@ -10,15 +10,18 @@
 package cn.timaviciix.ebm.registers.blocks
 
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.GeneralBookBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.bookentitys.JournalBookBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.LargeBookBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.LightBookBlockEntity
 import cn.timaviciix.ebm.block.books.generalbooks.*
+import cn.timaviciix.ebm.block.books.journalbooks.ClassicJournalBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.MajesticGildedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.QuartzRubyEncrustedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.RubyGildedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.SapphireGildedBookBlock
 import cn.timaviciix.ebm.block.books.lightbooks.CrimsonFlameGildedBookBlock
 import cn.timaviciix.ebm.block.books.lightbooks.GoldenBoughForestBookBlock
+import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
@@ -28,6 +31,8 @@ import net.minecraft.block.entity.BlockEntityType
 class BookRegister() : BlockRegistryContainer {
 
     companion object {
+        val CLASSIC_JOURNAL_BOOK: ClassicJournalBookBlock = registrySelf(::CLASSIC_JOURNAL_BOOK, 0xdbe2ef)
+
         val REFINED_LEATHER_BOOK: RefinedLeatherBookBlock = registrySelf(::REFINED_LEATHER_BOOK, 0xff8264, true)
         val LUXURIOUS_GILDED_BOOK: LuxuriousGildedBookBlock = registrySelf(::LUXURIOUS_GILDED_BOOK, 0xff8264, true)
         val QUARTZ_GILDED_BOOK: QuartzGildedBookBlock = registrySelf(::QUARTZ_GILDED_BOOK, 0xff8264, true)
@@ -50,15 +55,29 @@ class BookRegister() : BlockRegistryContainer {
     class EntityTypes() : BlockEntityRegistryContainer {
 
         companion object {
+            //journal books
+            val JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE: BlockEntityType<JournalBookBlockEntity> = registryEntitySelf(
+                ::CLASSIC_JOURNAL_BOOK,
+                FabricBlockEntityTypeBuilder.create({ pos, state ->
+                    JournalBookBlockEntity(
+                        ParamEntityTypes.JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE.blockEntityType,
+                        pos, state
+                    )
+                }, CLASSIC_JOURNAL_BOOK).build()
+            )
+
             //general books
-            val GENERAL_REFINED_LEATHER_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+            val GENERAL_REFINED_LEATHER_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> = registryEntitySelf(
+                ::REFINED_LEATHER_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     GeneralBookBlockEntity(
                         ParamEntityTypes.GENERAL_REFINED_LEATHER_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, REFINED_LEATHER_BOOK).build()
-            val GENERAL_LUXURIOUS_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+            )
+            val GENERAL_LUXURIOUS_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> = registryEntitySelf(
+                ::LUXURIOUS_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     GeneralBookBlockEntity(
                         ParamEntityTypes.GENERAL_LUXURIOUS_GILDED_BOOK_TYPE.blockEntityType,
@@ -66,60 +85,76 @@ class BookRegister() : BlockRegistryContainer {
                     )
 
                 }, LUXURIOUS_GILDED_BOOK).build()
-            val GENERAL_QUARTZ_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+            )
+            val GENERAL_QUARTZ_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> = registryEntitySelf(
+                ::QUARTZ_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     GeneralBookBlockEntity(
                         ParamEntityTypes.GENERAL_QUARTZ_GILDED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, QUARTZ_GILDED_BOOK).build()
-            val GENERAL_STURDY_OBSIDIAN_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+            )
+            val GENERAL_STURDY_OBSIDIAN_GILDED_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> = registryEntitySelf(
+                ::STURDY_OBSIDIAN_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     GeneralBookBlockEntity(
                         ParamEntityTypes.GENERAL_STURDY_OBSIDIAN_GILDED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, STURDY_OBSIDIAN_GILDED_BOOK).build()
-            val GENERAL_QUARTZ_LEATHER_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> =
+            )
+            val GENERAL_QUARTZ_LEATHER_BOOK_TYPE: BlockEntityType<GeneralBookBlockEntity> = registryEntitySelf(
+                ::QUARTZ_LEATHER_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     GeneralBookBlockEntity(
                         ParamEntityTypes.GENERAL_QUARTZ_LEATHER_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, QUARTZ_LEATHER_BOOK).build()
+            )
 
             //large books
-            val LARGE_MAJESTIC_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> =
+            val LARGE_MAJESTIC_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> = registryEntitySelf(
+                ::MAJESTIC_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LargeBookBlockEntity(
                         ParamEntityTypes.LARGE_MAJESTIC_GILDED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, MAJESTIC_GILDED_BOOK).build()
-            val LARGE_QUARTZ_RUBY_ENCRUSTED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> =
+            )
+            val LARGE_QUARTZ_RUBY_ENCRUSTED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> = registryEntitySelf(
+                ::QUARTZ_RUBY_ENCRUSTED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LargeBookBlockEntity(
                         ParamEntityTypes.LARGE_QUARTZ_RUBY_ENCRUSTED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, QUARTZ_RUBY_ENCRUSTED_BOOK).build()
-            val LARGE_RUBY_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> =
+            )
+            val LARGE_RUBY_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> = registryEntitySelf(
+                ::RUBY_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LargeBookBlockEntity(
                         ParamEntityTypes.LARGE_RUBY_GILDED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, RUBY_GILDED_BOOK).build()
-            val LARGE_SAPPHIRE_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> =
+            )
+            val LARGE_SAPPHIRE_GILDED_BOOK_TYPE: BlockEntityType<LargeBookBlockEntity> = registryEntitySelf(
+                ::SAPPHIRE_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LargeBookBlockEntity(
                         ParamEntityTypes.LARGE_SAPPHIRE_GILDED_BOOK_TYPE.blockEntityType,
                         pos, state
                     )
                 }, SAPPHIRE_GILDED_BOOK).build()
+            )
 
             //light books
-            val LIGHT_GOLDEN_BOUGH_FOREST_BOOK_TYPE: BlockEntityType<LightBookBlockEntity> =
+            val LIGHT_GOLDEN_BOUGH_FOREST_BOOK_TYPE: BlockEntityType<LightBookBlockEntity> = registryEntitySelf(
+                ::GOLDEN_BOUGH_FOREST_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LightBookBlockEntity(
                         ParamEntityTypes.LIGHT_GOLDEN_BOUGH_FOREST_BOOK_TYPE.blockEntityType,
@@ -127,7 +162,9 @@ class BookRegister() : BlockRegistryContainer {
                     )
 
                 }, GOLDEN_BOUGH_FOREST_BOOK).build()
-            val LIGHT_CRIMSON_FLAME_GILDED_BOOK_TYPE: BlockEntityType<LightBookBlockEntity> =
+            )
+            val LIGHT_CRIMSON_FLAME_GILDED_BOOK_TYPE: BlockEntityType<LightBookBlockEntity> = registryEntitySelf(
+                ::CRIMSON_FLAME_GILDED_BOOK,
                 FabricBlockEntityTypeBuilder.create({ pos, state ->
                     LightBookBlockEntity(
                         ParamEntityTypes.LIGHT_CRIMSON_FLAME_GILDED_BOOK_TYPE.blockEntityType,
@@ -135,8 +172,10 @@ class BookRegister() : BlockRegistryContainer {
                     )
 
                 }, CRIMSON_FLAME_GILDED_BOOK).build()
+            )
 
             enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
+                JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE(EntityTypes.JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE),
                 GENERAL_REFINED_LEATHER_BOOK_TYPE(EntityTypes.GENERAL_REFINED_LEATHER_BOOK_TYPE),
                 GENERAL_LUXURIOUS_GILDED_BOOK_TYPE(EntityTypes.GENERAL_LUXURIOUS_GILDED_BOOK_TYPE),
                 GENERAL_QUARTZ_GILDED_BOOK_TYPE(EntityTypes.GENERAL_QUARTZ_GILDED_BOOK_TYPE),

@@ -12,6 +12,7 @@ package cn.timaviciix.ebm.block.copiers
 import cn.timaviciix.ebm.block.BaseDirectBlock
 import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
+import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.entity.BlockEntity
@@ -21,7 +22,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-class VerticalCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.BLACK)) {
+class VerticalCopierBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.BLACK)), BlockEntityProvider {
 
     private val bodyShape = VoxelShapes.cuboid(0.0625, 0.0, 0.0625, 0.9375, 1.5, 0.9375)
 
