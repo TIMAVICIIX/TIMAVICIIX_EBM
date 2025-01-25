@@ -34,7 +34,7 @@ object GlobalData {
     val OWO_ITEM_BASE_64SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)!!
     val OWO_ITEM_SIGNAL_SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(1)!!
 
-    fun getGeneralBlockSetting(mapColor: DyeColor?): FabricBlockSettings {
+    fun getGeneralBlockSetting(mapColor: DyeColor?,instrument: Instrument = Instrument.BASEDRUM): FabricBlockSettings {
 
         var targetColor = DyeColor.GRAY
 
@@ -45,7 +45,7 @@ object GlobalData {
         return FabricBlockSettings.create().apply {
             collidable(true)
             mapColor(targetColor)
-            instrument(Instrument.BASEDRUM)
+            instrument(instrument)
             strength(1.2F, 6.0F)
         }
     }

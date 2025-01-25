@@ -2,6 +2,7 @@ package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
@@ -45,6 +46,7 @@ object TIMAVICIIXEBM : ModInitializer {
             SoundRegister.soundRegistryInterface()
             FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(OtherBlocksRegister::class.java, GlobalData.MOD_ID, false)
         }
 
         addRegistrySortPair(1) {

@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.registers.items
 
 import cn.timaviciix.ebm.item.others.FeatherDuster
+import cn.timaviciix.ebm.item.others.InvertedFeatherDuster
 import cn.timaviciix.ebm.registers.items.BaseItemRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
 
@@ -17,6 +18,7 @@ class OtherItemRegister : ItemRegistryContainer {
 
     companion object {
 
+        val INVERTED_FEATHER_DUSTER: InvertedFeatherDuster = registrySelf(::INVERTED_FEATHER_DUSTER)
         val FEATHER_DUSTER: FeatherDuster = registrySelf(::FEATHER_DUSTER)
 
     }

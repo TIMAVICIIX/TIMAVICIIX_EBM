@@ -18,8 +18,6 @@ import net.minecraft.item.ToolMaterials
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
 
 open class BaseSwordItem(
     nameColor: Int,

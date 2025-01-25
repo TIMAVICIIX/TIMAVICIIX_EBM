@@ -22,8 +22,8 @@ object ItemsTooltip {
 
             when (stack.item) {
 
-                OtherItemRegister.FEATHER_DUSTER -> {
-                    lines.add(Text.translatable(generateDescPath("feather_duster")))
+                OtherItemRegister.INVERTED_FEATHER_DUSTER -> {
+                    lines.add(Text.translatable(generateDescPath("inverted_feather_duster")))
                 }
 
             }
