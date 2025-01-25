@@ -8,6 +8,14 @@ pluginManagement {
 			name = "owo"
 			url = "https://maven.wispforest.io"
 		}
+		maven {
+			name = "lss233 Fabric Mirror"
+			url = "https://lss233.littleservice.cn/"
+		}
+		maven {
+			name = 'Fabric Han Bing s'
+			url = 'https://repository.hanbings.io/proxy'
+		}
 		mavenCentral()
 		gradlePluginPortal()
 	}

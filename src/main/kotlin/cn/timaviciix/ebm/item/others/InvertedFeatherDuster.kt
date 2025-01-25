@@ -26,8 +26,6 @@ import org.slf4j.LoggerFactory
 class InvertedFeatherDuster :
     BaseSwordItem(0xf73859, 0, GlobalData.OWO_ITEM_SIGNAL_SETTING, toolMaterial = FeatherDusterMaterial()) {
 
-    val logger: Logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
-
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
 
         user?.swingHand(hand, true)

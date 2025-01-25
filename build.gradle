@@ -21,6 +21,16 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
     maven {
+        name = "lss233 Fabric Mirror"
+        url = "https://lss233.littleservice.cn/"
+    }
+    maven {
+        url = 'https://maven.aliyun.com/nexus/content/groups/public'
+    }
+    maven {
+        url = 'https://repository.hanbings.io/proxy'
+    }
+    maven {
         name = "owo"
         url = "https://maven.wispforest.io"
     }
@@ -31,8 +41,12 @@ repositories {
         }
     }
     maven {
-        name = "lss233 Fabric Mirror"
-        url = "https://lss233.littleservice.cn/"
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
     }
 }
 
@@ -64,6 +78,10 @@ dependencies {
 
     //Jade
     modImplementation "curse.maven:jade-324717:${project.jade_id}"
+
+    //Gecko
+    modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${project.gecko_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
 
 }
 

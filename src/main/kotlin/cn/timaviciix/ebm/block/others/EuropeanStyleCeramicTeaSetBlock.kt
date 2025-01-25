@@ -20,7 +20,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 
-class EuropeanStyleCeramicTeaSet : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.CYAN)) {
+class EuropeanStyleCeramicTeaSetBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.CYAN)) {
 
     private val bodyShape: VoxelShape = VoxelShapes.cuboid(0.1875, 0.0, 0.1875, 0.8125, 0.6, 0.8125)
 

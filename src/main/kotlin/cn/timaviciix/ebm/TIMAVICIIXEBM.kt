@@ -6,12 +6,16 @@ import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
+import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
+import cn.timaviciix.ebm.render.BlueCatPendantBlockRender
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import org.slf4j.LoggerFactory
+import software.bernie.geckolib.GeckoLib
 
 object TIMAVICIIXEBM : ModInitializer {
 
@@ -41,7 +45,24 @@ object TIMAVICIIXEBM : ModInitializer {
 
 
         //Use New Registry Method by registry sorted
-        addRegistrySortPair(0) {
+
+        /**
+         * step1:registry Animation Block
+         * step2:registry Animation BlockEntity & BlockEntityType
+         *
+         * step3:Take an Animation Model（has resources from block_bench）
+         * step4:Take an Animation Render
+         * step5:registry this two guys 👆
+         */
+
+        //Animation Blocks Register
+        addRegistrySortPair(90) {
+            FieldRegistrationHandler.register(AnimationIBsRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(AnimationIBsRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+
+        }
+
+        addRegistrySortPair(100) {
             //Sound Register
             SoundRegister.soundRegistryInterface()
             FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
@@ -49,18 +70,18 @@ object TIMAVICIIXEBM : ModInitializer {
             FieldRegistrationHandler.register(OtherBlocksRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(1) {
+        addRegistrySortPair(200) {
             //block registers
             FieldRegistrationHandler.register(CopierRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(CopierRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(3) {
+        addRegistrySortPair(300) {
             FieldRegistrationHandler.register(BookcaseRegister::class.java, GlobalData.MOD_ID, false)
             //FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
         }
 
-        addRegistrySortPair(2) {
+        addRegistrySortPair(400) {
             FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
         }
@@ -72,6 +93,9 @@ object TIMAVICIIXEBM : ModInitializer {
 
         //buildItemGroup
         EBMItemGroup(null, null).buildAndInitItemGroup()
+
+        //Initialize Gecko
+        GeckoLib.initialize()
 
 
     }

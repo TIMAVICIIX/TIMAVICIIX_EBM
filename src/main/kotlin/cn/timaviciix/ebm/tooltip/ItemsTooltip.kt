@@ -16,6 +16,10 @@ import net.minecraft.text.Text
 
 object ItemsTooltip {
 
+    val TooltipList: MutableList<String> = mutableListOf(
+        OtherItemRegister.FEATHER_DUSTER.javaClass.name,
+    )
+
     fun initializeTooltip() {
 
         ItemTooltipCallback.EVENT.register { stack, _, lines ->
@@ -34,7 +38,7 @@ object ItemsTooltip {
 
     private fun generateDescPath(name: String): String {
 
-        return "item." + GlobalData.MOD_ID +"."+ name +  GlobalData.DESC_SUFFIX
+        return "item." + GlobalData.MOD_ID + "." + name + GlobalData.DESC_SUFFIX
 
     }
 

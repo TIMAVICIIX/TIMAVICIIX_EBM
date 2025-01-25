@@ -21,6 +21,12 @@
 				"adapter": "kotlin"
 			}
 		],
+		"client": [
+			{
+				"value": "cn.timaviciix.ebm.TIMAVICIIXEBMClient",
+				"adapter": "kotlin"
+			}
+		],
 		"fabric-datagen": [
 			{
 				"value": "cn.timaviciix.ebm.data_generators.TIMAVICIIXEBMDataGenerator",
