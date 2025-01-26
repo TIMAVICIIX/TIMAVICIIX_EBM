@@ -1,6 +1,6 @@
 {
   "itemGroup.timaviciix_ebm.timaviciix_ebm_group": "TIMAVICIIX的简单图书管理",
-  "itemGroup.timaviciix_ebm.timaviciix_ebm_group.button.github": "访问模组主页!",
+  "itemGroup.timaviciix_ebm.timaviciix_ebm_group.button.github": "访问TIMAVICIIX-EBM主页!",
   "block.timaviciix_ebm.classic_journal_book": "经典期刊本",
   "block.timaviciix_ebm.cut_size_book_paper": "裁版书纸",
   "block.timaviciix_ebm.refined_leather_book": "精致皮革书本",
@@ -27,7 +27,7 @@
   "item.timaviciix_ebm.crimson_flame_gilded_bookcase": "赤焰金边书皮",
   "block.timaviciix_ebm.portable_copier": "便携复印机",
   "block.timaviciix_ebm.vertical_copier": "立式复印机",
-  "item.timaviciix_ebm.binding_machine": "装订器",
+  "block.timaviciix_ebm.binding_machine": "装订器",
   "block.timaviciix_ebm.librarian_desk": "图书管理员的书桌",
   "item.timaviciix_ebm.stamping_desk": "签章台",
   "item.timaviciix_ebm.copier_body": "复印机体",

@@ -9,11 +9,9 @@
 
 package cn.timaviciix.ebm.tooltip
 
-import cn.timaviciix.ebm.util.GlobalData
-
 object ToolTipBus {
 
-    fun initAllTooltip(){
+    fun initAllTooltip() {
         ItemsTooltip.initializeTooltip()
     }
 

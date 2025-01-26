@@ -9,7 +9,9 @@
 
 package cn.timaviciix.ebm.registers.blocks
 
+import cn.timaviciix.ebm.block.blockentitys.worktables.BindingMachineBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.worktables.LibrarianDeskBlockEntity
+import cn.timaviciix.ebm.block.worktables.BindingMachineBlock
 import cn.timaviciix.ebm.block.worktables.LibrarianDeskBlock
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
@@ -28,12 +30,20 @@ class WorkTableRegister() : BlockRegistryContainer {
             blockItemsConsist.add(it)
         }, 0xd4a5a5)
 
+        val BINDING_MACHINE: BindingMachineBlock = registrySelf(::BINDING_MACHINE, {
+            blockItemsConsist.add(it)
+        }, 0x8d6262)
+
 
         class EntityTypes() : BlockEntityRegistryContainer {
             companion object {
                 val LIBRARIAN_DESK_TYPE: BlockEntityType<LibrarianDeskBlockEntity> = registryEntitySelf(
                     ::LIBRARIAN_DESK,
                     FabricBlockEntityTypeBuilder.create(::LibrarianDeskBlockEntity, LIBRARIAN_DESK).build()
+                )
+                val BINDING_MACHINE_TYPE: BlockEntityType<BindingMachineBlockEntity> = registryEntitySelf(
+                    ::BINDING_MACHINE,
+                    FabricBlockEntityTypeBuilder.create(::BindingMachineBlockEntity, BINDING_MACHINE).build()
                 )
             }
         }
