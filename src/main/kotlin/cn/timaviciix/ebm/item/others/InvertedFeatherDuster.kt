@@ -20,8 +20,6 @@ import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 class InvertedFeatherDuster :
     BaseSwordItem(0xf73859, 0, GlobalData.OWO_ITEM_SIGNAL_SETTING, toolMaterial = FeatherDusterMaterial()) {
@@ -42,18 +40,22 @@ class InvertedFeatherDuster :
 
         target?.let {
 
-            if (it.isPlayer) {
+            if (it.isPlayer || it.isBaby) {
                 if (!it.isSneaking) {
                     if (it.health < 10) {
                         it.health = 0f
                     }
                     it.health /= 2
+                    it.world.playSound(
+                        null, it.blockPos, SoundRegister.WHIP_CRACK, SoundCategory.PLAYERS, 4.0f, 1.0f
+                    )
                     return super.postHit(stack, it, attacker)
                 }
-                it.health = it.health
                 it.world.playSound(
-                    null, it.blockPos, SoundRegister.WHIP_CRACK, SoundCategory.PLAYERS, 4.0f, 1.0f
+                    null, it.blockPos, SoundRegister.WHIP_SWHOO, SoundCategory.PLAYERS, 3.0f, 1.0f
                 )
+                it.health = it.health
+
             } else {
                 it.health = it.health
                 attacker?.sendMessage(Text.translatable("message.timaviciix_ebm.feather_duster"))
