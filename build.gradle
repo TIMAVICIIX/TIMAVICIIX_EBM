@@ -35,7 +35,7 @@ repositories {
         url = "https://maven.wispforest.io"
     }
     maven {
-        url "https://www.cursemaven.com"
+        url = "https://www.cursemaven.com"
         content {
             includeGroup "curse.maven"
         }

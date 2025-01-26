@@ -13,13 +13,19 @@ import cn.timaviciix.ebm.item.others.FeatherDuster
 import cn.timaviciix.ebm.item.others.InvertedFeatherDuster
 import cn.timaviciix.ebm.registers.items.BaseItemRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
+import net.minecraft.item.Item
 
 class OtherItemRegister : ItemRegistryContainer {
 
     companion object {
+        val itemConsistList:MutableList<Pair<Item,String>> = mutableListOf()
 
-        val INVERTED_FEATHER_DUSTER: InvertedFeatherDuster = registrySelf(::INVERTED_FEATHER_DUSTER)
-        val FEATHER_DUSTER: FeatherDuster = registrySelf(::FEATHER_DUSTER)
+        val INVERTED_FEATHER_DUSTER: InvertedFeatherDuster = registrySelf(::INVERTED_FEATHER_DUSTER){
+            itemConsistList.add(it)
+        }
+        val FEATHER_DUSTER: FeatherDuster = registrySelf(::FEATHER_DUSTER){
+            itemConsistList.add(it)
+        }
 
     }
 

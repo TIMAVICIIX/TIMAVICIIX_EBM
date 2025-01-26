@@ -16,13 +16,18 @@ import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.item.BlockItem
 
 
 //we need /*BaseBlockRegister*/ to registry block           this guy↓
 class AnimationIBsRegister() : BlockRegistryContainer {
     companion object {
+        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
+
         //manual Registry
-        val BLUE_CAT_PENDANT: BlueCatPendantBlock = BaseBlockRegister.registrySelf(::BLUE_CAT_PENDANT, 0x3f72af)
+        val BLUE_CAT_PENDANT: BlueCatPendantBlock = BaseBlockRegister.registrySelf(::BLUE_CAT_PENDANT, {
+            blockItemsConsist.add(it)
+        }, 0x3f72af)
 
     }
 

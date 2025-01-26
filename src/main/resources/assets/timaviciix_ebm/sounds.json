@@ -10,5 +10,17 @@
     "sounds": [
       "timaviciix_ebm:whip_swhoo"
     ]
+  },
+  "bell_ling": {
+    "subtitle": "sound.timaviciix_ebm.bell_ling",
+    "sounds": [
+      "timaviciix_ebm:bell_ling"
+    ]
+  },
+  "bell_wind_swing": {
+    "subtitle": "sound.timaviciix_ebm.bell_wind_swing",
+    "sounds": [
+      "timaviciix_ebm:bell_wind_swing"
+    ]
   }
 }

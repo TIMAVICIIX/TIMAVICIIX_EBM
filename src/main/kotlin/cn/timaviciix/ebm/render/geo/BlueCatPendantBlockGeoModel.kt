@@ -12,10 +12,10 @@ package cn.timaviciix.ebm.render.geo
 import cn.timaviciix.ebm.block.blockentitys.others.BlueCatPendantBlockEntity
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.util.Identifier
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 class BlueCatPendantBlockGeoModel : GeoModel<BlueCatPendantBlockEntity>() {
-
 
     override fun getModelResource(p0: BlueCatPendantBlockEntity?): Identifier {
         return Identifier(GlobalData.MOD_ID, "geo/blue_cat_pendant.geo.json")

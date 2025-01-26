@@ -11,7 +11,6 @@ package cn.timaviciix.ebm.data_generators
 
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
-import cn.timaviciix.ebm.registers.items.WorkTablesRegister
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator
@@ -38,9 +37,6 @@ class EBMModelGenerator(output: FabricDataOutput) : FabricModelProvider(output) 
             register(StuffRegister.TONER_CARTRIDGE, Models.GENERATED)
             register(StuffRegister.INK_BOX, Models.GENERATED)
 
-            register(WorkTablesRegister.LIBRARIAN_DESK, Models.GENERATED)
-            register(WorkTablesRegister.STAMPING_DESK, Models.GENERATED)
-            register(WorkTablesRegister.BINDING_MACHINE, Models.GENERATED)
 
         }
     }

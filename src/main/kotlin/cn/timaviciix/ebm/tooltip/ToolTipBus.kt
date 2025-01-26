@@ -17,8 +17,4 @@ object ToolTipBus {
         ItemsTooltip.initializeTooltip()
     }
 
-    fun getTooltipPath(path:String):String{
-        return "item."+GlobalData.MOD_ID+"."+path+GlobalData.DESC_SUFFIX
-    }
-
 }

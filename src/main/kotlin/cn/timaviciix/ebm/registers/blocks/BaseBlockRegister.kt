@@ -22,7 +22,6 @@ import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.animatable.GeoItem
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.createInstance
 
@@ -41,7 +40,7 @@ interface BaseBlockRegister {
             identifier: Identifier,
             operation: (BlockItem.() -> Unit) = {},
             needSneaking: Boolean
-        ) {
+        ): BlockItem {
 
             val targetBlockItem = if (needSneaking) {
                 object : BlockItem(
@@ -85,7 +84,7 @@ interface BaseBlockRegister {
                 targetBlockItem.operation()
             }
 
-            Registry.register(
+            return Registry.register(
                 Registries.ITEM,
                 identifier,
                 targetBlockItem
@@ -95,6 +94,7 @@ interface BaseBlockRegister {
         //save an interface for animationItem
         inline fun <reified T : Block> registrySelf(
             property: KProperty<*>,
+            blockItemOperation: (Pair<BlockItem,String>) -> Unit,
             nameColor: Int = 0xeeeeee,
             needSneaking: Boolean = false,
         ): T {
@@ -102,12 +102,14 @@ interface BaseBlockRegister {
             val blockId = property.name.lowercase()
             val targetBlock = T::class.createInstance()
 
-            generateBlockItem(
+            val blockItemPart = generateBlockItem(
                 nameColor = nameColor,
                 block = targetBlock,
                 identifier = Identifier(GlobalData.MOD_ID, blockId),
                 needSneaking = needSneaking
             )
+
+            blockItemOperation(Pair(blockItemPart,blockId))
 
             return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, blockId), targetBlock)
 

@@ -3,17 +3,16 @@ package cn.timaviciix.ebm
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
+import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
-import cn.timaviciix.ebm.render.BlueCatPendantBlockRender
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import org.slf4j.LoggerFactory
 import software.bernie.geckolib.GeckoLib
 
@@ -84,6 +83,15 @@ object TIMAVICIIXEBM : ModInitializer {
         addRegistrySortPair(400) {
             FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+        }
+
+        addRegistrySortPair(210) {
+            FieldRegistrationHandler.register(WorkTableRegister::class.java, GlobalData.MOD_ID, false)
+            FieldRegistrationHandler.register(
+                WorkTableRegister.Companion.EntityTypes::class.java,
+                GlobalData.MOD_ID,
+                false
+            )
         }
 
         launchAutoRegistry()

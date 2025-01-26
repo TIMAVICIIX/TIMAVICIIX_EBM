@@ -19,13 +19,20 @@ import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.item.BlockItem
 
 //@Imp:Necessary Construct
 class CopierRegister() : BlockRegistryContainer {
 
     companion object {
-        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER, 0xa2d5f2)
-        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER, 0xc9d6df)
+        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
+
+        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER, {
+            blockItemsConsist.add(it)
+        }, 0xa2d5f2)
+        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER, {
+            blockItemsConsist.add(it)
+        }, 0xc9d6df)
     }
 
 //    override fun createBlockItem(block: Block?, identifier: String?): BlockItem {

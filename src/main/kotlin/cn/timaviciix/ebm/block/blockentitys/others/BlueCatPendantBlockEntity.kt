@@ -25,9 +25,7 @@ class BlueCatPendantBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(
     AnimationIBsRegister.EntityTypes.BLUE_CAT_PENDANT_ANIME_ENTITY_TYPE,
     pos, state
 ), GeoBlockEntity {
-
     private val cache: AnimatableInstanceCache = SingletonAnimatableInstanceCache(this)
-
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return cache
     }
@@ -39,6 +37,7 @@ class BlueCatPendantBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(
     //customize play state operation,set animation play
     private fun <T : GeoAnimatable> predicate(state: AnimationState<T>): PlayState {
         state.controller.setAnimation(RawAnimation.begin().then("swing_anime", Animation.LoopType.LOOP))
+        state.controller.setSoundKeyframeHandler { }
         return PlayState.CONTINUE
     }
 

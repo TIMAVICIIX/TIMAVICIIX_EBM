@@ -12,11 +12,14 @@ package cn.timaviciix.ebm.registers.items
 import cn.timaviciix.ebm.item.books.BookcaseItem
 import cn.timaviciix.ebm.registers.items.BaseItemRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer
+import net.minecraft.item.Item
 
 
 //@Imp:Necessary Parameterless Constructors
 class BookcaseRegister : ItemRegistryContainer {
     companion object {
+        val itemConsistList: MutableList<Pair<Item, String>> = mutableListOf()
+
         // Book Items
 //        val CLASSIC_JOURNAL_BOOK: JournalBook = registrySelf(Companion::CLASSIC_JOURNAL_BOOK)
 //
@@ -37,19 +40,41 @@ class BookcaseRegister : ItemRegistryContainer {
 //        val RUBY_GILDED_BOOK: LargeBook = registrySelf(Companion::RUBY_GILDED_BOOK)
 
         // Bookcase Items
-        val CRIMSON_FLAME_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::CRIMSON_FLAME_GILDED_BOOKCASE)
-        val GOLDEN_BOUGH_FOREST_BOOKCASE: BookcaseItem = registrySelf(Companion::GOLDEN_BOUGH_FOREST_BOOKCASE)
+        val CRIMSON_FLAME_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::CRIMSON_FLAME_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val GOLDEN_BOUGH_FOREST_BOOKCASE: BookcaseItem = registrySelf(Companion::GOLDEN_BOUGH_FOREST_BOOKCASE) {
+            itemConsistList.add(it)
+        }
 
-        val REFINED_LEATHER_BOOKCASE: BookcaseItem = registrySelf(Companion::REFINED_LEATHER_BOOKCASE)
-        val QUARTZ_LEATHER_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_LEATHER_BOOKCASE)
-        val LUXURIOUS_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::LUXURIOUS_GILDED_BOOKCASE)
-        val QUARTZ_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_GILDED_BOOKCASE)
-        val STURDY_OBSIDIAN_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::STURDY_OBSIDIAN_GILDED_BOOKCASE)
+        val REFINED_LEATHER_BOOKCASE: BookcaseItem = registrySelf(Companion::REFINED_LEATHER_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val QUARTZ_LEATHER_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_LEATHER_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val LUXURIOUS_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::LUXURIOUS_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val QUARTZ_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val STURDY_OBSIDIAN_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::STURDY_OBSIDIAN_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
 
-        val MAJESTIC_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::MAJESTIC_GILDED_BOOKCASE)
-        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_RUBY_ENCRUSTED_BOOKCASE)
-        val SAPPHIRE_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::SAPPHIRE_GILDED_BOOKCASE)
-        val RUBY_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::RUBY_GILDED_BOOKCASE)
+        val MAJESTIC_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::MAJESTIC_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val QUARTZ_RUBY_ENCRUSTED_BOOKCASE: BookcaseItem = registrySelf(Companion::QUARTZ_RUBY_ENCRUSTED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val SAPPHIRE_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::SAPPHIRE_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
+        val RUBY_GILDED_BOOKCASE: BookcaseItem = registrySelf(Companion::RUBY_GILDED_BOOKCASE) {
+            itemConsistList.add(it)
+        }
 
 
     }

@@ -9,36 +9,64 @@
 
 package cn.timaviciix.ebm.tooltip
 
+import cn.timaviciix.ebm.registers.blocks.BookRegister
+import cn.timaviciix.ebm.registers.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
+import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
+import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
+import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.util.GlobalData
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
 import net.minecraft.text.Text
 
 object ItemsTooltip {
 
-    val TooltipList: MutableList<String> = mutableListOf(
-        OtherItemRegister.FEATHER_DUSTER.javaClass.name,
-    )
-
     fun initializeTooltip() {
+        val tooltipBlockBusList: List<Pair<BlockItem, String>> =
+            BookRegister.blockItemsConsist.plus(CopierRegister.blockItemsConsist)
+                .plus(OtherBlocksRegister.blockItemsConsist).plus(WorkTableRegister.blockItemsConsist)
+
+        val tooltipItemBusList: List<Pair<Item, String>> =
+            BookcaseRegister.itemConsistList.plus(OtherItemRegister.itemConsistList).plus(StuffRegister.itemConsistList)
+
 
         ItemTooltipCallback.EVENT.register { stack, _, lines ->
 
-            when (stack.item) {
 
-                OtherItemRegister.INVERTED_FEATHER_DUSTER -> {
-                    lines.add(Text.translatable(generateDescPath("inverted_feather_duster")))
+            for (item in tooltipBlockBusList) {
+                if (stack.item == item.first) {
+                    val originRequestPath = generateDescPath(true, item.second)
+                    val translatedText = Text.translatable(originRequestPath)
+
+                    if (originRequestPath != translatedText.string) {
+                        lines.add(translatedText)
+                    }
+
                 }
+            }
 
+            for (item in tooltipItemBusList) {
+                if (stack.item == item.first) {
+                    val originRequestPath = generateDescPath(false, item.second)
+                    val translatedText = Text.translatable(originRequestPath)
+
+                    if (originRequestPath != translatedText.string) {
+                        lines.add(translatedText)
+                    }
+
+                }
             }
 
         }
 
     }
 
-    private fun generateDescPath(name: String): String {
+    private fun generateDescPath(isBlock: Boolean, name: String): String {
 
-        return "item." + GlobalData.MOD_ID + "." + name + GlobalData.DESC_SUFFIX
+        return if (isBlock) "block." + GlobalData.MOD_ID + "." + name + GlobalData.DESC_SUFFIX else "item." + GlobalData.MOD_ID + "." + name + GlobalData.DESC_SUFFIX
 
     }
 

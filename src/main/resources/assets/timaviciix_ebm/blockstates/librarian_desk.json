@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "timaviciix_ebm:block/worktables/librarian_desk"
+    },
+    "facing=east": {
+      "model": "timaviciix_ebm:block/worktables/librarian_desk",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "timaviciix_ebm:block/worktables/librarian_desk",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "timaviciix_ebm:block/worktables/librarian_desk",
+      "y": 270
+    }
+  }
+}
