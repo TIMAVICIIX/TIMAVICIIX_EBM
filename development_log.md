@@ -199,3 +199,9 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.01.24
 #### &emsp;导入多个物品模型，正在尝试制作武器
 
+## <br>2025.01.25
+#### &emsp;实现了Block动画
+
+## <br>2025.01.26
+#### &emsp;正在为各项工作台建模，下一阶段将设置阅读动画并绘制阅读 UI，安好！！
+
