@@ -9,18 +9,14 @@
 
 package cn.timaviciix.ebm.registers.blocks
 
+import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
 import cn.timaviciix.ebm.util.GlobalData
+import io.wispforest.owo.itemgroup.OwoItemSettings
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.BlockItem
-import net.minecraft.item.ItemPlacementContext
-import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.text.Style
-import net.minecraft.text.Text
-import net.minecraft.text.TextColor
-import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.createInstance
@@ -33,52 +29,21 @@ interface BaseBlockRegister {
 
         /**
          * @param needSneaking Check Player Sneaking or not when placed block
+         * @param settings Note that this class generates a single-stack item by default
          */
         fun generateBlockItem(
             nameColor: Int,
             block: Block,
             identifier: Identifier,
             operation: (BlockItem.() -> Unit) = {},
-            needSneaking: Boolean
+            needSneaking: Boolean,
+            settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING
         ): BlockItem {
 
-            val targetBlockItem = if (needSneaking) {
-                object : BlockItem(
-                    block,
-                    GlobalData.OWO_ITEM_SIGNAL_SETTING
-                ) {
-                    val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
-                    override fun getName(): Text {
-                        return super.getName().copy().setStyle(nameStyle)
-                    }
+            //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
 
-                    override fun getName(stack: ItemStack?): Text {
-                        return super.getName(stack).copy().setStyle(nameStyle)
-                    }
-
-                    override fun place(context: ItemPlacementContext?): ActionResult {
-                        val player = context?.player
-                        if (player != null && !player.isSneaking) {
-                            return ActionResult.FAIL
-                        }
-                        return super.place(context)
-                    }
-                }
-            } else {
-                object : BlockItem(
-                    block,
-                    GlobalData.OWO_ITEM_SIGNAL_SETTING
-                ) {
-                    val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
-                    override fun getName(): Text {
-                        return super.getName().copy().setStyle(nameStyle)
-                    }
-
-                    override fun getName(stack: ItemStack?): Text {
-                        return super.getName(stack).copy().setStyle(nameStyle)
-                    }
-                }
-            }
+            val targetBlockItem =
+                BaseBlockItem(block, settings, nameColor = nameColor, needSneakingPlace = needSneaking)
 
             operation.let {
                 targetBlockItem.operation()
@@ -94,7 +59,7 @@ interface BaseBlockRegister {
         //save an interface for animationItem
         inline fun <reified T : Block> registrySelf(
             property: KProperty<*>,
-            blockItemOperation: (Pair<BlockItem,String>) -> Unit,
+            blockItemOperation: (Pair<BlockItem, String>) -> Unit,
             nameColor: Int = 0xeeeeee,
             needSneaking: Boolean = false,
         ): T {
@@ -109,7 +74,7 @@ interface BaseBlockRegister {
                 needSneaking = needSneaking
             )
 
-            blockItemOperation(Pair(blockItemPart,blockId))
+            blockItemOperation(Pair(blockItemPart, blockId))
 
             return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, blockId), targetBlock)
 

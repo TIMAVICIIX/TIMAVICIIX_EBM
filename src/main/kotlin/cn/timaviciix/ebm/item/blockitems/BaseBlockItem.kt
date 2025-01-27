@@ -1,0 +1,66 @@
+/**
+ *@BelongsProject: TIMAVICIIX_EBM
+ *@BelongsPackage: cn.timaviciix.ebm.item
+ *@Author: TIMAVICIIX
+ *@CreateTime: 2025-01-27  17:30
+ *@Description: 基本BlockItem类
+ *@Version: 1.0
+ */
+
+package cn.timaviciix.ebm.item.blockitems
+
+import net.minecraft.block.Block
+import net.minecraft.item.BlockItem
+import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
+import net.minecraft.text.Style
+import net.minecraft.text.Text
+import net.minecraft.text.TextColor
+import net.minecraft.util.ActionResult
+
+open class BaseBlockItem(
+    block: Block,
+    settings: Settings,
+    nameColor: Int = 0xeeeeee,
+    private val needSneakingPlace: Boolean = false,
+    private val itemClassify: BlockItemClassify = BlockItemClassify.Unknown
+) :
+    BlockItem(block, settings) {
+
+    companion object {
+
+        //
+        enum class BlockItemClassify {
+            Unknown,
+            Books,
+            Worktables,
+            Others,
+            Copiers
+        }
+    }
+
+    private val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
+    override fun getName(): Text {
+        return super.getName().copy().setStyle(nameStyle)
+    }
+
+    override fun getName(stack: ItemStack?): Text {
+        return super.getName(stack).copy().setStyle(nameStyle)
+    }
+
+    /**
+     * needSneaking:Does the block need to be placed crouching?
+     */
+    override fun place(context: ItemPlacementContext?): ActionResult {
+        return if (needSneakingPlace) {
+            val player = context?.player
+            if (player != null && !player.isSneaking) {
+                ActionResult.FAIL
+            }
+            super.place(context)
+        } else {
+            super.place(context)
+        }
+    }
+
+}

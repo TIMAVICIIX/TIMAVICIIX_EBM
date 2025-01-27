@@ -73,6 +73,7 @@ class BlueCatPendantBlock : BaseDirectBlock(GlobalData.getGeneralBlockSetting(Dy
     }
 
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState?,
         world: World?,

@@ -13,11 +13,16 @@ import cn.timaviciix.ebm.block.BaseDirectBlock
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.ActionResult
 import net.minecraft.util.DyeColor
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
+import net.minecraft.world.World
 import org.slf4j.LoggerFactory
 
 abstract class BaseBookBlock(private val bookType: BookType) :
