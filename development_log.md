@@ -205,3 +205,8 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.01.26
 #### &emsp;正在为各项工作台建模，下一阶段将设置阅读动画并绘制阅读 UI，安好！！
 
+## <br>2025.01.27
+#### &emsp;所有工作台建模已完成！目前正在进行彩蛋盔甲开发，设置阅读动画推迟
+
+### Item
+#### 罗宾有珠三千问\[Penguin_Armor]\:实际上是企鹅玩偶服

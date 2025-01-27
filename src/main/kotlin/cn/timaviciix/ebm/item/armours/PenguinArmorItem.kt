@@ -17,7 +17,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class PenguinArmorItem(material: ArmorMaterial, type: ArmorItem.Type, settings: Settings) :
+class PenguinArmorItem(material: ArmorMaterial, type: Type, settings: Settings) :
     ArmorItem(material, type, settings), GeoItem {
 
     override fun registerControllers(p0: AnimatableManager.ControllerRegistrar?) {
