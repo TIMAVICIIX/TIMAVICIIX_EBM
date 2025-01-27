@@ -11,8 +11,10 @@ package cn.timaviciix.ebm.registers.blocks
 
 import cn.timaviciix.ebm.block.blockentitys.worktables.BindingMachineBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.worktables.LibrarianDeskBlockEntity
+import cn.timaviciix.ebm.block.blockentitys.worktables.StampingDeskBlockEntity
 import cn.timaviciix.ebm.block.worktables.BindingMachineBlock
 import cn.timaviciix.ebm.block.worktables.LibrarianDeskBlock
+import cn.timaviciix.ebm.block.worktables.StampingDeskBlock
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
@@ -34,6 +36,10 @@ class WorkTableRegister() : BlockRegistryContainer {
             blockItemsConsist.add(it)
         }, 0x8d6262)
 
+        val STAMPING_DESK: StampingDeskBlock = registrySelf(::STAMPING_DESK, {
+            blockItemsConsist.add(it)
+        }, 0x8ef6e4)
+
 
         class EntityTypes() : BlockEntityRegistryContainer {
             companion object {
@@ -44,6 +50,10 @@ class WorkTableRegister() : BlockRegistryContainer {
                 val BINDING_MACHINE_TYPE: BlockEntityType<BindingMachineBlockEntity> = registryEntitySelf(
                     ::BINDING_MACHINE,
                     FabricBlockEntityTypeBuilder.create(::BindingMachineBlockEntity, BINDING_MACHINE).build()
+                )
+                val STAMPING_DESK_TYPE: BlockEntityType<StampingDeskBlockEntity> = registryEntitySelf(
+                    ::STAMPING_DESK,
+                    FabricBlockEntityTypeBuilder.create(::StampingDeskBlockEntity, STAMPING_DESK).build()
                 )
             }
         }
