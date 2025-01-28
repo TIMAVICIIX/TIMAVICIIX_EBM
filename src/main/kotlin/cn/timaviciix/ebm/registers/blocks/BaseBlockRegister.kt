@@ -38,7 +38,7 @@ interface BaseBlockRegister {
             operation: (BlockItem.() -> Unit) = {},
             needSneaking: Boolean,
             settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING
-        ): BlockItem {
+        ): BaseBlockItem {
 
             //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
 

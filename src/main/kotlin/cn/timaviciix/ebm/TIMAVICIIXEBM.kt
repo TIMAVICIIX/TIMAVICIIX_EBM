@@ -4,6 +4,7 @@ import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
 import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
+import cn.timaviciix.ebm.registers.items.ArmorRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
@@ -78,6 +79,10 @@ object TIMAVICIIXEBM : ModInitializer {
         addRegistrySortPair(300) {
             FieldRegistrationHandler.register(BookcaseRegister::class.java, GlobalData.MOD_ID, false)
             //FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
+        }
+
+        addRegistrySortPair(390) {
+            FieldRegistrationHandler.register(ArmorRegister::class.java, GlobalData.MOD_ID, false)
         }
 
         addRegistrySortPair(400) {

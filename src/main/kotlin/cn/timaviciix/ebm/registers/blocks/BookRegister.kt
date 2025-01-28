@@ -38,7 +38,7 @@ class BookRegister() : BlockRegistryContainer {
         val CLASSIC_JOURNAL_BOOK: ClassicJournalBookBlock =
             registrySelf(::CLASSIC_JOURNAL_BOOK, {
                 blockItemsConsist.add(it)
-            }, 0xdbe2ef)
+            }, 0xdbe2ef,true)
 
 
         val REFINED_LEATHER_BOOK: RefinedLeatherBookBlock = registrySelf(::REFINED_LEATHER_BOOK, {

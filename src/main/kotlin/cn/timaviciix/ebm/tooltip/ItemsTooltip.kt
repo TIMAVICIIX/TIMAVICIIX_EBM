@@ -13,6 +13,7 @@ import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
 import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
+import cn.timaviciix.ebm.registers.items.ArmorRegister
 import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
@@ -31,6 +32,7 @@ object ItemsTooltip {
 
         val tooltipItemBusList: List<Pair<Item, String>> =
             BookcaseRegister.itemConsistList.plus(OtherItemRegister.itemConsistList).plus(StuffRegister.itemConsistList)
+                .plus(ArmorRegister.itemConsistList)
 
 
         ItemTooltipCallback.EVENT.register { stack, _, lines ->

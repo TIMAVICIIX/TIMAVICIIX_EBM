@@ -9,6 +9,7 @@
 
 package cn.timaviciix.ebm.item.blockitems
 
+import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
@@ -17,6 +18,7 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.ActionResult
+import org.slf4j.LoggerFactory
 
 open class BaseBlockItem(
     block: Block,
@@ -26,6 +28,8 @@ open class BaseBlockItem(
     private val itemClassify: BlockItemClassify = BlockItemClassify.Unknown
 ) :
     BlockItem(block, settings) {
+
+    private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
 
     companion object {
 
@@ -52,13 +56,18 @@ open class BaseBlockItem(
      * needSneaking:Does the block need to be placed crouching?
      */
     override fun place(context: ItemPlacementContext?): ActionResult {
+        //logger.info("Sneaking state:${needSneakingPlace}")
         return if (needSneakingPlace) {
             val player = context?.player
             if (player != null && !player.isSneaking) {
+                //logger.info("Player doesn't Sneaking")
                 ActionResult.FAIL
+            } else {
+                //logger.info("Player is Sneaking")
+                super.place(context)
             }
-            super.place(context)
         } else {
+            //logger.info("needing state fail!")
             super.place(context)
         }
     }

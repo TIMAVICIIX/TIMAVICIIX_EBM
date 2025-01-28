@@ -11,6 +11,7 @@ package cn.timaviciix.ebm.registers.items
 
 import cn.timaviciix.ebm.item.BaseItem
 import cn.timaviciix.ebm.util.GlobalData
+import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -34,7 +35,7 @@ interface BaseItemRegister {
 
         inline fun <reified T : Item> registrySelf(
             property: KProperty<*>,
-            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit
+            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = {}
         ): T {
 
             val itemId = property.name.lowercase()
@@ -45,6 +46,23 @@ interface BaseItemRegister {
             idOperation(Pair(registryItem, itemId))
 
             return registryItem
+        }
+
+        inline fun <reified T : ArmorItem> registryArmorSelf(
+            property: KProperty<*>,
+            armorEntity: T,
+            itemInfoConsist: Pair<Item, String> = Pair(armorEntity, property.name.lowercase()),
+            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = {}
+        ): T {
+
+            idOperation(itemInfoConsist)
+
+            return Registry.register(
+                Registries.ITEM,
+                Identifier(GlobalData.MOD_ID, property.name.lowercase()),
+                armorEntity
+            )
+
         }
     }
 

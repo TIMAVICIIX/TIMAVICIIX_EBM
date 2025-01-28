@@ -46,5 +46,13 @@
   "sound.timaviciix_ebm.whip_swhoo": "鸡毛掸子挥动声",
   "sound.timaviciix_ebm.whip_crack": "鸡毛掸子命中声",
   "sound.timaviciix_ebm.bell_wind_swing": "猫铃声",
-  "sound.timaviciix_ebm.bell_ling": "猫铃响"
+  "sound.timaviciix_ebm.bell_ling": "猫铃响",
+  "item.timaviciix_ebm.penguin_helmet": "罗兵有珠三千问-企鹅头套",
+  "item.timaviciix_ebm.penguin_chestplate": "罗宾有珠三千问-企鹅服",
+  "item.timaviciix_ebm.penguin_leggings": "罗宾有珠三千问-企鹅裤子",
+  "item.timaviciix_ebm.penguin_boots": "罗宾有珠三千问-企鹅脚掌",
+  "item.timaviciix_ebm.penguin_helmet_desc": "有一股淡淡的欧式香水气味,以及神秘的魔女气息",
+  "item.timaviciix_ebm.penguin_chestplate_desc": "宽松的玩偶服装",
+  "item.timaviciix_ebm.penguin_leggings_desc": "可有可无的玩偶裤子(其目的是为了掩盖穿模的事实)",
+  "item.timaviciix_ebm.penguin_boots_desc": "宽大的玩偶鞋，是模仿的企鹅脚掌"
 }

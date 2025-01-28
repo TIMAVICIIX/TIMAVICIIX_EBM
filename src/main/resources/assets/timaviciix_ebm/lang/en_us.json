@@ -46,5 +46,13 @@
   "sound.timaviciix_ebm.whip_swhoo": "Feather Duster Swing!!!",
   "sound.timaviciix_ebm.whip_crack": "Feather Duster Attacked!!!",
   "sound.timaviciix_ebm.bell_wind_swing": "Bell swinging",
-  "sound.timaviciix_ebm.bell_ling": "Bell Ling!"
+  "sound.timaviciix_ebm.bell_ling": "Bell Ling!",
+  "item.timaviciix_ebm.penguin_helmet": "Penguin Helmet",
+  "item.timaviciix_ebm.penguin_chestplate": "Penguin ChestPlate",
+  "item.timaviciix_ebm.penguin_leggings": "Penguin Leggings",
+  "item.timaviciix_ebm.penguin_boots": "Penguin Boot",
+  "item.timaviciix_ebm.penguin_helmet_desc": "There is a faint smell of perfume on the helmet.",
+  "item.timaviciix_ebm.penguin_chestplate_desc": "Loose fitting cloth doll clothes.",
+  "item.timaviciix_ebm.penguin_leggings_desc": "Disposable doll trousers (whose purpose is to hide the fact that they wear moulds)",
+  "item.timaviciix_ebm.penguin_boots_desc": "Wide doll shoes."
 }

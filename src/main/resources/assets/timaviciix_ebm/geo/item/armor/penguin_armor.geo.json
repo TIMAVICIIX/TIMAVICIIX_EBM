@@ -13,12 +13,12 @@
 			"bones": [
 				{
 					"name": "bipedHead",
-					"pivot": [0, 24, 0]
+					"pivot": [0, 23, 0]
 				},
 				{
 					"name": "armorHead",
 					"parent": "bipedHead",
-					"pivot": [8, 27, -8]
+					"pivot": [0, 27, 0]
 				},
 				{
 					"name": "head",
@@ -274,7 +274,7 @@
 				{
 					"name": "armorBody",
 					"parent": "bipedBody",
-					"pivot": [8, 24, -8]
+					"pivot": [1, 10, 1]
 				},
 				{
 					"name": "body",
@@ -315,7 +315,7 @@
 				{
 					"name": "armorRightArm",
 					"parent": "bipedRightArm",
-					"pivot": [4, 21, -8]
+					"pivot": [-6, 24, 0]
 				},
 				{
 					"name": "arm",
@@ -349,7 +349,7 @@
 				{
 					"name": "armorLeftArm",
 					"parent": "bipedLeftArm",
-					"pivot": [12, 22, -8]
+					"pivot": [7, 22, 1]
 				},
 				{
 					"name": "arm2",
@@ -383,7 +383,10 @@
 				{
 					"name": "armorLeftLeg",
 					"parent": "bipedLeftLeg",
-					"pivot": [2, 12, 0]
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [-0.25, 1, -2.5], "size": [5, 13, 5], "uv": [108, 110]}
+					]
 				},
 				{
 					"name": "armorLeftBoot",
@@ -430,7 +433,10 @@
 				{
 					"name": "armorRightLeg",
 					"parent": "bipedRightLeg",
-					"pivot": [-2, 12, 0]
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-5.25, 1, -2.5], "size": [5, 13, 5], "uv": [108, 110]}
+					]
 				},
 				{
 					"name": "armorRightBoot",
