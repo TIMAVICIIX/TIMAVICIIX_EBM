@@ -37,7 +37,7 @@ object Receiver {
             server.playerManager.playerList.forEach { targetPlayer ->
                 val responseBuf = PacketByteBuf(Unpooled.buffer())
                 responseBuf.writeUuid(uuid)
-                logger.info("You are Server Player send infos from Server")
+                //logger.info("You are Server Player send infos from Server")
                 ServerPlayNetworking.send(targetPlayer, Packets.BOOK_READING_PACKET_FROM_SERVER, responseBuf)
             }
 
@@ -50,9 +50,10 @@ object Receiver {
             client.execute {
                 val originPlayer = MinecraftClient.getInstance().world?.getPlayerByUuid(uuid)
 
-                logger.info("You are Client Player, Receive Infos From Server")
+                //logger.info("You are Client Player, Receive Infos From Server")
 
                 if (originPlayer != null) {
+                    //@Imp:Render&UI
                     client.player?.sendMessage(Text.literal("Player[${originPlayer.id}] is Reading!!!"))
                 }
 

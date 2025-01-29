@@ -58,7 +58,7 @@ open class BaseBlockItem(
                 //@Imp: close reading UI
                 return TypedActionResult.fail(user.getStackInHand(hand))
             } else {
-                logger.info("send Use!!!")
+                //logger.info("send Use!!!")
                 Packets.sendReadingPlayerUUid(user)
                 alreadyReading = true
             //@Imp: active reading UI
@@ -75,7 +75,7 @@ open class BaseBlockItem(
 
     override fun getName(stack: ItemStack?): Text {
         return super.getName(stack).copy().setStyle(nameStyle)
-    }
+    }e
 
     /**
      * needSneaking:Does the block need to be placed crouching?
