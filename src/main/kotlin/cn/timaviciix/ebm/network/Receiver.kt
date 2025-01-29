@@ -27,20 +27,20 @@ object Receiver {
     }
 
     private fun receiveAnnotationBookReadingState() {
-        ServerPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET) { server, player, handler, buf, responseSender ->
+        ServerPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET_FROM_CLIENT) { server, player, handler, buf, responseSender ->
             val uuid = buf.readUuid()
 
             server.playerManager.playerList.forEach { targetPlayer ->
                 val responseBuf = PacketByteBuf(Unpooled.buffer())
                 responseBuf.writeUuid(uuid)
-                ServerPlayNetworking.send(targetPlayer, Packets.BOOK_READING_PACKET, responseBuf)
+                ServerPlayNetworking.send(targetPlayer, Packets.BOOK_READING_PACKET_FROM_SERVER, responseBuf)
             }
 
         }
     }
 
     private fun clientReceiveBookReadingState() {
-        ClientPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET) { client, _, buf, _ ->
+        ClientPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET_FROM_SERVER) { client, _, buf, _ ->
             val uuid = buf.readUuid()
             client.execute {
                 val originPlayer = MinecraftClient.getInstance().world?.getPlayerByUuid(uuid)

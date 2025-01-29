@@ -21,15 +21,16 @@ import net.minecraft.util.Identifier
 
 object Packets {
 
-    val BOOK_READING_PACKET = Identifier(GlobalData.MOD_ID,GlobalData.PacketsID.BOOK_READING_STATE)
+    val BOOK_READING_PACKET_FROM_SERVER = Identifier(GlobalData.MOD_ID,GlobalData.PacketsID.BOOK_READING_STATE_FROM_SERVER)
+    val BOOK_READING_PACKET_FROM_CLIENT = Identifier(GlobalData.MOD_ID,GlobalData.PacketsID.BOOK_READING_STATE_FROM_CLIENT)
 
     fun sendReadingPlayerUUid(playerEntity: PlayerEntity){
         val buf = PacketByteBuf(Unpooled.buffer())
         buf.writeUuid(playerEntity.uuid)
         if (playerEntity is ServerPlayerEntity){
-            ServerPlayNetworking.send(playerEntity, BOOK_READING_PACKET,buf)
+            ServerPlayNetworking.send(playerEntity, BOOK_READING_PACKET_FROM_SERVER,buf)
         }else{
-            ClientPlayNetworking.send(BOOK_READING_PACKET,buf)
+            ClientPlayNetworking.send(BOOK_READING_PACKET_FROM_CLIENT,buf)
         }
 
     }

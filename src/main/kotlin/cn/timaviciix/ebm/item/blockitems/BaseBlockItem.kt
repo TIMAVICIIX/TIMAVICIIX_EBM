@@ -50,7 +50,7 @@ open class BaseBlockItem(
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
         //logger.info("${user?.id} is Using")
-        if (world?.isClient == false && user != null) {
+        if (user != null) {
             Packets.sendReadingPlayerUUid(user)
             //@Imp: active reading UI
         }
@@ -75,7 +75,7 @@ open class BaseBlockItem(
         return if (needSneakingPlace) {
             val player = context?.player
             if (player != null && !player.isSneaking) {
-                if (itemClassify == BlockItemClassify.Books && context.world?.isClient == false) {
+                if (itemClassify == BlockItemClassify.Books) {
                     player.swingHand(Hand.MAIN_HAND)
                     //@Imp: Fixed the other place state to read
                     Packets.sendReadingPlayerUUid(player)
