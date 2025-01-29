@@ -1,5 +1,6 @@
 package cn.timaviciix.ebm
 
+import cn.timaviciix.ebm.network.Events
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
@@ -60,6 +61,10 @@ object TIMAVICIIXEBM : ModInitializer {
             FieldRegistrationHandler.register(AnimationIBsRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(AnimationIBsRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
 
+        }
+
+        addRegistrySortPair(91) {
+            Events.registryAll()
         }
 
         addRegistrySortPair(100) {

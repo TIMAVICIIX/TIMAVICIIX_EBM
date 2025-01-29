@@ -25,7 +25,7 @@ open class BaseBlockItem(
     settings: Settings,
     nameColor: Int = 0xeeeeee,
     private val needSneakingPlace: Boolean = false,
-    private val itemClassify: BlockItemClassify = BlockItemClassify.Unknown
+    val itemClassify: BlockItemClassify = BlockItemClassify.Unknown
 ) :
     BlockItem(block, settings) {
 

@@ -9,12 +9,13 @@
 
 package cn.timaviciix.ebm
 
+import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.render.BlueCatPendantBlockRender
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
-object TIMAVICIIXEBMClient:ClientModInitializer {
+object TIMAVICIIXEBMClient : ClientModInitializer {
 
     override fun onInitializeClient() {
 
@@ -23,6 +24,9 @@ object TIMAVICIIXEBMClient:ClientModInitializer {
             AnimationIBsRegister.EntityTypes.BLUE_CAT_PENDANT_ANIME_ENTITY_TYPE,
             ::BlueCatPendantBlockRender
         )
+
+        //client to registry event
+        Receiver.registryAll()
     }
 
 }

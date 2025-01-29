@@ -37,13 +37,14 @@ interface BaseBlockRegister {
             identifier: Identifier,
             operation: (BlockItem.() -> Unit) = {},
             needSneaking: Boolean,
-            settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING
+            settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING,
+            itemClassify:BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
         ): BaseBlockItem {
 
             //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
 
             val targetBlockItem =
-                BaseBlockItem(block, settings, nameColor = nameColor, needSneakingPlace = needSneaking)
+                BaseBlockItem(block, settings, nameColor = nameColor, needSneakingPlace = needSneaking,itemClassify = itemClassify)
 
             operation.let {
                 targetBlockItem.operation()
@@ -62,6 +63,7 @@ interface BaseBlockRegister {
             blockItemOperation: (Pair<BlockItem, String>) -> Unit,
             nameColor: Int = 0xeeeeee,
             needSneaking: Boolean = false,
+            itemClassify: BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
         ): T {
 
             val blockId = property.name.lowercase()
@@ -71,7 +73,8 @@ interface BaseBlockRegister {
                 nameColor = nameColor,
                 block = targetBlock,
                 identifier = Identifier(GlobalData.MOD_ID, blockId),
-                needSneaking = needSneaking
+                needSneaking = needSneaking,
+                itemClassify = itemClassify
             )
 
             blockItemOperation(Pair(blockItemPart, blockId))
