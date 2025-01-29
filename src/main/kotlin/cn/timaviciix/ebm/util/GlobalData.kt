@@ -52,8 +52,8 @@ object GlobalData {
     }
 
     object PacketsID {
-        val BOOK_READING_STATE_FROM_SERVER = MOD_ID + "book_reading_state_from_server"
-        val BOOK_READING_STATE_FROM_CLIENT = MOD_ID + "book_reading_state_from_client"
+        const val BOOK_READING_STATE_FROM_SERVER = MOD_ID + "book_reading_state_from_server"
+        const val BOOK_READING_STATE_FROM_CLIENT = MOD_ID + "book_reading_state_from_client"
     }
 
     //Item Group

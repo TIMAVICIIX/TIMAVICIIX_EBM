@@ -49,12 +49,13 @@ open class BaseBlockItem(
     }
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
+        logger.info("Active use")
         //logger.info("${user?.id} is Using")
         if (user != null) {
             Packets.sendReadingPlayerUUid(user)
             //@Imp: active reading UI
         }
-        user?.swingHand(hand)
+        //user?.swingHand(hand)
         return TypedActionResult.success(user?.getStackInHand(hand))
     }
 
@@ -71,6 +72,7 @@ open class BaseBlockItem(
      * needSneaking:Does the block need to be placed crouching?
      */
     override fun place(context: ItemPlacementContext?): ActionResult {
+        logger.info("Active place")
         //logger.info("Sneaking state:${needSneakingPlace}")
         return if (needSneakingPlace) {
             val player = context?.player
