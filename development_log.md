@@ -210,3 +210,9 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ### Item
 #### 罗宾有珠三千问\[Penguin_Armor]\:实际上是企鹅玩偶服
+
+## <br>2025.01.28
+#### 彩蛋玩偶服开发完成，下一步进行阅读状态开发，新年快乐！
+
+## <br>2025.01.29
+#### 正在开发阅读状态同步机制
