@@ -35,6 +35,7 @@ open class BaseBlockItem(
     BlockItem(block, settings) {
 
     private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
+    private var alreadyReading = false
 
     companion object {
 
@@ -49,14 +50,22 @@ open class BaseBlockItem(
     }
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
-        logger.info("Active use")
+        //logger.info("Active use")
         //logger.info("${user?.id} is Using")
         if (user != null) {
-            Packets.sendReadingPlayerUUid(user)
+            //Use Mixin
+            if (alreadyReading) {
+                //@Imp: close reading UI
+                return TypedActionResult.fail(user.getStackInHand(hand))
+            } else {
+                logger.info("send Use!!!")
+                Packets.sendReadingPlayerUUid(user)
+                alreadyReading = true
             //@Imp: active reading UI
+            }
         }
-        //user?.swingHand(hand)
-        return TypedActionResult.success(user?.getStackInHand(hand))
+        user?.swingHand(hand)
+        return TypedActionResult.fail(user?.getStackInHand(hand))
     }
 
     private val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
