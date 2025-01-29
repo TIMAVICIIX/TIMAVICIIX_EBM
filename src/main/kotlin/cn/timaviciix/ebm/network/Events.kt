@@ -17,7 +17,7 @@ object Events {
 
     fun registryAll() {
 
-    registryBookReadingState()
+        registryBookReadingState()
 
     }
 
@@ -25,12 +25,15 @@ object Events {
 
         UseItemCallback.EVENT.register(UseItemCallback { playerEntity, world, hand ->
 
+
             val itemStack = playerEntity.getStackInHand(hand)
             val item = itemStack.item
 
             if (item is BaseBlockItem) {
                 if (item.itemClassify == BaseBlockItem.Companion.BlockItemClassify.Books) {
-                    Packets.sendReadingPlayerUUid(playerEntity)
+                    if (!world.isClient) {
+                        Packets.sendReadingPlayerUUid(playerEntity)
+                    }
                     return@UseItemCallback TypedActionResult.success(itemStack)
                 }
                 return@UseItemCallback TypedActionResult.pass(itemStack)

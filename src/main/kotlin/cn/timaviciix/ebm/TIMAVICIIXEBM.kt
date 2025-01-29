@@ -1,6 +1,7 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.network.Events
+import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
@@ -65,6 +66,7 @@ object TIMAVICIIXEBM : ModInitializer {
 
         addRegistrySortPair(91) {
             Events.registryAll()
+            Receiver.registryServerReceiver()
         }
 
         addRegistrySortPair(100) {

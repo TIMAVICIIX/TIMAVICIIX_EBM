@@ -9,8 +9,10 @@
 
 package cn.timaviciix.ebm.item.blockitems
 
+import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
@@ -18,6 +20,9 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
+import net.minecraft.util.TypedActionResult
+import net.minecraft.world.World
 import org.slf4j.LoggerFactory
 
 open class BaseBlockItem(
@@ -43,6 +48,16 @@ open class BaseBlockItem(
         }
     }
 
+    override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
+        //logger.info("${user?.id} is Using")
+        if (world?.isClient == false && user != null) {
+            Packets.sendReadingPlayerUUid(user)
+            //@Imp: active reading UI
+        }
+        user?.swingHand(hand)
+        return TypedActionResult.success(user?.getStackInHand(hand))
+    }
+
     private val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
     override fun getName(): Text {
         return super.getName().copy().setStyle(nameStyle)
@@ -60,8 +75,16 @@ open class BaseBlockItem(
         return if (needSneakingPlace) {
             val player = context?.player
             if (player != null && !player.isSneaking) {
-                //logger.info("Player doesn't Sneaking")
-                ActionResult.FAIL
+                if (itemClassify == BlockItemClassify.Books && context.world?.isClient == false) {
+                    player.swingHand(Hand.MAIN_HAND)
+                    //@Imp: Fixed the other place state to read
+                    Packets.sendReadingPlayerUUid(player)
+                    //@Imp: active Book UI
+                    ActionResult.FAIL
+                } else {
+                    //logger.info("Player doesn't Sneaking")
+                    ActionResult.FAIL
+                }
             } else {
                 //logger.info("Player is Sneaking")
                 super.place(context)

@@ -26,7 +26,7 @@ object TIMAVICIIXEBMClient : ClientModInitializer {
         )
 
         //client to registry event
-        Receiver.registryAll()
+        Receiver.registryClientReceiver()
     }
 
 }

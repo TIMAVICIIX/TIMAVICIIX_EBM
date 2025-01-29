@@ -12,6 +12,7 @@ package cn.timaviciix.ebm.network
 import cn.timaviciix.ebm.util.GlobalData
 import io.netty.buffer.Unpooled
 import kotlinx.serialization.internal.InlinePrimitiveDescriptor
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.PacketByteBuf
@@ -25,7 +26,12 @@ object Packets {
     fun sendReadingPlayerUUid(playerEntity: PlayerEntity){
         val buf = PacketByteBuf(Unpooled.buffer())
         buf.writeUuid(playerEntity.uuid)
-        ServerPlayNetworking.send(playerEntity as ServerPlayerEntity?, BOOK_READING_PACKET,buf)
+        if (playerEntity is ServerPlayerEntity){
+            ServerPlayNetworking.send(playerEntity, BOOK_READING_PACKET,buf)
+        }else{
+            ClientPlayNetworking.send(BOOK_READING_PACKET,buf)
+        }
+
     }
 
 }
