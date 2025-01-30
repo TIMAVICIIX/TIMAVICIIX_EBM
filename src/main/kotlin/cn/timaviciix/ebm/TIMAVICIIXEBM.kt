@@ -1,5 +1,6 @@
 package cn.timaviciix.ebm
 
+import cn.timaviciix.ebm.network.BufferBus
 import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
@@ -15,6 +16,8 @@ import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
+import net.minecraft.text.Text
 import org.slf4j.LoggerFactory
 import software.bernie.geckolib.GeckoLib
 

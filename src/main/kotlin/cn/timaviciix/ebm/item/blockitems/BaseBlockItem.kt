@@ -75,7 +75,7 @@ open class BaseBlockItem(
 
     override fun getName(stack: ItemStack?): Text {
         return super.getName(stack).copy().setStyle(nameStyle)
-    }e
+    }
 
     /**
      * needSneaking:Does the block need to be placed crouching?
@@ -86,10 +86,11 @@ open class BaseBlockItem(
         return if (needSneakingPlace) {
             val player = context?.player
             if (player != null && !player.isSneaking) {
-                if (itemClassify == BlockItemClassify.Books) {
+                if (itemClassify == BlockItemClassify.Books && !alreadyReading) {
                     player.swingHand(Hand.MAIN_HAND)
                     //@Imp: Fixed the other place state to read
                     Packets.sendReadingPlayerUUid(player)
+                    alreadyReading = true
                     //@Imp: active Book UI
                     ActionResult.FAIL
                 } else {

@@ -25,6 +25,7 @@ object TIMAVICIIXEBMClient : ClientModInitializer {
             ::BlueCatPendantBlockRender
         )
 
+
         //client to registry event
         Receiver.registryClientReceiver()
     }

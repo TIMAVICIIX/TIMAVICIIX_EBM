@@ -53,8 +53,12 @@ object Receiver {
                 //logger.info("You are Client Player, Receive Infos From Server")
 
                 if (originPlayer != null) {
+
                     //@Imp:Render&UI
-                    client.player?.sendMessage(Text.literal("Player[${originPlayer.id}] is Reading!!!"))
+                    //client.player?.sendMessage(Text.literal("Player[${originPlayer.name.string}] is Reading!!!"))
+                    BufferBus.ReadingOperationBus.addReadingPlayer(originPlayer.name.string)
+                    //@Imp: WARING!!! TEST CODE
+
                 }
 
             }
