@@ -1,0 +1,101 @@
+<owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
+    <components>
+        <flow-layout direction="horizontal">
+            <children>
+                <flow-layout direction="horizontal">
+                    <children>
+                        <label id="TitleLabel">
+                            <text>Title Space</text>
+                        </label>
+                    </children>
+                    <horizontal-alignment>right</horizontal-alignment>
+                    <vertical-alignment>center</vertical-alignment>
+                    <positioning type="relative">50,5</positioning>
+                </flow-layout>
+                <flow-layout direction="horizontal">
+                    <children>
+                        <button id="BackBtn">
+                            <text>Quit</text>
+                        </button>
+                    </children>
+                    <horizontal-alignment>right</horizontal-alignment>
+                    <vertical-alignment>center</vertical-alignment>
+                    <positioning type="relative">100,5</positioning>
+                </flow-layout>
+
+                <label id="TextDisplayLabel">
+                    <text>
+                        owo-lib 的较高社区支持主要体现在以下几个方面：
+
+                        1. 活跃的 GitHub 讨论和提交
+                        源代码维护: owo-lib 在 GitHub 上有一个活跃的代码库，开发者和贡献者定期提交更新和修复。社区成员可以通过 Pull Requests 提交 bug 修复、功能增强或改进建议。 问题追踪 (Issue Tracking): owo-lib 的 GitHub 页面有大量的开放式和已解决的 Issues，涵盖了各种 bug 报告、功能请求和讨论。通过 Issue，开发者可以轻松查找常见问题的解决方案，也能看到其他开发者的解决方法。
+                        2. 社区支持的文档和教程
+                        官方文档: owo-lib 提供了一些详细的文档来帮助开发者理解和使用它的功能。这些文档覆盖了常见的 UI 构建方法、常见问题解答以及高级功能的使用。
+
+                    </text>
+                    <max-width>300</max-width>
+
+                    <margins>
+                        <all>15</all>
+                    </margins>
+                    <positioning type="relative">11,25</positioning>
+                </label>
+
+                <flow-layout direction="horizontal">
+                    <children>
+                        <button id="inspector-button">
+                            <text>⚡ Inspector</text>
+                        </button>
+
+                        <box>
+                            <color>#FF696969</color>
+                            <sizing>
+                                <vertical method="fixed">16</vertical>
+                                <horizontal method="fixed">1</horizontal>
+                            </sizing>
+                            <margins>
+                                <horizontal>5</horizontal>
+                            </margins>
+                        </box>
+
+                        <button id="previous-button">
+                            <text>⏴ Previous</text>
+                            <margins>
+                                <right>2</right>
+                            </margins>
+                        </button>
+                        <button id="next-button">
+                            <text>Next ⏵</text>
+                        </button>
+                    </children>
+
+                    <positioning type="relative">50,100</positioning>
+
+                    <vertical-alignment>center</vertical-alignment>
+
+                    <surface>
+                        <panel dark="true"/>
+                    </surface>
+
+                    <padding>
+                        <all>6</all>
+                    </padding>
+
+                    <margins>
+                        <bottom>15</bottom>
+                    </margins>
+                </flow-layout>
+
+            </children>
+            <vertical-alignment>center</vertical-alignment>
+            <horizontal-alignment>center</horizontal-alignment>
+            <surface>
+                <flat>#C0101010</flat>
+            </surface>
+            <padding>
+                <all>5</all>
+            </padding>
+        </flow-layout>
+    </components>
+</owo-ui>

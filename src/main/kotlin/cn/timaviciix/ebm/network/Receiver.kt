@@ -12,11 +12,12 @@ package cn.timaviciix.ebm.network
 import cn.timaviciix.ebm.util.GlobalData
 import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.text.Text
 import org.slf4j.LoggerFactory
+import java.util.*
 
 object Receiver {
 
@@ -24,22 +25,40 @@ object Receiver {
 
     fun registryClientReceiver() {
         clientReceiveBookReadingState()
+        clientInitPlayersReadingState()
     }
 
     fun registryServerReceiver() {
         receiveAnnotationBookReadingState()
+        initPlayerSyncReadingState()
     }
 
     private fun receiveAnnotationBookReadingState() {
-        ServerPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET_FROM_CLIENT) { server, player, handler, buf, responseSender ->
+        ServerPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET_FROM_CLIENT) { server, player, _, buf, _ ->
             val uuid = buf.readUuid()
-
             server.playerManager.playerList.forEach { targetPlayer ->
                 val responseBuf = PacketByteBuf(Unpooled.buffer())
                 responseBuf.writeUuid(uuid)
                 //logger.info("You are Server Player send infos from Server")
                 ServerPlayNetworking.send(targetPlayer, Packets.BOOK_READING_PACKET_FROM_SERVER, responseBuf)
+
             }
+
+        }
+    }
+
+    private fun initPlayerSyncReadingState() {
+        ServerPlayConnectionEvents.JOIN.register { handler, _, _ ->
+
+            val initReadStateBuf = PacketByteBuf(Unpooled.buffer()).apply {
+                writeInt(BufferBus.ReadingOperationBus.readingStatePlayers.size)
+
+                for (uuid in BufferBus.ReadingOperationBus.readingStatePlayers) {
+                    writeUuid(uuid)
+                }
+            }
+
+            ServerPlayNetworking.send(handler.player, Packets.BOOK_READING_INIT_PACKET, initReadStateBuf)
 
         }
     }
@@ -47,20 +66,39 @@ object Receiver {
     private fun clientReceiveBookReadingState() {
         ClientPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_PACKET_FROM_SERVER) { client, _, buf, _ ->
             val uuid = buf.readUuid()
+            logger.info("Reading Players:${BufferBus.ReadingOperationBus.readingStatePlayers}")
             client.execute {
-                val originPlayer = MinecraftClient.getInstance().world?.getPlayerByUuid(uuid)
-
                 //logger.info("You are Client Player, Receive Infos From Server")
-
-                if (originPlayer != null) {
-
+                if (!BufferBus.ReadingOperationBus.readingStatePlayers.contains(uuid)) {
                     //@Imp:Render&UI
                     //client.player?.sendMessage(Text.literal("Player[${originPlayer.name.string}] is Reading!!!"))
-                    BufferBus.ReadingOperationBus.addReadingPlayer(originPlayer.name.string)
-                    //@Imp: WARING!!! TEST CODE
+                    BufferBus.ReadingOperationBus.addReadingPlayer(uuid)
 
+                    //@Imp: WARING!!! TEST CODE
+                } else {
+                    BufferBus.ReadingOperationBus.removeReadingPlayer(uuid)
                 }
 
+
+            }
+
+        }
+
+    }
+
+    private fun clientInitPlayersReadingState() {
+
+        ClientPlayNetworking.registerGlobalReceiver(Packets.BOOK_READING_INIT_PACKET) { client, _, buf, _ ->
+
+            val size = buf.readInt()
+            val initReadingPlayerUUIDList: MutableList<UUID> = mutableListOf()
+
+            repeat(size) {
+                initReadingPlayerUUIDList.add(buf.readUuid())
+            }
+
+            client.execute {
+                BufferBus.ReadingOperationBus.readingStatePlayers += initReadingPlayerUUIDList
             }
 
         }

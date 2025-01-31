@@ -1,0 +1,12 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "timaviciix:font/alima",
+      "size": 12.0,
+      "oversample": 2.0,
+      "shift": [0, 0],
+      "skip": " "
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.network.BufferBus
 import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
@@ -11,13 +10,12 @@ import cn.timaviciix.ebm.registers.items.BookcaseRegister
 import cn.timaviciix.ebm.registers.items.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
+import cn.timaviciix.ebm.registers.others.FontRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
-import net.minecraft.text.Text
 import org.slf4j.LoggerFactory
 import software.bernie.geckolib.GeckoLib
 
@@ -70,9 +68,13 @@ object TIMAVICIIXEBM : ModInitializer {
             Receiver.registryServerReceiver()
         }
 
-        addRegistrySortPair(100) {
+        addRegistrySortPair(92) {
             //Sound Register
             SoundRegister.soundRegistryInterface()
+            FontRegister.registry()
+        }
+
+        addRegistrySortPair(100) {
             FieldRegistrationHandler.register(StuffRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(OtherItemRegister::class.java, GlobalData.MOD_ID, false)
             FieldRegistrationHandler.register(OtherBlocksRegister::class.java, GlobalData.MOD_ID, false)

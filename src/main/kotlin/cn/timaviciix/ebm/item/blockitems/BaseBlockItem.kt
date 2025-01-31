@@ -9,9 +9,11 @@
 
 package cn.timaviciix.ebm.item.blockitems
 
+import cn.timaviciix.ebm.client.gui.ReadingScreen
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
+import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
@@ -35,7 +37,7 @@ open class BaseBlockItem(
     BlockItem(block, settings) {
 
     private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
-    private var alreadyReading = false
+    var alreadyReading = false
 
     companion object {
 
@@ -55,13 +57,18 @@ open class BaseBlockItem(
         if (user != null) {
             //Use Mixin
             if (alreadyReading) {
-                //@Imp: close reading UI
                 return TypedActionResult.fail(user.getStackInHand(hand))
             } else {
                 //logger.info("send Use!!!")
-                Packets.sendReadingPlayerUUid(user)
+
                 alreadyReading = true
-            //@Imp: active reading UI
+                Packets.sendReadingPlayerUUid(user)
+
+                //@Imp: active reading UI
+                if (user.world.isClient) {
+                    user.swingHand(Hand.MAIN_HAND)
+                    MinecraftClient.getInstance().setScreen(ReadingScreen(this, user))
+                }
             }
         }
         user?.swingHand(hand)
@@ -89,9 +96,16 @@ open class BaseBlockItem(
                 if (itemClassify == BlockItemClassify.Books && !alreadyReading) {
                     player.swingHand(Hand.MAIN_HAND)
                     //@Imp: Fixed the other place state to read
-                    Packets.sendReadingPlayerUUid(player)
-                    alreadyReading = true
+
                     //@Imp: active Book UI
+                    alreadyReading = true
+                    Packets.sendReadingPlayerUUid(player)
+
+                    //@Imp: active reading UI
+                    if (player.world.isClient) {
+                        player.swingHand(Hand.MAIN_HAND)
+                        MinecraftClient.getInstance().setScreen(ReadingScreen(this, player))
+                    }
                     ActionResult.FAIL
                 } else {
                     //logger.info("Player doesn't Sneaking")

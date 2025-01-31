@@ -10,8 +10,8 @@
 package cn.timaviciix.ebm.network
 
 import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.entity.player.PlayerEntity
 import org.slf4j.LoggerFactory
+import java.util.*
 
 object BufferBus {
 
@@ -19,16 +19,17 @@ object BufferBus {
 
     object ReadingOperationBus {
 
-        val readingStatePlayers: MutableList<String> = mutableListOf()
+        val readingStatePlayers: MutableList<UUID> = mutableListOf()
 
-        fun addReadingPlayer(playerId:String) {
+        fun addReadingPlayer(playerId: UUID) {
             if (!readingStatePlayers.contains(playerId)) {
                 logger.info("SET NEW READING PLAYER:${playerId}")
                 readingStatePlayers.add(playerId)
             }
         }
 
-        fun removeReadingPlayer(playerId:String) {
+        fun removeReadingPlayer(playerId: UUID) {
+            logger.info("EXIT READING PLAYER:${playerId}")
             readingStatePlayers.remove(playerId)
         }
 

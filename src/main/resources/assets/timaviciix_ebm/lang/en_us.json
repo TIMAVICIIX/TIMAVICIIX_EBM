@@ -54,5 +54,6 @@
   "item.timaviciix_ebm.penguin_helmet_desc": "There is a faint smell of perfume on the helmet.",
   "item.timaviciix_ebm.penguin_chestplate_desc": "Loose fitting cloth doll clothes.",
   "item.timaviciix_ebm.penguin_leggings_desc": "Disposable doll trousers (whose purpose is to hide the fact that they wear moulds)",
-  "item.timaviciix_ebm.penguin_boots_desc": "Wide doll shoes."
+  "item.timaviciix_ebm.penguin_boots_desc": "Wide doll shoes.",
+  "state.timaviciix_ebm.reading_state": "Reading..."
 }
