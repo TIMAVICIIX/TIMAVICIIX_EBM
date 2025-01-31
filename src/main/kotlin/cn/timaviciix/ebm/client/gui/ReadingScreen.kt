@@ -31,11 +31,7 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
         p0?.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
             close()
         }
-        p0?.childById(LabelComponent::class.java, "TextDisplayLabel")?.apply {
-            text().style.apply {
-                withFont(textFont)
-            }
-        }
+        p0?.childById(LabelComponent::class.java, "TextDisplayLabel")
     }
 
     override fun close() {

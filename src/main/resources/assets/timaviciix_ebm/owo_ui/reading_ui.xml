@@ -11,7 +11,7 @@
                     </children>
                     <horizontal-alignment>right</horizontal-alignment>
                     <vertical-alignment>center</vertical-alignment>
-                    <positioning type="relative">50,5</positioning>
+                    <positioning type="relative">50,3</positioning>
                 </flow-layout>
                 <flow-layout direction="horizontal">
                     <children>
@@ -25,21 +25,15 @@
                 </flow-layout>
 
                 <label id="TextDisplayLabel">
-                    <text>
-                        owo-lib 的较高社区支持主要体现在以下几个方面：
-
-                        1. 活跃的 GitHub 讨论和提交
-                        源代码维护: owo-lib 在 GitHub 上有一个活跃的代码库，开发者和贡献者定期提交更新和修复。社区成员可以通过 Pull Requests 提交 bug 修复、功能增强或改进建议。 问题追踪 (Issue Tracking): owo-lib 的 GitHub 页面有大量的开放式和已解决的 Issues，涵盖了各种 bug 报告、功能请求和讨论。通过 Issue，开发者可以轻松查找常见问题的解决方案，也能看到其他开发者的解决方法。
-                        2. 社区支持的文档和教程
-                        官方文档: owo-lib 提供了一些详细的文档来帮助开发者理解和使用它的功能。这些文档覆盖了常见的 UI 构建方法、常见问题解答以及高级功能的使用。
-
-                    </text>
-                    <max-width>300</max-width>
+                    <text translate="true">text.timaviciix_ebm.example_display</text>
+                    <max-width>180</max-width>
 
                     <margins>
                         <all>15</all>
                     </margins>
-                    <positioning type="relative">11,25</positioning>
+                    <horizontal-text-alignment>left</horizontal-text-alignment>
+                    <vertical-text-alignment>top</vertical-text-alignment>
+                    <positioning type="relative">30,28</positioning>
                 </label>
 
                 <flow-layout direction="horizontal">
@@ -70,7 +64,7 @@
                         </button>
                     </children>
 
-                    <positioning type="relative">50,100</positioning>
+                    <positioning type="relative">50,105</positioning>
 
                     <vertical-alignment>center</vertical-alignment>
 
