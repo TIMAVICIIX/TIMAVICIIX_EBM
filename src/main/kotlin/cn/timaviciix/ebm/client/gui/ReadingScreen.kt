@@ -25,13 +25,15 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
         DataSource.asset(Identifier(GlobalData.MOD_ID,"reading_ui"))
     ) {
 
-    private val textFont = Identifier(GlobalData.MOD_ID, "font/alima")
+    private val textFont = Identifier(GlobalData.MOD_ID, "font_alima")
 
     override fun build(p0: FlowLayout?) {
         p0?.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
             close()
         }
-        p0?.childById(LabelComponent::class.java, "TextDisplayLabel")
+        p0?.childById(LabelComponent::class.java, "TextDisplayLabel")?.apply {
+            text().style.withFont(textFont)
+        }
     }
 
     override fun close() {

@@ -219,3 +219,12 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ## <br>2025.01.30
 #### 阅读同步机制艰难开发中，ChatGPT，Coze，DeepSeek哥几个尽给我出馊主意
+
+## <br>2025.01.31
+#### 阅读同步机制完成，绘制书本UI中。。。
+
+## <br>2025.02.01
+#### 书本UI绘制完成，正在解决UI背景材质与字体等问题
+
+## <br>2025.02.02
+#### 今天啥也没做。。。

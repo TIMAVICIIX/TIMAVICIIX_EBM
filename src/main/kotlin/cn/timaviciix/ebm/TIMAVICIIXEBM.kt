@@ -12,6 +12,7 @@ import cn.timaviciix.ebm.registers.items.StuffRegister
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.registers.others.FontRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
+import cn.timaviciix.ebm.registers.others.TexturesRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -72,6 +73,7 @@ object TIMAVICIIXEBM : ModInitializer {
             //Sound Register
             SoundRegister.soundRegistryInterface()
             FontRegister.registry()
+            TexturesRegister.registry()
         }
 
         addRegistrySortPair(100) {

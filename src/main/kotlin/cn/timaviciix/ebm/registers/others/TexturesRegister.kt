@@ -2,7 +2,7 @@
  *@BelongsProject: TIMAVICIIX_EBM
  *@BelongsPackage: cn.timaviciix.ebm.registers.others
  *@Author: TIMAVICIIX
- *@CreateTime: 2025-02-01  01:02
+ *@CreateTime: 2025-02-01  16:28
  *@Description: TODO
  *@Version: 1.0
  */
@@ -16,18 +16,20 @@ import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
 
-object FontRegister {
+object TexturesRegister {
+
+    private val READING_UI_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/ui/reading_ui.png")
 
     fun registry() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(
-            object:SimpleSynchronousResourceReloadListener {
+            object : SimpleSynchronousResourceReloadListener {
 
                 override fun reload(manager: ResourceManager?) {
-                    manager?.getAllResources(Identifier(GlobalData.MOD_ID,"font/fonts.json"))
+                    manager?.getAllResources(READING_UI_TEXTURE)
                 }
 
                 override fun getFabricId(): Identifier {
-                    return Identifier(GlobalData.MOD_ID, "font_alima")
+                    return Identifier(GlobalData.MOD_ID, "reading_ui_bk")
                 }
 
             }

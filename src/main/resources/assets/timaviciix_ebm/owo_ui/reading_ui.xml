@@ -1,8 +1,16 @@
 <owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
     <components>
+
         <flow-layout direction="horizontal">
             <children>
+                <texture texture="timaviciix_ebm/textures/ui/reading_ui.png">
+                    <z-index>0</z-index>
+                    <sizing>
+                        <horizontal method="fill">100</horizontal>
+                        <vertical method="fill">100</vertical>
+                    </sizing>
+                </texture>
                 <flow-layout direction="horizontal">
                     <children>
                         <label id="TitleLabel">
