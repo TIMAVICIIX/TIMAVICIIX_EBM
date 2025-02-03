@@ -7,10 +7,10 @@
                     <children>
                         <texture texture="timaviciix_ebm:textures/gui/reading_gui.png" region-width="256"
                                  region-height="192">
-                        <sizing>
-                            <vertical method="fill">90</vertical>
-                            <horizontal method="fill">70</horizontal>
-                        </sizing>
+                            <sizing>
+                                <vertical method="fill">90</vertical>
+                                <horizontal method="fill">70</horizontal>
+                            </sizing>
                         </texture>
 
                         <label id="TextDisplayLabelLeft">
@@ -20,7 +20,17 @@
                             </margins>
                             <horizontal-text-alignment>left</horizontal-text-alignment>
                             <vertical-text-alignment>top</vertical-text-alignment>
-                            <positioning type="relative">10,28</positioning>
+                            <positioning type="relative">11,36</positioning>
+                        </label>
+
+                        <label id="TextDisplayLabelRight">
+                            <max-width>130</max-width>
+                            <margins>
+                                <all>15</all>
+                            </margins>
+                            <horizontal-text-alignment>left</horizontal-text-alignment>
+                            <vertical-text-alignment>top</vertical-text-alignment>
+                            <positioning type="relative">90,36</positioning>
                         </label>
                     </children>
                 </flow-layout>
@@ -35,7 +45,7 @@
                     <vertical-alignment>center</vertical-alignment>
                     <positioning type="relative">50,3</positioning>
                 </flow-layout>
-                <flow-layout direction="horizontal">
+                <flow-layout direction="vertical">
                     <children>
                         <button id="BackBtn">
                             <text>Quit</text>
@@ -46,34 +56,13 @@
                     <positioning type="relative">100,5</positioning>
                 </flow-layout>
 
-                <flow-layout direction="horizontal">
+                <flow-layout direction="vertical">
                     <children>
                         <button id="inspector-button">
                             <text>⚡ Inspector</text>
                         </button>
-
-                        <box>
-                            <color>#FF696969</color>
-                            <sizing>
-                                <vertical method="fixed">16</vertical>
-                                <horizontal method="fixed">1</horizontal>
-                            </sizing>
-                            <margins>
-                                <horizontal>5</horizontal>
-                            </margins>
-                        </box>
-
-                        <button id="previous-button">
-                            <text>⏴ Previous</text>
-                            <margins>
-                                <right>2</right>
-                            </margins>
-                        </button>
-                        <button id="next-button">
-                            <text>Next ⏵</text>
-                        </button>
                     </children>
-                    <positioning type="relative">50,105</positioning>
+                    <positioning type="relative">100,105</positioning>
 
                     <vertical-alignment>center</vertical-alignment>
 

@@ -22,5 +22,17 @@
     "sounds": [
       "timaviciix_ebm:bell_wind_swing"
     ]
+  },
+  "book_closing": {
+    "subtitle": "sound.timaviciix_ebm.book_closing",
+    "sounds": [
+      "timaviciix_ebm:book_closing"
+    ]
+  },
+  "turning_page": {
+    "subtitle": "sound.timaviciix_ebm.turning_page",
+    "sounds": [
+      "timaviciix_ebm:turning_page"
+    ]
   }
 }

@@ -16,7 +16,6 @@ import io.wispforest.owo.ui.base.BaseUIModelScreen
 import io.wispforest.owo.ui.component.ButtonComponent
 import io.wispforest.owo.ui.component.LabelComponent
 import io.wispforest.owo.ui.container.FlowLayout
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.Style
 import net.minecraft.text.Text
@@ -44,7 +43,17 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-                                .withFont(textFont)
+//                                .withFont(textFont)
+
+                        )
+                )
+            }
+            p0.childById(LabelComponent::class.java, "TextDisplayLabelRight")?.apply {
+                text(
+                    Text.translatable("text.timaviciix_ebm.example_display")
+                        .setStyle(
+                            Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
+//                                .withFont(textFont)
 
                         )
                 )

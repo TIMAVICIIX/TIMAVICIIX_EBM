@@ -26,8 +26,11 @@ object SoundRegister {
     val WHIP_CRACK: SoundEvent = registrySelf(::WHIP_CRACK)
     val WHIP_SWHOO: SoundEvent = registrySelf(::WHIP_SWHOO)
 
-    val BELL_LING:SoundEvent = registrySelf(::BELL_LING)
-    val BELL_WIND_SWING:SoundEvent = registrySelf(::BELL_WIND_SWING)
+    val BELL_LING: SoundEvent = registrySelf(::BELL_LING)
+    val BELL_WIND_SWING: SoundEvent = registrySelf(::BELL_WIND_SWING)
+
+    val BOOK_CLOSING: SoundEvent = registrySelf(::BOOK_CLOSING)
+    val TURNING_PAGE: SoundEvent = registrySelf(::TURNING_PAGE)
 
     fun registrySelf(property: KProperty<*>): SoundEvent {
 
