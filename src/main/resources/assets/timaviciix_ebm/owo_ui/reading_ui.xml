@@ -1,16 +1,30 @@
 <owo-ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/wisp-forest/owo-lib/1.20/owo-ui.xsd">
     <components>
-
         <flow-layout direction="horizontal">
             <children>
-                <texture texture="timaviciix_ebm/textures/ui/reading_ui.png">
-                    <z-index>0</z-index>
-                    <sizing>
-                        <horizontal method="fill">100</horizontal>
-                        <vertical method="fill">100</vertical>
-                    </sizing>
-                </texture>
+                <flow-layout direction="horizontal" id="background">
+                    <children>
+                        <texture texture="timaviciix_ebm:textures/gui/reading_gui.png" region-width="256"
+                                 region-height="192">
+                        <sizing>
+                            <vertical method="fill">90</vertical>
+                            <horizontal method="fill">70</horizontal>
+                        </sizing>
+                        </texture>
+
+                        <label id="TextDisplayLabelLeft">
+                            <max-width>130</max-width>
+                            <margins>
+                                <all>15</all>
+                            </margins>
+                            <horizontal-text-alignment>left</horizontal-text-alignment>
+                            <vertical-text-alignment>top</vertical-text-alignment>
+                            <positioning type="relative">10,28</positioning>
+                        </label>
+                    </children>
+                </flow-layout>
+
                 <flow-layout direction="horizontal">
                     <children>
                         <label id="TitleLabel">
@@ -31,18 +45,6 @@
                     <vertical-alignment>center</vertical-alignment>
                     <positioning type="relative">100,5</positioning>
                 </flow-layout>
-
-                <label id="TextDisplayLabel">
-                    <text translate="true">text.timaviciix_ebm.example_display</text>
-                    <max-width>180</max-width>
-
-                    <margins>
-                        <all>15</all>
-                    </margins>
-                    <horizontal-text-alignment>left</horizontal-text-alignment>
-                    <vertical-text-alignment>top</vertical-text-alignment>
-                    <positioning type="relative">30,28</positioning>
-                </label>
 
                 <flow-layout direction="horizontal">
                     <children>
@@ -71,7 +73,6 @@
                             <text>Next ⏵</text>
                         </button>
                     </children>
-
                     <positioning type="relative">50,105</positioning>
 
                     <vertical-alignment>center</vertical-alignment>
@@ -81,11 +82,11 @@
                     </surface>
 
                     <padding>
-                        <all>6</all>
+                        <all>1</all>
                     </padding>
 
                     <margins>
-                        <bottom>15</bottom>
+                        <bottom>10</bottom>
                     </margins>
                 </flow-layout>
 
@@ -100,4 +101,9 @@
             </padding>
         </flow-layout>
     </components>
+    <templates>
+        <background-texture>
+            <texture/>
+        </background-texture>
+    </templates>
 </owo-ui>

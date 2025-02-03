@@ -16,23 +16,42 @@ import io.wispforest.owo.ui.base.BaseUIModelScreen
 import io.wispforest.owo.ui.component.ButtonComponent
 import io.wispforest.owo.ui.component.LabelComponent
 import io.wispforest.owo.ui.container.FlowLayout
+import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.text.Style
+import net.minecraft.text.Text
+import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
+
 
 class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUser: PlayerEntity) :
     BaseUIModelScreen<FlowLayout>(
         FlowLayout::class.java,
-        DataSource.asset(Identifier(GlobalData.MOD_ID,"reading_ui"))
+        DataSource.asset(Identifier(GlobalData.MOD_ID, "reading_ui"))
     ) {
 
-    private val textFont = Identifier(GlobalData.MOD_ID, "font_alima")
+    private val textFont = Identifier(GlobalData.MOD_ID, "font/alima")
 
     override fun build(p0: FlowLayout?) {
-        p0?.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
-            close()
-        }
-        p0?.childById(LabelComponent::class.java, "TextDisplayLabel")?.apply {
-            text().style.withFont(textFont)
+        p0?.let {
+
+
+            p0.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
+                close()
+            }
+            p0.childById(LabelComponent::class.java, "TextDisplayLabelLeft")?.apply {
+                text(
+                    Text.translatable("text.timaviciix_ebm.example_display")
+                        .setStyle(
+                            Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
+                                .withFont(textFont)
+
+                        )
+                )
+            }
+
+            p0.childById(ButtonComponent::class.java, "inspector-button")
+                ?.onPress { uiAdapter.toggleInspector() }
         }
     }
 
@@ -41,4 +60,5 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
         Packets.sendReadingPlayerUUid(awakeUser)
         super.close()
     }
+
 }

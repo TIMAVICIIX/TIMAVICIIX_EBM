@@ -14,6 +14,8 @@ import io.wispforest.owo.itemgroup.OwoItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.enums.Instrument
 import net.minecraft.util.DyeColor
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object GlobalData {
 
@@ -29,6 +31,8 @@ object GlobalData {
     const val BOOK_ID = "book_id"
     const val PAGE_STORAGE_SUFFIX = "page_"
     const val DESC_SUFFIX = "_desc"
+
+    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 
     //default Owo Setting
     val OWO_ITEM_BASE_64SETTING = OwoItemSettings().group(EBMItemGroup.EBM_ITEM_GROUP).maxCount(64)!!
