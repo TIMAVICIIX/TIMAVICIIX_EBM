@@ -44,7 +44,7 @@ class ReadingScreen(private val awakeUser: PlayerEntity) :
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-                                .withFont(textFont)
+//                                .withFont(textFont)
 
                         )
                 )
