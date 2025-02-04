@@ -18,6 +18,7 @@ import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import org.slf4j.LoggerFactory
+import java.util.UUID
 
 object Packets {
 

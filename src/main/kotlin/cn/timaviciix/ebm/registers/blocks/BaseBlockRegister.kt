@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.registers.blocks
 
 import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
+import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.itemgroup.OwoItemSettings
 import net.minecraft.block.Block
@@ -38,13 +39,33 @@ interface BaseBlockRegister {
             operation: (BlockItem.() -> Unit) = {},
             needSneaking: Boolean,
             settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING,
-            itemClassify:BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
+            itemClassify: BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
         ): BaseBlockItem {
 
             //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
 
-            val targetBlockItem =
-                BaseBlockItem(block, settings, nameColor = nameColor, needSneakingPlace = needSneaking,itemClassify = itemClassify)
+            val targetBlockItem = when (itemClassify) {
+
+                BaseBlockItem.Companion.BlockItemClassify.Books -> {
+                    BookBlockItem(
+                        block,
+                        settings,
+                        nameColor = nameColor,
+                        itemClassify = BaseBlockItem.Companion.BlockItemClassify.Books
+                    )
+                }
+
+                else -> {
+                    BaseBlockItem(
+                        block,
+                        settings,
+                        nameColor = nameColor,
+                        needSneakingPlace = needSneaking,
+                        itemClassify = itemClassify
+                    )
+                }
+            }
+
 
             operation.let {
                 targetBlockItem.operation()

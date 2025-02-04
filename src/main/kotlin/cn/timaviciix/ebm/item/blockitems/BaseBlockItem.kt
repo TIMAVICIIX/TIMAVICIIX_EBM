@@ -15,17 +15,21 @@ import cn.timaviciix.ebm.registers.others.SoundRegister
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import org.slf4j.LoggerFactory
 
@@ -39,7 +43,6 @@ open class BaseBlockItem(
     BlockItem(block, settings) {
 
     private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
-    var alreadyReading = false
 
     companion object {
 
@@ -51,29 +54,6 @@ open class BaseBlockItem(
             Others,
             Copiers
         }
-    }
-
-    override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
-        if (user != null) {
-            //Use Mixin
-            if (alreadyReading) {
-                return TypedActionResult.fail(user.getStackInHand(hand))
-            } else {
-                //logger.info("send Use!!!")
-
-                alreadyReading = true
-                Packets.sendReadingPlayerUUid(user)
-
-                //@Imp: active reading UI
-                if (user.world.isClient) {
-                    user.swingHand(Hand.MAIN_HAND)
-                    world?.playSound(null, user.blockPos, SoundRegister.TURNING_PAGE, SoundCategory.VOICE, 2.0f, 1.0f)
-                    MinecraftClient.getInstance().setScreen(ReadingScreen(this, user))
-                }
-            }
-        }
-        user?.swingHand(hand)
-        return TypedActionResult.fail(user?.getStackInHand(hand))
     }
 
     private val nameStyle: Style = Style.EMPTY.withColor(TextColor.fromRgb(nameColor))
@@ -88,35 +68,6 @@ open class BaseBlockItem(
     /**
      * needSneaking:Does the block need to be placed crouching?
      */
-    override fun place(context: ItemPlacementContext?): ActionResult {
-        logger.info("Active place")
-        //logger.info("Sneaking state:${needSneakingPlace}")
-        return if (needSneakingPlace) {
-            val player = context?.player
-            if (player != null && !player.isSneaking) {
-                if (itemClassify == BlockItemClassify.Books && !alreadyReading) {
-                    player.swingHand(Hand.MAIN_HAND)
-                    //@Imp: Fixed the other place state to read
 
-                    //@Imp: active Book UI
-                    alreadyReading = true
-                    Packets.sendReadingPlayerUUid(player)
-
-                    //@Imp: active reading UI
-                    if (player.world.isClient) {
-                        player.swingHand(Hand.MAIN_HAND)
-                        MinecraftClient.getInstance().setScreen(ReadingScreen(this, player))
-                    }
-                    ActionResult.FAIL
-                } else {
-                    ActionResult.FAIL
-                }
-            } else {
-                super.place(context)
-            }
-        } else {
-            super.place(context)
-        }
-    }
 
 }

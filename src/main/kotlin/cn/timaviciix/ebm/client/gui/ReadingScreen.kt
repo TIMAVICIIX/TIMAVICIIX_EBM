@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.client.gui
 
-import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
+import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.ui.base.BaseUIModelScreen
@@ -23,13 +23,14 @@ import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
 
 
-class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUser: PlayerEntity) :
+class ReadingScreen(private val awakeUser: PlayerEntity) :
     BaseUIModelScreen<FlowLayout>(
         FlowLayout::class.java,
         DataSource.asset(Identifier(GlobalData.MOD_ID, "reading_ui"))
     ) {
 
-    private val textFont = Identifier(GlobalData.MOD_ID, "font/alima")
+    private val textFont = Identifier(GlobalData.MOD_ID, "large_reading")
+
 
     override fun build(p0: FlowLayout?) {
         p0?.let {
@@ -43,7 +44,7 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-//                                .withFont(textFont)
+                                .withFont(textFont)
 
                         )
                 )
@@ -65,7 +66,6 @@ class ReadingScreen(private val awakeMaster: BaseBlockItem, private val awakeUse
     }
 
     override fun close() {
-        awakeMaster.alreadyReading = false
         Packets.sendReadingPlayerUUid(awakeUser)
         super.close()
     }
