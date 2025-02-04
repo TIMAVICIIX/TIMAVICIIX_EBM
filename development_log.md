@@ -228,3 +228,10 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ## <br>2025.02.02
 #### 今天啥也没做。。。
+
+## <br>2025.02.03
+#### 加入了声音事件
+
+## <br>2025.02.04
+#### 正在修正LabelComponent存在的Bug
+
