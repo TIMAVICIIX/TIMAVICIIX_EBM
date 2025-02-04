@@ -91,7 +91,7 @@ class BookBlockItem(
         val player = context?.player
         if (player != null) {
             if (player.isSneaking) {
-                return ActionResult.SUCCESS
+                return super.place(context)
             } else {
 
                 player.swingHand(Hand.MAIN_HAND)
