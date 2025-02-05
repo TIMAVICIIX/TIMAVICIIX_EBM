@@ -9,7 +9,6 @@
 
 package cn.timaviciix.ebm.client.gui
 
-import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.ui.base.BaseUIModelScreen
@@ -23,7 +22,11 @@ import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
 
 
-class ReadingScreen(private val awakeUser: PlayerEntity) :
+class ReadingScreen(
+    private val openOperation: () -> Unit = {},
+    private val usingOperation: () -> Unit = {},
+    private val closeOperation: () -> Unit = {},
+) :
     BaseUIModelScreen<FlowLayout>(
         FlowLayout::class.java,
         DataSource.asset(Identifier(GlobalData.MOD_ID, "reading_ui"))
@@ -33,6 +36,7 @@ class ReadingScreen(private val awakeUser: PlayerEntity) :
 
 
     override fun build(p0: FlowLayout?) {
+        openOperation()
         p0?.let {
 
 
@@ -44,7 +48,7 @@ class ReadingScreen(private val awakeUser: PlayerEntity) :
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-//                                .withFont(textFont)
+                                .withFont(textFont)
 
                         )
                 )
@@ -54,7 +58,7 @@ class ReadingScreen(private val awakeUser: PlayerEntity) :
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-//                                .withFont(textFont)
+                                .withFont(textFont)
 
                         )
                 )
@@ -66,7 +70,7 @@ class ReadingScreen(private val awakeUser: PlayerEntity) :
     }
 
     override fun close() {
-        Packets.sendReadingPlayerUUid(awakeUser)
+        closeOperation()
         super.close()
     }
 

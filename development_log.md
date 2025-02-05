@@ -235,3 +235,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.04
 #### 正在修正LabelComponent存在的Bug
 
+## <br>2025.02.05
+#### 字体运行正常，UI界面运行暂时正常，正在实现分段存储与阅读机制
+

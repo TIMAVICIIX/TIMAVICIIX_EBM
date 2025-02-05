@@ -29,7 +29,6 @@ interface BaseBlockRegister {
 
 
         /**
-         * @param needSneaking Check Player Sneaking or not when placed block
          * @param settings Note that this class generates a single-stack item by default
          */
         fun generateBlockItem(
@@ -37,7 +36,6 @@ interface BaseBlockRegister {
             block: Block,
             identifier: Identifier,
             operation: (BlockItem.() -> Unit) = {},
-            needSneaking: Boolean,
             settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING,
             itemClassify: BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
         ): BaseBlockItem {
@@ -60,7 +58,6 @@ interface BaseBlockRegister {
                         block,
                         settings,
                         nameColor = nameColor,
-                        needSneakingPlace = needSneaking,
                         itemClassify = itemClassify
                     )
                 }
@@ -83,7 +80,6 @@ interface BaseBlockRegister {
             property: KProperty<*>,
             blockItemOperation: (Pair<BlockItem, String>) -> Unit,
             nameColor: Int = 0xeeeeee,
-            needSneaking: Boolean = false,
             itemClassify: BaseBlockItem.Companion.BlockItemClassify = BaseBlockItem.Companion.BlockItemClassify.Unknown
         ): T {
 
@@ -94,7 +90,6 @@ interface BaseBlockRegister {
                 nameColor = nameColor,
                 block = targetBlock,
                 identifier = Identifier(GlobalData.MOD_ID, blockId),
-                needSneaking = needSneaking,
                 itemClassify = itemClassify
             )
 

@@ -22,14 +22,6 @@ object GlobalData {
     // Mod ID
     const val MOD_ID = "timaviciix_ebm"
     const val ITEM_GROUP_ID = "timaviciix_ebm_group"
-
-
-    //Books attributes
-    const val PAGE_COUNT = "page_count"
-    const val AUTHOR = "author"
-    const val COPY_PERMISSION = "copy_permission"
-    const val BOOK_ID = "book_id"
-    const val PAGE_STORAGE_SUFFIX = "page_"
     const val DESC_SUFFIX = "_desc"
 
     val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
@@ -59,6 +51,15 @@ object GlobalData {
         const val BOOK_READING_STATE_FROM_SERVER = MOD_ID + "book_reading_state_from_server"
         const val BOOK_READING_STATE_FROM_CLIENT = MOD_ID + "book_reading_state_from_client"
         const val BOOK_READING_INIT_STATE = MOD_ID + "book_reading_init"
+    }
+
+    object BookNbtAttributes{
+        //Books attributes
+        const val PAGE_COUNT = "page_count"
+        const val AUTHOR = "author"
+        const val COPY_PERMISSION = "copy_permission"
+        const val BOOK_ID = "book_id"
+        const val PAGE_STORAGE_SUFFIX = "page_"
     }
 
     //Item Group

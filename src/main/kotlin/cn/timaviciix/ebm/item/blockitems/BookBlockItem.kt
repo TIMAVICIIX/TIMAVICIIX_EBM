@@ -29,9 +29,13 @@ class BookBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int,
-    private val needSneakingPlace: Boolean = true,
-    itemClassify: Companion.BlockItemClassify
-) : BaseBlockItem(block, settings, nameColor, needSneakingPlace, itemClassify), BookItemOverrides {
+    itemClassify: BaseBlockItem.Companion.BlockItemClassify
+) : BaseBlockItem(block, settings, nameColor, itemClassify), BlockItemHandler {
+
+    /**
+     * needSneaking:Does the block need to be placed crouching?
+     */
+
 
     override fun playOpenSounds(user: PlayerEntity) {
         val volume = 5.0f
@@ -48,8 +52,19 @@ class BookBlockItem(
         )
     }
 
-    override fun playUsingSounds() {
-        TODO("Not yet implemented")
+    override fun playUsingSounds(user: PlayerEntity) {
+        val volume = 5.0f
+        val pitch = 1.0f
+        MinecraftClient.getInstance().soundManager.play(
+            PositionedSoundInstance(
+                SoundRegister.TURNING_PAGE,
+                SoundCategory.BLOCKS,
+                volume,
+                pitch,
+                Random.create(),
+                user.blockPos
+            )
+        )
     }
 
     override fun playCloseSounds(user: PlayerEntity) {
@@ -67,18 +82,25 @@ class BookBlockItem(
         )
     }
 
+    override fun setScreen(user: PlayerEntity) {
+        MinecraftClient.getInstance().setScreen(ReadingScreen(
+            closeOperation = {
+                playCloseSounds(user)
+                Packets.sendReadingPlayerUUid(user)
+            },
+            openOperation = {
+                playOpenSounds(user)
+                Packets.sendReadingPlayerUUid(user)
+            }
+        ))
+    }
+
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
         if (user != null) {
-            //Use Mixin
-            Packets.sendReadingPlayerUUid(user)
-
             //@Imp: active reading UI
             if (user.world.isClient) {
                 user.swingHand(Hand.MAIN_HAND)
-
-                playOpenSounds(user)
-
-                MinecraftClient.getInstance().setScreen(ReadingScreen(user))
+                setScreen(user)
             }
         }
 
@@ -93,17 +115,9 @@ class BookBlockItem(
             if (player.isSneaking) {
                 return super.place(context)
             } else {
-
-                player.swingHand(Hand.MAIN_HAND)
-                //@Imp: Fixed the other place state to read
-                //@Imp: active Book UI
-
-                Packets.sendReadingPlayerUUid(player)
-
-                //@Imp: active reading UI
                 if (player.world.isClient) {
                     player.swingHand(Hand.MAIN_HAND)
-                    MinecraftClient.getInstance().setScreen(ReadingScreen(player))
+                    setScreen(player)
                 }
                 return ActionResult.FAIL
             }

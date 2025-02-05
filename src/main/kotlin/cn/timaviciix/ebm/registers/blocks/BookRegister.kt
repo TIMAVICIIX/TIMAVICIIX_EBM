@@ -39,62 +39,62 @@ class BookRegister() : BlockRegistryContainer {
         val CLASSIC_JOURNAL_BOOK: ClassicJournalBookBlock =
             registrySelf(::CLASSIC_JOURNAL_BOOK, {
                 blockItemsConsist.add(it)
-            }, 0xdbe2ef,true,BaseBlockItem.Companion.BlockItemClassify.Books)
+            }, 0xdbe2ef,BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val REFINED_LEATHER_BOOK: RefinedLeatherBookBlock = registrySelf(::REFINED_LEATHER_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val LUXURIOUS_GILDED_BOOK: LuxuriousGildedBookBlock = registrySelf(::LUXURIOUS_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val QUARTZ_GILDED_BOOK: QuartzGildedBookBlock = registrySelf(::QUARTZ_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val STURDY_OBSIDIAN_GILDED_BOOK: SturdyObsidianGildedBookBlock = registrySelf(::STURDY_OBSIDIAN_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264,true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val QUARTZ_LEATHER_BOOK: QuartzLeatherBookBlock = registrySelf(::QUARTZ_LEATHER_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val MAJESTIC_GILDED_BOOK: MajesticGildedBookBlock = registrySelf(::MAJESTIC_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val QUARTZ_RUBY_ENCRUSTED_BOOK: QuartzRubyEncrustedBookBlock = registrySelf(::QUARTZ_RUBY_ENCRUSTED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val RUBY_GILDED_BOOK: RubyGildedBookBlock = registrySelf(::RUBY_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val SAPPHIRE_GILDED_BOOK: SapphireGildedBookBlock = registrySelf(::SAPPHIRE_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val GOLDEN_BOUGH_FOREST_BOOK: GoldenBoughForestBookBlock = registrySelf(::GOLDEN_BOUGH_FOREST_BOOK, {
             blockItemsConsist.add(it)
-        }, 0x10ddc2, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0x10ddc2, BaseBlockItem.Companion.BlockItemClassify.Books)
 
 
         val CRIMSON_FLAME_GILDED_BOOK: CrimsonFlameGildedBookBlock = registrySelf(::CRIMSON_FLAME_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xfa4659, true,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xfa4659, BaseBlockItem.Companion.BlockItemClassify.Books)
 
     }
 

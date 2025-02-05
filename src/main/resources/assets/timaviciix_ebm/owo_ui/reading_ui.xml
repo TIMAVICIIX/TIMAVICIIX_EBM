@@ -18,7 +18,7 @@
                             <children>
                                 <label id="TextDisplayLabelLeft">
                                     <margins>
-                                        <top>2</top>
+                                        <top>4</top>
                                         <right>5</right>
                                         <left>24</left>
                                     </margins>
@@ -26,7 +26,7 @@
                                         <vertical method="fill">80</vertical>
                                         <horizontal method="fill">88</horizontal>
                                     </sizing>
-                                    <positioning type="relative">50,50</positioning>
+                                    <positioning type="relative">54,50</positioning>
                                 </label>
                             </children>
                             <sizing>
@@ -39,7 +39,7 @@
                             <children>
                                 <label id="TextDisplayLabelRight">
                                     <margins>
-                                        <top>2</top>
+                                        <top>4</top>
                                         <left>5</left>
                                         <right>24</right>
                                     </margins>
@@ -47,7 +47,7 @@
                                         <vertical method="fill">80</vertical>
                                         <horizontal method="fill">88</horizontal>
                                     </sizing>
-                                    <positioning type="relative">50,50</positioning>
+                                    <positioning type="relative">46,50</positioning>
                                 </label>
                             </children>
                             <sizing>

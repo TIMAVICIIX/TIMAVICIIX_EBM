@@ -11,12 +11,14 @@ package cn.timaviciix.ebm.item.blockitems
 
 import net.minecraft.entity.player.PlayerEntity
 
-interface BookItemOverrides {
+interface BlockItemHandler {
 
     fun playOpenSounds(user: PlayerEntity)
 
-    fun playUsingSounds()
+    fun playUsingSounds(user: PlayerEntity)
 
     fun playCloseSounds(user: PlayerEntity)
+
+    fun setScreen(user: PlayerEntity)
 
 }

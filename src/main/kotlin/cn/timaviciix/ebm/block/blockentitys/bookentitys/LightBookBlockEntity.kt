@@ -9,11 +9,19 @@
 
 package cn.timaviciix.ebm.block.blockentitys.bookentitys
 
+import cn.timaviciix.ebm.data.book.BookBlockType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.math.BlockPos
 
-class LightBookBlockEntity(entityType: BlockEntityType<*>, pos: BlockPos, state: BlockState) :
-    BlockEntity(entityType, pos, state) {
+class LightBookBlockEntity(
+    entityType: BlockEntityType<*>,
+    pos: BlockPos,
+    state: BlockState
+) :
+    BaseBookBlockEntity(entityType, pos, state, BookBlockType.LightBook) {
+
+
+
 }
