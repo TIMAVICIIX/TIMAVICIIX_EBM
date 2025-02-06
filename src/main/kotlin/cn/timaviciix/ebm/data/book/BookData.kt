@@ -8,7 +8,13 @@ data class BookData(
     val author:String,
     val createDate:String,
     val bookBlockType: BookBlockType,
+    val preloadPages:Int = 2,
     var copyPermission:Boolean,
-    var nbtContent:MutableList<NbtCompound>,
-    var currentContent:String
-)
+    var bytesNbtChunks:MutableList<ByteArray>
+){
+
+    @Transient
+    var currentContent:String = ""
+
+
+}
