@@ -238,3 +238,9 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.05
 #### 字体运行正常，UI界面运行暂时正常，正在实现分段存储与阅读机制
 
+## <br>2025.02.06
+#### 将Book中的数据逻辑集中到Data类中处理，并将View与Controller分离，后期将实现MVVM架构
+
+## <br>2025.02.07
+#### 完整了工作台UI，目前正在为数据存储与Display的MVVM架构筑底
+
