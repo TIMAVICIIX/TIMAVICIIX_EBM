@@ -23,17 +23,6 @@ open class BaseBookBlockEntity(
     private val bookBlockType: BookBlockType = BookBlockType.GeneralBook
 ) : BlockEntity(entityType, pos, state) {
 
-    fun getMaxCharCount(): Int = bookBlockType.maxPage * bookBlockType.charsPerPage
-
-    fun getMaxPage(): Int = bookBlockType.maxPage
-
-    fun getContentMaxPage(contentCharNum: Int): Int = if (contentCharNum % bookBlockType.charsPerPage == 0) {
-        contentCharNum / bookBlockType.charsPerPage
-    } else {
-        (contentCharNum / bookBlockType.charsPerPage) + 1
-    }
-
-    fun getNbtSplitPartCount(contentCharNum: Int): Int = contentCharNum / MAX_SIZE_PER_NBT
 
 
 }

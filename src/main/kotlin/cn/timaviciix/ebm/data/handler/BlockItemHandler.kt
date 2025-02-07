@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.item.blockitems
+package cn.timaviciix.ebm.data.handler
 
 import net.minecraft.entity.player.PlayerEntity
 

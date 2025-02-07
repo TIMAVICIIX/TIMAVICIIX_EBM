@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.item.blockitems
 
 import cn.timaviciix.ebm.client.gui.ReadingScreen
+import cn.timaviciix.ebm.data.handler.BlockItemHandler
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.registers.others.SoundRegister
 import net.minecraft.block.Block
