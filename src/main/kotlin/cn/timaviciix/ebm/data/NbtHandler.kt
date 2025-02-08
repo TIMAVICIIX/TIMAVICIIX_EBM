@@ -1,11 +1,8 @@
 package cn.timaviciix.ebm.data
 
-import cn.timaviciix.ebm.data.book.BookBlockType
 import net.minecraft.nbt.NbtByteArray
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
-import kotlin.reflect.KProperty
 
 object NbtHandler {
 

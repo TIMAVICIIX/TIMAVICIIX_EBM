@@ -9,36 +9,32 @@
  */
 package cn.timaviciix.ebm.data.book
 
-import cn.timaviciix.ebm.data.NbtHandler
 import cn.timaviciix.ebm.util.CompressUtil.decompressString
-import cn.timaviciix.ebm.util.GeneralUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
-import net.minecraft.item.ItemStack
 
 data class BookData(
-    private var bookId: String,
-    private var author: String,
-    private var createDate: String = LocalDateTime.toString(),
-    private var bookBlockType: BookBlockType,
-    private var preloadPages: Int = 2,
-    private var stack: ItemStack,
-    private var copyPermission: Boolean = false,
-    private var bytesNbtChunks: MutableList<ByteArray> = mutableListOf(),
+    val bookId: String,
+    val author: String,
+    val createDate: String = LocalDateTime.toString(),
+    val bookNbtType: BookNbtType,
+    var copyPermission: Boolean,
+    private var bytesNbtChunks: MutableList<ByteArray>,
+    private val preloadPages: Int = 5,
     private var pageCacheTag: Pair<Int, Int> = Pair(1, 10),
     private var pageCache: MutableMap<Int, String> = mutableMapOf(),
     private var currentPage: Int = 1,
-    var pageTag: Map<String, Int>,
+    var pageTag: Map<String, Int> = mapOf(),
 ) {
 
     /**
      * Normal Config Getter & Setter
      */
-    val maxCharCount = bookBlockType.maxPage * bookBlockType.charsPerPage
-    private val maxPage = bookBlockType.maxPage
+    val maxCharCount = bookNbtType.maxPage * bookNbtType.charsPerPage
+    private val maxPage = bookNbtType.maxPage
 
     @Transient
     var currentContent: String = ""
@@ -60,9 +56,6 @@ data class BookData(
     //@Imp: Init
     //Active When Player Opening Book
     init {
-        CoroutineScope(Dispatchers.IO).launch {
-            loadBookDataFromNbt(stack)
-        }
         initPageCache()
     }
 
@@ -83,14 +76,14 @@ data class BookData(
 
     // Update Pages Cache Tags [(currentPage)-5,currentPage,(currentPage+5)]
     private fun updatePageCacheTag(): Pair<Int, Int> {
-        val minPageCache = if (currentPage < 5) {
+        val minPageCache = if (currentPage < preloadPages) {
             1
         } else {
-            currentPage - 5
+            currentPage - preloadPages
         }
 
         val maxPageCache = if (currentPage < maxPage) {
-            currentPage + 5
+            currentPage + preloadPages
         } else {
             maxPage
         }
@@ -121,40 +114,7 @@ data class BookData(
         }
     }
 
-    /**
-     * Load & Save Controller Functions
-     */
 
-    private fun loadBookDataFromNbt(stack: ItemStack) {
-        stack.orCreateNbt.apply {
-            bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
-            author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { "Unknown" }
-            createDate = getString(BookDataConfig.BOOK_CREATE_DATE_NBT_ID).ifBlank { LocalDateTime.toString() }
-            bookBlockType = when (getInt(BookDataConfig.BOOK_BLOCK_TYPE_NBT_ID)) {
-                0 -> {
-                    BookBlockType.JournalBook
-                }
-
-                1 -> {
-                    BookBlockType.GeneralBook
-                }
-
-                2 -> {
-                    BookBlockType.LightBook
-                }
-
-                3 -> {
-                    BookBlockType.LargeBook
-                }
-
-                else -> {
-                    BookBlockType.GeneralBook
-                }
-            }
-
-            bytesNbtChunks = NbtHandler.loadByteArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
-        }
-
-    }
+    //@Imp: Save Bus
 
 }

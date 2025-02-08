@@ -1,6 +1,6 @@
 package cn.timaviciix.ebm.data.book
 
-enum class BookBlockType(
+enum class BookNbtType(
     val maxPage: Int,
     val charsPerPage: Int,
     val backgroundAndStorageType: Int,

@@ -9,9 +9,8 @@
 
 package cn.timaviciix.ebm.block.blockentitys.bookentitys
 
-import cn.timaviciix.ebm.data.book.BookBlockType
+import cn.timaviciix.ebm.data.book.BookNbtType
 import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.math.BlockPos
 
@@ -20,7 +19,7 @@ class GeneralBookBlockEntity(
     pos: BlockPos,
     state: BlockState
 ) :
-    BaseBookBlockEntity(entityType, pos, state, BookBlockType.GeneralBook) {
+    BaseBookBlockEntity(entityType, pos, state, BookNbtType.GeneralBook) {
 
 
 

@@ -26,7 +26,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-class BookScreenSet(
+class BookBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int,
