@@ -11,7 +11,7 @@ package cn.timaviciix.ebm.data.handler
 
 import net.minecraft.entity.player.PlayerEntity
 
-interface BlockItemHandler {
+interface ScreenSetHandler {
 
     fun playOpenSounds(user: PlayerEntity)
 

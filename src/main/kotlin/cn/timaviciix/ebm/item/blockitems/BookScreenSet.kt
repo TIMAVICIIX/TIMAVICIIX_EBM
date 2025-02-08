@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.item.blockitems
 
 import cn.timaviciix.ebm.client.gui.ReadingScreen
-import cn.timaviciix.ebm.data.handler.BlockItemHandler
+import cn.timaviciix.ebm.data.handler.ScreenSetHandler
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.registers.others.SoundRegister
 import net.minecraft.block.Block
@@ -26,12 +26,12 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
-class BookBlockItem(
+class BookScreenSet(
     block: Block,
     settings: Settings,
     nameColor: Int,
     itemClassify: BaseBlockItem.Companion.BlockItemClassify
-) : BaseBlockItem(block, settings, nameColor, itemClassify), BlockItemHandler {
+) : BaseBlockItem(block, settings, nameColor, itemClassify), ScreenSetHandler {
 
     /**
      * needSneaking:Does the block need to be placed crouching?

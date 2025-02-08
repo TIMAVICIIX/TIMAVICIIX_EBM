@@ -29,8 +29,8 @@ object CompressUtil {
     }
 
     @Throws(IOException::class)
-    fun ByteArray.decompressString(compressed: ByteArray): String {
-        return ByteArrayInputStream(compressed).use { bis ->
+    fun ByteArray.decompressString(): String {
+        return ByteArrayInputStream(this).use { bis ->
             GZIPInputStream(bis).bufferedReader(StandardCharsets.UTF_8).use { reader ->
                 reader.readText()
             }

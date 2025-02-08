@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.registers.blocks
 
 import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
-import cn.timaviciix.ebm.item.blockitems.BookBlockItem
+import cn.timaviciix.ebm.item.blockitems.BookScreenSet
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.itemgroup.OwoItemSettings
 import net.minecraft.block.Block
@@ -45,7 +45,7 @@ interface BaseBlockRegister {
             val targetBlockItem = when (itemClassify) {
 
                 BaseBlockItem.Companion.BlockItemClassify.Books -> {
-                    BookBlockItem(
+                    BookScreenSet(
                         block,
                         settings,
                         nameColor = nameColor,
