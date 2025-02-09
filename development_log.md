@@ -244,3 +244,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.07
 #### 完整了工作台UI，目前正在为数据存储与Display的MVVM架构筑底
 
+## <br>2025.02.08
+#### 建立数据存储工厂，优化了数据调用机制，打码让人失去生机...
+

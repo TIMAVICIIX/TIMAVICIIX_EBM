@@ -9,13 +9,11 @@
 
 package cn.timaviciix.ebm.client.gui
 
-import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.ui.base.BaseUIModelScreen
 import io.wispforest.owo.ui.component.ButtonComponent
 import io.wispforest.owo.ui.component.LabelComponent
 import io.wispforest.owo.ui.container.FlowLayout
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
@@ -24,7 +22,7 @@ import net.minecraft.util.Identifier
 
 class ReadingScreen(
     private val openOperation: () -> Unit = {},
-    private val usingOperation: () -> Unit = {},
+    private val changePageOperation: () -> String? = { null },
     private val closeOperation: () -> Unit = {},
 ) :
     BaseUIModelScreen<FlowLayout>(
@@ -48,7 +46,7 @@ class ReadingScreen(
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-                                .withFont(textFont)
+//                                .withFont(textFont)
 
                         )
                 )
@@ -58,7 +56,7 @@ class ReadingScreen(
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
                             Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
-                                .withFont(textFont)
+//                                .withFont(textFont)
 
                         )
                 )
@@ -67,6 +65,11 @@ class ReadingScreen(
             p0.childById(ButtonComponent::class.java, "inspector-button")
                 ?.onPress { uiAdapter.toggleInspector() }
         }
+    }
+
+    //TODO
+    override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
+        return super.keyPressed(keyCode, scanCode, modifiers)
     }
 
     override fun close() {

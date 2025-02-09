@@ -7,22 +7,27 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.data.book
+package cn.timaviciix.ebm.data
 
-import cn.timaviciix.ebm.data.NbtHandler
+import cn.timaviciix.ebm.data.book.BookData
+import cn.timaviciix.ebm.data.book.BookDataConfig
+import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.util.GeneralUtil
 import kotlinx.datetime.LocalDateTime
-import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 
-object BookDataFactory {
+object DataFactory {
 
-    fun getOrCreateBookData(stack: ItemStack, shortUUID: String): BookData {
-        stack.orCreateNbt.apply {
+    fun getOrCreateBookData(
+        nbt: NbtCompound,
+        playerName: String = "Unknown",
+        bookDataTaker: (bookData: BookData) -> Unit
+    ): NbtCompound {
+        nbt.apply {
             val bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
-            val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { "Unknown" }
+            val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { playerName }
             val createDate = getString(BookDataConfig.BOOK_CREATE_DATE_NBT_ID).ifBlank { LocalDateTime.toString() }
-            val copyPermission = getBoolean(BookDataConfig.BOOK_COPY_PERMISSION_NBT_ID)
-            val bookNbtType = when (getInt(BookDataConfig.BOOK_BLOCK_TYPE_NBT_ID)) {
+            val bookNbtType = when (getInt(BookDataConfig.BOOK_ITEM_TYPE_NBT_ID)) {
                 0 -> {
                     BookNbtType.JournalBook
                 }
@@ -44,17 +49,21 @@ object BookDataFactory {
                 }
             }
 
+            val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
             val bytesNbtChunks = NbtHandler.loadByteArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
-
-            return BookData(
-                bookId = bookId,
-                author = author,
-                createDate = createDate,
-                bookNbtType = bookNbtType,
-                copyPermission = copyPermission,
-                bytesNbtChunks = bytesNbtChunks
+            bookDataTaker(
+                BookData(
+                    bookId = bookId,
+                    author = author,
+                    createDate = createDate,
+                    bookNbtType = bookNbtType,
+                    copyPermission = copyPermission,
+                    bytesNbtChunks = bytesNbtChunks
+                )
             )
+            return nbt
         }
+
 
     }
 

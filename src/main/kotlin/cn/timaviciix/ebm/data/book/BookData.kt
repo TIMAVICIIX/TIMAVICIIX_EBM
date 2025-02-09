@@ -9,35 +9,43 @@
  */
 package cn.timaviciix.ebm.data.book
 
+import cn.timaviciix.ebm.data.NbtHandler
 import cn.timaviciix.ebm.util.CompressUtil.decompressString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
+import net.minecraft.item.ItemStack
+import kotlin.properties.Delegates
 
 data class BookData(
     val bookId: String,
     val author: String,
     val createDate: String = LocalDateTime.toString(),
     val bookNbtType: BookNbtType,
-    var copyPermission: Boolean,
+    var copyPermission: CopyPermission,
     private var bytesNbtChunks: MutableList<ByteArray>,
     private val preloadPages: Int = 5,
     private var pageCacheTag: Pair<Int, Int> = Pair(1, 10),
     private var pageCache: MutableMap<Int, String> = mutableMapOf(),
-    private var currentPage: Int = 1,
     var pageTag: Map<String, Int> = mapOf(),
 ) {
 
     /**
      * Normal Config Getter & Setter
      */
-    val maxCharCount = bookNbtType.maxPage * bookNbtType.charsPerPage
-    private val maxPage = bookNbtType.maxPage
-
     @Transient
     var currentContent: String = ""
+    var currentPage: Int by Delegates.observable(1) { _, _, newValue ->
+        updatePageCacheTag()
+        CoroutineScope(Dispatchers.IO).launch {
+            loadPageCaches()
+        }
+        currentContent = pageCache[newValue].orEmpty()
+    }
+    val maxCharCount = bookNbtType.maxPage * bookNbtType.charsPerPage
+    private val maxPage = bookNbtType.maxPage
 
     // Get Content Max Page Count When Author Save Book Content! Or Auto Save
     fun getContentMaxPage(): Int = bytesNbtChunks.size
@@ -46,13 +54,6 @@ data class BookData(
      * Page Cache Functions
      */
 
-    //@Imp:Outer Interface
-    //Public Function
-    fun getPageContent(pageNum: Int): String {
-        setCurrentPage(pageNum)
-        return pageCache[pageNum].orEmpty()
-    }
-
     //@Imp: Init
     //Active When Player Opening Book
     init {
@@ -60,14 +61,6 @@ data class BookData(
     }
 
     private fun initPageCache() {
-        updatePageCacheTag()
-        CoroutineScope(Dispatchers.IO).launch {
-            loadPageCaches()
-        }
-    }
-
-    private fun setCurrentPage(pageNum: Int) {
-        currentPage = pageNum
         updatePageCacheTag()
         CoroutineScope(Dispatchers.IO).launch {
             loadPageCaches()
@@ -116,5 +109,37 @@ data class BookData(
 
 
     //@Imp: Save Bus
+    fun save(itemStack: ItemStack) {
+
+        itemStack.orCreateNbt.let { nbt ->
+
+            NbtHandler.apply {
+                bookId.saveToNbt(
+                    nbt,
+                    BookDataConfig.BOOK_UUID_NBT_ID
+                )
+                author.saveToNbt(
+                    nbt,
+                    BookDataConfig.BOOK_AUTHOR_NBT_ID
+                )
+                createDate.saveToNbt(
+                    nbt,
+                    BookDataConfig.BOOK_CREATE_DATE_NBT_ID
+                )
+                bookNbtType.backgroundAndStorageType.saveToNbt(
+                    nbt,
+                    BookDataConfig.BOOK_ITEM_TYPE_NBT_ID
+                )
+                copyPermission.saveToNbt(nbt)
+                saveToNbt(
+                    nbt,
+                    bytesNbtChunks,
+                    BookDataConfig.BOOK_CONTENT_NBT_ID,
+                    BookDataConfig.BOOK_SIZE_NBT_ID
+                )
+
+            }
+        }
+    }
 
 }

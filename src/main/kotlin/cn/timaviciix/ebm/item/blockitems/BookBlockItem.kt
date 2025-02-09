@@ -10,6 +10,9 @@
 package cn.timaviciix.ebm.item.blockitems
 
 import cn.timaviciix.ebm.client.gui.ReadingScreen
+import cn.timaviciix.ebm.client.gui.WritingScreen
+import cn.timaviciix.ebm.data.DataFactory
+import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.handler.ScreenSetHandler
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.registers.others.SoundRegister
@@ -19,6 +22,7 @@ import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -30,13 +34,21 @@ class BookBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int,
-    itemClassify: BaseBlockItem.Companion.BlockItemClassify
+    itemClassify: Companion.BlockItemClassify
 ) : BaseBlockItem(block, settings, nameColor, itemClassify), ScreenSetHandler {
 
-    /**
-     * needSneaking:Does the block need to be placed crouching?
-     */
+    private lateinit var bookData: BookData
+    private var bookDataAlready = false
 
+    private fun initItemNbt(): NbtCompound {
+        var nbt = NbtCompound()
+        // Can use this step build nbt
+        nbt = DataFactory.getOrCreateBookData(nbt) {
+            bookData = it
+        }
+        bookDataAlready = true
+        return nbt
+    }
 
     override fun playOpenSounds(user: PlayerEntity) {
         val volume = 5.0f
@@ -83,17 +95,47 @@ class BookBlockItem(
         )
     }
 
-    override fun setScreen(user: PlayerEntity) {
-        MinecraftClient.getInstance().setScreen(ReadingScreen(
-            closeOperation = {
-                playCloseSounds(user)
-                Packets.sendReadingPlayerUUid(user)
-            },
-            openOperation = {
-                playOpenSounds(user)
-                Packets.sendReadingPlayerUUid(user)
-            }
-        ))
+    override fun setScreen(user: PlayerEntity, stack: ItemStack) {
+        stack.nbt = initItemNbt()
+        if (bookData.copyPermission.getStampingState()) {
+            MinecraftClient.getInstance().setScreen(ReadingScreen(
+                closeOperation = {
+                    playCloseSounds(user)
+                    Packets.sendReadingPlayerUUid(user)
+                },
+                openOperation = {
+                    playOpenSounds(user)
+                    Packets.sendReadingPlayerUUid(user)
+//                if (bookData == null) {
+//                    updateBookData(stack)
+//                }
+                }, changePageOperation = {
+                    playUsingSounds(user)
+                    bookData.currentContent
+                }
+            ))
+        } else {
+            MinecraftClient.getInstance().setScreen(WritingScreen(
+                closeOperation = {
+                    playCloseSounds(user)
+                    Packets.sendReadingPlayerUUid(user)
+                },
+                openOperation = {
+                    playOpenSounds(user)
+                    Packets.sendReadingPlayerUUid(user)
+//                if (bookData == null) {
+//                    updateBookData(stack)
+//                }
+                }, changePageOperation = {
+                    playUsingSounds(user)
+                    bookData.currentContent
+                },
+                saveOperation = {
+                    bookData.save(stack)
+                }
+            ))
+        }
+
     }
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
@@ -101,7 +143,7 @@ class BookBlockItem(
             //@Imp: active reading UI
             if (user.world.isClient) {
                 user.swingHand(Hand.MAIN_HAND)
-                setScreen(user)
+                setScreen(user, user.getStackInHand(hand))
             }
         }
 
@@ -118,7 +160,7 @@ class BookBlockItem(
             } else {
                 if (player.world.isClient) {
                     player.swingHand(Hand.MAIN_HAND)
-                    setScreen(player)
+                    setScreen(player, context.stack)
                 }
                 return ActionResult.FAIL
             }

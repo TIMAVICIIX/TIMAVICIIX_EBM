@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.data.handler
 
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 
 interface ScreenSetHandler {
 
@@ -19,6 +20,6 @@ interface ScreenSetHandler {
 
     fun playCloseSounds(user: PlayerEntity)
 
-    fun setScreen(user: PlayerEntity)
+    fun setScreen(user: PlayerEntity, stack: ItemStack)
 
 }
