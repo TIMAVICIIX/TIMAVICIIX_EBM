@@ -247,3 +247,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.08
 #### 建立数据存储工厂，优化了数据调用机制，打码让人失去生机...
 
+## <br>2025.02.09
+#### 建立BookItem的内容Nbt拉取机制，明天再把注释写上...感觉很需要重构，内聚稀松，耦合大片。唉！打码让人脑子爆炸
+
