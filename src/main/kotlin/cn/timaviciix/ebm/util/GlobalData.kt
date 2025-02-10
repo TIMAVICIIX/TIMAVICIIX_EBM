@@ -53,14 +53,6 @@ object GlobalData {
         const val BOOK_READING_INIT_STATE = MOD_ID + "book_reading_init"
     }
 
-    object BookNbtAttributes{
-        //Books attributes
-        const val PAGE_COUNT = "page_count"
-        const val AUTHOR = "author"
-        const val COPY_PERMISSION = "copy_permission"
-        const val BOOK_ID = "book_id"
-        const val PAGE_STORAGE_SUFFIX = "page_"
-    }
 
     //Item Group
     //@Imp:Deprecated

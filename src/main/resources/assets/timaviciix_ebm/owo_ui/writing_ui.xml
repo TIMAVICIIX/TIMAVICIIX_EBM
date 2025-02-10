@@ -37,7 +37,7 @@
 
                         <flow-layout direction="horizontal">
                             <children>
-                                <text-box id="TextWriteLabelRight">
+                                <text-area id="TextWriteLabelRight">
                                     <margins>
                                         <top>4</top>
                                         <left>5</left>
@@ -47,8 +47,12 @@
                                         <vertical method="fill">80</vertical>
                                         <horizontal method="fill">88</horizontal>
                                     </sizing>
-                                    <positioning type="relative">46,50</positioning>
-                                </text-box>
+                                    <max-lines>16</max-lines>
+                                    <allow-overflow>false</allow-overflow>
+                                    <horizontal-alignment>left</horizontal-alignment>
+                                    <vertical-alignment>top</vertical-alignment>
+                                    <positioning type="relative">44,50</positioning>
+                                </text-area>
                             </children>
                             <sizing>
                                 <vertical method="fill">100</vertical>

@@ -1,4 +1,4 @@
-package cn.timaviciix.ebm.data
+package cn.timaviciix.ebm.data.handler
 
 import cn.timaviciix.ebm.data.book.BookDataConfig
 import cn.timaviciix.ebm.data.book.CopyPermission

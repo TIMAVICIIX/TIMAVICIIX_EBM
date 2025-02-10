@@ -9,7 +9,7 @@
  */
 package cn.timaviciix.ebm.data.book
 
-import cn.timaviciix.ebm.data.NbtHandler
+import cn.timaviciix.ebm.data.handler.NbtHandler
 import cn.timaviciix.ebm.util.CompressUtil.decompressString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,9 +21,9 @@ import kotlin.properties.Delegates
 
 data class BookData(
     val bookId: String,
-    val author: String,
     val createDate: String = LocalDateTime.toString(),
     val bookNbtType: BookNbtType,
+    var author: String,
     var copyPermission: CopyPermission,
     private var bytesNbtChunks: MutableList<ByteArray>,
     private val preloadPages: Int = 5,
@@ -65,6 +65,7 @@ data class BookData(
         CoroutineScope(Dispatchers.IO).launch {
             loadPageCaches()
         }
+        currentContent = pageCache[currentPage].orEmpty()
     }
 
     // Update Pages Cache Tags [(currentPage)-5,currentPage,(currentPage+5)]
@@ -76,7 +77,12 @@ data class BookData(
         }
 
         val maxPageCache = if (currentPage < maxPage) {
-            currentPage + preloadPages
+            val targetPageCache = currentPage + preloadPages
+            if (bytesNbtChunks.size + 1 < targetPageCache) {
+                bytesNbtChunks.size + 1
+            } else {
+                targetPageCache
+            }
         } else {
             maxPage
         }
@@ -102,9 +108,15 @@ data class BookData(
             pageCache.clear()
         }
 
+
         for (i in pageCacheTag.first..pageCacheTag.second) {
-            pageCache[i] = bytesNbtChunks[i].decompressString()
+            if (i > bytesNbtChunks.size) {
+                pageCache[i] = ""
+            } else {
+                pageCache[i] = bytesNbtChunks[i].decompressString()
+            }
         }
+
     }
 
 

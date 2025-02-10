@@ -32,6 +32,9 @@ class ReadingScreen(
 
     private val textFont = Identifier(GlobalData.MOD_ID, "large_reading")
 
+    override fun shouldPause(): Boolean {
+        return false
+    }
 
     override fun build(p0: FlowLayout?) {
         openOperation()
@@ -45,7 +48,7 @@ class ReadingScreen(
                 text(
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
-                            Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
+                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
 //                                .withFont(textFont)
 
                         )
@@ -55,7 +58,7 @@ class ReadingScreen(
                 text(
                     Text.translatable("text.timaviciix_ebm.example_display")
                         .setStyle(
-                            Style.EMPTY.withColor(TextColor.fromRgb(0x000000))
+                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
 //                                .withFont(textFont)
 
                         )

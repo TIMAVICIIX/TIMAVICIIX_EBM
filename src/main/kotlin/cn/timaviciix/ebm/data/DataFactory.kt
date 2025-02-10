@@ -12,6 +12,7 @@ package cn.timaviciix.ebm.data
 import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.book.BookDataConfig
 import cn.timaviciix.ebm.data.book.BookNbtType
+import cn.timaviciix.ebm.data.handler.NbtHandler
 import cn.timaviciix.ebm.util.GeneralUtil
 import kotlinx.datetime.LocalDateTime
 import net.minecraft.nbt.NbtCompound
@@ -21,8 +22,7 @@ object DataFactory {
     fun getOrCreateBookData(
         nbt: NbtCompound,
         playerName: String = "Unknown",
-        bookDataTaker: (bookData: BookData) -> Unit
-    ): NbtCompound {
+    ): BookData {
         nbt.apply {
             val bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
             val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { playerName }
@@ -51,17 +51,15 @@ object DataFactory {
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
             val bytesNbtChunks = NbtHandler.loadByteArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
-            bookDataTaker(
-                BookData(
-                    bookId = bookId,
-                    author = author,
-                    createDate = createDate,
-                    bookNbtType = bookNbtType,
-                    copyPermission = copyPermission,
-                    bytesNbtChunks = bytesNbtChunks
-                )
+            return BookData(
+                bookId = bookId,
+                author = author,
+                createDate = createDate,
+                bookNbtType = bookNbtType,
+                copyPermission = copyPermission,
+                bytesNbtChunks = bytesNbtChunks
             )
-            return nbt
+
         }
 
 
