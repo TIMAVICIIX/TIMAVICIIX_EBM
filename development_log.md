@@ -250,3 +250,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.09
 #### 建立BookItem的内容Nbt拉取机制，明天再把注释写上...感觉很需要重构，内聚稀松，耦合大片。唉！打码让人脑子爆炸
 
+## <br>2025.02.10
+#### Nbt拉取机制修正完毕，将采用原生UI进行开发，不再采用任何UI库，Owo-lib的UI就是依托
+
