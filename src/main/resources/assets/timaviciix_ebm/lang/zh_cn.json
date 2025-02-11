@@ -55,6 +55,5 @@
   "item.timaviciix_ebm.penguin_chestplate_desc": "宽松的玩偶服装",
   "item.timaviciix_ebm.penguin_leggings_desc": "可有可无的玩偶裤子(其目的是为了掩盖穿模的事实)",
   "item.timaviciix_ebm.penguin_boots_desc": "宽大的玩偶鞋，是模仿的企鹅脚掌",
-  "state.timaviciix_ebm.reading_state": "阅读中...",
-  "text.timaviciix_ebm.example_display": "owo-lib的较高社区支持主要体现在以下几个方面: \n1. 活跃的 GitHub 讨论和提交 源代码维护: owo-lib 在 GitHub 上有一个活跃的代码库，开发者和贡献者定期提交更新和修复。社区成员可以通过 Pull Requests 提交 bug 修复、功能增强或改进建议。 问题追踪 (Issue Tracking): owo-lib 的 GitHub 页面有大量的开放式和已解决的 Issues，涵盖了各种 bug 报告、功能请求和讨论。"
+  "state.timaviciix_ebm.reading_state": "阅读中..."
 }

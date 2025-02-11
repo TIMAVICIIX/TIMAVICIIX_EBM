@@ -44,26 +44,26 @@ class ReadingScreen(
             p0.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
                 close()
             }
-            p0.childById(LabelComponent::class.java, "TextDisplayLabelLeft")?.apply {
-                text(
-                    Text.translatable("text.timaviciix_ebm.example_display")
-                        .setStyle(
-                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
-//                                .withFont(textFont)
-
-                        )
-                )
-            }
-            p0.childById(LabelComponent::class.java, "TextDisplayLabelRight")?.apply {
-                text(
-                    Text.translatable("text.timaviciix_ebm.example_display")
-                        .setStyle(
-                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
-//                                .withFont(textFont)
-
-                        )
-                )
-            }
+//            p0.childById(LabelComponent::class.java, "TextDisplayLabelLeft")?.apply {
+//                text(
+//                    Text.translatable("text.timaviciix_ebm.example_display")
+//                        .setStyle(
+//                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
+////                                .withFont(textFont)
+//
+//                        )
+//                )
+//            }
+//            p0.childById(LabelComponent::class.java, "TextDisplayLabelRight")?.apply {
+//                text(
+//                    Text.translatable("text.timaviciix_ebm.example_display")
+//                        .setStyle(
+//                            Style.EMPTY.withColor(GUIConfig.blackTextColor4)
+////                                .withFont(textFont)
+//
+//                        )
+//                )
+//            }
 
             p0.childById(ButtonComponent::class.java, "inspector-button")
                 ?.onPress { uiAdapter.toggleInspector() }
