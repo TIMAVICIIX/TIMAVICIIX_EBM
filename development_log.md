@@ -253,3 +253,9 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.10
 #### Nbt拉取机制修正完毕，将采用原生UI进行开发，不再采用任何UI库，Owo-lib的UI就是依托
 
+## <br>2025.02.11
+#### 正在使用原生Minecraft UI开发
+
+## <br>2025.02.12
+#### 原生Minecraft UI开发稳步进行中，Mixin真好用嘿嘿嘿
+
