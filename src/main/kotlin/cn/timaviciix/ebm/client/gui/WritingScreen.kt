@@ -30,6 +30,10 @@ class WritingScreen(
         DataSource.asset(Identifier(GlobalData.MOD_ID, "writing_ui"))
     ) {
 
+        init {
+            openOperation()
+        }
+
     private lateinit var displayLabel: LabelComponent
     private lateinit var textWriteLabel: TextAreaComponent
 
@@ -38,7 +42,6 @@ class WritingScreen(
     }
 
     override fun build(p0: FlowLayout?) {
-        openOperation()
         p0?.let {
 
             p0.childById(ButtonComponent::class.java, "BackBtn")?.onPress {
@@ -63,20 +66,13 @@ class WritingScreen(
                                 )
                         )
                     } else {
-                        displayLabel.text(Text.literal(" "))
+                        displayLabel.text(Text.empty())
                     }
                 })
 
             }
         }
 
-    }
-
-    fun printUnicodeCodes(input: String) {
-        input.forEach { char ->
-            // 输出 Unicode 编码
-            GlobalData.LOGGER.info("\\u${char.code.toString(16).padStart(4, '0')}")
-        }
     }
 
     private fun save() {

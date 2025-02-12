@@ -23,13 +23,11 @@ object BufferBus {
 
         fun addReadingPlayer(playerId: UUID) {
             if (!readingStatePlayers.contains(playerId)) {
-                logger.info("SET NEW READING PLAYER:${playerId}")
                 readingStatePlayers.add(playerId)
             }
         }
 
         fun removeReadingPlayer(playerId: UUID) {
-            logger.info("EXIT READING PLAYER:${playerId}")
             readingStatePlayers.remove(playerId)
         }
 

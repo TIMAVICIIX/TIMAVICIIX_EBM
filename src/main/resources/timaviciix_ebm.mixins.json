@@ -1,5 +1,5 @@
 {
-  "required": false,
+  "required": true,
   "package": "cn.timaviciix.ebm.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
@@ -9,6 +9,8 @@
     "defaultRequire": 1
   },
   "client": [
+    "EditBoxWidgetGetLinesMixin",
+    "EditBoxWidgetTextColorMixin",
     "ReadStateMixin"
   ]
 }

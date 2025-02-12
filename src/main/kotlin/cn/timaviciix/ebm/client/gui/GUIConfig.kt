@@ -1,8 +1,10 @@
 package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
+import cn.timaviciix.ebm.util.GlobalData.LOGGER
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
+import kotlin.properties.Delegates
 
 object GUIConfig {
 
@@ -32,6 +34,12 @@ object GUIConfig {
 
     object Fonts {
         val BOOK_FONT = Identifier(GlobalData.MOD_ID, "large_reading")
+    }
+
+    object BufferFromMixin {
+        var wrapLineCount by Delegates.observable(1) { _, _, newValue ->
+            LOGGER.info("Lines Changed: $newValue")
+        }
     }
 
     data class NormalTextureConfig(

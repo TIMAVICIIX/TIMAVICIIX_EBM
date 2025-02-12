@@ -36,10 +36,10 @@ object Packets {
         buf.writeUuid(uuid)
 
         if (playerEntity is ServerPlayerEntity) {
-            logger.info("Player is ServerPlayer send ServerPlayerNetworking")
+            //logger.info("Player is ServerPlayer send ServerPlayerNetworking")
             ServerPlayNetworking.send(playerEntity, BOOK_READING_PACKET_FROM_SERVER, buf)
         } else {
-            logger.info("Player is ClientPlayer send ClientPlayerNetworking")
+            //logger.info("Player is ClientPlayer send ClientPlayerNetworking")
             ClientPlayNetworking.send(BOOK_READING_PACKET_FROM_CLIENT, buf)
         }
 

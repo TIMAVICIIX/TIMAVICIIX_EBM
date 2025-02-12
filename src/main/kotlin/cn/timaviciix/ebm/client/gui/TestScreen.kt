@@ -9,11 +9,12 @@
 
 package cn.timaviciix.ebm.client.gui
 
+import cn.timaviciix.ebm.client.gui.widgets.EditTextWidget
 import cn.timaviciix.ebm.client.gui.widgets.ImageButtonWidget
+import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ScrollableTextWidget
-import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 
@@ -24,8 +25,14 @@ class TestScreen(
     private val closeOperation: () -> Unit = {}
 ) : Screen(Text.literal("原生UI示例")) {
 
+    private lateinit var closeBtn: ImageButtonWidget
     private lateinit var textDisplay: ScrollableTextWidget
-    private lateinit var textField: TextFieldWidget
+    private lateinit var textField: EditTextWidget
+    private var bufferFieldString = ""
+
+    init {
+        openOperation()
+    }
 
     override fun shouldPause(): Boolean {
         return false
@@ -36,7 +43,7 @@ class TestScreen(
     }
 
     override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(context)
+        super.renderBackground(context)
         super.render(context, mouseX, mouseY, 0.4f)
         context?.let {
             GUIConfig.READING_GUI_TEXTURE_SET.apply {
@@ -49,12 +56,12 @@ class TestScreen(
                 )
             }
         }
+
+
     }
 
     override fun init() {
-        openOperation()
-
-        addDrawableChild(
+        closeBtn = addDrawableChild(
             ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 10, 20, 20) {
                 saveOperation()
                 close()
@@ -62,34 +69,59 @@ class TestScreen(
         )
 
         val displayTextPosition = Pair(
-            (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 24,
-            (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 14
+            (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 22,
+            (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 16
         )
-
         textDisplay = addDrawableChild(
-           ScrollableTextWidget(
+            ScrollableTextWidget(
                 displayTextPosition.first,
                 displayTextPosition.second,
-                116, 176,
-                Text.literal(
-                    "黑暗中的我們都沒有說話 你只想回家 不想你回家\n" +
-                            "寂寞深的像海太讓人害怕\n" +
-                            "溫柔你的手 輕輕揉著我的髮\n" +
-                            "你的眉眼說 你好渴望我擁抱\n" +
-                            "你身體卻在拼命逃 當慾望在燃燒你愛我還是他\n" +
-                            "是不是真的他有比我好 你為誰在掙扎\n" +
-                            "愛我還是他\n" +
-                            "就說出你想說的真心話\n" +
-                            "你到底要跟我還是他\n" +
-                            "愛 愛 愛 他\n" +
-                            "這是不是命運對我的懲罰\n" +
-                            "愛你也沒辦法 恨你也沒辦法\n"
-                ).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4)),
+                116, 170,
+                textInterpreter(bufferFieldString),
                 textRenderer
             )
         )
 
 
+        val textFieldPosition = Pair(
+            ((width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2) + 136,
+            ((height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2) + 12
+        )
+
+        textField = addDrawableChild(
+            EditTextWidget(
+                textRenderer,
+                textFieldPosition.first, textFieldPosition.second,
+                116, 170
+            ).apply {
+                text = bufferFieldString
+                setChangeListener {
+                    bufferFieldString = it
+
+                    remove(textDisplay)
+                    textDisplay = addDrawableChild(
+                        ScrollableTextWidget(
+                            displayTextPosition.first,
+                            displayTextPosition.second,
+                            116, 170,
+                            textInterpreter(bufferFieldString),
+                            textRenderer
+                        )
+                    )
+                }
+
+            }
+        )
+
+
+    }
+
+    private fun textInterpreter(bufferString: String): Text {
+        return if (bufferString.isBlank() || bufferString.isEmpty()) {
+            Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+        } else {
+            Text.literal(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+        }
     }
 
     private fun saveData() {

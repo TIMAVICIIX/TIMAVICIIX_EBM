@@ -9,11 +9,15 @@
 
 package cn.timaviciix.ebm.util
 
-import cn.timaviciix.ebm.item.BaseItem
 import io.wispforest.owo.nbt.NbtKey
+import net.minecraft.client.font.FontStorage
+import net.minecraft.client.font.TextRenderer
 import net.minecraft.item.ItemStack
+import net.minecraft.text.Style
 import java.util.*
 import kotlin.reflect.KProperty
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.jvm.isAccessible
 
 
 object GeneralUtil {
@@ -76,7 +80,6 @@ object GeneralUtil {
         }
 
     }
-
 
     //Kotlin Reflect
     fun <T> getPropertyName(property: KProperty<T>): String {

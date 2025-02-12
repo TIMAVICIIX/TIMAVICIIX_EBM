@@ -130,14 +130,15 @@ class BookBlockItem(
                 )
             )
         } else {
-            MinecraftClient.getInstance().setScreen(TestScreen(
-                openOperation = setOpenOperation,
-                changePageOperation = setChangeOperation,
-                closeOperation = setCloseOperation,
-                saveOperation = {
-                    bookData.save(stack)
-                }
-            ))
+            MinecraftClient.getInstance().setScreen(
+                TestScreen(
+                    openOperation = setOpenOperation,
+                    changePageOperation = setChangeOperation,
+                    closeOperation = setCloseOperation,
+                    saveOperation = {
+                        bookData.save(stack)
+                    }
+                ))
         }
 
     }
