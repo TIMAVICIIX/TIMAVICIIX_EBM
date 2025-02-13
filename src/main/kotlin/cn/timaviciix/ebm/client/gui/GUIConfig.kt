@@ -37,8 +37,11 @@ object GUIConfig {
     }
 
     object BufferFromMixin {
+        var listener: ((Int) -> Unit)? = null
+
         var wrapLineCount by Delegates.observable(1) { _, _, newValue ->
             LOGGER.info("Lines Changed: $newValue")
+            listener?.invoke(newValue)
         }
     }
 

@@ -11,7 +11,7 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.client.gui.widgets.EditTextWidget
 import cn.timaviciix.ebm.client.gui.widgets.ImageButtonWidget
-import cn.timaviciix.ebm.util.GlobalData
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ScrollableTextWidget
@@ -29,6 +29,8 @@ class TestScreen(
     private lateinit var textDisplay: ScrollableTextWidget
     private lateinit var textField: EditTextWidget
     private var bufferFieldString = ""
+
+    private val pendingWidgetUpdates = mutableListOf<() -> Unit>()
 
     init {
         openOperation()
@@ -56,8 +58,10 @@ class TestScreen(
                 )
             }
         }
-
-
+        for (update in pendingWidgetUpdates) {
+            update()
+        }
+        pendingWidgetUpdates.clear()
     }
 
     override fun init() {
@@ -98,30 +102,44 @@ class TestScreen(
                 setChangeListener {
                     bufferFieldString = it
 
-                    remove(textDisplay)
-                    textDisplay = addDrawableChild(
-                        ScrollableTextWidget(
-                            displayTextPosition.first,
-                            displayTextPosition.second,
-                            116, 170,
-                            textInterpreter(bufferFieldString),
-                            textRenderer
+                    pendingWidgetUpdates.add {
+                        remove(textDisplay)
+                        textDisplay = addDrawableChild(
+                            ScrollableTextWidget(
+                                displayTextPosition.first,
+                                displayTextPosition.second,
+                                116, 170,
+                                textInterpreter(bufferFieldString),
+                                textRenderer
+                            )
                         )
-                    )
+                    }
                 }
 
             }
         )
 
+        GUIConfig.BufferFromMixin.listener = { newValue ->
+            if (newValue > textField.maxLines) {
+                val newText = textField.text.substring(0, textField.text.length - 1)
+                MinecraftClient.getInstance().execute {
+                    textField.text = newText
+                }
+                bufferFieldString = newText
+            }
+
+        }
+
 
     }
 
     private fun textInterpreter(bufferString: String): Text {
-        return if (bufferString.isBlank() || bufferString.isEmpty()) {
+        return if (bufferString.isEmpty()) {
             Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         } else {
             Text.literal(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         }
+
     }
 
     private fun saveData() {
@@ -131,5 +149,6 @@ class TestScreen(
     override fun close() {
         closeOperation()
         super.close()
+        GUIConfig.BufferFromMixin.wrapLineCount = 1
     }
 }

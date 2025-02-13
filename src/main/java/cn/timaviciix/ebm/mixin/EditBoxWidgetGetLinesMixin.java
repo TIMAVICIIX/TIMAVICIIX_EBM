@@ -2,6 +2,7 @@ package cn.timaviciix.ebm.mixin;
 
 
 import cn.timaviciix.ebm.client.gui.GUIConfig;
+import cn.timaviciix.ebm.util.GlobalData;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.EditBox;
 import net.minecraft.client.gui.widget.EditBoxWidget;
@@ -26,6 +27,7 @@ public abstract class EditBoxWidgetGetLinesMixin {
         if (!string.isEmpty()) {
             int linesCount = getSize(this.editBox.getLines());
             if (linesCount != GUIConfig.BufferFromMixin.INSTANCE.getWrapLineCount()) {
+                //GlobalData.INSTANCE.getLOGGER().info("[Mixin] Change Lines: "+linesCount);
                 GUIConfig.BufferFromMixin.INSTANCE.setWrapLineCount(linesCount);
             }
         }
