@@ -2,6 +2,7 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
 import cn.timaviciix.ebm.util.GlobalData.LOGGER
+import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
 import kotlin.properties.Delegates
@@ -80,6 +81,20 @@ object GUIConfig {
         20, 20,
         20, 20,
         hoverTexture = Textures.CLOSE_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val NEXT_BUTTON_TEXTURE_SET = BtnTextureConfig(
+        Textures.NEXT_BTN_WIDGET_TEXTURE,
+        0,0,20,20,
+        20,20,
+        hoverTexture = Textures.NEXT_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val PREVIEW_BUTTON_TEXTURE_SET = BtnTextureConfig(
+        Textures.PREVIEW_BTN_WIDGET_TEXTURE,
+        0,0,20,20,
+        20,20,
+        hoverTexture = Textures.PREVIEW_BTN_WIDGET_HOVER_TEXTURE
     )
 
 }

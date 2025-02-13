@@ -26,6 +26,9 @@ class TestScreen(
 ) : Screen(Text.literal("原生UI示例")) {
 
     private lateinit var closeBtn: ImageButtonWidget
+    private lateinit var nextPageBtn: ImageButtonWidget
+    private lateinit var previewPageBtn: ImageButtonWidget
+
     private lateinit var textDisplay: ScrollableTextWidget
     private lateinit var textField: EditTextWidget
     private var bufferFieldString = ""
@@ -58,6 +61,8 @@ class TestScreen(
                 )
             }
         }
+
+        //@Imp: Execute
         for (update in pendingWidgetUpdates) {
             update()
         }
@@ -69,6 +74,16 @@ class TestScreen(
             ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 10, 20, 20) {
                 saveOperation()
                 close()
+            }
+        )
+        nextPageBtn = addDrawableChild(
+            ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 30, 20, 20) {
+                changePageOperation()
+            }
+        )
+        previewPageBtn = addDrawableChild(
+            ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 30, 20, 20) {
+                changePageOperation()
             }
         )
 
@@ -102,6 +117,7 @@ class TestScreen(
                 setChangeListener {
                     bufferFieldString = it
 
+                    //@Imp: Make sure to do the following after render()
                     pendingWidgetUpdates.add {
                         remove(textDisplay)
                         textDisplay = addDrawableChild(
@@ -117,17 +133,17 @@ class TestScreen(
                 }
 
             }
-        )
-
-        GUIConfig.BufferFromMixin.listener = { newValue ->
-            if (newValue > textField.maxLines) {
-                val newText = textField.text.substring(0, textField.text.length - 1)
-                MinecraftClient.getInstance().execute {
-                    textField.text = newText
+        ).apply {
+            GUIConfig.BufferFromMixin.listener = { newValue ->
+                if (newValue > maxLines) {
+                    val newText = text.substring(0, text.length - 1)
+                    MinecraftClient.getInstance().execute {
+                        text = newText
+                    }
+                    bufferFieldString = newText
                 }
-                bufferFieldString = newText
-            }
 
+            }
         }
 
 

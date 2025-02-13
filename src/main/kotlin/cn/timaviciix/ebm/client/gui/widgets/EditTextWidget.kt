@@ -38,7 +38,7 @@ class EditTextWidget(
     override fun charTyped(chr: Char, modifiers: Int): Boolean {
         GlobalData.LOGGER.info("CharTyped!")
         if (GUIConfig.BufferFromMixin.wrapLineCount > maxLines) {
-            GlobalData.LOGGER.info("[charTyped]Can't Typed More Chars!!!")
+            //GlobalData.LOGGER.info("[charTyped]Can't Typed More Chars!!!")
             return false
         }
         //GlobalData.LOGGER.info("[charTyped]Typed Char!!!")
@@ -46,13 +46,13 @@ class EditTextWidget(
     }
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
-        GlobalData.LOGGER.info("KeyPressed")
-        if (GUIConfig.BufferFromMixin.wrapLineCount > maxLines) {
-            GlobalData.LOGGER.info("[keyPressed]Can't Typed More Chars!!!")
+        //GlobalData.LOGGER.info("KeyPressed")
+        if (GUIConfig.BufferFromMixin.wrapLineCount > maxLines && isFocused) {
+            //GlobalData.LOGGER.info("[keyPressed]Can't Typed More Chars!!!")
             //GlobalData.LOGGER.info("Now Text:$text")
             return false
-        } else if (GUIConfig.BufferFromMixin.wrapLineCount == maxLines && (keyCode == 257 || keyCode == 335)) {
-            GlobalData.LOGGER.info("[keyPressed]Can't Typed More Chars!!!")
+        } else if (GUIConfig.BufferFromMixin.wrapLineCount == maxLines && (keyCode == 257 || keyCode == 335) &&isFocused) {
+            //GlobalData.LOGGER.info("[keyPressed]Can't Typed More Chars!!!")
             //GlobalData.LOGGER.info("Now Text:$text")
             return false
         } else {
