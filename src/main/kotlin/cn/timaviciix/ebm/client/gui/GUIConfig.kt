@@ -44,6 +44,11 @@ object GUIConfig {
             LOGGER.info("Lines Changed: $newValue")
             listener?.invoke(newValue)
         }
+
+        var screenMixinLaunch = false
+        fun toggleMixin(){
+            screenMixinLaunch = screenMixinLaunch != true
+        }
     }
 
     data class NormalTextureConfig(

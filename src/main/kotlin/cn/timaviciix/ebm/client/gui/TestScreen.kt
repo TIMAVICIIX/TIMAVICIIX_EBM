@@ -67,58 +67,66 @@ class TestScreen(
             update()
         }
         pendingWidgetUpdates.clear()
+
+        //Render Components Again!
+        textField.render(context,mouseX,mouseY,delta)
+        textDisplay.render(context,mouseX,mouseY,delta)
     }
 
     override fun init() {
-        closeBtn = addDrawableChild(
-            ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 10, 20, 20) {
-                saveOperation()
-                close()
-            }
-        )
-        nextPageBtn = addDrawableChild(
-            ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 30, 20, 20) {
-                changePageOperation()
-            }
-        )
-        previewPageBtn = addDrawableChild(
-            ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 30, 20, 20) {
-                changePageOperation()
-            }
-        )
-
-        val displayTextPosition = Pair(
-            (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 22,
-            (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 16
-        )
-        textDisplay = addDrawableChild(
-            ScrollableTextWidget(
-                displayTextPosition.first,
-                displayTextPosition.second,
-                116, 170,
-                textInterpreter(bufferFieldString),
-                textRenderer
+        //@Imp: Make sure to do the following after render()
+        pendingWidgetUpdates.add {
+            closeBtn = addDrawableChild(
+                ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 10, 20, 20) {
+                    saveOperation()
+                    close()
+                }
             )
-        )
+            nextPageBtn = addDrawableChild(
+                ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 30, 20, 20) {
+                    changePageOperation()
+                }
+            )
+            previewPageBtn = addDrawableChild(
+                ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 30, 20, 20) {
+                    changePageOperation()
+                }
+            )
+        }
+
+        pendingWidgetUpdates.add {
+            val displayTextPosition = Pair(
+                (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 22,
+                (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 16
+            )
+            textDisplay = addDrawableChild(
+                ScrollableTextWidget(
+                    displayTextPosition.first,
+                    displayTextPosition.second,
+                    116, 170,
+                    textInterpreter(bufferFieldString),
+                    textRenderer
+                )
+            )
 
 
-        val textFieldPosition = Pair(
-            ((width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2) + 136,
-            ((height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2) + 12
-        )
+            val textFieldPosition = Pair(
+                ((width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2) + 136,
+                ((height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2) + 12
+            )
 
-        textField = addDrawableChild(
-            EditTextWidget(
-                textRenderer,
-                textFieldPosition.first, textFieldPosition.second,
-                116, 170
-            ).apply {
-                text = bufferFieldString
-                setChangeListener {
-                    bufferFieldString = it
+            textField = addDrawableChild(
+                EditTextWidget(
+                    textRenderer,
+                    textFieldPosition.first, textFieldPosition.second,
+                    116, 170
+                ).apply {
+                    text = bufferFieldString
+                    setChangeListener {
+                        bufferFieldString = it
 
-                    //@Imp: Make sure to do the following after render()
-                    pendingWidgetUpdates.add {
+
+
                         remove(textDisplay)
                         textDisplay = addDrawableChild(
                             ScrollableTextWidget(
@@ -130,23 +138,23 @@ class TestScreen(
                             )
                         )
                     }
-                }
 
-            }
-        ).apply {
-            GUIConfig.BufferFromMixin.listener = { newValue ->
-                if (newValue > maxLines) {
-                    val newText = text.substring(0, text.length - 1)
-                    MinecraftClient.getInstance().execute {
-                        text = newText
+
+                }
+            ).apply {
+                GUIConfig.BufferFromMixin.listener = { newValue ->
+                    if (newValue > maxLines) {
+                        val newText = text.substring(0, text.length - 1)
+                        MinecraftClient.getInstance().execute {
+                            text = newText
+                        }
+                        bufferFieldString = newText
                     }
-                    bufferFieldString = newText
+
                 }
-
             }
+
         }
-
-
     }
 
     private fun textInterpreter(bufferString: String): Text {

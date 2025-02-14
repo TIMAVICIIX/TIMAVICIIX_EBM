@@ -9,6 +9,7 @@
 
 package cn.timaviciix.ebm.item.blockitems
 
+import cn.timaviciix.ebm.client.gui.GUIConfig
 import cn.timaviciix.ebm.client.gui.TestScreen
 import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.SealedData
@@ -107,6 +108,7 @@ class BookBlockItem(
         stack.loadCacheDataFromNbt()
 
         val setOpenOperation = {
+            GUIConfig.BufferFromMixin.toggleMixin()
             playOpenSounds(user)
             Packets.sendReadingPlayerUUid(user)
         }
@@ -117,6 +119,7 @@ class BookBlockItem(
         }
 
         val setCloseOperation = {
+            GUIConfig.BufferFromMixin.toggleMixin()
             playCloseSounds(user)
             Packets.sendReadingPlayerUUid(user)
         }
