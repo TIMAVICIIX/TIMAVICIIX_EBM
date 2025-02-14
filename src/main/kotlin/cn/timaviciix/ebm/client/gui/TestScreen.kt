@@ -14,6 +14,7 @@ import cn.timaviciix.ebm.client.gui.widgets.ImageButtonWidget
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.ScrollableTextWidget
 import net.minecraft.text.Style
 import net.minecraft.text.Text
@@ -28,6 +29,7 @@ class TestScreen(
     private lateinit var closeBtn: ImageButtonWidget
     private lateinit var nextPageBtn: ImageButtonWidget
     private lateinit var previewPageBtn: ImageButtonWidget
+    private lateinit var savePageBtn: ButtonWidget
 
     private lateinit var textDisplay: ScrollableTextWidget
     private lateinit var textField: EditTextWidget
