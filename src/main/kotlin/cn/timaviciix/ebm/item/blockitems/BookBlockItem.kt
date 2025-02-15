@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.item.blockitems
 
 import cn.timaviciix.ebm.client.gui.GUIConfig
-import cn.timaviciix.ebm.client.gui.TestScreen
+import cn.timaviciix.ebm.client.gui.OriginalWritingScreen
 import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
@@ -49,11 +49,11 @@ class BookBlockItem(
     private lateinit var dataPackage: SealedDataPackage
     private lateinit var bookData: BookData
 
-    private fun ItemStack.loadCacheDataFromNbt() {
+    private fun ItemStack.loadCacheDataFromNbt(authorName: String) {
         val nbt = this.orCreateNbt
 
         dataPackage = SealedDataPackage(
-            SealedData.BookDataComponent(DataFactory.getOrCreateBookData(nbt))
+            SealedData.BookDataComponent(DataFactory.getOrCreateBookData(nbt, authorName, true))
         ).apply {
             bookData = get()
         }
@@ -105,7 +105,7 @@ class BookBlockItem(
     }
 
     override fun setScreen(user: PlayerEntity, stack: ItemStack) {
-        stack.loadCacheDataFromNbt()
+        stack.loadCacheDataFromNbt(user.name.string)
 
         val setOpenOperation = {
             GUIConfig.BufferFromMixin.toggleMixin()
@@ -126,7 +126,8 @@ class BookBlockItem(
 
         if (bookData.copyPermission.getStampingState()) {
             MinecraftClient.getInstance().setScreen(
-                TestScreen(
+                OriginalWritingScreen(
+                    bookData,
                     openOperation = setOpenOperation,
                     changePageOperation = setChangeOperation,
                     closeOperation = setCloseOperation
@@ -134,7 +135,8 @@ class BookBlockItem(
             )
         } else {
             MinecraftClient.getInstance().setScreen(
-                TestScreen(
+                OriginalWritingScreen(
+                    bookData,
                     openOperation = setOpenOperation,
                     changePageOperation = setChangeOperation,
                     closeOperation = setCloseOperation,

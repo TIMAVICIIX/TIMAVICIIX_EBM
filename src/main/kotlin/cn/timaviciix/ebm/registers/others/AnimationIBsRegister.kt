@@ -22,11 +22,11 @@ import net.minecraft.item.BlockItem
 //we need /*BaseBlockRegister*/ to registry block           this guy↓
 class AnimationIBsRegister() : BlockRegistryContainer {
     companion object {
-        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
+        val blockItemsConsistList: MutableList<Pair<BlockItem, String>> = mutableListOf()
 
         //manual Registry
         val BLUE_CAT_PENDANT: BlueCatPendantBlock = BaseBlockRegister.registrySelf(::BLUE_CAT_PENDANT, {
-            blockItemsConsist.add(it)
+            blockItemsConsistList.add(it)
         }, 0x3f72af)
 
     }

@@ -62,9 +62,8 @@ data class BookData(
 
     private fun initPageCache() {
         updatePageCacheTag()
-        CoroutineScope(Dispatchers.IO).launch {
-            loadPageCaches()
-        }
+        loadPageCaches()
+
         currentContent = pageCache[currentPage].orEmpty()
     }
 
@@ -94,7 +93,7 @@ data class BookData(
     }
 
     //Clean Cache List & load New Content in
-    private suspend fun loadPageCaches() = withContext(Dispatchers.IO) {
+    private fun loadPageCaches() {
         //clean Dirt Content Method
         if (currentPage in pageCacheTag.first..pageCacheTag.second) {
 

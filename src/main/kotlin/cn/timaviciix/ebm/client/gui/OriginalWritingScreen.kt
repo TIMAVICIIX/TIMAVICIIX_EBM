@@ -11,25 +11,29 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.client.gui.widgets.EditTextWidget
 import cn.timaviciix.ebm.client.gui.widgets.ImageButtonWidget
+import cn.timaviciix.ebm.client.gui.widgets.TextImageButtonWidget
+import cn.timaviciix.ebm.data.book.BookData
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.client.gui.widget.ScrollableTextWidget
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 
-class TestScreen(
+class OriginalWritingScreen(
+    private val bookData: BookData,
     private val openOperation: () -> Unit = {},
     private val changePageOperation: () -> String? = { null },
     private val saveOperation: () -> Unit = {},
     private val closeOperation: () -> Unit = {}
-) : Screen(Text.literal("原生UI示例")) {
+) : Screen(Text.literal("TIMAVICIIX_EBM:WRITING_GUI")) {
 
     private lateinit var closeBtn: ImageButtonWidget
     private lateinit var nextPageBtn: ImageButtonWidget
-    private lateinit var previewPageBtn: ImageButtonWidget
-    private lateinit var savePageBtn: ButtonWidget
+    private lateinit var previousPageBtn: ImageButtonWidget
+
+    private lateinit var savePageBtn: TextImageButtonWidget
+    private lateinit var previewBtn: TextImageButtonWidget
 
     private lateinit var textDisplay: ScrollableTextWidget
     private lateinit var textField: EditTextWidget
@@ -38,6 +42,7 @@ class TestScreen(
     private val pendingWidgetUpdates = mutableListOf<() -> Unit>()
 
     init {
+        bufferFieldString = bookData.currentContent
         openOperation()
     }
 
@@ -71,8 +76,8 @@ class TestScreen(
         pendingWidgetUpdates.clear()
 
         //Render Components Again!
-        textField.render(context,mouseX,mouseY,delta)
-        textDisplay.render(context,mouseX,mouseY,delta)
+        textField.render(context, mouseX, mouseY, delta)
+        textDisplay.render(context, mouseX, mouseY, delta)
     }
 
     override fun init() {
@@ -89,7 +94,7 @@ class TestScreen(
                     changePageOperation()
                 }
             )
-            previewPageBtn = addDrawableChild(
+            previousPageBtn = addDrawableChild(
                 ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 30, 20, 20) {
                     changePageOperation()
                 }
@@ -155,6 +160,37 @@ class TestScreen(
 
                 }
             }
+        }
+
+        pendingWidgetUpdates.add {
+
+            val operationsBtnPosition = Pair(
+                125, height - 30
+            )
+
+            savePageBtn = addDrawableChild(
+                TextImageButtonWidget(
+                    GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
+                    operationsBtnPosition.first,
+                    operationsBtnPosition.second,
+                    36, 20,
+                    textTranslatableInterpreter("gui.timaviciix_ebm.save_btn")
+                ) {
+                    saveData()
+                }
+            )
+
+            previewBtn = addDrawableChild(
+                TextImageButtonWidget(
+                    GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
+                    operationsBtnPosition.first + 70,
+                    operationsBtnPosition.second,
+                    36, 20,
+                    textTranslatableInterpreter("gui.timaviciix_ebm.previous_btn")
+                ) {
+                    //
+                }
+            )
 
         }
     }
@@ -164,6 +200,15 @@ class TestScreen(
             Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         } else {
             Text.literal(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+        }
+
+    }
+
+    private fun textTranslatableInterpreter(bufferString: String): Text {
+        return if (bufferString.isEmpty()) {
+            Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+        } else {
+            Text.translatable(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         }
 
     }

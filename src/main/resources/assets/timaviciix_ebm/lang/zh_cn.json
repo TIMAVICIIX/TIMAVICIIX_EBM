@@ -55,5 +55,9 @@
   "item.timaviciix_ebm.penguin_chestplate_desc": "宽松的玩偶服装",
   "item.timaviciix_ebm.penguin_leggings_desc": "可有可无的玩偶裤子(其目的是为了掩盖穿模的事实)",
   "item.timaviciix_ebm.penguin_boots_desc": "宽大的玩偶鞋，是模仿的企鹅脚掌",
-  "state.timaviciix_ebm.reading_state": "阅读中..."
+  "state.timaviciix_ebm.reading_state": "阅读中...",
+  "gui.timaviciix_ebm.book_name": "书名:",
+  "gui.timaviciix_ebm.book_author_name": "作者:",
+  "gui.timaviciix_ebm.save_btn": "保存",
+  "gui.timaviciix_ebm.previous_btn": "预览"
 }

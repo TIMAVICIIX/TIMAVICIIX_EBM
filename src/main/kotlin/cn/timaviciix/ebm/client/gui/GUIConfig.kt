@@ -31,6 +31,9 @@ object GUIConfig {
         val PREVIEW_BTN_WIDGET_HOVER_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/preview_btn_widget_hover.png")
 
+        val SHORT_TEXT_BTN_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID,"textures/gui/widget/btn/short_text_btn_widget.png")
+        val SHORT_TEXT_BTN_WIDGET_HOVER_TEXTURE = Identifier(GlobalData.MOD_ID,"textures/gui/widget/btn/hover/short_text_btn_widget_hover.png")
+
     }
 
     object Fonts {
@@ -100,6 +103,13 @@ object GUIConfig {
         0,0,20,20,
         20,20,
         hoverTexture = Textures.PREVIEW_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val SHORT_TEXT_BTN_TEXTURE_SET = BtnTextureConfig(
+        Textures.SHORT_TEXT_BTN_WIDGET_TEXTURE,
+        0,0,36,20,
+        36,20,
+        hoverTexture = Textures.SHORT_TEXT_BTN_WIDGET_HOVER_TEXTURE
     )
 
 }
