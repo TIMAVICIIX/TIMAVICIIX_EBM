@@ -265,3 +265,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.14
 #### 解决了文本渲染阴影问题，即将整合文本存储功能进行测试，后续将引入富文本解释器，引入滚轮、回车翻页功能
 
+## <br>2025.02.15
+#### 唉，头痛，最麻烦数据存取机制，正在开发，明天见！
+
