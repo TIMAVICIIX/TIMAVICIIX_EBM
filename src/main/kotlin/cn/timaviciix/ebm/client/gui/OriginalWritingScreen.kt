@@ -11,39 +11,48 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.client.gui.widgets.EditTextWidget
 import cn.timaviciix.ebm.client.gui.widgets.ImageButtonWidget
+import cn.timaviciix.ebm.client.gui.widgets.RandomTipsWidget
 import cn.timaviciix.ebm.client.gui.widgets.TextImageButtonWidget
 import cn.timaviciix.ebm.data.book.BookData
+import cn.timaviciix.ebm.data.book.BookData.Companion.save
+import cn.timaviciix.ebm.network.Packets
+import cn.timaviciix.ebm.registers.others.SoundRegister
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.ScrollableTextWidget
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 
 class OriginalWritingScreen(
     private val bookData: BookData,
-    private val openOperation: () -> Unit = {},
-    private val changePageOperation: () -> String? = { null },
-    private val saveOperation: () -> Unit = {},
-    private val closeOperation: () -> Unit = {}
-) : Screen(Text.literal("TIMAVICIIX_EBM:WRITING_GUI")) {
+    private val user: PlayerEntity,
+    private val stack: ItemStack
+) : BaseScreen(Text.literal("TIMAVICIIX_EBM:WRITING_GUI")) {
 
     private lateinit var closeBtn: ImageButtonWidget
     private lateinit var nextPageBtn: ImageButtonWidget
     private lateinit var previousPageBtn: ImageButtonWidget
+
+    private lateinit var tipsWidget: RandomTipsWidget
 
     private lateinit var savePageBtn: TextImageButtonWidget
     private lateinit var previewBtn: TextImageButtonWidget
 
     private lateinit var textDisplay: ScrollableTextWidget
     private lateinit var textField: EditTextWidget
+
     private var bufferFieldString = ""
+    private var currentPage = 1
 
     private val pendingWidgetUpdates = mutableListOf<() -> Unit>()
 
     init {
-        bufferFieldString = bookData.currentContent
-        openOperation()
+        val lastContent = bookData.getLastReadingContent()
+        bufferFieldString = lastContent.second
+        currentPage = lastContent.first
+        openOperations()
     }
 
     override fun shouldPause(): Boolean {
@@ -85,20 +94,35 @@ class OriginalWritingScreen(
         pendingWidgetUpdates.add {
             closeBtn = addDrawableChild(
                 ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 10, 20, 20) {
-                    saveOperation()
+                    doneOperations()
                     close()
                 }
             )
             nextPageBtn = addDrawableChild(
                 ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 30, 20, 20) {
-                    changePageOperation()
+                    changeOperations()
                 }
             )
             previousPageBtn = addDrawableChild(
                 ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 30, 20, 20) {
-                    changePageOperation()
+                    changeOperations()
                 }
             )
+        }
+
+        pendingWidgetUpdates.add {
+            tipsWidget = addDrawableChild(
+                RandomTipsWidget(
+                    GUIConfig.TIPS_WIDGET_TEXTURE_SET,
+                    textRenderer,
+                    25,
+                    height - 30,
+                    100,
+                    20,
+                    GUIConfig.TIPS_TEXT_SET.toList()
+                )
+            )
+
         }
 
         pendingWidgetUpdates.add {
@@ -165,25 +189,27 @@ class OriginalWritingScreen(
         pendingWidgetUpdates.add {
 
             val operationsBtnPosition = Pair(
-                125, height - 30
+                width - 41, height - 30
             )
 
             savePageBtn = addDrawableChild(
                 TextImageButtonWidget(
+                    textRenderer,
                     GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
                     operationsBtnPosition.first,
-                    operationsBtnPosition.second,
+                    operationsBtnPosition.second - 30,
                     36, 20,
                     textTranslatableInterpreter("gui.timaviciix_ebm.save_btn")
                 ) {
-                    saveData()
+                    doneOperations()
                 }
             )
 
             previewBtn = addDrawableChild(
                 TextImageButtonWidget(
+                    textRenderer,
                     GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
-                    operationsBtnPosition.first + 70,
+                    operationsBtnPosition.first,
                     operationsBtnPosition.second,
                     36, 20,
                     textTranslatableInterpreter("gui.timaviciix_ebm.previous_btn")
@@ -213,13 +239,29 @@ class OriginalWritingScreen(
 
     }
 
-    private fun saveData() {
-        saveOperation()
+    override fun openOperations() {
+        GUIConfig.BufferFromMixin.toggleMixin()
+        SoundRegister.BookSounds.playOpenSounds(user)
+        Packets.sendReadingPlayerUUid(user)
+    }
+
+    override fun changeOperations() {
+        SoundRegister.BookSounds.playUsingSounds(user)
+    }
+
+    override fun doneOperations() {
+        bookData.save(stack)
+    }
+
+    override fun closeOperations() {
+        GUIConfig.BufferFromMixin.toggleMixin()
+        SoundRegister.BookSounds.playCloseSounds(user)
+        Packets.sendReadingPlayerUUid(user)
     }
 
     override fun close() {
-        closeOperation()
-        super.close()
+        closeOperations()
         GUIConfig.BufferFromMixin.wrapLineCount = 1
+        super.close()
     }
 }

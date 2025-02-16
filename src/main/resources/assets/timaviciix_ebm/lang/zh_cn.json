@@ -59,5 +59,12 @@
   "gui.timaviciix_ebm.book_name": "书名:",
   "gui.timaviciix_ebm.book_author_name": "作者:",
   "gui.timaviciix_ebm.save_btn": "保存",
-  "gui.timaviciix_ebm.previous_btn": "预览"
+  "gui.timaviciix_ebm.previous_btn": "预览",
+  "tips.timaviciix_ebm.tips_desc_1": "点击我可以隐藏或出现~",
+  "tips.timaviciix_ebm.tips_desc_2": "每次编辑书本翻页后都会自动保存！",
+  "tips.timaviciix_ebm.tips_desc_3": "自动目录请使用“$chapter：”进行指定",
+  "tips.timaviciix_ebm.tips_desc_4": "编辑状态下，点击左上角名称进行书名修改",
+  "tips.timaviciix_ebm.tips_desc_5": "书中自有颜如玉，书中自有黄金屋",
+  "tips.timaviciix_ebm.tips_desc_6": "编辑状态下退出会自动保存哦~",
+  "tips.timaviciix_ebm.tips_desc_7": "关闭阅读会自动保存书签"
 }

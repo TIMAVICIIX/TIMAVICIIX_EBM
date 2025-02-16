@@ -19,6 +19,7 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
+@Deprecated("using Original Screen instead")
 class WritingScreen(
     private val openOperation: () -> Unit = {},
     private val changePageOperation: () -> String? = { null },

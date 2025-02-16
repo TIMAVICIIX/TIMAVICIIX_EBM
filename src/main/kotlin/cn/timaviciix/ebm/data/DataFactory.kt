@@ -15,26 +15,32 @@ import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.data.handler.NbtHandler
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
-import kotlinx.datetime.LocalDateTime
 import net.minecraft.nbt.NbtCompound
+import java.time.LocalDateTime
 
 object DataFactory {
 
     fun getOrCreateBookData(
         nbt: NbtCompound,
         playerName: String = "Unknown",
-        printInfo: Boolean = false
+        printInfo: Boolean = false,
     ): BookData {
         nbt.apply {
             val bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
+            val bookName = getString(BookDataConfig.BOOK_NAME_NBT_ID).ifBlank { "Unknown" }
             val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { playerName }
+            var lastReadingPage = getInt(BookDataConfig.BOOK_LAST_READING_PAGE_NBT_TAG)
+            if(lastReadingPage == 0){
+                lastReadingPage = 1
+            }
+
             val createDate = getString(BookDataConfig.BOOK_CREATE_DATE_NBT_ID).ifBlank {
                 GlobalData.LOGGER.info(
                     """
                     [Data Factory]Trying Create New Book Data Struct
                 """.trimIndent()
                 )
-                LocalDateTime.toString()
+                LocalDateTime.now().toString()
             }
             val bookNbtType = when (getInt(BookDataConfig.BOOK_ITEM_TYPE_NBT_ID)) {
                 0 -> {
@@ -59,32 +65,36 @@ object DataFactory {
             }
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
-            val bytesNbtChunks = NbtHandler.loadByteArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
+            val contents = NbtHandler.loadStringArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
+            val pageTags = NbtHandler.loadPageTagsFromNbt(this,BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
 
             if (printInfo) {
                 GlobalData.LOGGER.info(
                     """
                 [Data Factory]
                 BOOK ID:$bookId
+                BOOK NAME:$bookName
                 Author:$author
                 Create Date:$createDate
                 Book Nbt Type:${bookNbtType.backgroundAndStorageType}
                 Copy Permission:$copyPermission
-                Byte Nbt Chunks Size${bytesNbtChunks.size}
+                Contents Size:${contents.size}
+                Page Tags:$pageTags
                 """.trimIndent()
                 )
             }
 
-            return BookData(
+            return  BookData(
                 bookId = bookId,
+                bookName = bookName,
                 author = author,
                 createDate = createDate,
                 bookNbtType = bookNbtType,
                 copyPermission = copyPermission,
-                bytesNbtChunks = bytesNbtChunks
+                contents = contents,
+                pageTag = pageTags,
+                lastReadingPage = lastReadingPage
             )
-
-
         }
 
 

@@ -2,6 +2,8 @@ package cn.timaviciix.ebm.data.handler
 
 import cn.timaviciix.ebm.data.book.BookDataConfig
 import cn.timaviciix.ebm.data.book.CopyPermission
+import cn.timaviciix.ebm.util.CompressUtil.compressString
+import cn.timaviciix.ebm.util.CompressUtil.decompressString
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.nbt.NbtByteArray
 import net.minecraft.nbt.NbtCompound
@@ -12,16 +14,13 @@ import java.util.*
 object NbtHandler {
 
     //Save Nbt Methods
-    fun saveToNbt(
+    fun MutableList<String>.saveToNbt(
         nbt: NbtCompound,
-        nbtByteArray: MutableList<ByteArray>,
         contentId: String,
-        sizeId: String = contentId + "_size"
     ) {
         nbt.put(contentId, NbtList().apply {
-            nbtByteArray.forEach { add(NbtByteArray(it)) }
+            this@saveToNbt.forEach { add(NbtByteArray(compressString(it))) }
         })
-        nbt.putInt(sizeId, nbtByteArray.size)
     }
 
     fun CopyPermission.saveToNbt(nbt: NbtCompound) {
@@ -34,6 +33,11 @@ object NbtHandler {
                 }
             })
         }
+    }
+
+    fun Map<String, Int>.saveToNbt(nbt: NbtCompound, id: String) {
+        val serializedMap = this.entries.joinToString(",") { "${it.key}:${it.value}" }
+        nbt.putString(id, serializedMap)
     }
 
     fun Boolean.saveToNbt(nbt: NbtCompound, id: String) {
@@ -63,12 +67,26 @@ object NbtHandler {
         return CopyPermission.duplicateCopyPermission(stampingState, copyGrantees)
     }
 
-    fun loadByteArrayFromNbt(nbt: NbtCompound, contentId: String): MutableList<ByteArray> {
+    fun loadStringArrayFromNbt(nbt: NbtCompound, contentId: String): MutableList<String> {
         val listTag = nbt.get(contentId) as? NbtList ?: return mutableListOf()
 
         return listTag.mapNotNull { tag ->
-            (tag as? NbtByteArray)?.byteArray
+            (tag as? NbtByteArray)?.byteArray?.decompressString()
         }.toMutableList()
+    }
+
+    fun loadPageTagsFromNbt(nbt: NbtCompound, id: String): Map<String, Int> {
+        val map = mutableMapOf<String, Int>()
+        val serializedMap = nbt.getString(id)
+
+        if (serializedMap.isNotEmpty()) {
+            for (entry in serializedMap.split(",")) {
+                val (key, value) = entry.split(":")
+                map[key] = value.toInt()
+            }
+        }
+
+        return map
     }
 
 }

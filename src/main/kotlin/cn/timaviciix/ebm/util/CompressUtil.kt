@@ -19,7 +19,7 @@ import java.util.zip.GZIPOutputStream
 object CompressUtil {
 
     @Throws(IOException::class)
-    fun String.compressString(data: String): ByteArray {
+    fun compressString(data: String): ByteArray {
         return ByteArrayOutputStream().use { bos ->
             GZIPOutputStream(bos).bufferedWriter(StandardCharsets.UTF_8).use { writer ->
                 writer.write(data)

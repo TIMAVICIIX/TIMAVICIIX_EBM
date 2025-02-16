@@ -13,13 +13,6 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
 interface ScreenSetHandler {
-
-    fun playOpenSounds(user: PlayerEntity)
-
-    fun playUsingSounds(user: PlayerEntity)
-
-    fun playCloseSounds(user: PlayerEntity)
-
     fun setScreen(user: PlayerEntity, stack: ItemStack)
 
 }

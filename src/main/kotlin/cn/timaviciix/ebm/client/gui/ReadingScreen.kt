@@ -20,6 +20,7 @@ import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
 
 
+@Deprecated("using Original Screen instead")
 class ReadingScreen(
     private val openOperation: () -> Unit = {},
     private val changePageOperation: () -> String? = { null },

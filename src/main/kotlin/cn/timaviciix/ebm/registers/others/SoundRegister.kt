@@ -10,10 +10,15 @@
 package cn.timaviciix.ebm.registers.others
 
 import cn.timaviciix.ebm.util.GlobalData
+import net.minecraft.client.MinecraftClient
+import net.minecraft.client.sound.PositionedSoundInstance
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.random.Random
 import kotlin.reflect.KProperty
 
 object SoundRegister {
@@ -38,6 +43,55 @@ object SoundRegister {
         val targetSoundEvent = SoundEvent.of(Identifier(GlobalData.MOD_ID, soundId))
 
         return Registry.register(Registries.SOUND_EVENT, Identifier(GlobalData.MOD_ID, soundId), targetSoundEvent)
+
+    }
+
+    object BookSounds{
+
+        fun playOpenSounds(user: PlayerEntity) {
+            val volume = 5.0f
+            val pitch = 1.0f
+            MinecraftClient.getInstance().soundManager.play(
+                PositionedSoundInstance(
+                    TURNING_PAGE,
+                    SoundCategory.BLOCKS,
+                    volume,
+                    pitch,
+                    Random.create(),
+                    user.blockPos
+                )
+            )
+        }
+
+        fun playUsingSounds(user: PlayerEntity) {
+            val volume = 5.0f
+            val pitch = 1.0f
+            MinecraftClient.getInstance().soundManager.play(
+                PositionedSoundInstance(
+                    TURNING_PAGE,
+                    SoundCategory.BLOCKS,
+                    volume,
+                    pitch,
+                    Random.create(),
+                    user.blockPos
+                )
+            )
+        }
+
+        fun playCloseSounds(user: PlayerEntity) {
+            val volume = 5.0f
+            val pitch = 1.0f
+            MinecraftClient.getInstance().soundManager.play(
+                PositionedSoundInstance(
+                    BOOK_CLOSING,
+                    SoundCategory.BLOCKS,
+                    volume,
+                    pitch,
+                    Random.create(),
+                    user.blockPos
+                )
+            )
+        }
 
     }
 

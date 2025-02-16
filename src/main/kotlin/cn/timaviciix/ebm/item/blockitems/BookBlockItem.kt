@@ -9,26 +9,20 @@
 
 package cn.timaviciix.ebm.item.blockitems
 
-import cn.timaviciix.ebm.client.gui.GUIConfig
 import cn.timaviciix.ebm.client.gui.OriginalWritingScreen
 import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
 import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.handler.ScreenSetHandler
-import cn.timaviciix.ebm.network.Packets
-import cn.timaviciix.ebm.registers.others.SoundRegister
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
-import net.minecraft.sound.SoundCategory
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
-import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 
 class BookBlockItem(
@@ -49,103 +43,20 @@ class BookBlockItem(
     private lateinit var dataPackage: SealedDataPackage
     private lateinit var bookData: BookData
 
-    private fun ItemStack.loadCacheDataFromNbt(authorName: String) {
+    private fun ItemStack.loadCacheDataFromNbt(authorName: String, stamp: Boolean) {
         val nbt = this.orCreateNbt
-
         dataPackage = SealedDataPackage(
             SealedData.BookDataComponent(DataFactory.getOrCreateBookData(nbt, authorName, true))
         ).apply {
             bookData = get()
         }
+
     }
 
-    override fun playOpenSounds(user: PlayerEntity) {
-        val volume = 5.0f
-        val pitch = 1.0f
-        MinecraftClient.getInstance().soundManager.play(
-            PositionedSoundInstance(
-                SoundRegister.TURNING_PAGE,
-                SoundCategory.BLOCKS,
-                volume,
-                pitch,
-                Random.create(),
-                user.blockPos
-            )
-        )
-    }
-
-    override fun playUsingSounds(user: PlayerEntity) {
-        val volume = 5.0f
-        val pitch = 1.0f
-        MinecraftClient.getInstance().soundManager.play(
-            PositionedSoundInstance(
-                SoundRegister.TURNING_PAGE,
-                SoundCategory.BLOCKS,
-                volume,
-                pitch,
-                Random.create(),
-                user.blockPos
-            )
-        )
-    }
-
-    override fun playCloseSounds(user: PlayerEntity) {
-        val volume = 5.0f
-        val pitch = 1.0f
-        MinecraftClient.getInstance().soundManager.play(
-            PositionedSoundInstance(
-                SoundRegister.BOOK_CLOSING,
-                SoundCategory.BLOCKS,
-                volume,
-                pitch,
-                Random.create(),
-                user.blockPos
-            )
-        )
-    }
 
     override fun setScreen(user: PlayerEntity, stack: ItemStack) {
-        stack.loadCacheDataFromNbt(user.name.string)
-
-        val setOpenOperation = {
-            GUIConfig.BufferFromMixin.toggleMixin()
-            playOpenSounds(user)
-            Packets.sendReadingPlayerUUid(user)
-        }
-
-        val setChangeOperation = {
-            playUsingSounds(user)
-            bookData.currentContent
-        }
-
-        val setCloseOperation = {
-            GUIConfig.BufferFromMixin.toggleMixin()
-            playCloseSounds(user)
-            Packets.sendReadingPlayerUUid(user)
-        }
-
-        if (bookData.copyPermission.getStampingState()) {
-            MinecraftClient.getInstance().setScreen(
-                OriginalWritingScreen(
-                    bookData,
-                    openOperation = setOpenOperation,
-                    changePageOperation = setChangeOperation,
-                    closeOperation = setCloseOperation
-                )
-            )
-        } else {
-            MinecraftClient.getInstance().setScreen(
-                OriginalWritingScreen(
-                    bookData,
-                    openOperation = setOpenOperation,
-                    changePageOperation = setChangeOperation,
-                    closeOperation = setCloseOperation,
-                    saveOperation = {
-                        bookData.save(stack)
-                    }
-                ))
-        }
-
+        stack.loadCacheDataFromNbt(user.name.string, true)
+        MinecraftClient.getInstance().setScreen(OriginalWritingScreen(bookData, user, stack))
     }
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {

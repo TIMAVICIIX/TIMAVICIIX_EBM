@@ -2,6 +2,7 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
 import cn.timaviciix.ebm.util.GlobalData.LOGGER
+import com.google.common.math.IntMath
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
@@ -31,13 +32,30 @@ object GUIConfig {
         val PREVIEW_BTN_WIDGET_HOVER_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/preview_btn_widget_hover.png")
 
-        val SHORT_TEXT_BTN_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID,"textures/gui/widget/btn/short_text_btn_widget.png")
-        val SHORT_TEXT_BTN_WIDGET_HOVER_TEXTURE = Identifier(GlobalData.MOD_ID,"textures/gui/widget/btn/hover/short_text_btn_widget_hover.png")
+        val SHORT_TEXT_BTN_WIDGET_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/short_text_btn_widget.png")
+        val SHORT_TEXT_BTN_WIDGET_HOVER_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/short_text_btn_widget_hover.png")
 
+        val TIPS_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/tips_widget.png")
+
+        val TITLE_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/title_widget.png")
+
+        val READ_LEVEL_WIDGET_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/read_level_widget.png")
+
+        val WRITE_LEVEL_WIDGET_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "texture/gui/widget/component/write_level_widget.png")
     }
 
     object Fonts {
         val BOOK_FONT = Identifier(GlobalData.MOD_ID, "large_reading")
+    }
+
+    val TIPS_TEXT_SET = mutableSetOf<Text>().apply {
+        for (i in 1..7) {
+            add(Text.translatable("tips.timaviciix_ebm.tips_desc_$i"))
+        }
     }
 
     object BufferFromMixin {
@@ -49,7 +67,7 @@ object GUIConfig {
         }
 
         var screenMixinLaunch = false
-        fun toggleMixin(){
+        fun toggleMixin() {
             screenMixinLaunch = screenMixinLaunch != true
         }
     }
@@ -76,6 +94,12 @@ object GUIConfig {
         val pressTexture: Identifier = normalTexture,
     )
 
+    data class NineBlockTextureConfig(
+        val texture: Identifier,
+        val u: Int,
+        val v: Int
+    )
+
     val READING_GUI_TEXTURE_SET = NormalTextureConfig(
         Textures.READING_WRITING_GUI_TEXTURE,
         0, 0,
@@ -93,23 +117,30 @@ object GUIConfig {
 
     val NEXT_BUTTON_TEXTURE_SET = BtnTextureConfig(
         Textures.NEXT_BTN_WIDGET_TEXTURE,
-        0,0,20,20,
-        20,20,
+        0, 0, 20, 20,
+        20, 20,
         hoverTexture = Textures.NEXT_BTN_WIDGET_HOVER_TEXTURE
     )
 
     val PREVIEW_BUTTON_TEXTURE_SET = BtnTextureConfig(
         Textures.PREVIEW_BTN_WIDGET_TEXTURE,
-        0,0,20,20,
-        20,20,
+        0, 0, 20, 20,
+        20, 20,
         hoverTexture = Textures.PREVIEW_BTN_WIDGET_HOVER_TEXTURE
     )
 
     val SHORT_TEXT_BTN_TEXTURE_SET = BtnTextureConfig(
         Textures.SHORT_TEXT_BTN_WIDGET_TEXTURE,
-        0,0,36,20,
-        36,20,
+        0, 0, 36, 20,
+        36, 20,
         hoverTexture = Textures.SHORT_TEXT_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val TIPS_WIDGET_TEXTURE_SET = NormalTextureConfig(
+        Textures.TIPS_WIDGET_TEXTURE,
+        0, 0,
+        12, 16,
+        12, 16
     )
 
 }
