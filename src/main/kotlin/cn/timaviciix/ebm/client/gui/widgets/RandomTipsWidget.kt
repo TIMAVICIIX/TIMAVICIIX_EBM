@@ -30,7 +30,6 @@ class RandomTipsWidget(
     private var checkTick = 0
     private var currentText = textSetList.random()
 
-
     override fun renderButton(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         if (checkTick >= 2000) {
             checkTick = 0

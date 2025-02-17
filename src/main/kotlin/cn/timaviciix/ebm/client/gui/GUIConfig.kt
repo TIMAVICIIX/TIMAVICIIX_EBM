@@ -2,7 +2,6 @@ package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
 import cn.timaviciix.ebm.util.GlobalData.LOGGER
-import com.google.common.math.IntMath
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
@@ -11,6 +10,7 @@ import kotlin.properties.Delegates
 object GUIConfig {
 
     val blackTextColor4: TextColor = TextColor.fromRgb(0x444444)
+    val blackTextColorPure: TextColor = TextColor.fromRgb(0x000000)
 
     data class BtnTextureSets(
         val normalTexture: Identifier
@@ -70,6 +70,7 @@ object GUIConfig {
         fun toggleMixin() {
             screenMixinLaunch = screenMixinLaunch != true
         }
+
     }
 
     data class NormalTextureConfig(
@@ -94,10 +95,14 @@ object GUIConfig {
         val pressTexture: Identifier = normalTexture,
     )
 
-    data class NineBlockTextureConfig(
+    data class ThreePatchTextureConfig(
         val texture: Identifier,
         val u: Int,
-        val v: Int
+        val v: Int,
+        val textureWidth: Int,
+        val textureHeight: Int,
+        val sideWidth: Int,
+        val middleOffset: Int
     )
 
     val READING_GUI_TEXTURE_SET = NormalTextureConfig(
@@ -141,6 +146,13 @@ object GUIConfig {
         0, 0,
         12, 16,
         12, 16
+    )
+
+    val TITLE_THREE_PATCH_TEXTURE_SET = ThreePatchTextureConfig(
+        Textures.TITLE_WIDGET_TEXTURE,
+        0, 0,
+        91, 20,
+        14, 63
     )
 
 }

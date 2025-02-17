@@ -12,6 +12,7 @@
     "EditBoxEditCutBackgroundBoxMixin",
     "EditBoxWidgetGetLinesMixin",
     "EditBoxWidgetTextColorMixin",
-    "ReadStateMixin"
+    "ReadStateMixin",
+    "TitleTextFieldWidgetMixin"
   ]
 }
