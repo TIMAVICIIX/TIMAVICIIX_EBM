@@ -273,3 +273,6 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ## <br>2025.02.17
 #### 正在着手解决渲染BUG。
+
+## <br>2025.02.18
+#### 渲染BUG解决，可能开发进度要变慢了，优先做毕设！

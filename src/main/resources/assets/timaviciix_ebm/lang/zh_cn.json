@@ -66,5 +66,7 @@
   "tips.timaviciix_ebm.tips_desc_4": "编辑状态下，点击左上角名称进行书名修改",
   "tips.timaviciix_ebm.tips_desc_5": "书中自有颜如玉，书中自有黄金屋",
   "tips.timaviciix_ebm.tips_desc_6": "编辑状态下退出会自动保存哦~",
-  "tips.timaviciix_ebm.tips_desc_7": "关闭阅读会自动保存书签"
+  "tips.timaviciix_ebm.tips_desc_7": "关闭阅读会自动保存书签",
+  "data.timaviciix_ebm.book_name_unknown": "未命名",
+  "data.timaviciix_ebm.author_name_unknown": "佚名"
 }

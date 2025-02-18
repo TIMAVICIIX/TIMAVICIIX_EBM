@@ -3,7 +3,7 @@
  *@BelongsPackage: cn.timaviciix.ebm.client.gui.widgets
  *@Author: TIMAVICIIX
  *@CreateTime: 2025-02-17  14:14
- *@Description: TODO
+ *@Description: 左中右三宫格背景渲染TextField
  *@Version: 1.0
  */
 
@@ -24,14 +24,14 @@ class ThreePatchHorizontalFieldWidget(
     private val positionY: Int,
     private val widgetWidth: Int,
     private val widgetHeight: Int,
+    private val bufferStringChecker: (String) -> Unit = {},
     private val widgetEditable: Boolean = false,
     private val text: Text = Text.empty()
-) : TextFieldWidget(textRenderer, positionX, positionY, widgetWidth, widgetHeight, text) {
-
+) : TextFieldWidget(textRenderer, positionX + textureConfig.sideWidth, positionY, widgetWidth, widgetHeight, text) {
     init {
         setEditableColor(GUIConfig.blackTextColor4.rgb)
         setUneditableColor(GUIConfig.blackTextColorPure.rgb)
-        setEditable(widgetEditable)
+        setEditable(false)
     }
 
     override fun drawTexture(
@@ -52,6 +52,8 @@ class ThreePatchHorizontalFieldWidget(
         } else {
             textRenderer.getWidth(getText())
         }
+
+
         RenderSystem.enableDepthTest()
         //Background Part1 Renderer
         context!!.drawTexture(
@@ -102,10 +104,27 @@ class ThreePatchHorizontalFieldWidget(
         super.setDrawsBackground(false)
     }
 
-    fun onScreenClick(mouseX: Double, mouseY: Double) {
+    override fun onClick(mouseX: Double, mouseY: Double) {
         if (widgetEditable) {
+            setEditable(true)
+            super.onClick(mouseX, mouseY)
+        }
+    }
+
+    override fun setFocused(focused: Boolean) {
+        if (!focused && getText().isEmpty()) {
+            bufferStringChecker(Text.translatable("data.timaviciix_ebm.book_name_unknown").string)
+            setText(Text.translatable("data.timaviciix_ebm.book_name_unknown").string)
+        }
+        super.setFocused(focused)
+    }
+
+
+    fun onScreenClick(mouseX: Double, mouseY: Double) {
+        if (this.isFocused) {
             if (mouseX < x || mouseY < y || mouseX > widgetWidth + x || mouseY > widgetHeight + y) {
                 this.isFocused = false
+                setEditable(false)
             }
         }
     }
@@ -113,6 +132,7 @@ class ThreePatchHorizontalFieldWidget(
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
         if (keyCode == 257 || keyCode == 335) {
             this.isFocused = false
+            setEditable(false)
         }
         return super.keyPressed(keyCode, scanCode, modifiers)
     }

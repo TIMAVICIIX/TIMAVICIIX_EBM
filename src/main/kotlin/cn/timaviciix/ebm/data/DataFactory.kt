@@ -16,21 +16,23 @@ import cn.timaviciix.ebm.data.handler.NbtHandler
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.text.Text
 import java.time.LocalDateTime
 
 object DataFactory {
 
     fun getOrCreateBookData(
         nbt: NbtCompound,
-        playerName: String = "Unknown",
+        playerName: String = Text.translatable("data.timaviciix_ebm.author_name_unknown").string,
         printInfo: Boolean = false,
     ): BookData {
         nbt.apply {
             val bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
-            val bookName = getString(BookDataConfig.BOOK_NAME_NBT_ID).ifBlank { "Unknown" }
+            val bookName =
+                getString(BookDataConfig.BOOK_NAME_NBT_ID).ifBlank { Text.translatable("data.timaviciix_ebm.book_name_unknown").string }
             val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { playerName }
             var lastReadingPage = getInt(BookDataConfig.BOOK_LAST_READING_PAGE_NBT_TAG)
-            if(lastReadingPage == 0){
+            if (lastReadingPage == 0) {
                 lastReadingPage = 1
             }
 
@@ -66,7 +68,7 @@ object DataFactory {
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
             val contents = NbtHandler.loadStringArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
-            val pageTags = NbtHandler.loadPageTagsFromNbt(this,BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
+            val pageTags = NbtHandler.loadPageTagsFromNbt(this, BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
 
             if (printInfo) {
                 GlobalData.LOGGER.info(
@@ -84,7 +86,7 @@ object DataFactory {
                 )
             }
 
-            return  BookData(
+            return BookData(
                 bookId = bookId,
                 bookName = bookName,
                 author = author,

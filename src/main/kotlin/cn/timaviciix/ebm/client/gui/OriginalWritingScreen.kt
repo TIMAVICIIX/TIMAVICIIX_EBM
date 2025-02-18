@@ -14,6 +14,7 @@ import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.book.BookData.Companion.save
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.registers.others.SoundRegister
+import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.widget.ScrollableTextWidget
@@ -21,6 +22,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
+import kotlin.properties.Delegates
 
 class OriginalWritingScreen(
     private val bookData: BookData,
@@ -32,20 +34,19 @@ class OriginalWritingScreen(
     private lateinit var nextPageBtn: ImageButtonWidget
     private lateinit var previousPageBtn: ImageButtonWidget
 
-    private lateinit var titleTextWidget: ThreePatchHorizontalFieldWidget
+    private lateinit var bookNameTextWidget: ThreePatchHorizontalFieldWidget
     private lateinit var tipsWidget: RandomTipsWidget
 
     private lateinit var savePageBtn: TextImageButtonWidget
     private lateinit var previewBtn: TextImageButtonWidget
 
-    private lateinit var textDisplay: ScrollableTextWidget
-    private lateinit var textField: EditTextWidget
+    private lateinit var textContentDisplayWidget: ScrollableTextWidget
+    private lateinit var textContentFieldWidget: EditTextWidget
 
     private var bufferTitleFieldString = ""
     private var bufferFieldString = ""
     private var currentPage = 1
 
-    private val pendingWidgetUpdates = mutableListOf<() -> Unit>()
 
     init {
         bufferTitleFieldString = bookData.bookName
@@ -59,18 +60,16 @@ class OriginalWritingScreen(
         return false
     }
 
-    override fun renderBackground(context: DrawContext?) {
-        super.renderBackground(context)
-    }
 
     override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
-        super.renderBackground(context)
-        super.render(context, mouseX, mouseY, 0.4f)
+        this.renderBackground(context)
         context?.let {
             GUIConfig.READING_GUI_TEXTURE_SET.apply {
+                val x1 = (width - sizeWidth) / 2
+                val y1 = (height - sizeHeight) / 2 + 5
                 it.drawTexture(
                     texture,
-                    (width - sizeWidth) / 2, (height - sizeHeight) / 2 + 5,
+                    x1, y1,
                     u.toFloat(), v.toFloat(),
                     sizeWidth, sizeHeight,
                     textureWidth, textureHeight
@@ -78,171 +77,159 @@ class OriginalWritingScreen(
             }
         }
 
-        //@Imp: Execute
-        for (update in pendingWidgetUpdates) {
-            update()
-        }
-        pendingWidgetUpdates.clear()
-
-        //Render Components Again!
-        tipsWidget.render(context,mouseX,mouseY,delta)
-        textField.render(context, mouseX, mouseY, delta)
-        textDisplay.render(context, mouseX, mouseY, delta)
+        super.render(context, mouseX, mouseY, delta)
     }
 
     override fun init() {
-        //@Imp: Make sure to do the following after render()
-        pendingWidgetUpdates.add {
-            closeBtn = addDrawableChild(
-                ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 5, 20, 20) {
-                    doneOperations()
-                    close()
-                }
-            )
-            nextPageBtn = addDrawableChild(
-                ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 25, 20, 20) {
-                    changeOperations()
-                }
-            )
-            previousPageBtn = addDrawableChild(
-                ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 25, 20, 20) {
-                    changeOperations()
-                }
-            )
-        }
+        closeBtn = addDrawableChild(
+            ImageButtonWidget(GUIConfig.CLOSE_BUTTON_TEXTURE_SET, width - 25, 5, 20, 20) {
+                doneOperations()
+                close()
+            }
+        )
 
-        pendingWidgetUpdates.add {
-            titleTextWidget = addDrawableChild(
-                ThreePatchHorizontalFieldWidget(
-                    GUIConfig.TITLE_THREE_PATCH_TEXTURE_SET,
-                    textRenderer,
-                    10, 5, width - 100, 20,
-                    true,
-                    textInterpreter(bufferTitleFieldString)
-                )
-            )
+        nextPageBtn = addDrawableChild(
+            ImageButtonWidget(GUIConfig.NEXT_BUTTON_TEXTURE_SET, width - 125, height - 25, 20, 20) {
+                changeOperations()
+            }
+        )
 
-            tipsWidget = addDrawableChild(
-                RandomTipsWidget(
-                    GUIConfig.TIPS_WIDGET_TEXTURE_SET,
-                    textRenderer,
-                    25,
-                    height - 25,
-                    100,
-                    20,
-                    GUIConfig.TIPS_TEXT_SET.toList()
-                )
-            )
+        previousPageBtn = addDrawableChild(
+            ImageButtonWidget(GUIConfig.PREVIEW_BUTTON_TEXTURE_SET, width - 155, height - 25, 20, 20) {
+                changeOperations()
+            }
+        )
 
-        }
-
-        pendingWidgetUpdates.add {
-            val displayTextPosition = Pair(
-                (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 22,
-                (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 21
-            )
-            textDisplay = addDrawableChild(
-                ScrollableTextWidget(
-                    displayTextPosition.first,
-                    displayTextPosition.second,
-                    116, 170,
-                    textInterpreter(bufferFieldString),
-                    textRenderer
-                )
-            )
-
-
-            val textFieldPosition = Pair(
-                ((width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2) + 136,
-                ((height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2) + 17
-            )
-
-            textField = addDrawableChild(
-                EditTextWidget(
-                    textRenderer,
-                    textFieldPosition.first, textFieldPosition.second,
-                    116, 170
-                ).apply {
-                    text = bufferFieldString
-                    setChangeListener {
-                        bufferFieldString = it
-
-
-
-                        remove(textDisplay)
-                        textDisplay = addDrawableChild(
-                            ScrollableTextWidget(
-                                displayTextPosition.first,
-                                displayTextPosition.second,
-                                116, 170,
-                                textInterpreter(bufferFieldString),
-                                textRenderer
-                            )
-                        )
-                    }
-
-
-                }
+        bookNameTextWidget = addDrawableChild(
+            ThreePatchHorizontalFieldWidget(
+                GUIConfig.TITLE_THREE_PATCH_TEXTURE_SET,
+                textRenderer,
+                10, 5, width - 100, 20,
+                bufferStringChecker = {
+                  bufferTitleFieldString= it
+                },
+                true,
+                textInterpreter(bufferTitleFieldString,true)
             ).apply {
-                GUIConfig.BufferFromMixin.listener = { newValue ->
-                    if (newValue > maxLines) {
-                        val newText = text.substring(0, text.length - 1)
-                        MinecraftClient.getInstance().execute {
-                            text = newText
-                        }
-                        bufferFieldString = newText
-                    }
-
+                setChangedListener {
+                    bufferTitleFieldString = it
                 }
+            }.also {
+                it.text = bufferTitleFieldString
+            }
+        )
+
+        tipsWidget = addDrawableChild(
+            RandomTipsWidget(
+                GUIConfig.TIPS_WIDGET_TEXTURE_SET,
+                textRenderer,
+                25,
+                height - 25,
+                100,
+                20,
+                GUIConfig.TIPS_TEXT_SET.toList()
+            )
+        )
+
+
+        val displayTextPosition = Pair(
+            (width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2 + 22,
+            (height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2 + 21
+        )
+        textContentDisplayWidget = addDrawableChild(
+            ScrollableTextWidget(
+                displayTextPosition.first,
+                displayTextPosition.second,
+                116, 170,
+                textInterpreter(bufferFieldString),
+                textRenderer
+            )
+        )
+
+
+        val textFieldPosition = Pair(
+            ((width - GUIConfig.READING_GUI_TEXTURE_SET.sizeWidth) / 2) + 136,
+            ((height - GUIConfig.READING_GUI_TEXTURE_SET.sizeHeight) / 2) + 17
+        )
+        textContentFieldWidget = addDrawableChild(
+            EditTextWidget(
+                textRenderer,
+                textFieldPosition.first, textFieldPosition.second,
+                116, 170
+            ).apply {
+                text = bufferFieldString
+                setChangeListener {
+                    bufferFieldString = it
+
+                    remove(textContentDisplayWidget)
+                    textContentDisplayWidget = addDrawableChild(
+                        ScrollableTextWidget(
+                            displayTextPosition.first,
+                            displayTextPosition.second,
+                            116, 170,
+                            textInterpreter(bufferFieldString),
+                            textRenderer
+                        )
+                    )
+                }
+            }
+        ).apply {
+            GUIConfig.BufferFromMixin.listener = { newValue ->
+                if (newValue > maxLines) {
+                    val newText = text.substring(0, text.length - 1)
+                    MinecraftClient.getInstance().execute {
+                        text = newText
+                    }
+                    bufferFieldString = newText
+                }
+
             }
         }
 
-        pendingWidgetUpdates.add {
+        val operationsBtnPosition = Pair(
+            width - 41, height - 25
+        )
+        savePageBtn = addDrawableChild(
+            TextImageButtonWidget(
+                textRenderer,
+                GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
+                operationsBtnPosition.first,
+                operationsBtnPosition.second - 30,
+                36, 20,
+                textTranslatableInterpreter(
+                    "gui.timaviciix_ebm.save_btn",
+                    Style.EMPTY.withBold(true).withColor(GUIConfig.blackTextColor4)
+                )
+            ) {
+                doneOperations()
+            }
+        )
+        previewBtn = addDrawableChild(
+            TextImageButtonWidget(
+                textRenderer,
+                GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
+                operationsBtnPosition.first,
+                operationsBtnPosition.second,
+                36, 20,
+                textTranslatableInterpreter(
+                    "gui.timaviciix_ebm.previous_btn",
+                    Style.EMPTY.withBold(true).withColor(GUIConfig.blackTextColor4)
+                )
+            ) {
+                //
+            }
+        )
 
-            val operationsBtnPosition = Pair(
-                width - 41, height - 25
-            )
-
-            savePageBtn = addDrawableChild(
-                TextImageButtonWidget(
-                    textRenderer,
-                    GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
-                    operationsBtnPosition.first,
-                    operationsBtnPosition.second - 30,
-                    36, 20,
-                    textTranslatableInterpreter(
-                        "gui.timaviciix_ebm.save_btn",
-                        Style.EMPTY.withBold(true).withColor(GUIConfig.blackTextColor4)
-                    )
-                ) {
-                    doneOperations()
-                }
-            )
-
-            previewBtn = addDrawableChild(
-                TextImageButtonWidget(
-                    textRenderer,
-                    GUIConfig.SHORT_TEXT_BTN_TEXTURE_SET,
-                    operationsBtnPosition.first,
-                    operationsBtnPosition.second,
-                    36, 20,
-                    textTranslatableInterpreter(
-                        "gui.timaviciix_ebm.previous_btn",
-                        Style.EMPTY.withBold(true).withColor(GUIConfig.blackTextColor4)
-                    )
-                ) {
-                    //
-                }
-            )
-
-        }
     }
 
-    private fun textInterpreter(bufferString: String): Text {
+    private fun textInterpreter(bufferString: String, withBold: Boolean = false): Text {
         return if (bufferString.isEmpty()) {
-            Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+            if (withBold) Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4).withBold(true))
+            else Text.empty().setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         } else {
-            Text.literal(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
+            if (withBold) Text.literal(bufferString)
+                .setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4).withBold(true))
+            else Text.literal(bufferString).setStyle(Style.EMPTY.withColor(GUIConfig.blackTextColor4))
         }
 
     }
@@ -262,7 +249,7 @@ class OriginalWritingScreen(
 
     //@Imp: Change Title Widget State
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        titleTextWidget.onScreenClick(mouseX, mouseY)
+        bookNameTextWidget.onScreenClick(mouseX, mouseY)
         return super.mouseClicked(mouseX, mouseY, button)
     }
 

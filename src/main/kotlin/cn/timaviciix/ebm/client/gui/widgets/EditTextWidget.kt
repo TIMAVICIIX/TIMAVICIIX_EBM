@@ -11,8 +11,10 @@ package cn.timaviciix.ebm.client.gui.widgets
 
 import cn.timaviciix.ebm.client.gui.GUIConfig
 import cn.timaviciix.ebm.util.GlobalData
+import net.minecraft.SharedConstants
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
-import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.EditBoxWidget
 import net.minecraft.text.Text
 
@@ -43,7 +45,7 @@ class EditTextWidget(
             //GlobalData.LOGGER.info("[keyPressed]Can't Type More Chars!!!")
             //GlobalData.LOGGER.info("Now Text:$text")
             false
-        } else if (GUIConfig.BufferFromMixin.wrapLineCount == maxLines && (keyCode == 257 || keyCode == 335) &&isFocused) {
+        } else if (GUIConfig.BufferFromMixin.wrapLineCount == maxLines && (keyCode == 257 || keyCode == 335) && isFocused) {
             //GlobalData.LOGGER.info("[keyPressed]Can't Type More Chars!!!")
             //GlobalData.LOGGER.info("Now Text:$text")
             false

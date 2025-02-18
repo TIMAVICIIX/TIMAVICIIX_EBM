@@ -2,7 +2,7 @@
  * @desc : 通过Mixin添加玩家阅读状态,下述代码由DeepSeek生成
  */
 
-package cn.timaviciix.ebm.mixin;
+package cn.timaviciix.ebm.mixin.network;
 
 import cn.timaviciix.ebm.network.BufferBus;
 import net.minecraft.client.MinecraftClient;

@@ -66,5 +66,7 @@
   "tips.timaviciix_ebm.tips_desc_4": "In editing mode, click the title in the top-left corner to change the book's name.",
   "tips.timaviciix_ebm.tips_desc_5": "Between the pages await wealth untold; Within the lines dwell beauties of old.",
   "tips.timaviciix_ebm.tips_desc_6": "Exiting editing mode will automatically save your changes~.",
-  "tips.timaviciix_ebm.tips_desc_7": "Closing the reader will automatically save your bookmark."
+  "tips.timaviciix_ebm.tips_desc_7": "Closing the reader will automatically save your bookmark.",
+  "data.timaviciix_ebm.book_name_unknown": "Unnamed Book",
+  "data.timaviciix_ebm.author_name_unknown": "Unknown Author"
 }

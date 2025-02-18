@@ -1,4 +1,4 @@
-package cn.timaviciix.ebm.mixin;
+package cn.timaviciix.ebm.mixin.gui;
 
 
 import cn.timaviciix.ebm.client.gui.GUIConfig;

@@ -8,11 +8,11 @@
     "defaultRequire": 1
   },
   "client": [
-    "DisplayBoxMixin",
-    "EditBoxEditCutBackgroundBoxMixin",
-    "EditBoxWidgetGetLinesMixin",
-    "EditBoxWidgetTextColorMixin",
-    "ReadStateMixin",
-    "TitleTextFieldWidgetMixin"
+    "gui.DisplayBoxMixin",
+    "gui.EditBoxEditCutBackgroundBoxMixin",
+    "gui.EditBoxWidgetGetLinesMixin",
+    "gui.EditBoxWidgetTextColorMixin",
+    "gui.TitleTextFieldWidgetMixin",
+    "network.ReadStateMixin"
   ]
 }
