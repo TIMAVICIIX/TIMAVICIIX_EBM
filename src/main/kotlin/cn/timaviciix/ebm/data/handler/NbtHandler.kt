@@ -67,12 +67,17 @@ object NbtHandler {
         return CopyPermission.duplicateCopyPermission(stampingState, copyGrantees)
     }
 
-    fun loadStringArrayFromNbt(nbt: NbtCompound, contentId: String): MutableList<String> {
-        val listTag = nbt.get(contentId) as? NbtList ?: return mutableListOf()
+    fun loadStringMapFromNbt(nbt: NbtCompound, contentId: String): MutableMap<Int, String> {
+        val listTag = nbt.get(contentId) as? NbtList ?: return mutableMapOf()
 
-        return listTag.mapNotNull { tag ->
-            (tag as? NbtByteArray)?.byteArray?.decompressString()
-        }.toMutableList()
+        listTag.let {
+            return mutableMapOf<Int, String>().apply {
+                for ((index, element) in it.withIndex()) {
+                    val stringContent = (element as? NbtByteArray)?.byteArray?.decompressString()
+                    stringContent?.let { this[index] = stringContent }
+                }
+            }
+        }
     }
 
     fun loadPageTagsFromNbt(nbt: NbtCompound, id: String): Map<String, Int> {

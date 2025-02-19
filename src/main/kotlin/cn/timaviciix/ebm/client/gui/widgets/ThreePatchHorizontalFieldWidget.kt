@@ -24,6 +24,7 @@ class ThreePatchHorizontalFieldWidget(
     private val positionY: Int,
     private val widgetWidth: Int,
     private val widgetHeight: Int,
+    private val checkSaveOperation: () -> Unit,
     private val bufferStringChecker: (String) -> Unit = {},
     private val widgetEditable: Boolean = false,
     private val text: Text = Text.empty()
@@ -123,16 +124,14 @@ class ThreePatchHorizontalFieldWidget(
     fun onScreenClick(mouseX: Double, mouseY: Double) {
         if (this.isFocused) {
             if (mouseX < x || mouseY < y || mouseX > widgetWidth + x || mouseY > widgetHeight + y) {
-                this.isFocused = false
-                setEditable(false)
+                saveBus()
             }
         }
     }
 
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
         if (keyCode == 257 || keyCode == 335) {
-            this.isFocused = false
-            setEditable(false)
+            saveBus()
         }
         return super.keyPressed(keyCode, scanCode, modifiers)
     }
@@ -156,5 +155,11 @@ class ThreePatchHorizontalFieldWidget(
         super.renderButton(context, mouseX, mouseY, delta)
     }
 
+
+    private fun saveBus(){
+        this.isFocused = false
+        setEditable(false)
+        checkSaveOperation()
+    }
 
 }

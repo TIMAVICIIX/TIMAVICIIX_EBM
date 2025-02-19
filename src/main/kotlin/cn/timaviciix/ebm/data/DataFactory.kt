@@ -67,7 +67,7 @@ object DataFactory {
             }
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
-            val contents = NbtHandler.loadStringArrayFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
+            val contents = NbtHandler.loadStringMapFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
             val pageTags = NbtHandler.loadPageTagsFromNbt(this, BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
 
             if (printInfo) {

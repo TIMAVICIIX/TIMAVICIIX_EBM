@@ -21,7 +21,7 @@ open class BookData(
     var copyPermission: CopyPermission,
     var pageTag: Map<String, Int>,
     var lastReadingPage: Int,
-    private var contents: MutableList<String>,
+    var contents: MutableMap<Int, String>,
 ) {
 
     val maxCharCount = bookNbtType.maxPage * bookNbtType.charsPerPage
@@ -30,14 +30,14 @@ open class BookData(
     fun getContentMaxPage(): Int = contents.size
     fun getLastReadingContent(): Pair<Int, String> {
         if (contents.size > lastReadingPage) {
-            for (i in contents.reversed()) {
-                if (i.isNotEmpty()) return Pair(contents.indexOf(i), i)
+            for (i in contents.toList().reversed()) {
+                if (i.second.isNotEmpty()) return i
             }
             return Pair(1, "")
-        } else if (contents.size == 0) {
+        } else if (contents.isEmpty()) {
             return Pair(1, "")
         } else {
-            return Pair(lastReadingPage, contents[lastReadingPage - 1])
+            return contents.toList()[contents.size - 1]
         }
     }
 
@@ -52,7 +52,7 @@ open class BookData(
                     this@save.author.saveToNbt(it, BOOK_AUTHOR_NBT_ID)
                     this@save.createDate.saveToNbt(it, BOOK_CREATE_DATE_NBT_ID)
                     this@save.bookNbtType.backgroundAndStorageType.saveToNbt(it, BOOK_ITEM_TYPE_NBT_ID)
-                    this@save.contents.saveToNbt(it, BOOK_CONTENT_NBT_ID)
+                    this@save.contents.values.toMutableList().saveToNbt(it, BOOK_CONTENT_NBT_ID)
                     this@save.copyPermission.saveToNbt(it)
                     this@save.pageTag.saveToNbt(it, BOOK_PAGE_TAG_NBT_ID)
 

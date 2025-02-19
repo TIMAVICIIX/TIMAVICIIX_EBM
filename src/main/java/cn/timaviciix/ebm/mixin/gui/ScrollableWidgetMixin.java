@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ScrollableWidget.class)
-public abstract class EditBoxEditCutBackgroundBoxMixin {
+public abstract class ScrollableWidgetMixin {
 
     @Inject(method = "drawBox(Lnet/minecraft/client/gui/DrawContext;)V", at = @At("HEAD"), cancellable = true)
     private void drawBoxInject1(DrawContext context, CallbackInfo ci) {

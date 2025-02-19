@@ -9,9 +9,8 @@
   },
   "client": [
     "gui.DisplayBoxMixin",
-    "gui.EditBoxEditCutBackgroundBoxMixin",
-    "gui.EditBoxWidgetGetLinesMixin",
     "gui.EditBoxWidgetTextColorMixin",
+    "gui.ScrollableWidgetMixin",
     "gui.TitleTextFieldWidgetMixin",
     "network.ReadStateMixin"
   ]

@@ -14,15 +14,12 @@ import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.book.BookData.Companion.save
 import cn.timaviciix.ebm.network.Packets
 import cn.timaviciix.ebm.registers.others.SoundRegister
-import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.widget.ScrollableTextWidget
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
-import kotlin.properties.Delegates
 
 class OriginalWritingScreen(
     private val bookData: BookData,
@@ -43,8 +40,9 @@ class OriginalWritingScreen(
     private lateinit var textContentDisplayWidget: ScrollableTextWidget
     private lateinit var textContentFieldWidget: EditTextWidget
 
-    private var bufferTitleFieldString = ""
-    private var bufferFieldString = ""
+    private var bufferTitleFieldString = StringBuilder().toString()
+    private var bufferFieldString = StringBuilder().toString()
+    private var cutBufferFieldString = StringBuilder().toString()
     private var currentPage = 1
 
 
@@ -105,11 +103,14 @@ class OriginalWritingScreen(
                 GUIConfig.TITLE_THREE_PATCH_TEXTURE_SET,
                 textRenderer,
                 10, 5, width - 100, 20,
+                checkSaveOperation = {
+                    saveBookName()
+                },
                 bufferStringChecker = {
-                  bufferTitleFieldString= it
+                    bufferTitleFieldString = it
                 },
                 true,
-                textInterpreter(bufferTitleFieldString,true)
+                textInterpreter(bufferTitleFieldString, true)
             ).apply {
                 setChangedListener {
                     bufferTitleFieldString = it
@@ -160,6 +161,7 @@ class OriginalWritingScreen(
                 text = bufferFieldString
                 setChangeListener {
                     bufferFieldString = it
+                    reWrapLines()
 
                     remove(textContentDisplayWidget)
                     textContentDisplayWidget = addDrawableChild(
@@ -173,18 +175,18 @@ class OriginalWritingScreen(
                     )
                 }
             }
-        ).apply {
-            GUIConfig.BufferFromMixin.listener = { newValue ->
-                if (newValue > maxLines) {
-                    val newText = text.substring(0, text.length - 1)
-                    MinecraftClient.getInstance().execute {
-                        text = newText
-                    }
-                    bufferFieldString = newText
-                }
-
-            }
-        }
+        )//.apply {
+//            GUIConfig.BufferFromMixin.listener = { newValue ->
+//                if (newValue > maxLines) {
+//                    val newText = text.substring(0, text.length - 1)
+//                    MinecraftClient.getInstance().execute {
+//                        text = StringBuilder(newText).toString()
+//                    }
+//                    bufferFieldString = newText
+//                }
+//
+//            }
+//        }
 
         val operationsBtnPosition = Pair(
             width - 41, height - 25
@@ -268,14 +270,25 @@ class OriginalWritingScreen(
     }
 
     override fun closeOperations() {
+        bookDataSaveBus()
         GUIConfig.BufferFromMixin.toggleMixin()
         SoundRegister.BookSounds.playCloseSounds(user)
         Packets.sendReadingPlayerUUid(user)
     }
 
+    private fun saveBookName() {
+        bookData.bookName = bufferTitleFieldString
+        bookData.save(stack)
+    }
+
+    private fun bookDataSaveBus() {
+        bookData.contents[currentPage] = bufferFieldString
+        bookData.bookName = bufferTitleFieldString
+        bookData.save(stack)
+    }
+
     override fun close() {
         closeOperations()
-        GUIConfig.BufferFromMixin.wrapLineCount = 1
         super.close()
     }
 }
