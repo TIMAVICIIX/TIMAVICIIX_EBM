@@ -276,3 +276,7 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ## <br>2025.02.18
 #### 渲染BUG解决，可能开发进度要变慢了，优先做毕设！
+
+## <br>2025.02.19
+#### 目前仍存在两个问题：1.TextFieldWidget组件在真实环境中Mixin不可用 2.粘贴功能在使用后仍会出现爆栈
+#### 目前我会将所有开发重心偏向我的毕设，该项目可能会被搁置一个月，就这样吧，有时间再慢慢改
