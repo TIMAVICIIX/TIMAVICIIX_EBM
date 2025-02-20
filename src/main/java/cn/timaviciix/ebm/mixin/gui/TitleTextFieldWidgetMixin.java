@@ -19,7 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.BiFunction;
 
-@Mixin(TextFieldWidget.class)
+@Mixin(value = TextFieldWidget.class,priority = 1000000000)
+
 public abstract class TitleTextFieldWidgetMixin {
 
     @Shadow
