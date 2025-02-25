@@ -1,10 +1,13 @@
 package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
-import cn.timaviciix.ebm.util.GlobalData.LOGGER
+import net.minecraft.client.font.TextRenderer
+import net.minecraft.client.gui.DrawContext
+import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
+import java.util.function.BiFunction
 import kotlin.properties.Delegates
 
 object GUIConfig {

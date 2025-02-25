@@ -4,7 +4,7 @@ import java.util.*
 
 
 //@Imp: Shouldn't Use Default Construction Method!!!
-data class CopyPermission(
+class CopyPermission private constructor(
     private var stampingState: Boolean = false,
     private var copyGrantees: MutableList<UUID>
 ) {

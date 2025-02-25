@@ -9,12 +9,12 @@
 
 package cn.timaviciix.ebm.data
 
-class SealedDataPackage(vararg sealedData: SealedData<*>) {
 
+
+class SealedDataPackage(vararg sealedData: SealedData<*>) {
     val dataMap: Map<Class<*>, SealedData<*>> = sealedData.associateBy {
         it.data!!::class.java
     }
-
 
     @Suppress("UNCHECKED_CAST")
     inline fun <reified T> get():T{

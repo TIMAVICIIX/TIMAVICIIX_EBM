@@ -293,5 +293,17 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.02.23
 #### 打卡x3！
 
-## <br>2025.02.23
+## <br>2025.02.24
 #### 打卡x4！
+
+## <br>2025.02.25
+#### 打卡x5！
+
+## <br>2025.04.06
+#### 哈！我复活了！
+
+## <br>2025.04.22
+#### 继续开工！居然两个月个月没碰了
+
+## <br>2025.04.26
+#### 解决了多模组环境下的Mixin权重问题，将TextFieldWidget组件创建影子组件，绕过Mixin，同时为其他Mixin问题提供了思路

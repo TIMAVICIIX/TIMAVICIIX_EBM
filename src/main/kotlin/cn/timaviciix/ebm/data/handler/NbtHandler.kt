@@ -26,7 +26,6 @@ object NbtHandler {
     fun CopyPermission.saveToNbt(nbt: NbtCompound) {
         nbt.apply {
             putBoolean(BookDataConfig.BOOK_STAMPING_STATE_NBT_ID, this@saveToNbt.getStampingState())
-
             nbt.put(BookDataConfig.BOOK_COPY_GRANTEES_NBT_ID, NbtList().apply {
                 this@saveToNbt.getCopyGrantees().forEach {
                     add(NbtString.of(it.toString()))
@@ -52,7 +51,7 @@ object NbtHandler {
         nbt.putInt(id, this)
     }
 
-    fun loadCopyPermissionFromNbt(nbt: NbtCompound): CopyPermission {
+    fun loadCopyPermissionFromNbt(nbt: NbtCompound,playerUUID:UUID): CopyPermission {
         val stampingState = nbt.getBoolean(BookDataConfig.BOOK_STAMPING_STATE_NBT_ID)
         val list = nbt.getList(BookDataConfig.BOOK_COPY_GRANTEES_NBT_ID, 8)
         val copyGrantees = mutableListOf<UUID>()
@@ -63,6 +62,9 @@ object NbtHandler {
             } catch (e: Exception) {
                 GlobalData.LOGGER.info("$uuidStr Copy Permission Load Field!!!")
             }
+        }
+        if (copyGrantees.isEmpty()){
+            copyGrantees.add(playerUUID)
         }
         return CopyPermission.duplicateCopyPermission(stampingState, copyGrantees)
     }

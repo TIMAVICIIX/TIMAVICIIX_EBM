@@ -18,12 +18,14 @@ import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
 import java.time.LocalDateTime
+import java.util.UUID
 
 object DataFactory {
 
     fun getOrCreateBookData(
         nbt: NbtCompound,
         playerName: String = Text.translatable("data.timaviciix_ebm.author_name_unknown").string,
+        playerUUID: UUID,
         printInfo: Boolean = false,
     ): BookData {
         nbt.apply {
@@ -66,7 +68,7 @@ object DataFactory {
                 }
             }
 
-            val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this)
+            val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this,playerUUID)
             val contents = NbtHandler.loadStringMapFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
             val pageTags = NbtHandler.loadPageTagsFromNbt(this, BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
 
@@ -79,7 +81,9 @@ object DataFactory {
                 Author:$author
                 Create Date:$createDate
                 Book Nbt Type:${bookNbtType.backgroundAndStorageType}
-                Copy Permission:$copyPermission
+                Copy Permission:
+                    stampingState:${copyPermission.getStampingState()}
+                    copyPermission:${copyPermission.getCopyGrantees()}
                 Contents Size:${contents.size}
                 Page Tags:$pageTags
                 """.trimIndent()

@@ -10,11 +10,10 @@
 package cn.timaviciix.ebm.client.gui.widgets
 
 import cn.timaviciix.ebm.client.gui.GUIConfig
+import cn.timaviciix.ebm.deploy.TextFieldWidgetDeploy
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
@@ -29,11 +28,33 @@ class ThreePatchHorizontalFieldWidget(
     private val bufferStringChecker: (String) -> Unit = {},
     private val widgetEditable: Boolean = false,
     private val text: Text = Text.empty()
-) : TextFieldWidget(textRenderer, positionX + textureConfig.sideWidth, positionY, widgetWidth, widgetHeight, text) {
+) : TextFieldWidgetDeploy(
+    textRenderer,
+    positionX + textureConfig.sideWidth,
+    positionY,
+    widgetWidth,
+    widgetHeight,
+    text
+) {
+
+    private val editableColor = GUIConfig.blackTextColor4.rgb
+    private val uneditableColor = GUIConfig.blackTextColorPure.rgb
+    private var outerEditable = false
+    private fun toggleOuterEditable() {
+        outerEditable = !outerEditable
+        setEditable(outerEditable)
+    }
+
+    private fun setOuterEditable() {
+        outerEditable = true
+        setEditable(true)
+    }
+
     init {
-        setEditableColor(GUIConfig.blackTextColor4.rgb)
-        setUneditableColor(GUIConfig.blackTextColorPure.rgb)
+        setEditableColor(editableColor)
+        setUneditableColor(uneditableColor)
         setEditable(false)
+        super.setDrawsBackground(false)
     }
 
     override fun drawTexture(
@@ -108,7 +129,7 @@ class ThreePatchHorizontalFieldWidget(
 
     override fun onClick(mouseX: Double, mouseY: Double) {
         if (widgetEditable) {
-            setEditable(true)
+            setOuterEditable()
             super.onClick(mouseX, mouseY)
         }
     }
@@ -156,8 +177,7 @@ class ThreePatchHorizontalFieldWidget(
         super.renderButton(context, mouseX, mouseY, delta)
     }
 
-
-    private fun saveBus(){
+    private fun saveBus() {
         this.isFocused = false
         setEditable(false)
         checkSaveOperation()
