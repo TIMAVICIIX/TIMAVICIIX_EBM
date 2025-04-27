@@ -307,3 +307,7 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 
 ## <br>2025.04.26
 #### 解决了多模组环境下的Mixin权重问题，将TextFieldWidget组件创建影子组件，绕过Mixin，同时为其他Mixin问题提供了思路
+
+## <br>2025.04.27
+#### 目前在文本存储方面存在两个方案，1.将所有文本内容存储在NBT文件内；2.将书本属性信息存储在NBT内，文本通过压缩存储在外部文件夹内，并进行唯一性保管。
+#### 拟采用方案2进行开发。
