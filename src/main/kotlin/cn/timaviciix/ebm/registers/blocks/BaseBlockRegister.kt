@@ -9,6 +9,7 @@
 
 package cn.timaviciix.ebm.registers.blocks
 
+import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
 import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.util.GlobalData
@@ -42,27 +43,45 @@ interface BaseBlockRegister {
 
             //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
 
-            val targetBlockItem = when (itemClassify) {
+            val targetBlockItem =
+                BaseBlockItem(
+                    block,
+                    settings,
+                    nameColor = nameColor,
+                    itemClassify = itemClassify
+                )
 
-                BaseBlockItem.Companion.BlockItemClassify.Books -> {
-                    BookBlockItem(
-                        block,
-                        settings,
-                        nameColor = nameColor,
-                        itemClassify = BaseBlockItem.Companion.BlockItemClassify.Books
-                    )
-                }
 
-                else -> {
-                    BaseBlockItem(
-                        block,
-                        settings,
-                        nameColor = nameColor,
-                        itemClassify = itemClassify
-                    )
-                }
+            operation.let {
+                targetBlockItem.operation()
             }
 
+            return Registry.register(
+                Registries.ITEM,
+                identifier,
+                targetBlockItem
+            )
+        }
+
+        fun generateBlockItem(
+            nameColor: Int,
+            block: Block,
+            identifier: Identifier,
+            operation: (BlockItem.() -> Unit) = {},
+            settings: OwoItemSettings = GlobalData.OWO_ITEM_SIGNAL_SETTING,
+            bookNbtType: BookNbtType
+        ): BaseBlockItem {
+
+            //@Imp:Solve the abstraction problem of BaseBlockItem and represent BlockItem into multiple types
+
+            val targetBlockItem =
+                BookBlockItem(
+                    block,
+                    settings,
+                    nameColor = nameColor,
+                    itemClassify = BaseBlockItem.Companion.BlockItemClassify.Books,
+                    bookNbtType = bookNbtType
+                )
 
             operation.let {
                 targetBlockItem.operation()
@@ -91,6 +110,29 @@ interface BaseBlockRegister {
                 block = targetBlock,
                 identifier = Identifier(GlobalData.MOD_ID, blockId),
                 itemClassify = itemClassify
+            )
+
+            blockItemOperation(Pair(blockItemPart, blockId))
+
+            return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, blockId), targetBlock)
+
+        }
+
+        inline fun <reified T : Block> registrySelf(
+            property: KProperty<*>,
+            blockItemOperation: (Pair<BlockItem, String>) -> Unit,
+            nameColor: Int = 0xeeeeee,
+            bookNbtType: BookNbtType
+        ): T {
+
+            val blockId = property.name.lowercase()
+            val targetBlock = T::class.createInstance()
+
+            val blockItemPart = generateBlockItem(
+                nameColor = nameColor,
+                block = targetBlock,
+                identifier = Identifier(GlobalData.MOD_ID, blockId),
+                bookNbtType = bookNbtType
             )
 
             blockItemOperation(Pair(blockItemPart, blockId))

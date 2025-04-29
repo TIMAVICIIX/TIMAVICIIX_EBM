@@ -24,7 +24,7 @@ open class BaseBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int = 0xeeeeee,
-    val itemClassify: BlockItemClassify = BlockItemClassify.Unknown
+    val itemClassify: BlockItemClassify = BlockItemClassify.Unknown,
 ) :
     BlockItem(block, settings) {
 

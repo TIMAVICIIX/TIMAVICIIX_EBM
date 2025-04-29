@@ -3,6 +3,7 @@
   "package": "cn.timaviciix.ebm.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+
   ],
   "injectors": {
     "defaultRequire": 1
@@ -11,6 +12,7 @@
     "gui.DisplayBoxMixin",
     "gui.EditBoxWidgetTextColorMixin",
     "gui.ScrollableWidgetMixin",
-    "network.ReadStateMixin"
+    "network.ReadStateMixin",
+    "inventory.PlayerInventoryChangedMixin"
   ]
 }

@@ -14,9 +14,14 @@ import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
 import cn.timaviciix.ebm.data.book.BookData
+import cn.timaviciix.ebm.data.book.BookNbtType
+import cn.timaviciix.ebm.data.book.BookTooltipConfig
 import cn.timaviciix.ebm.data.handler.ScreenSetHandler
+import cn.timaviciix.ebm.util.StyleUtil
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
@@ -31,7 +36,8 @@ class BookBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int,
-    itemClassify: Companion.BlockItemClassify
+    itemClassify: Companion.BlockItemClassify,
+    val bookNbtType: BookNbtType
 ) : BaseBlockItem(block, settings, nameColor, itemClassify), ScreenSetHandler {
 
     /**2024.02.10 01:24
@@ -44,10 +50,9 @@ class BookBlockItem(
     private lateinit var dataPackage: SealedDataPackage
     private lateinit var bookData: BookData
 
-    private fun ItemStack.loadCacheDataFromNbt(authorName: String,playerUUID: UUID) {
-        val nbt = this.orCreateNbt
+    private fun ItemStack.loadCacheDataFromNbt(authorName: String, playerUUID: UUID) {
         dataPackage = SealedDataPackage(
-            SealedData.BookDataComponent(DataFactory.getOrCreateBookData(nbt, authorName,playerUUID, true))
+            SealedData.BookDataComponent(DataFactory.getOrCreateBookData(this, authorName, playerUUID, true))
         ).apply {
             bookData = get()
         }
@@ -57,10 +62,10 @@ class BookBlockItem(
 
     //Stamp（签章权不应在此入参，应绑定在BooData内，再从其中抽取判定，并形成UI）
     override fun setScreen(user: PlayerEntity, stack: ItemStack) {
-        stack.loadCacheDataFromNbt(user.name.string,user.uuid)
-        if (!bookData.copyPermission.getStampingState()) {
+        stack.loadCacheDataFromNbt(user.name.string, user.uuid)
+        if (!bookData.copyPermission.stampingState) {
             MinecraftClient.getInstance().setScreen(OriginalWritingScreen(bookData, user, stack))
-        }else{
+        } else {
             user.sendMessage(Text.literal("TODO"))
         }
     }
@@ -94,6 +99,53 @@ class BookBlockItem(
         } else {
             return ActionResult.FAIL
         }
+    }
+
+    //书本Item的tooltip展示
+    override fun appendTooltip(
+        stack: ItemStack?,
+        world: World?,
+        tooltip: MutableList<Text>?,
+        context: TooltipContext?
+    ) {
+        require(stack != null && tooltip != null)
+        stack.let {
+            val bookData = DataFactory.getOrCreateBookData(it, playerUUID = null, loadBaseData = true)
+            val bookEditor = bookData.editor
+            val textEditor = Text.translatable(BookTooltipConfig.BOOK_EDITOR).string
+
+            tooltip.add(Text.literal("$textEditor:$bookEditor").setStyle(StyleUtil.WITHE_COLOR_STYLE))
+
+            if (Screen.hasShiftDown()) {
+                val bookAuthor = bookData.author
+                val textAuthor = Text.translatable(BookTooltipConfig.BOOK_AUTHOR).string
+
+                val bookTag = bookData.pageTag
+                val textTag = Text.translatable(BookTooltipConfig.BOOK_TAG).string
+
+                val isCopies = if (bookData.copyPermission.isCopies) {
+                    Text.translatable(BookTooltipConfig.BOOK_IS_COPIES)
+                } else {
+                    Text.translatable(BookTooltipConfig.BOOK_IS_MANUSCRIPT)
+                }
+                val stampState = if (bookData.copyPermission.stampingState) {
+                    Text.translatable(BookTooltipConfig.BOOK_STAMPED)
+                } else {
+                    Text.translatable(BookTooltipConfig.BOOK_DRAFT)
+                }
+
+                tooltip.apply {
+                    add(Text.literal("$textAuthor:$bookAuthor").setStyle(StyleUtil.WITHE_COLOR_STYLE))
+                    add(Text.literal("$textTag:$bookTag").setStyle(StyleUtil.WITHE_COLOR_STYLE))
+                    add(isCopies.setStyle(StyleUtil.WITHE_COLOR_STYLE))
+                    add(stampState.setStyle(StyleUtil.WITHE_COLOR_STYLE))
+                }
+            } else {
+                val holdShift = Text.translatable(BookTooltipConfig.HOLD_SHIFT).setStyle(StyleUtil.GRAY_COLOR_STYLE)
+                tooltip.add(holdShift)
+            }
+        }
+
     }
 }
 

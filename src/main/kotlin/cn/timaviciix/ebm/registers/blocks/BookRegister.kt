@@ -21,7 +21,7 @@ import cn.timaviciix.ebm.block.books.largebooks.RubyGildedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.SapphireGildedBookBlock
 import cn.timaviciix.ebm.block.books.lightbooks.CrimsonFlameGildedBookBlock
 import cn.timaviciix.ebm.block.books.lightbooks.GoldenBoughForestBookBlock
-import cn.timaviciix.ebm.item.blockitems.BaseBlockItem
+import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
 import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
@@ -33,68 +33,68 @@ import net.minecraft.item.BlockItem
 class BookRegister() : BlockRegistryContainer {
 
     companion object {
-        val blockItemsConsist: MutableList<Pair<BlockItem,String>> = mutableListOf()
+        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
 
 
         val CLASSIC_JOURNAL_BOOK: ClassicJournalBookBlock =
             registrySelf(::CLASSIC_JOURNAL_BOOK, {
                 blockItemsConsist.add(it)
-            }, 0xdbe2ef,BaseBlockItem.Companion.BlockItemClassify.Books)
+            }, 0xdbe2ef, bookNbtType = BookNbtType.JournalBook)
 
 
         val REFINED_LEATHER_BOOK: RefinedLeatherBookBlock = registrySelf(::REFINED_LEATHER_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,bookNbtType = BookNbtType.GeneralBook)
 
 
         val LUXURIOUS_GILDED_BOOK: LuxuriousGildedBookBlock = registrySelf(::LUXURIOUS_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,bookNbtType = BookNbtType.GeneralBook)
 
 
         val QUARTZ_GILDED_BOOK: QuartzGildedBookBlock = registrySelf(::QUARTZ_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,bookNbtType = BookNbtType.GeneralBook)
 
 
         val STURDY_OBSIDIAN_GILDED_BOOK: SturdyObsidianGildedBookBlock = registrySelf(::STURDY_OBSIDIAN_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264,BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,bookNbtType = BookNbtType.GeneralBook)
 
 
         val QUARTZ_LEATHER_BOOK: QuartzLeatherBookBlock = registrySelf(::QUARTZ_LEATHER_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xff8264, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xff8264,bookNbtType = BookNbtType.GeneralBook)
 
 
         val MAJESTIC_GILDED_BOOK: MajesticGildedBookBlock = registrySelf(::MAJESTIC_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545,bookNbtType = BookNbtType.LargeBook)
 
 
         val QUARTZ_RUBY_ENCRUSTED_BOOK: QuartzRubyEncrustedBookBlock = registrySelf(::QUARTZ_RUBY_ENCRUSTED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545,bookNbtType = BookNbtType.LargeBook)
 
 
         val RUBY_GILDED_BOOK: RubyGildedBookBlock = registrySelf(::RUBY_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, bookNbtType = BookNbtType.LargeBook)
 
 
         val SAPPHIRE_GILDED_BOOK: SapphireGildedBookBlock = registrySelf(::SAPPHIRE_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xe84545, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xe84545, bookNbtType = BookNbtType.LargeBook)
 
 
         val GOLDEN_BOUGH_FOREST_BOOK: GoldenBoughForestBookBlock = registrySelf(::GOLDEN_BOUGH_FOREST_BOOK, {
             blockItemsConsist.add(it)
-        }, 0x10ddc2, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0x10ddc2, bookNbtType = BookNbtType.LightBook)
 
 
         val CRIMSON_FLAME_GILDED_BOOK: CrimsonFlameGildedBookBlock = registrySelf(::CRIMSON_FLAME_GILDED_BOOK, {
             blockItemsConsist.add(it)
-        }, 0xfa4659, BaseBlockItem.Companion.BlockItemClassify.Books)
+        }, 0xfa4659,bookNbtType = BookNbtType.LightBook)
 
     }
 

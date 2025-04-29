@@ -11,79 +11,65 @@ package cn.timaviciix.ebm.data
 
 import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.book.BookDataConfig
-import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.data.handler.NbtHandler
+import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 object DataFactory {
 
     fun getOrCreateBookData(
-        nbt: NbtCompound,
+        stack: ItemStack,
         playerName: String = Text.translatable("data.timaviciix_ebm.author_name_unknown").string,
-        playerUUID: UUID,
+        playerUUID: UUID?,
+        loadBaseData:Boolean = false,
         printInfo: Boolean = false,
     ): BookData {
-        nbt.apply {
+        stack.orCreateNbt.apply {
             val bookId = getString(BookDataConfig.BOOK_UUID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateShortUUID() }
             val bookName =
                 getString(BookDataConfig.BOOK_NAME_NBT_ID).ifBlank { Text.translatable("data.timaviciix_ebm.book_name_unknown").string }
-            val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { playerName }
+            val editor = getString(BookDataConfig.BOOK_EDITOR_NBT_ID).ifBlank { playerName }
+            val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { editor }
             var lastReadingPage = getInt(BookDataConfig.BOOK_LAST_READING_PAGE_NBT_TAG)
             if (lastReadingPage == 0) {
                 lastReadingPage = 1
             }
 
             val createDate = getString(BookDataConfig.BOOK_CREATE_DATE_NBT_ID).ifBlank {
-                GlobalData.LOGGER.info(
-                    """
+                if (printInfo) {
+                    GlobalData.LOGGER.info(
+                        """
                     [Data Factory]Trying Create New Book Data Struct
                 """.trimIndent()
-                )
+                    )
+                }
                 LocalDateTime.now().toString()
             }
-            val bookNbtType = when (getInt(BookDataConfig.BOOK_ITEM_TYPE_NBT_ID)) {
-                0 -> {
-                    BookNbtType.JournalBook
-                }
-
-                1 -> {
-                    BookNbtType.GeneralBook
-                }
-
-                2 -> {
-                    BookNbtType.LightBook
-                }
-
-                3 -> {
-                    BookNbtType.LargeBook
-                }
-
-                else -> {
-                    BookNbtType.GeneralBook
-                }
-            }
+            val bookNbtType = (stack.item as BookBlockItem).bookNbtType
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this,playerUUID)
-            val contents = NbtHandler.loadStringMapFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
+            val contents = if(loadBaseData) mutableMapOf() else  NbtHandler.loadStringMapFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)
             val pageTags = NbtHandler.loadPageTagsFromNbt(this, BookDataConfig.BOOK_PAGE_TAG_NBT_ID)
 
             if (printInfo) {
+
                 GlobalData.LOGGER.info(
                     """
                 [Data Factory]
                 BOOK ID:$bookId
                 BOOK NAME:$bookName
-                Author:$author
+                Editor:$editor
                 Create Date:$createDate
-                Book Nbt Type:${bookNbtType.backgroundAndStorageType}
+                Book Nbt Type:${bookNbtType.name}
                 Copy Permission:
-                    stampingState:${copyPermission.getStampingState()}
-                    copyPermission:${copyPermission.getCopyGrantees()}
+                    stampingState:${copyPermission.stampingState}
+                    isCopies:${copyPermission.isCopies}
+                    copyPermission:${copyPermission.copyGrantees}
                 Contents Size:${contents.size}
                 Page Tags:$pageTags
                 """.trimIndent()
@@ -93,6 +79,7 @@ object DataFactory {
             return BookData(
                 bookId = bookId,
                 bookName = bookName,
+                editor = editor,
                 author = author,
                 createDate = createDate,
                 bookNbtType = bookNbtType,
