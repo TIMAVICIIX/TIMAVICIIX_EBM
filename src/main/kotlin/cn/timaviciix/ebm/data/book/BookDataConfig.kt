@@ -12,6 +12,7 @@ package cn.timaviciix.ebm.data.book
 object BookDataConfig {
 
     const val BOOK_CONTENT_NBT_ID = "book_content"
+    const val BOOK_EDITOR_ID_NBT_ID = "book_editor_id"
     const val BOOK_EDITOR_NBT_ID = "book_editor"
     const val BOOK_AUTHOR_NBT_ID = "book_author"
     const val BOOK_STAMPING_STATE_NBT_ID = "book_stamping_state"

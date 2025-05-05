@@ -30,6 +30,8 @@ object GeneralUtil {
             return ticket.replace("-".toRegex(), "")
         }
 
+        fun generateFullUUID():UUID = UUID.randomUUID()
+
         fun generateShortUUID(): String {
             val chars: Array<String> = arrayOf(
                 "a", "b", "c", "d", "e", "f",

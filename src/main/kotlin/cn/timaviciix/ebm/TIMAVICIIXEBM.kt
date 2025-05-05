@@ -1,5 +1,7 @@
 package cn.timaviciix.ebm
 
+import cn.timaviciix.ebm.config.ConfigCreator
+import cn.timaviciix.ebm.data.book.storage.io.StorageFolderCreator
 import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister
@@ -55,6 +57,12 @@ object TIMAVICIIXEBM : ModInitializer {
          * step4:Take an Animation Render
          * step5:registry this two guys 👆
          */
+
+        //load Config And Create Data Storage Folder
+        addRegistrySortPair(89) {
+            ConfigCreator.loadConfig()
+            StorageFolderCreator.createStorageFolder()
+        }
 
         //Animation Blocks Register
         addRegistrySortPair(90) {

@@ -34,6 +34,7 @@ object DataFactory {
             val bookName =
                 getString(BookDataConfig.BOOK_NAME_NBT_ID).ifBlank { Text.translatable("data.timaviciix_ebm.book_name_unknown").string }
             val editor = getString(BookDataConfig.BOOK_EDITOR_NBT_ID).ifBlank { playerName }
+            val editorId = getString(BookDataConfig.BOOK_EDITOR_ID_NBT_ID).ifBlank { GeneralUtil.Uuid.generateFullUUID().toString() }
             val author = getString(BookDataConfig.BOOK_AUTHOR_NBT_ID).ifBlank { editor }
             var lastReadingPage = getInt(BookDataConfig.BOOK_LAST_READING_PAGE_NBT_TAG)
             if (lastReadingPage == 0) {
@@ -64,6 +65,7 @@ object DataFactory {
                 BOOK ID:$bookId
                 BOOK NAME:$bookName
                 Editor:$editor
+                Editor UUID:$editorId
                 Create Date:$createDate
                 Book Nbt Type:${bookNbtType.name}
                 Copy Permission:
@@ -80,6 +82,7 @@ object DataFactory {
                 bookId = bookId,
                 bookName = bookName,
                 editor = editor,
+                editorId = editorId,
                 author = author,
                 createDate = createDate,
                 bookNbtType = bookNbtType,

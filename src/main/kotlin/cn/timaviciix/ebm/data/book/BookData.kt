@@ -18,6 +18,7 @@ open class BookData(
     val bookNbtType: BookNbtType,
     var bookName: String,
     var editor: String,
+    var editorId: String,
     var author: String,
     var copyPermission: CopyPermission,
     var pageTag: Map<String, Int>,
@@ -50,6 +51,7 @@ open class BookData(
                 BookDataConfig.apply {
                     this@save.bookId.saveToNbt(it, BOOK_UUID_NBT_ID)
                     this@save.bookName.saveToNbt(it, BOOK_NAME_NBT_ID)
+                    this@save.editorId.saveToNbt(it, BOOK_EDITOR_ID_NBT_ID)
                     this@save.editor.saveToNbt(it, BOOK_EDITOR_NBT_ID)
                     this@save.author.saveToNbt(it, BOOK_AUTHOR_NBT_ID)
                     this@save.createDate.saveToNbt(it, BOOK_CREATE_DATE_NBT_ID)
