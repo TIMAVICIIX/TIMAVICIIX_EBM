@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.data.book.storage.io
+package cn.timaviciix.ebm.data_io.file
 
 import cn.timaviciix.ebm.config.ConfigCreator
 import java.nio.file.Files

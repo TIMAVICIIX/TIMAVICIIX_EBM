@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.data.handler
+package cn.timaviciix.ebm.client.gui
 
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack

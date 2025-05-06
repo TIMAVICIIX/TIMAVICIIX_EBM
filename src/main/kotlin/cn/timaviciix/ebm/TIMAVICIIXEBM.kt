@@ -1,7 +1,7 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.config.ConfigCreator
-import cn.timaviciix.ebm.data.book.storage.io.StorageFolderCreator
+import cn.timaviciix.ebm.data_io.file.StorageFolderCreator
 import cn.timaviciix.ebm.network.Receiver
 import cn.timaviciix.ebm.registers.blocks.BookRegister
 import cn.timaviciix.ebm.registers.blocks.CopierRegister

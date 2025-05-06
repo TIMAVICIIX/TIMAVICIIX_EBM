@@ -10,8 +10,8 @@
 package cn.timaviciix.ebm.data
 
 import cn.timaviciix.ebm.data.book.BookData
-import cn.timaviciix.ebm.data.book.BookDataConfig
-import cn.timaviciix.ebm.data.handler.NbtHandler
+import cn.timaviciix.ebm.data_io.data_configs.BookDataConfig
+import cn.timaviciix.ebm.data_io.handler.NbtHandler
 import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.util.GeneralUtil
 import cn.timaviciix.ebm.util.GlobalData

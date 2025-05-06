@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.data.book
+package cn.timaviciix.ebm.data_io.data_configs
 
 object BookDataConfig {
 

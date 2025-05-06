@@ -9,7 +9,8 @@
  */
 package cn.timaviciix.ebm.data.book
 
-import cn.timaviciix.ebm.data.handler.NbtHandler.saveToNbt
+import cn.timaviciix.ebm.data_io.handler.NbtHandler.saveToNbt
+import cn.timaviciix.ebm.data_io.data_configs.BookDataConfig
 import net.minecraft.item.ItemStack
 
 open class BookData(

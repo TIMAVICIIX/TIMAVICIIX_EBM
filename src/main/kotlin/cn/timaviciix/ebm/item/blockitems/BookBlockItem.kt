@@ -15,8 +15,8 @@ import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
 import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data.book.BookNbtType
-import cn.timaviciix.ebm.data.book.BookTooltipConfig
-import cn.timaviciix.ebm.data.handler.ScreenSetHandler
+import cn.timaviciix.ebm.data_io.data_configs.BookTooltipConfig
+import cn.timaviciix.ebm.client.gui.ScreenSetHandler
 import cn.timaviciix.ebm.util.StyleUtil
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient

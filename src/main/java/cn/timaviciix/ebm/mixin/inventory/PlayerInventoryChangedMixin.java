@@ -2,7 +2,7 @@ package cn.timaviciix.ebm.mixin.inventory;
 
 import cn.timaviciix.ebm.data.DataFactory;
 import cn.timaviciix.ebm.data.book.BookData;
-import cn.timaviciix.ebm.data.handler.BookNameHandler;
+import cn.timaviciix.ebm.data_io.handler.BookNameHandler;
 import cn.timaviciix.ebm.item.blockitems.BookBlockItem;
 import cn.timaviciix.ebm.util.GlobalData;
 import net.minecraft.entity.player.PlayerEntity;

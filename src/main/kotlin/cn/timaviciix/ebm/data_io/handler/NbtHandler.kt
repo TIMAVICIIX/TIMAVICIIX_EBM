@@ -1,6 +1,6 @@
-package cn.timaviciix.ebm.data.handler
+package cn.timaviciix.ebm.data_io.handler
 
-import cn.timaviciix.ebm.data.book.BookDataConfig
+import cn.timaviciix.ebm.data_io.data_configs.BookDataConfig
 import cn.timaviciix.ebm.data.book.CopyPermission
 import cn.timaviciix.ebm.util.CompressUtil.compressString
 import cn.timaviciix.ebm.util.CompressUtil.decompressString

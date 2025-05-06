@@ -12,12 +12,10 @@ package cn.timaviciix.ebm.item.blockitems
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
-import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
-import net.minecraft.util.ActionResult
 import org.slf4j.LoggerFactory
 
 open class BaseBlockItem(
@@ -51,5 +49,7 @@ open class BaseBlockItem(
         return super.getName(stack).copy().setStyle(nameStyle)
     }
 
+    fun getGroupData(){
+    }
 
 }
