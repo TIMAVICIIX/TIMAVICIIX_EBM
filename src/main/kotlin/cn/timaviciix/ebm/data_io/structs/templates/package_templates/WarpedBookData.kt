@@ -17,5 +17,7 @@ import cn.timaviciix.ebm.data_io.structs.templates.original_templates.WarpedTemp
 class WarpedBookData : WarpedTemplate(
 ) {
     val bookId by template<String>()
+    val createDate by template<String>()
+    val maxPage by template<Int>()
 
 }

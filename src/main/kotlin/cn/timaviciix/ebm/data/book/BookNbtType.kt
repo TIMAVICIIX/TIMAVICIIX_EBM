@@ -1,5 +1,7 @@
 package cn.timaviciix.ebm.data.book
 
+
+//@Imp:抽取displayPrefixKey到配置类，将该类的入参改为typeCode:Int,或成立自动化总线
 enum class BookNbtType(
     val maxPage: Int,
     val charsPerPage: Int,

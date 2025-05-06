@@ -9,11 +9,13 @@
 
 package cn.timaviciix.ebm.data_io.structs.templates.original_templates
 
+import cn.timaviciix.ebm.data_io.structs.components.NbtResolver
 import cn.timaviciix.ebm.data_io.structs.components.XmlResolver
 
 class ElementTemplate<T>(
     val id: String,
-    val xpath: XmlResolver,
+    val xmlResolver: XmlResolver,
+    val nbtResolver: NbtResolver,
     val attributes: MutableMap<String, String> = mutableMapOf()
 ) {
     var elementValue: T? = null
@@ -22,5 +24,7 @@ class ElementTemplate<T>(
     fun injectValue(targetValue: T) {
         elementValue = targetValue
     }
+
+    fun valueToString(): String = elementValue.toString()
 
 }
