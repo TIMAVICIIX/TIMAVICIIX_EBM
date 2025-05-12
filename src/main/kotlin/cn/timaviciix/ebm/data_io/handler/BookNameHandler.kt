@@ -11,6 +11,7 @@ package cn.timaviciix.ebm.data_io.handler
 
 import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.book.BookData.Companion.save
+import cn.timaviciix.ebm.data_io.data_configs.BookTooltipConfig
 import cn.timaviciix.ebm.item.blockitems.BookBlockItem
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.entity.player.PlayerEntity
@@ -22,7 +23,7 @@ object BookNameHandler {
         DataFactory.getOrCreateBookData(stack, player.name.string, player.uuid).apply {
             GlobalData.LOGGER.info("Rename Book!")
             val bookPrefixName =
-                Text.translatable(bookNbtType.displayPrefixKey + (stack.item as BookBlockItem).bookNbtType.typeCode).string
+                Text.translatable(BookTooltipConfig.DISPLAY_PREFIX_KEY + (stack.item as BookBlockItem).typeCode).string
             stack.setCustomName(Text.literal("[$bookPrefixName]-${bookName}").setStyle(stack.name.style))
             save(stack)
         }

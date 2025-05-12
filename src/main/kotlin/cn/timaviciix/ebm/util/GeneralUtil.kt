@@ -9,19 +9,16 @@
 
 package cn.timaviciix.ebm.util
 
-import io.wispforest.owo.nbt.NbtKey
-import net.minecraft.client.font.FontStorage
-import net.minecraft.client.font.TextRenderer
-import net.minecraft.item.ItemStack
-import net.minecraft.text.Style
 import java.util.*
-import kotlin.reflect.KProperty
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.jvm.isAccessible
 
 
 object GeneralUtil {
 
+    object Objects {
+
+        fun Int.toBoolean(): Boolean = this > 0
+
+    }
 
     //UUID class
     object Uuid {
@@ -30,7 +27,7 @@ object GeneralUtil {
             return ticket.replace("-".toRegex(), "")
         }
 
-        fun generateFullUUID():UUID = UUID.randomUUID()
+        fun generateFullUUID(): UUID = UUID.randomUUID()
 
         fun generateShortUUID(): String {
             val chars: Array<String> = arrayOf(
@@ -54,38 +51,6 @@ object GeneralUtil {
             }
             return shortBuffer.toString()
         }
-    }
-
-    //Nbt Operations final class
-    //@Imp: extendsOperations It can be used to accompany the operation empty, and the overall situation of the code is evaluated later to consider deletion and modification
-    object Nbt {
-
-        fun <T : Any> setNbtValue(
-            stack: ItemStack,
-            key: NbtKey<T>,
-            value: T,
-            extendsOperation: ((value: ItemStack) -> Unit)?
-        ): T {
-            extendsOperation?.let { extendsOperation(stack) }
-            stack.put(key, value)
-            return value
-        }
-
-        fun <T : Any> getNbtValue(
-            stack: ItemStack,
-            key: NbtKey<T>,
-            default: T,
-            extendsOperation: ((value: ItemStack) -> Unit)?
-        ): T {
-            extendsOperation?.let { extendsOperation(stack) }
-            return if (stack.has(key)) stack.get(key) else default
-        }
-
-    }
-
-    //Kotlin Reflect
-    fun <T> getPropertyName(property: KProperty<T>): String {
-        return property.name.lowercase(Locale.getDefault())
     }
 
 }

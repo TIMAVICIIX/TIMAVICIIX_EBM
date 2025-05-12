@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.data
 
 import cn.timaviciix.ebm.data.book.BookData
+import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.data_io.data_configs.BookDataConfig
 import cn.timaviciix.ebm.data_io.handler.NbtHandler
 import cn.timaviciix.ebm.item.blockitems.BookBlockItem
@@ -51,7 +52,10 @@ object DataFactory {
                 }
                 LocalDateTime.now().toString()
             }
-            val bookNbtType = (stack.item as BookBlockItem).bookNbtType
+
+            val bookNbtType = BookNbtType.GeneralBook
+            //Already Changed
+            //val bookNbtType = (stack.item as BookBlockItem).bookNbtType
 
             val copyPermission = NbtHandler.loadCopyPermissionFromNbt(this,playerUUID)
             val contents = if(loadBaseData) mutableMapOf() else  NbtHandler.loadStringMapFromNbt(this, BookDataConfig.BOOK_CONTENT_NBT_ID)

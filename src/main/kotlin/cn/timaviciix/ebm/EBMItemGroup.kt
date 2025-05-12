@@ -9,7 +9,8 @@
 
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.registers.blocks.BookRegister
+import cn.timaviciix.ebm.registers.blocks.books.BookBusRegister
+import cn.timaviciix.ebm.registers.blocks.books.GeneralBookRegister
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.itemgroup.Icon
 import io.wispforest.owo.itemgroup.OwoItemGroup
@@ -26,7 +27,7 @@ class EBMItemGroup(
         val EBM_ITEM_GROUP: OwoItemGroup = OwoItemGroup.builder(
             Identifier(GlobalData.MOD_ID, GlobalData.ITEM_GROUP_ID)
         ) {
-            Icon.of(ItemStack(BookRegister.REFINED_LEATHER_BOOK))
+            Icon.of(ItemStack(GeneralBookRegister.REFINED_LEATHER_BOOK))
         }.initializer {
             it.addButton(ItemGroupButton.github(it, "https://github.com/TIMAVICIIX/TIMAVICIIX_EBM"))
         }.build()

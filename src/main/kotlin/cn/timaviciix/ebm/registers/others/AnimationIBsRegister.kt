@@ -11,7 +11,7 @@ package cn.timaviciix.ebm.registers.others
 
 import cn.timaviciix.ebm.block.blockentitys.others.BlueCatPendantBlockEntity
 import cn.timaviciix.ebm.block.others.BlueCatPendantBlock
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -22,19 +22,15 @@ import net.minecraft.item.BlockItem
 //we need /*BaseBlockRegister*/ to registry block           this guy↓
 class AnimationIBsRegister() : BlockRegistryContainer {
     companion object {
-        val blockItemsConsistList: MutableList<Pair<BlockItem, String>> = mutableListOf()
-
         //manual Registry
-        val BLUE_CAT_PENDANT: BlueCatPendantBlock = BaseBlockRegister.registrySelf(::BLUE_CAT_PENDANT, {
-            blockItemsConsistList.add(it)
-        }, 0x3f72af)
+        val BLUE_CAT_PENDANT: BlueCatPendantBlock = BlockRegistryHandler.registrySelf(::BLUE_CAT_PENDANT,0x3f72af)
 
     }
 
     class EntityTypes() : BlockEntityRegistryContainer {
         companion object {
             val BLUE_CAT_PENDANT_ANIME_ENTITY_TYPE: BlockEntityType<BlueCatPendantBlockEntity> =
-                BaseBlockRegister.registryEntitySelf(
+                BlockRegistryHandler.registryEntitySelf(
                     ::BLUE_CAT_PENDANT,
                     FabricBlockEntityTypeBuilder.create(
                         ::BlueCatPendantBlockEntity,

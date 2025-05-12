@@ -12,7 +12,7 @@ package cn.timaviciix.ebm.block.books.lightbooks
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.LightBookBlockEntity
 import cn.timaviciix.ebm.block.books.BaseBookBlock
 import cn.timaviciix.ebm.block.books.BookBlockInterface
-import cn.timaviciix.ebm.registers.blocks.BookRegister
+import cn.timaviciix.ebm.registers.blocks.books.LightBookRegister
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -23,7 +23,7 @@ class GoldenBoughForestBookBlock : BaseBookBlock(BookType.LightBook),
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
         return if (pos != null && state != null) {
-            LightBookBlockEntity(BookRegister.EntityTypes.LIGHT_GOLDEN_BOUGH_FOREST_BOOK_TYPE, pos, state)
+            LightBookBlockEntity(LightBookRegister.EntityTypes.LIGHT_GOLDEN_BOUGH_FOREST_BOOK_TYPE, pos, state)
         } else {
             null
         }

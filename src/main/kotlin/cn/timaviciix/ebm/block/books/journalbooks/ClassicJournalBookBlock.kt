@@ -12,7 +12,7 @@ package cn.timaviciix.ebm.block.books.journalbooks
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.JournalBookBlockEntity
 import cn.timaviciix.ebm.block.books.BaseBookBlock
 import cn.timaviciix.ebm.block.books.BookBlockInterface
-import cn.timaviciix.ebm.registers.blocks.BookRegister
+import cn.timaviciix.ebm.registers.blocks.books.JournalBookRegister
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -23,7 +23,7 @@ class ClassicJournalBookBlock : BaseBookBlock(BookType.JournalBook),
 
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
         return if (pos != null && state != null) {
-            return JournalBookBlockEntity(BookRegister.EntityTypes.JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE, pos, state)
+            return JournalBookBlockEntity(JournalBookRegister.EntityTypes.JOURNAL_CLASSIC_JOURNAL_BOOK_TYPE, pos, state)
         } else {
             null
         }

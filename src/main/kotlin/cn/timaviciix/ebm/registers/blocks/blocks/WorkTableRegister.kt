@@ -7,7 +7,7 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.registers.blocks
+package cn.timaviciix.ebm.registers.blocks.blocks
 
 import cn.timaviciix.ebm.block.blockentitys.worktables.BindingMachineBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.worktables.LibrarianDeskBlockEntity
@@ -15,30 +15,19 @@ import cn.timaviciix.ebm.block.blockentitys.worktables.StampingDeskBlockEntity
 import cn.timaviciix.ebm.block.worktables.BindingMachineBlock
 import cn.timaviciix.ebm.block.worktables.LibrarianDeskBlock
 import cn.timaviciix.ebm.block.worktables.StampingDeskBlock
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler.registryEntitySelf
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.item.BlockItem
 
 class WorkTableRegister() : BlockRegistryContainer {
 
     companion object {
-        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
-
-        val LIBRARIAN_DESK: LibrarianDeskBlock = registrySelf(::LIBRARIAN_DESK, {
-            blockItemsConsist.add(it)
-        }, 0xd4a5a5)
-
-        val BINDING_MACHINE: BindingMachineBlock = registrySelf(::BINDING_MACHINE, {
-            blockItemsConsist.add(it)
-        }, 0x8d6262)
-
-        val STAMPING_DESK: StampingDeskBlock = registrySelf(::STAMPING_DESK, {
-            blockItemsConsist.add(it)
-        }, 0x8ef6e4)
+        val LIBRARIAN_DESK: LibrarianDeskBlock = registrySelf(::LIBRARIAN_DESK, 0xd4a5a5)
+        val BINDING_MACHINE: BindingMachineBlock = registrySelf(::BINDING_MACHINE, 0x8d6262)
+        val STAMPING_DESK: StampingDeskBlock = registrySelf(::STAMPING_DESK, 0x8ef6e4)
 
 
         class EntityTypes() : BlockEntityRegistryContainer {

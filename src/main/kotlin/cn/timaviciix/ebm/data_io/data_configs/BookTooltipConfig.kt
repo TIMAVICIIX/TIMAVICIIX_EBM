@@ -22,4 +22,6 @@ object BookTooltipConfig {
     const val BOOK_STAMPED = PREFIX + "book_stamped"
     const val BOOK_DRAFT = PREFIX + "book_draft"
 
+    const val DISPLAY_PREFIX_KEY: String = "item.timaviciix_ebm.book_display_type_"
+
 }

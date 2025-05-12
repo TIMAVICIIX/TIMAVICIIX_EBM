@@ -9,15 +9,6 @@
 
 package cn.timaviciix.ebm.tooltip
 
-import cn.timaviciix.ebm.registers.blocks.BookRegister
-import cn.timaviciix.ebm.registers.blocks.CopierRegister
-import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
-import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
-import cn.timaviciix.ebm.registers.items.ArmorRegister
-import cn.timaviciix.ebm.registers.items.BookcaseRegister
-import cn.timaviciix.ebm.registers.items.OtherItemRegister
-import cn.timaviciix.ebm.registers.items.StuffRegister
-import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.util.GlobalData
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.minecraft.item.BlockItem
@@ -26,16 +17,10 @@ import net.minecraft.text.Text
 
 object ItemsTooltip {
 
+    val tooltipBlockBusList:MutableList<Pair<BlockItem,String>> = mutableListOf()
+    val tooltipItemBusList:MutableList<Pair<Item,String>> = mutableListOf()
+
     fun initializeTooltip() {
-        val tooltipBlockBusList: List<Pair<BlockItem, String>> =
-            BookRegister.blockItemsConsist.plus(CopierRegister.blockItemsConsist)
-                .plus(OtherBlocksRegister.blockItemsConsist).plus(WorkTableRegister.blockItemsConsist)
-
-        val tooltipItemBusList: List<Pair<Item, String>> =
-            BookcaseRegister.itemConsistList.plus(OtherItemRegister.itemConsistList).plus(StuffRegister.itemConsistList)
-                .plus(ArmorRegister.itemConsistList).plus(AnimationIBsRegister.blockItemsConsistList)
-
-
         ItemTooltipCallback.EVENT.register { stack, _, lines ->
 
 

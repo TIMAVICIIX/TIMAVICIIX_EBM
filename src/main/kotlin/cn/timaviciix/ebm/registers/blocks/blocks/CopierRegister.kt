@@ -7,32 +7,26 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.registers.blocks
+package cn.timaviciix.ebm.registers.blocks.blocks
 
 import cn.timaviciix.ebm.block.blockentitys.copierentitys.PortableCopierBlockEntity
 import cn.timaviciix.ebm.block.blockentitys.copierentitys.VerticalCopierBlockEntity
 import cn.timaviciix.ebm.block.copiers.PortableCopierBlock
 import cn.timaviciix.ebm.block.copiers.VerticalCopierBlock
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registryEntitySelf
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler.registryEntitySelf
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler.registrySelf
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.item.BlockItem
 
 //@Imp:Necessary Construct
 class CopierRegister() : BlockRegistryContainer {
 
     companion object {
-        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
 
-        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER, {
-            blockItemsConsist.add(it)
-        }, 0xa2d5f2)
-        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER, {
-            blockItemsConsist.add(it)
-        }, 0xc9d6df)
+        val PORTABLE_COPIER: PortableCopierBlock = registrySelf(::PORTABLE_COPIER, 0xa2d5f2)
+        val VERTICAL_COPIER: VerticalCopierBlock = registrySelf(::VERTICAL_COPIER, 0xc9d6df)
     }
 
 //    override fun createBlockItem(block: Block?, identifier: String?): BlockItem {

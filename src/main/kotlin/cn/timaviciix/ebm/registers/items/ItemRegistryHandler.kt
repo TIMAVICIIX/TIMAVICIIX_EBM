@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.registers.items
 
 import cn.timaviciix.ebm.item.BaseItem
+import cn.timaviciix.ebm.tooltip.ItemsTooltip
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.Item
@@ -20,13 +21,12 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.createInstance
 
-interface BaseItemRegister {
+interface ItemRegistryHandler {
 
     companion object {
 
         @Deprecated("you can use new RegistryMethod to do this ↓ ")
         fun <T : BaseItem> registrySelf(registryConsist: Pair<String, KClass<T>>): T {
-
             val name = registryConsist.first
             val context = registryConsist.second.createInstance()
 
@@ -35,7 +35,7 @@ interface BaseItemRegister {
 
         inline fun <reified T : Item> registrySelf(
             property: KProperty<*>,
-            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = {}
+            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = { ItemsTooltip.tooltipItemBusList.add(it) }
         ): T {
 
             val itemId = property.name.lowercase()
@@ -52,7 +52,7 @@ interface BaseItemRegister {
             property: KProperty<*>,
             armorEntity: T,
             itemInfoConsist: Pair<Item, String> = Pair(armorEntity, property.name.lowercase()),
-            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = {}
+            idOperation: (itemInfoConsist: Pair<Item, String>) -> Unit = { ItemsTooltip.tooltipItemBusList.add(it) }
         ): T {
 
             idOperation(itemInfoConsist)

@@ -3,14 +3,14 @@ package cn.timaviciix.ebm
 import cn.timaviciix.ebm.config.ConfigCreator
 import cn.timaviciix.ebm.data_io.file.StorageFolderCreator
 import cn.timaviciix.ebm.network.Receiver
-import cn.timaviciix.ebm.registers.blocks.BookRegister
-import cn.timaviciix.ebm.registers.blocks.CopierRegister
-import cn.timaviciix.ebm.registers.blocks.OtherBlocksRegister
-import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
-import cn.timaviciix.ebm.registers.items.ArmorRegister
-import cn.timaviciix.ebm.registers.items.BookcaseRegister
-import cn.timaviciix.ebm.registers.items.OtherItemRegister
-import cn.timaviciix.ebm.registers.items.StuffRegister
+import cn.timaviciix.ebm.registers.blocks.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.blocks.blocks.OtherBlocksRegister
+import cn.timaviciix.ebm.registers.blocks.blocks.WorkTableRegister
+import cn.timaviciix.ebm.registers.blocks.books.BookBusRegister
+import cn.timaviciix.ebm.registers.items.registers.ArmorRegister
+import cn.timaviciix.ebm.registers.items.registers.BookcaseRegister
+import cn.timaviciix.ebm.registers.items.registers.OtherItemRegister
+import cn.timaviciix.ebm.registers.items.registers.StuffRegister
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
 import cn.timaviciix.ebm.tooltip.ToolTipBus
@@ -102,8 +102,7 @@ object TIMAVICIIXEBM : ModInitializer {
         }
 
         addRegistrySortPair(400) {
-            FieldRegistrationHandler.register(BookRegister::class.java, GlobalData.MOD_ID, false)
-            FieldRegistrationHandler.register(BookRegister.EntityTypes::class.java, GlobalData.MOD_ID, false)
+            BookBusRegister.registryAllBook()
         }
 
         addRegistrySortPair(210) {

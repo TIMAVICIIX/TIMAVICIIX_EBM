@@ -12,7 +12,7 @@ package cn.timaviciix.ebm.block.books.largebooks
 import cn.timaviciix.ebm.block.blockentitys.bookentitys.LargeBookBlockEntity
 import cn.timaviciix.ebm.block.books.BaseBookBlock
 import cn.timaviciix.ebm.block.books.BookBlockInterface
-import cn.timaviciix.ebm.registers.blocks.BookRegister
+import cn.timaviciix.ebm.registers.blocks.books.LargeBookRegister
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -22,7 +22,7 @@ class RubyGildedBookBlock : BaseBookBlock(BookType.LargeBook),
     BlockEntityProvider, BookBlockInterface {
     override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity? {
         return if (pos != null && state != null) {
-            LargeBookBlockEntity(BookRegister.EntityTypes.LARGE_RUBY_GILDED_BOOK_TYPE, pos, state)
+            LargeBookBlockEntity(LargeBookRegister.EntityTypes.LARGE_RUBY_GILDED_BOOK_TYPE, pos, state)
         } else {
             null
         }

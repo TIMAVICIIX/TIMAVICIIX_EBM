@@ -19,5 +19,11 @@ class LargeBookBlockEntity(
     pos: BlockPos,
     state: BlockState
 ) :
-    BaseBookBlockEntity(entityType, pos, state, BookNbtType.LargeBook){
+    BaseBookBlockEntity(entityType, pos, state){
+
+    override val maxPage: Int
+        get() = TODO("Not yet implemented")
+
+    override val typeCode: Int
+        get() = TODO("Not yet implemented")
 }

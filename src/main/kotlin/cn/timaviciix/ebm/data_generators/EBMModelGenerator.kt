@@ -9,8 +9,8 @@
 
 package cn.timaviciix.ebm.data_generators
 
-import cn.timaviciix.ebm.registers.items.OtherItemRegister
-import cn.timaviciix.ebm.registers.items.StuffRegister
+import cn.timaviciix.ebm.registers.items.registers.OtherItemRegister
+import cn.timaviciix.ebm.registers.items.registers.StuffRegister
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.BlockStateModelGenerator

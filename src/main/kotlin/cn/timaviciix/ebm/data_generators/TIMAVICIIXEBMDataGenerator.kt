@@ -8,7 +8,7 @@ object TIMAVICIIXEBMDataGenerator : DataGeneratorEntrypoint {
 
         fabricDataGenerator.createPack().apply {
 
-            addProvider(::EBMModelGenerator)
+            //addProvider(::EBMModelGenerator)
 
         }
 

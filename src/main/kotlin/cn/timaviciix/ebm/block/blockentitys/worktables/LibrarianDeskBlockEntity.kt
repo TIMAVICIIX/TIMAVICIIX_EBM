@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.block.blockentitys.worktables
 
-import cn.timaviciix.ebm.registers.blocks.WorkTableRegister
+import cn.timaviciix.ebm.registers.blocks.blocks.WorkTableRegister
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.util.math.BlockPos

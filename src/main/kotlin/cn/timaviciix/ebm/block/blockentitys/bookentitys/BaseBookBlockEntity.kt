@@ -9,19 +9,18 @@
 
 package cn.timaviciix.ebm.block.blockentitys.bookentitys
 
-import cn.timaviciix.ebm.data.book.BookNbtType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.math.BlockPos
 
-open class BaseBookBlockEntity(
+abstract class BaseBookBlockEntity(
     entityType: BlockEntityType<*>,
     pos: BlockPos,
-    state: BlockState,
-    private val bookNbtType: BookNbtType = BookNbtType.GeneralBook
+    state: BlockState
 ) : BlockEntity(entityType, pos, state) {
 
-
+    abstract val typeCode : Int
+    abstract val maxPage: Int
 
 }

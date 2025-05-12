@@ -9,10 +9,9 @@
 
 package cn.timaviciix.ebm.block.blockentitys.copierentitys
 
-import cn.timaviciix.ebm.registers.blocks.CopierRegister
+import cn.timaviciix.ebm.registers.blocks.blocks.CopierRegister
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.math.BlockPos
 
 class PortableCopierBlockEntity(pos: BlockPos, state: BlockState) :

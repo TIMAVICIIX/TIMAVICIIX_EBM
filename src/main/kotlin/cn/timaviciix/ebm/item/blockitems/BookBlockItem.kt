@@ -10,13 +10,12 @@
 package cn.timaviciix.ebm.item.blockitems
 
 import cn.timaviciix.ebm.client.gui.OriginalWritingScreen
+import cn.timaviciix.ebm.client.gui.ScreenSetHandler
 import cn.timaviciix.ebm.data.DataFactory
 import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
 import cn.timaviciix.ebm.data.book.BookData
-import cn.timaviciix.ebm.data.book.BookNbtType
 import cn.timaviciix.ebm.data_io.data_configs.BookTooltipConfig
-import cn.timaviciix.ebm.client.gui.ScreenSetHandler
 import cn.timaviciix.ebm.util.StyleUtil
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
@@ -36,9 +35,9 @@ class BookBlockItem(
     block: Block,
     settings: Settings,
     nameColor: Int,
-    itemClassify: Companion.BlockItemClassify,
-    val bookNbtType: BookNbtType
-) : BaseBlockItem(block, settings, nameColor, itemClassify), ScreenSetHandler {
+    val typeCode: Int,
+    val maxPage: Int
+) : BaseBlockItem(block, settings, nameColor, Companion.BlockItemClassify.Books), ScreenSetHandler {
 
     /**2024.02.10 01:24
      * 目前需要解决的问题：

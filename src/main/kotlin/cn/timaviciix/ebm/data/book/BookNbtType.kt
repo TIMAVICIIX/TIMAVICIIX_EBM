@@ -5,8 +5,7 @@ package cn.timaviciix.ebm.data.book
 enum class BookNbtType(
     val maxPage: Int,
     val charsPerPage: Int,
-    val typeCode:Int,
-    val displayPrefixKey:String = "item.timaviciix_ebm.book_display_type_"
+    val typeCode:Int
 ) {
     //@Imp: Temp init
     //15 lines & 14 chars per line

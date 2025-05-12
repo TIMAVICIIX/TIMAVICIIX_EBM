@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.item.armors
 
-import cn.timaviciix.ebm.registers.items.ArmorRegister
+import cn.timaviciix.ebm.registers.items.registers.ArmorRegister
 import cn.timaviciix.ebm.render.PenguinArmorRender
 import net.minecraft.client.render.entity.model.BipedEntityModel
 import net.minecraft.entity.Entity

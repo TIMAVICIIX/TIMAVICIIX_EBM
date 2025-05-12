@@ -7,21 +7,17 @@
  *@Version: 1.0
  */
 
-package cn.timaviciix.ebm.registers.blocks
+package cn.timaviciix.ebm.registers.blocks.blocks
 
 import cn.timaviciix.ebm.block.others.EuropeanStyleCeramicTeaSetBlock
-import cn.timaviciix.ebm.registers.blocks.BaseBlockRegister.Companion.registrySelf
+import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler.registrySelf
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
-import net.minecraft.item.BlockItem
 
-class OtherBlocksRegister : BlockRegistryContainer {
+class OtherBlocksRegister() : BlockRegistryContainer {
 
     companion object {
-        val blockItemsConsist: MutableList<Pair<BlockItem, String>> = mutableListOf()
         val EUROPEAN_STYLE_CERAMIC_TEA_SET: EuropeanStyleCeramicTeaSetBlock =
-            registrySelf(::EUROPEAN_STYLE_CERAMIC_TEA_SET, {
-                blockItemsConsist.add(it)
-            }, 0xf8f3d4)
+            registrySelf(::EUROPEAN_STYLE_CERAMIC_TEA_SET, 0xf8f3d4)
 
     }
 
