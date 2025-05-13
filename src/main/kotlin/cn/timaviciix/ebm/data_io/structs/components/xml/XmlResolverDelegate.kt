@@ -12,8 +12,8 @@ package cn.timaviciix.ebm.data_io.structs.components.xml
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class XmlResolverDelegate : ReadOnlyProperty<Any?, XmlResolver> {
+class XmlResolverDelegate(private val attributes:Map<String,String>) : ReadOnlyProperty<Any?, XmlResolver> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): XmlResolver {
-        return XmlResolver(property.name)
+        return XmlResolver(property.name,attributes)
     }
 }

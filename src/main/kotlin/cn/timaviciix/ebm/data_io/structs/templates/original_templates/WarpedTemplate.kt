@@ -10,7 +10,6 @@
 package cn.timaviciix.ebm.data_io.structs.templates.original_templates
 
 import cn.timaviciix.ebm.data_io.structs.components.TemplateDelegate
-import cn.timaviciix.ebm.data_io.structs.components.TypeToken
 import cn.timaviciix.ebm.data_io.structs.components.nbt.NbtResolver
 import cn.timaviciix.ebm.data_io.structs.components.xml.XmlResolver
 
@@ -29,10 +28,8 @@ abstract class WarpedTemplate {
         xmlResolver: XmlResolver = XmlResolver.DEFAULT_ROOT,
         nbtResolver: NbtResolver<T>,
         default: T? = null,
-        typeToken: TypeToken<T> = object : TypeToken<T>() {},
-        attributes: MutableMap<String, String> = mutableMapOf()
     ): TemplateDelegate<T> {
-        return TemplateDelegate(xmlResolver, nbtResolver, default, typeToken, attributes)
+        return TemplateDelegate(xmlResolver, nbtResolver, default)
     }
 
 

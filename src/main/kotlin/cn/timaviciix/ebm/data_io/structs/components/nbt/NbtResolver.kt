@@ -12,7 +12,6 @@ package cn.timaviciix.ebm.data_io.structs.components.nbt
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.nbt.*
 import java.util.*
-import kotlin.reflect.KClass
 
 abstract class NbtResolver<T>() {
 
@@ -25,6 +24,14 @@ abstract class NbtResolver<T>() {
     }
 
     companion object {
+
+        class NullResolver() : NbtResolver<String>() {
+            override fun saveTo(nbt: NbtCompound, value: String) {
+            }
+            override fun readFrom(nbt: NbtCompound, default: String?): String? {
+                return null
+            }
+        }
 
         class StringResolver() : NbtResolver<String>() {
             override fun readFrom(nbt: NbtCompound, default: String?): String? {

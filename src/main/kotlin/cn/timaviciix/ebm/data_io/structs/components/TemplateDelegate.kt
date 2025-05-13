@@ -20,9 +20,7 @@ import kotlin.reflect.KProperty
 class TemplateDelegate<T>(
     private val xmlResolver: XmlResolver = XmlResolver.EMPTY,
     private val nbtResolver: NbtResolver<T>,
-    private val default: T? = null,
-    private val typeToken: TypeToken<T>,
-    private val attributes: MutableMap<String, String> = mutableMapOf()
+    private val default: T? = null
 ) {
     private lateinit var instance: ElementTemplate<T>
 
@@ -30,7 +28,7 @@ class TemplateDelegate<T>(
         if (!::instance.isInitialized) {
             val id = property.name
             instance =
-                ElementTemplate(id, xmlResolver, nbtResolver.also { it.injectId(property.name) }, default, typeToken, attributes)
+                ElementTemplate(id, xmlResolver, nbtResolver.also { it.injectId(property.name) }, default)
             thisRef.register(instance)
         }
         return instance

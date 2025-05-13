@@ -9,12 +9,10 @@
 
 package cn.timaviciix.ebm.data_io.structs.templates.package_templates
 
-import cn.timaviciix.ebm.data_io.structs.components.TypeToken
 import cn.timaviciix.ebm.data_io.structs.components.nbt.NbtResolver.Companion
 import cn.timaviciix.ebm.data_io.structs.templates.original_templates.WarpedTemplate
 import cn.timaviciix.ebm.util.GeneralUtil
 import net.minecraft.text.Text
-import java.util.*
 
 class WarpedBookData : WarpedTemplate(
 ) {
@@ -47,4 +45,5 @@ class WarpedBookData : WarpedTemplate(
     val pageTag by template(nbtResolver = Companion.IntListResolver())
     val lastReadingPage by template(nbtResolver = Companion.IntResolver())
 
+    val content by template(nbtResolver = Companion.NullResolver())
 }

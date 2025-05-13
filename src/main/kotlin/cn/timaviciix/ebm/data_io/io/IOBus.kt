@@ -9,29 +9,49 @@
 
 package cn.timaviciix.ebm.data_io.io
 
-import cn.timaviciix.ebm.data_io.structs.components.nbt.NbtResolver
 import cn.timaviciix.ebm.data_io.structs.templates.original_templates.WarpedTemplate
-import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.nbt.NbtCompound
+import org.dom4j.DocumentHelper
 
 object IOBus {
 
-    fun WarpedTemplate.saveToNbt(nbt:NbtCompound):Boolean{
-        this.elements.forEach { element ->
-            val elementValue = element.safetyGetValue()
-            if (elementValue != null) {
-                // 通过 TypeToken 检查类型
-                if (element.typeToken.type == elementValue::class.java.genericSuperclass) {
-                    @Suppress("UNCHECKED_CAST")
-                    (element.nbtResolver as NbtResolver<Any>).saveTo(nbt, elementValue)
-                } else {
-                    throw IllegalStateException("Type mismatch for element ${element.id}")
-                }
-            }else{
-                throw IllegalStateException("Element mismatch of value ${element.id}")
-            }
+    fun WarpedTemplate.read(nbt: NbtCompound): WarpedTemplate {
+        return readFromNbt(this,nbt)
+        //TODO
+    }
+
+    fun WarpedTemplate.save(nbt: NbtCompound) {
+        saveToNbt(this, nbt)
+        saveToXml(this)
+    }
+
+    private fun readFromNbt(targetTemplate: WarpedTemplate, nbt: NbtCompound): WarpedTemplate {
+        targetTemplate.elements.forEach { element ->
+            element.readFrom(nbt)
+        }
+        return targetTemplate
+    }
+
+
+    private fun saveToNbt(targetTemplate: WarpedTemplate, nbt: NbtCompound): Boolean {
+        targetTemplate.elements.forEach { element ->
+            element.saveToNbt(nbt)
         }
         return true
     }
 
+    private fun saveToXml(targetTemplate: WarpedTemplate) {
+        val document = DocumentHelper.createDocument()
+        targetTemplate.elements.forEach {
+            it.xmlResolver.saveToXml(document, it.valueToString())
+        }
+    }
+
+    fun compressDocument() {
+
+    }
+
+    fun compressedAsyncConn() {
+
+    }
 }
