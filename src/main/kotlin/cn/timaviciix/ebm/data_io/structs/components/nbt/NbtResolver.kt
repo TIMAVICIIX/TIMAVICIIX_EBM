@@ -25,10 +25,10 @@ abstract class NbtResolver<T>() {
 
     companion object {
 
-        class NullResolver() : NbtResolver<String>() {
-            override fun saveTo(nbt: NbtCompound, value: String) {
+        class NullResolver<T>() : NbtResolver<T>() {
+            override fun saveTo(nbt: NbtCompound, value: T) {
             }
-            override fun readFrom(nbt: NbtCompound, default: String?): String? {
+            override fun readFrom(nbt: NbtCompound, default: T?): T? {
                 return null
             }
         }

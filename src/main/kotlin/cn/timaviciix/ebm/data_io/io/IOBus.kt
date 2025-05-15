@@ -12,11 +12,13 @@ package cn.timaviciix.ebm.data_io.io
 import cn.timaviciix.ebm.data_io.structs.templates.original_templates.WarpedTemplate
 import net.minecraft.nbt.NbtCompound
 import org.dom4j.DocumentHelper
+import org.dom4j.Element
+import org.dom4j.tree.DefaultElement
 
 object IOBus {
 
     fun WarpedTemplate.read(nbt: NbtCompound): WarpedTemplate {
-        return readFromNbt(this,nbt)
+        return readFromNbt(this, nbt)
         //TODO
     }
 
@@ -42,8 +44,9 @@ object IOBus {
 
     private fun saveToXml(targetTemplate: WarpedTemplate) {
         val document = DocumentHelper.createDocument()
+        val ebm = document.addElement("ebm")
         targetTemplate.elements.forEach {
-            it.xmlResolver.saveToXml(document, it.valueToString())
+            it.saveToXml(ebm)
         }
     }
 
@@ -53,5 +56,21 @@ object IOBus {
 
     fun compressedAsyncConn() {
 
+    }
+
+    //This Method ensure Signal Element in Document
+    fun ensureElement(root: Element, xpath: List<String>): Element {
+        var current = root
+        for (nodeName in xpath) {
+            val next = current.element(nodeName)
+            current = if (next != null) {
+                next
+            } else {
+                val created = DefaultElement(nodeName)
+                current.add(created)
+                created
+            }
+        }
+        return current
     }
 }

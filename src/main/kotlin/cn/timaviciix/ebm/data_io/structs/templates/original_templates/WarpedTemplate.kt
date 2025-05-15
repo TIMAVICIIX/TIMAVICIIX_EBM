@@ -11,6 +11,7 @@ package cn.timaviciix.ebm.data_io.structs.templates.original_templates
 
 import cn.timaviciix.ebm.data_io.structs.components.TemplateDelegate
 import cn.timaviciix.ebm.data_io.structs.components.nbt.NbtResolver
+import cn.timaviciix.ebm.data_io.structs.components.xml.XmlResolveSupplier
 import cn.timaviciix.ebm.data_io.structs.components.xml.XmlResolver
 
 //基类函数template与委托类TemplateDelegate配合，完成子类语法糖方式的声明，算是一个语法糖优化，不要也行
@@ -25,11 +26,11 @@ abstract class WarpedTemplate {
     }
 
     fun <T> template(
-        xmlResolver: XmlResolver = XmlResolver.DEFAULT_ROOT,
+        xmlResolverSupplier: XmlResolveSupplier<T>? = null,
         nbtResolver: NbtResolver<T>,
         default: T? = null,
     ): TemplateDelegate<T> {
-        return TemplateDelegate(xmlResolver, nbtResolver, default)
+        return TemplateDelegate(xmlResolverSupplier,nbtResolver, default)
     }
 
 
