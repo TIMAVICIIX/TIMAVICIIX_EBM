@@ -31,8 +31,12 @@ class ElementTemplate<T>(
 
     fun valueToString(): String = elementValue.toString()
 
-    fun readFrom(nbt: NbtCompound) {
+    fun readFromNbt(nbt: NbtCompound) {
         elementValue = nbtResolver.readFrom(nbt)
+    }
+
+    fun readFromXml(root:Element){
+        elementValue = xmlResolver.readFromXml(root)?.value
     }
 
     fun saveToNbt(nbt: NbtCompound) {

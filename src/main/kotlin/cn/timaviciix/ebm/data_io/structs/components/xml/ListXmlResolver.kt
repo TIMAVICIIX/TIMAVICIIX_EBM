@@ -13,12 +13,12 @@ import cn.timaviciix.ebm.data_io.io.IOBus
 import cn.timaviciix.ebm.util.GlobalData
 import org.dom4j.Element
 
-class ListXmlResolver<T : MutableList<*>>(
+class ListXmlResolver(
     private val warpXpath: MutableList<String>,
     private val itemElementId: String,
     private val itemStringAttributes: Map<String, String>,
     private val itemDigitAttributes: Map<String, Pair<Int, Boolean>>
-) : XmlResolveSupplier<T> {
+) : XmlResolveSupplier<MutableList<String>> {
 
     constructor(
         signalXpath: String,
@@ -30,9 +30,34 @@ class ListXmlResolver<T : MutableList<*>>(
     override val supplierAttributes: Map<String, String> = itemStringAttributes
     override val supplierXpath: MutableList<String> = warpXpath
 
+    override fun saveToXml(root: Element, value: MutableList<String>) {
+        saveXml(root, value)
+    }
+
+    override fun readFromXml(root: Element): XmlReadOut<MutableList<String>>? {
+        if (warpXpath.isEmpty()) return null
+
+        val list = mutableListOf<String>()
+        var current = root
+
+        for (nodeName in warpXpath) {
+            val next = current.element(nodeName) ?: return null
+            current = next
+        }
+
+        // 提取所有子元素 itemElementId
+        val items = current.elements(itemElementId)
+        for (item in items) {
+            list.add(item.text)
+        }
+
+        return XmlReadOut(list, mapOf(), mapOf())
+
+    }
+
     private fun saveXml(
         root: Element,
-        value: T,
+        value: MutableList<String>,
     ) {
         root.let {
             if (warpXpath.isNotEmpty()) {
@@ -40,7 +65,7 @@ class ListXmlResolver<T : MutableList<*>>(
                 val incrementCache = mutableMapOf<String, Int>()
                 value.forEach {
                     val currentItem = warpElement.addElement(itemElementId)
-                    currentItem.text = it.toString()
+                    currentItem.text = it
 
                     itemStringAttributes.forEach { (key, value) ->
                         currentItem.addAttribute(key, value)
@@ -63,10 +88,6 @@ class ListXmlResolver<T : MutableList<*>>(
             }
         }
 
-    }
-
-    override fun saveToXml(root: Element, value: T) {
-        saveXml(root, value)
     }
 
 

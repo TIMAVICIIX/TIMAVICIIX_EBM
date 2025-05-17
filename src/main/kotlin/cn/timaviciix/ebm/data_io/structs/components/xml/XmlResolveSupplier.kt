@@ -12,12 +12,9 @@ package cn.timaviciix.ebm.data_io.structs.components.xml
 import org.dom4j.Element
 
 interface XmlResolveSupplier<T> {
+    val supplierXpath: MutableList<String>
+    val supplierAttributes: Map<String, String>
 
-    val supplierXpath:MutableList<String>
-    val supplierAttributes:Map<String,String>
-
-    fun saveToXml(
-        root:Element,
-        value:T
-    )
+    fun saveToXml(root: Element, value: T)
+    fun readFromXml(root: Element): XmlReadOut<T>?
 }

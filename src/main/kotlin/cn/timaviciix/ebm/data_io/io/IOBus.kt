@@ -11,43 +11,61 @@ package cn.timaviciix.ebm.data_io.io
 
 import cn.timaviciix.ebm.data_io.structs.templates.original_templates.WarpedTemplate
 import net.minecraft.nbt.NbtCompound
+import org.dom4j.Document
 import org.dom4j.DocumentHelper
 import org.dom4j.Element
+import org.dom4j.io.SAXReader
 import org.dom4j.tree.DefaultElement
+import java.io.InputStream
 
 object IOBus {
 
-    fun WarpedTemplate.read(nbt: NbtCompound): WarpedTemplate {
-        return readFromNbt(this, nbt)
-        //TODO
+    fun WarpedTemplate.read(nbt: NbtCompound, inputStream: InputStream): WarpedTemplate {
+        this.readFromNbt(nbt)
+        this.readFromXml(inputStream)
+        return this
     }
 
     fun WarpedTemplate.save(nbt: NbtCompound) {
-        saveToNbt(this, nbt)
-        saveToXml(this)
+        saveToNbt(nbt)
+        saveToXml()
     }
 
-    private fun readFromNbt(targetTemplate: WarpedTemplate, nbt: NbtCompound): WarpedTemplate {
-        targetTemplate.elements.forEach { element ->
-            element.readFrom(nbt)
+
+    private fun WarpedTemplate.readFromNbt(nbt: NbtCompound): WarpedTemplate {
+        this.elements.forEach { element ->
+            element.readFromNbt(nbt)
         }
-        return targetTemplate
+        return this
     }
 
 
-    private fun saveToNbt(targetTemplate: WarpedTemplate, nbt: NbtCompound): Boolean {
-        targetTemplate.elements.forEach { element ->
+    private fun WarpedTemplate.saveToNbt(nbt: NbtCompound): Boolean {
+        this.elements.forEach { element ->
             element.saveToNbt(nbt)
         }
         return true
     }
 
-    private fun saveToXml(targetTemplate: WarpedTemplate) {
+    private fun WarpedTemplate.readFromXml(inputStream: InputStream): WarpedTemplate {
+        val saxReader = SAXReader()
+        val document: Document = saxReader.read(inputStream)
+        this.elements.forEach {
+            it.readFromXml(document.rootElement)
+        }
+        return this
+    }
+
+    private fun WarpedTemplate.saveToXml() {
         val document = DocumentHelper.createDocument()
         val ebm = document.addElement("ebm")
-        targetTemplate.elements.forEach {
+        this.elements.forEach {
             it.saveToXml(ebm)
         }
+    }
+
+    private fun readFromXml() {
+
     }
 
     fun compressDocument() {
@@ -72,5 +90,19 @@ object IOBus {
             }
         }
         return current
+    }
+
+
+    inline fun <reified T> readElementFromXpath(
+        root: Element,
+        xpath: List<String>,
+        crossinline converter: (Element) -> T?
+    ): T? {
+        var current = root
+        for (nodeName in xpath) {
+            val next = current.element(nodeName) ?: return null
+            current = next
+        }
+        return converter(current)
     }
 }

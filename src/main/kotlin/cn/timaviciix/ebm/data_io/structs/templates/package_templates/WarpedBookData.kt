@@ -47,7 +47,7 @@ class WarpedBookData : WarpedTemplate(
     val lastReadingPage by template(nbtResolver = Companion.IntResolver())
 
     val content by template(
-        xmlResolverSupplier = ListXmlResolver<MutableList<String>>(
+        xmlResolverSupplier = ListXmlResolver(
             "content",
             "page",
             mutableMapOf(),
