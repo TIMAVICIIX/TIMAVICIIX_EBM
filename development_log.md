@@ -372,3 +372,8 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 ## <br>2025.05.17
 #### XML读取逻辑完成闭环，XML存取机制将为覆盖
 #### XML外部数据结构到内部数据结构转换后，List结构将缺失自增attributes,由内部结构List接管
+
+## <br>2025.05.18
+#### 底层客户端数据存储逻辑开发告一段落，将整合旧数据存储并替代其逻辑
+#### 下一步将优化网络模块
+#### 高内聚，低耦合
