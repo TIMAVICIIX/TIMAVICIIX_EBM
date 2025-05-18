@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.client.gui.widgets
 
 import cn.timaviciix.ebm.client.gui.GUIConfig
-import cn.timaviciix.ebm.deploy.TextFieldWidgetDeploy
+import cn.timaviciix.ebm.puppets.TextFieldWidgetPuppet
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
@@ -28,7 +28,7 @@ class ThreePatchHorizontalFieldWidget(
     private val bufferStringChecker: (String) -> Unit = {},
     private val widgetEditable: Boolean = false,
     private val text: Text = Text.empty()
-) : TextFieldWidgetDeploy(
+) : TextFieldWidgetPuppet(
     textRenderer,
     positionX + textureConfig.sideWidth,
     positionY,

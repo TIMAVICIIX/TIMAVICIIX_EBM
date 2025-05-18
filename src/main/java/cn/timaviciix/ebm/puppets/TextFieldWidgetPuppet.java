@@ -1,4 +1,4 @@
-package cn.timaviciix.ebm.deploy;
+package cn.timaviciix.ebm.puppets;
 
 
 import io.wispforest.owo.ui.inject.GreedyInputComponent;
@@ -30,7 +30,7 @@ import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
-public class TextFieldWidgetDeploy extends ClickableWidget implements Drawable, GreedyInputComponent {
+public class TextFieldWidgetPuppet extends ClickableWidget implements Drawable, GreedyInputComponent {
     public static final int field_32194 = -1;
     public static final int field_32195 = 1;
     private static final int field_32197 = 1;
@@ -67,11 +67,11 @@ public class TextFieldWidgetDeploy extends ClickableWidget implements Drawable, 
     @Nullable
     private Text placeholder;
 
-    public TextFieldWidgetDeploy(TextRenderer textRenderer, int x, int y, int width, int height, Text text) {
+    public TextFieldWidgetPuppet(TextRenderer textRenderer, int x, int y, int width, int height, Text text) {
         this(textRenderer, x, y, width, height, null, text);
     }
 
-    public TextFieldWidgetDeploy(TextRenderer textRenderer, int x, int y, int width, int height, @Nullable net.minecraft.client.gui.widget.TextFieldWidget copyFrom, Text text) {
+    public TextFieldWidgetPuppet(TextRenderer textRenderer, int x, int y, int width, int height, @Nullable net.minecraft.client.gui.widget.TextFieldWidget copyFrom, Text text) {
         super(x, y, width, height, text);
         this.textRenderer = textRenderer;
         if (copyFrom != null) {

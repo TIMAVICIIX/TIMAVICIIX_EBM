@@ -51,7 +51,7 @@ class WarpedBookData : WarpedTemplate(
             "content",
             "page",
             mutableMapOf(),
-            mutableMapOf("page" to Pair(1, true))
+            "page" to Pair(1, true)
         ),
         nbtResolver = Companion.NullResolver()
     )

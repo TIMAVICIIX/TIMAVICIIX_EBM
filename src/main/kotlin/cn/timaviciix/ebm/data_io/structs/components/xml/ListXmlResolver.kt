@@ -10,6 +10,7 @@
 package cn.timaviciix.ebm.data_io.structs.components.xml
 
 import cn.timaviciix.ebm.data_io.io.IOBus
+import cn.timaviciix.ebm.util.GeneralUtil.Objects.toIntOr0
 import cn.timaviciix.ebm.util.GlobalData
 import org.dom4j.Element
 
@@ -17,15 +18,15 @@ class ListXmlResolver(
     private val warpXpath: MutableList<String>,
     private val itemElementId: String,
     private val itemStringAttributes: Map<String, String>,
-    private val itemDigitAttributes: Map<String, Pair<Int, Boolean>>
+    private val itemDigitAttribute: Pair<String, Pair<Int, Boolean>>
 ) : XmlResolveSupplier<MutableList<String>> {
 
     constructor(
         signalXpath: String,
         itemElementId: String,
         itemStringAttributes: Map<String, String>,
-        itemDigitAttributes: Map<String, Pair<Int, Boolean>>
-    ) : this(mutableListOf(signalXpath), itemElementId, itemStringAttributes, itemDigitAttributes)
+        itemDigitAttribute: Pair<String, Pair<Int, Boolean>>
+    ) : this(mutableListOf(signalXpath), itemElementId, itemStringAttributes, itemDigitAttribute)
 
     override val supplierAttributes: Map<String, String> = itemStringAttributes
     override val supplierXpath: MutableList<String> = warpXpath
@@ -37,7 +38,7 @@ class ListXmlResolver(
     override fun readFromXml(root: Element): XmlReadOut<MutableList<String>>? {
         if (warpXpath.isEmpty()) return null
 
-        val list = mutableListOf<String>()
+        val sortList = mutableListOf<Pair<Int, String>>()
         var current = root
 
         for (nodeName in warpXpath) {
@@ -48,10 +49,16 @@ class ListXmlResolver(
         // 提取所有子元素 itemElementId
         val items = current.elements(itemElementId)
         for (item in items) {
-            list.add(item.text)
+            val digit = item.attribute(itemDigitAttribute.first).value.toIntOr0()
+            sortList.plus(digit to item.text)
         }
 
-        return XmlReadOut(list, mapOf(), mapOf())
+        val sortedStrings = sortList
+            .sortedBy { it.first }
+            .map { it.second }
+            .toMutableList()
+
+        return XmlReadOut(sortedStrings, mapOf(), mapOf())
 
     }
 
@@ -70,7 +77,7 @@ class ListXmlResolver(
                     itemStringAttributes.forEach { (key, value) ->
                         currentItem.addAttribute(key, value)
                     }
-                    itemDigitAttributes.forEach { (key, value) ->
+                    itemDigitAttribute.let { (key, value) ->
                         if (value.second) {
                             currentItem.addAttribute(key, value.first.toString())
                         } else {

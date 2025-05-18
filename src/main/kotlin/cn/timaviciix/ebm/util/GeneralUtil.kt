@@ -18,6 +18,14 @@ object GeneralUtil {
 
         fun Int.toBoolean(): Boolean = this > 0
 
+        fun String.toIntOr0(): Int {
+            return try {
+                this.toInt()
+            } catch (e: Exception) {
+                0
+            }
+        }
+
     }
 
     //UUID class
