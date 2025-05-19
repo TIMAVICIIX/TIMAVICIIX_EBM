@@ -10,7 +10,7 @@
 package cn.timaviciix.ebm.data_io.structs.components.xml
 
 class XmlReadOut<T>(
-    val value:T,
+    val value:T?,
     val stringAttributes:Map<String,String>,
     val digitAttributes:Map<String,Int>
 ) {

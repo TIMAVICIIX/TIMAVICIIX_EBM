@@ -16,6 +16,7 @@ import cn.timaviciix.ebm.data.SealedData
 import cn.timaviciix.ebm.data.SealedDataPackage
 import cn.timaviciix.ebm.data.book.BookData
 import cn.timaviciix.ebm.data_io.data_configs.BookTooltipConfig
+import cn.timaviciix.ebm.data_io.structs.templates.package_templates.WarpedBookData
 import cn.timaviciix.ebm.util.StyleUtil
 import net.minecraft.block.Block
 import net.minecraft.client.MinecraftClient
@@ -36,8 +37,11 @@ class BookBlockItem(
     settings: Settings,
     nameColor: Int,
     val typeCode: Int,
-    val maxPage: Int
+    val maxPage: Int,
 ) : BaseBlockItem(block, settings, nameColor, Companion.BlockItemClassify.Books), ScreenSetHandler {
+
+    //丝滑替代,爽到了
+    private val bookDataStruct = WarpedBookData(maxPage, typeCode)
 
     /**2024.02.10 01:24
      * 目前需要解决的问题：

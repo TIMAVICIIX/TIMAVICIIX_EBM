@@ -377,3 +377,7 @@ enum class ParamEntityTypes(val blockEntityType: BlockEntityType<*>) {
 #### 底层客户端数据存储逻辑开发告一段落，将整合旧数据存储并替代其逻辑
 #### 下一步将优化网络模块
 #### 高内聚，低耦合
+
+## <br>2025.05.19
+#### 修复未经检查的XML解析器类型转换，新增XML存取处理逻辑入参，将通过模板方法入参
+#### 正在将存取结构整合到item中

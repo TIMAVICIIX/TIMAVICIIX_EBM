@@ -35,8 +35,12 @@ class ElementTemplate<T>(
         elementValue = nbtResolver.readFrom(nbt)
     }
 
-    fun readFromXml(root:Element){
-        elementValue = xmlResolver.readFromXml(root)?.value
+    fun readFromXml(root: Element,default:T) {
+        try {
+            elementValue = xmlResolver.readFromXml(root,defaultValue)?.value
+        } catch (e: Exception) {
+            GlobalData.LOGGER.info("Read Element From Xml failed$id")
+        }
     }
 
     fun saveToNbt(nbt: NbtCompound) {

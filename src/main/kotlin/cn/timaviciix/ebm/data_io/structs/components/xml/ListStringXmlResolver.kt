@@ -14,7 +14,7 @@ import cn.timaviciix.ebm.util.GeneralUtil.Objects.toIntOr0
 import cn.timaviciix.ebm.util.GlobalData
 import org.dom4j.Element
 
-class ListXmlResolver(
+class ListStringXmlResolver(
     private val warpXpath: MutableList<String>,
     private val itemElementId: String,
     private val itemStringAttributes: Map<String, String>,
@@ -35,7 +35,7 @@ class ListXmlResolver(
         saveXml(root, value)
     }
 
-    override fun readFromXml(root: Element): XmlReadOut<MutableList<String>>? {
+    override fun readFromXml(root: Element, default: MutableList<String>?): XmlReadOut<MutableList<String>>? {
         if (warpXpath.isEmpty()) return null
 
         val sortList = mutableListOf<Pair<Int, String>>()
@@ -58,7 +58,11 @@ class ListXmlResolver(
             .map { it.second }
             .toMutableList()
 
-        return XmlReadOut(sortedStrings, mapOf(), mapOf())
+        return if (sortedStrings.isNotEmpty()) {
+            XmlReadOut(sortedStrings, mapOf(), mapOf())
+        } else {
+            XmlReadOut(default, mapOf(), mapOf())
+        }
 
     }
 

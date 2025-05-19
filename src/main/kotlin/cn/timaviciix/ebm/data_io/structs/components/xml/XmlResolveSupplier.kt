@@ -16,5 +16,5 @@ interface XmlResolveSupplier<T> {
     val supplierAttributes: Map<String, String>
 
     fun saveToXml(root: Element, value: T)
-    fun readFromXml(root: Element): XmlReadOut<T>?
+    fun readFromXml(root: Element, default: T?): XmlReadOut<T>?
 }
