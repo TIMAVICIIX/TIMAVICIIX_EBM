@@ -13,7 +13,7 @@ import cn.timaviciix.ebm.block.blockentitys.bookentitys.LightBookBlockEntity
 import cn.timaviciix.ebm.block.books.lightbooks.CrimsonFlameGildedBookBlock
 import cn.timaviciix.ebm.block.books.lightbooks.GoldenBoughForestBookBlock
 import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler
-import cn.timaviciix.ebm.registers.blocks.books.delegates.LightBookDelegateRegister
+import cn.timaviciix.ebm.registers.blocks.books.components.BookRegistrySupplier
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -21,9 +21,14 @@ import net.minecraft.block.entity.BlockEntityType
 
 class LightBookRegister() : BlockRegistryContainer {
 
-    companion object {
-        val GOLDEN_BOUGH_FOREST_BOOK by LightBookDelegateRegister(::GoldenBoughForestBookBlock)
-        val CRIMSON_FLAME_GILDED_BOOK by LightBookDelegateRegister(::CrimsonFlameGildedBookBlock)
+    companion object : BookRegistrySupplier() {
+        override val nameColor: Int = 0x46cdcf
+        override val maxPage: Int = 500
+        override val typeCode: Int = 2
+
+        val GOLDEN_BOUGH_FOREST_BOOK: GoldenBoughForestBookBlock = registry(::GOLDEN_BOUGH_FOREST_BOOK)
+        val CRIMSON_FLAME_GILDED_BOOK: CrimsonFlameGildedBookBlock = registry(::CRIMSON_FLAME_GILDED_BOOK)
+
     }
 
     class EntityTypes() : BlockEntityRegistryContainer {

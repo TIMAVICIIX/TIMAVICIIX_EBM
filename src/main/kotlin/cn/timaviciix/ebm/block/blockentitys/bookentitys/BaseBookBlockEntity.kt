@@ -20,7 +20,5 @@ abstract class BaseBookBlockEntity(
     state: BlockState
 ) : BlockEntity(entityType, pos, state) {
 
-    abstract val typeCode : Int
-    abstract val maxPage: Int
 
 }

@@ -47,7 +47,7 @@ class InvertedFeatherDuster :
                     }
                     it.health /= 2
                     it.world.playSound(
-                        null, it.blockPos, SoundRegister.WHIP_CRACK, SoundCategory.PLAYERS, 4.0f, 1.0f
+                        null, it.blockPos, SoundRegister.WHIP_CRACK, SoundCategory.PLAYERS, 5.0f, 1.0f
                     )
                     return super.postHit(stack, it, attacker)
                 }

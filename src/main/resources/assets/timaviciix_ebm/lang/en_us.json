@@ -64,6 +64,7 @@
   "gui.timaviciix_ebm.book_author_name": "Author Name:",
   "gui.timaviciix_ebm.save_btn": "Save",
   "gui.timaviciix_ebm.previous_btn": "Previous",
+  "gui.timaviciix_ebm.screen_musk_loading": "Loading......",
   "tips.timaviciix_ebm.tips_desc_1": "Click me to hide or show ~",
   "tips.timaviciix_ebm.tips_desc_2": "The book will be automatically saved after each page flip during editing!",
   "tips.timaviciix_ebm.tips_desc_3": "Use “$chapter:” to specify the automatic table of contents.",
@@ -80,6 +81,7 @@
   "tooltip.timaviciix_ebm.book_is_manuscript": "Manuscript",
   "tooltip.timaviciix_ebm.book_stamped": "Stamped",
   "tooltip.timaviciix_ebm.book_draft": "Draft",
+  "tooltip.timaviciix_ebm.book_blank_data": "This book hasn't been edited.",
   "data.timaviciix_ebm.book_name_unknown": "Unnamed Book",
   "data.timaviciix_ebm.author_name_unknown": "Unknown Author"
 }

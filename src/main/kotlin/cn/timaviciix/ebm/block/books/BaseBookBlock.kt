@@ -28,9 +28,6 @@ import org.slf4j.LoggerFactory
 abstract class BaseBookBlock(private val bookType: BookType) :
     BaseDirectBlock(GlobalData.getGeneralBlockSetting(DyeColor.BROWN)) {
 
-    private val logger = LoggerFactory.getLogger(GlobalData.MOD_ID)
-
-
     enum class BookType(val bodyShape: VoxelShape) {
         JournalBook(
             VoxelShapes.union(

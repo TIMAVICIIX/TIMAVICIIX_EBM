@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.network.Receiver
+import cn.timaviciix.ebm.network.NetworkInit
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.render.BlueCatPendantBlockRender
 import net.fabricmc.api.ClientModInitializer
@@ -27,7 +27,7 @@ object TIMAVICIIXEBMClient : ClientModInitializer {
 
 
         //client to registry event
-        Receiver.registryClientReceiver()
+        NetworkInit.registryClient()
     }
 
 }

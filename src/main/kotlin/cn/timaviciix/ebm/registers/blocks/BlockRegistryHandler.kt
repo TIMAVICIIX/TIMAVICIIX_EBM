@@ -62,7 +62,7 @@ object BlockRegistryHandler {
         )
     }
 
-    private fun generateBlockItem(
+     private fun generateBlockItem(
         nameColor: Int,
         block: Block,
         identifier: Identifier,
@@ -118,20 +118,18 @@ object BlockRegistryHandler {
 
     }
 
-    fun <T : BaseBookBlock> registrySelf(
-        id: String,
-        blockSupplier: () -> T,
+    fun <T: BaseBookBlock> registrySelf(
+        id:String,
+        block: T,
         blockItemOperation: (Pair<BlockItem, String>) -> Unit = { ItemsTooltip.tooltipBlockBusList.add(it) },
         nameColor: Int = 0xeeeeee,
         maxPage: Int,
         typeCode: Int
     ): T {
 
-        val targetBlock = blockSupplier()
-
         val blockItemPart = generateBlockItem(
             nameColor = nameColor,
-            block = targetBlock,
+            block = block,
             identifier = Identifier(GlobalData.MOD_ID, id),
             maxPage = maxPage,
             typeCode = typeCode
@@ -139,7 +137,7 @@ object BlockRegistryHandler {
 
         blockItemOperation(Pair(blockItemPart, id))
 
-        return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, id), targetBlock)
+        return Registry.register(Registries.BLOCK, Identifier(GlobalData.MOD_ID, id), block)
 
     }
 

@@ -12,7 +12,7 @@ package cn.timaviciix.ebm.client.gui
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.Text
 
-abstract class BaseScreen(title: Text): Screen(title) {
+abstract class BaseScreen(title: Text) : Screen(title) {
 
     abstract fun openOperations()
 
@@ -21,5 +21,6 @@ abstract class BaseScreen(title: Text): Screen(title) {
     abstract fun doneOperations()
 
     abstract fun closeOperations()
+
 
 }

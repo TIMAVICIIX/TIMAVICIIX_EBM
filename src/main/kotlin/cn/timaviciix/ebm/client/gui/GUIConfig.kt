@@ -1,14 +1,9 @@
 package cn.timaviciix.ebm.client.gui
 
 import cn.timaviciix.ebm.util.GlobalData
-import net.minecraft.client.font.TextRenderer
-import net.minecraft.client.gui.DrawContext
-import net.minecraft.text.OrderedText
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Identifier
-import java.util.function.BiFunction
-import kotlin.properties.Delegates
 
 object GUIConfig {
 
@@ -27,6 +22,14 @@ object GUIConfig {
         val CLOSE_BTN_WIDGET_HOVER_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/close_btn_widget_hover.png")
 
+        val SETTING_BTN_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/setting_btn_widget.png")
+        val SETTING_BTN_WIDGET_HOVER_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/setting_btn_widget_hover.png")
+
+        val NETWORK_BTN_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/network_btn_widget.png")
+        val NETWORK_BTN_WIDGET_HOVER_TEXTURE =
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/network_btn_widget_hover.png")
+
         val NEXT_BTN_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/next_btn_widget.png")
         val NEXT_BTN_WIDGET_HOVER_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/btn/hover/next_btn_widget_hover.png")
@@ -44,11 +47,26 @@ object GUIConfig {
 
         val TITLE_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/title_widget.png")
 
+        val TOP_SLIDE_NOTICE_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/background_notice.png")
+        val NOTICE_SAVE_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/save_notice.png")
+        val NOTICE_INFO_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/info_notice.png")
+
         val READ_LEVEL_WIDGET_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/read_level_widget.png")
 
         val WRITE_LEVEL_WIDGET_TEXTURE =
-            Identifier(GlobalData.MOD_ID, "texture/gui/widget/component/write_level_widget.png")
+            Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/write_level_widget.png")
+    }
+
+    object FrameTextures {
+        val BOOK_LOADING_FRAME_TEXTURES = listOf(
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame1.png"),
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame2.png"),
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame3.png"),
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame4.png"),
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame5.png"),
+            Identifier(GlobalData.MOD_ID, "textures/gui/frame/loading/book_data_loading_frame6.png")
+        )
     }
 
     object Fonts {
@@ -108,6 +126,14 @@ object GUIConfig {
         val middleOffset: Int
     )
 
+    data class FrameTexturesConfig(
+        val textures: List<Identifier>,
+        val u: Float,
+        val v: Float,
+        val textureWidth: Int,
+        val textureHeight: Int,
+    )
+
     val READING_GUI_TEXTURE_SET = NormalTextureConfig(
         Textures.READING_WRITING_GUI_TEXTURE,
         0, 0,
@@ -121,6 +147,22 @@ object GUIConfig {
         20, 20,
         20, 20,
         hoverTexture = Textures.CLOSE_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val SETTING_BUTTON_TEXTURE_SET = BtnTextureConfig(
+        Textures.SETTING_BTN_WIDGET_TEXTURE,
+        0, 0,
+        20, 20,
+        20, 20,
+        hoverTexture = Textures.SETTING_BTN_WIDGET_HOVER_TEXTURE
+    )
+
+    val NETWORK_BUTTON_TEXTURE_SET = BtnTextureConfig(
+        Textures.NETWORK_BTN_WIDGET_TEXTURE,
+        0, 0,
+        20, 20,
+        20, 20,
+        hoverTexture = Textures.NETWORK_BTN_WIDGET_HOVER_TEXTURE
     )
 
     val NEXT_BUTTON_TEXTURE_SET = BtnTextureConfig(
@@ -156,6 +198,31 @@ object GUIConfig {
         0, 0,
         91, 20,
         14, 63
+    )
+
+    val LOADING_FRAME_TEXTURE_SET = FrameTexturesConfig(
+        FrameTextures.BOOK_LOADING_FRAME_TEXTURES,
+        0f, 0f,
+        32, 32
+    )
+
+    val SAVE_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
+        Textures.NOTICE_SAVE_ICON_TEXTURE,
+        0, 0,
+        12, 12,
+        12, 12
+    )
+    val INFO_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
+        Textures.NOTICE_INFO_ICON_TEXTURE,
+        0, 0,
+        12, 12,
+        12, 12
+    )
+    val NOTICE_THREE_PATCH_TEXTURE_SET = ThreePatchTextureConfig(
+        Textures.TOP_SLIDE_NOTICE_WIDGET_TEXTURE,
+        0, 0,
+        102, 24,
+        6, 90
     )
 
 }

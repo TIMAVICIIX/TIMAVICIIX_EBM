@@ -4,7 +4,7 @@
 
 package cn.timaviciix.ebm.mixin.network;
 
-import cn.timaviciix.ebm.network.BufferBus;
+import cn.timaviciix.ebm.network.channels.ReadingStateChannel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -42,7 +42,7 @@ public abstract class ReadStateMixin extends LivingEntityRenderer<AbstractClient
             CallbackInfo ci
     ) {
         // 检查玩家是否在阅读状态
-        if (BufferBus.ReadingOperationBus.INSTANCE.getReadingStatePlayers().contains(entity.getUuid())) {
+        if (ReadingStateChannel.INSTANCE.getReadingStatePlayers().contains(entity.getUuid())) {
             Text readingStateString = Text.translatable("state.timaviciix_ebm.reading_state");
             double d = this.dispatcher.getSquaredDistanceToCamera(entity);
             if (!(d > 4096.0)) {

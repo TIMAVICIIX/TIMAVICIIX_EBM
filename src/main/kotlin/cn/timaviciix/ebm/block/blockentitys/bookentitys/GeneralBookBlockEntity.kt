@@ -9,7 +9,6 @@
 
 package cn.timaviciix.ebm.block.blockentitys.bookentitys
 
-import cn.timaviciix.ebm.data.book.BookNbtType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.math.BlockPos
@@ -20,11 +19,5 @@ class GeneralBookBlockEntity(
     state: BlockState
 ) :
     BaseBookBlockEntity(entityType, pos, state) {
-
-    override val maxPage: Int
-        get() = TODO("Not yet implemented")
-
-    override val typeCode: Int
-        get() = TODO("Not yet implemented")
 
 }

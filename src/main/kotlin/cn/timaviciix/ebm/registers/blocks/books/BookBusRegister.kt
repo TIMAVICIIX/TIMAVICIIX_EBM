@@ -17,6 +17,7 @@ import net.minecraft.item.BlockItem
 class BookBusRegister() : BlockRegistryContainer {
 
     companion object {
+
         fun registryAllBook() {
             //JournalBook
             FieldRegistrationHandler.register(JournalBookRegister::class.java, GlobalData.MOD_ID, false)

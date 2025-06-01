@@ -15,7 +15,7 @@ import cn.timaviciix.ebm.block.books.largebooks.QuartzRubyEncrustedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.RubyGildedBookBlock
 import cn.timaviciix.ebm.block.books.largebooks.SapphireGildedBookBlock
 import cn.timaviciix.ebm.registers.blocks.BlockRegistryHandler
-import cn.timaviciix.ebm.registers.blocks.books.delegates.LargeBookDelegateRegister
+import cn.timaviciix.ebm.registers.blocks.books.components.BookRegistrySupplier
 import io.wispforest.owo.registration.reflect.BlockEntityRegistryContainer
 import io.wispforest.owo.registration.reflect.BlockRegistryContainer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -23,11 +23,16 @@ import net.minecraft.block.entity.BlockEntityType
 
 class LargeBookRegister() : BlockRegistryContainer {
 
-    companion object {
-        val MAJESTIC_GILDED_BOOK by LargeBookDelegateRegister(::MajesticGildedBookBlock)
-        val QUARTZ_RUBY_ENCRUSTED_BOOK by LargeBookDelegateRegister(::QuartzRubyEncrustedBookBlock)
-        val RUBY_GILDED_BOOK by LargeBookDelegateRegister(::RubyGildedBookBlock)
-        val SAPPHIRE_GILDED_BOOK by LargeBookDelegateRegister(::SapphireGildedBookBlock)
+    companion object : BookRegistrySupplier() {
+        override val nameColor: Int = 0xf73859
+        override val maxPage: Int = 2000
+        override val typeCode: Int = 3
+
+        val MAJESTIC_GILDED_BOOK: MajesticGildedBookBlock = registry(::MAJESTIC_GILDED_BOOK)
+        val QUARTZ_RUBY_ENCRUSTED_BOOK: QuartzRubyEncrustedBookBlock = registry(::QUARTZ_RUBY_ENCRUSTED_BOOK)
+        val RUBY_GILDED_BOOK: RubyGildedBookBlock = registry(::RUBY_GILDED_BOOK)
+        val SAPPHIRE_GILDED_BOOK: SapphireGildedBookBlock = registry(::SAPPHIRE_GILDED_BOOK)
+
     }
 
     class EntityTypes() : BlockEntityRegistryContainer {

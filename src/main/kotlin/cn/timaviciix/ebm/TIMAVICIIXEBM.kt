@@ -1,8 +1,8 @@
 package cn.timaviciix.ebm
 
 import cn.timaviciix.ebm.config.ConfigCreator
-import cn.timaviciix.ebm.data_io.file.StorageFolderCreator
-import cn.timaviciix.ebm.network.Receiver
+import cn.timaviciix.ebm.data.file.StorageOperator
+import cn.timaviciix.ebm.network.NetworkInit
 import cn.timaviciix.ebm.registers.blocks.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.blocks.OtherBlocksRegister
 import cn.timaviciix.ebm.registers.blocks.blocks.WorkTableRegister
@@ -61,7 +61,7 @@ object TIMAVICIIXEBM : ModInitializer {
         //load Config And Create Data Storage Folder
         addRegistrySortPair(89) {
             ConfigCreator.loadConfig()
-            StorageFolderCreator.createStorageFolder()
+            StorageOperator.createStorageFolder()
         }
 
         //Animation Blocks Register
@@ -72,7 +72,7 @@ object TIMAVICIIXEBM : ModInitializer {
         }
 
         addRegistrySortPair(91) {
-            Receiver.registryServerReceiver()
+            NetworkInit.registryServer()
         }
 
         addRegistrySortPair(92) {

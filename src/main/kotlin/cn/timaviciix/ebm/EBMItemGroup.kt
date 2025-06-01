@@ -31,24 +31,6 @@ class EBMItemGroup(
         }.initializer {
             it.addButton(ItemGroupButton.github(it, "https://github.com/TIMAVICIIX/TIMAVICIIX_EBM"))
         }.build()
-
-        //@Imp:Deprecated
-//        fun addItemsToIG(entries:FabricItemGroupEntries){
-//            entries.apply {
-//                add(BookRegister.CLASSIC_JOURNAL_BOOK)
-//                add(BookRegister.CRIMSON_FLAME_GILDED_BOOK)
-//                add(BookRegister.GOLDEN_BOUGH_FOREST_BOOK)
-//                add(BookRegister.LUXURIOUS_GILDED_BOOK)
-//                add(BookRegister.MAJESTIC_GILDED_BOOK)
-//                add(BookRegister.MAJESTIC_GILDED_BOOK)
-//                add(BookRegister.QUART_GILDED_BOOK)
-//                add(BookRegister.QUARTZ_RUBY_ENCRUSTED_BOOK)
-//                add(BookRegister.REFINED_LEATHER_BOOK)
-//                add(BookRegister.RUBY_GILDED_BOOK)
-//                add(BookRegister.SAPPHIRE_GILDED_BOOK)
-//                add(BookRegister.STURDY_OBSIDIAN_GILDED_BOOK)
-//            }
-//        }
     }
 
     //extendsOperation check
