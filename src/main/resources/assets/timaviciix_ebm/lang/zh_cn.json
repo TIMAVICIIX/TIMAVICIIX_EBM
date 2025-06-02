@@ -83,5 +83,9 @@
   "tooltip.timaviciix_ebm.book_draft": "未签章",
   "tooltip.timaviciix_ebm.book_blank_data": "这本书未被编辑过",
   "data.timaviciix_ebm.book_name_unknown": "未命名",
-  "data.timaviciix_ebm.author_name_unknown": "佚名"
+  "data.timaviciix_ebm.author_name_unknown": "佚名",
+  "notice.timaviciix_ebm.save_success": "保存成功",
+  "notice.timaviciix_ebm.save_failed": "保存失败",
+  "notice.timaviciix_ebm.save_wait": "请稍等片刻后上传!",
+  "notice.timaviciix_ebm.info_un_open": "功能未开放,敬请期待!"
 }

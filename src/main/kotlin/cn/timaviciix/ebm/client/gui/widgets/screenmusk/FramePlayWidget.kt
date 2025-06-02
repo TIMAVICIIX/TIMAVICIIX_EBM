@@ -9,7 +9,7 @@
 
 package cn.timaviciix.ebm.client.gui.widgets.screenmusk
 
-import cn.timaviciix.ebm.client.gui.GUIConfig
+import cn.timaviciix.ebm.client.gui.config.GUIConfig
 import net.minecraft.client.gui.DrawContext
 
 class FramePlayWidget(

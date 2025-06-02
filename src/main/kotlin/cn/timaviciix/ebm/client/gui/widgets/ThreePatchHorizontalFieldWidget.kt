@@ -9,7 +9,8 @@
 
 package cn.timaviciix.ebm.client.gui.widgets
 
-import cn.timaviciix.ebm.client.gui.GUIConfig
+
+import cn.timaviciix.ebm.client.gui.config.GUIConfig
 import cn.timaviciix.ebm.puppets.TextFieldWidgetPuppet
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.font.TextRenderer

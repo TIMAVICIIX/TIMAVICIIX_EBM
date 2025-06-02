@@ -15,7 +15,6 @@ object BookTooltipConfig {
     const val HOLD_SHIFT = PREFIX + "hold_shift"
     const val BOOK_AUTHOR = PREFIX + "book_author"
     const val BOOK_EDITOR = PREFIX + "book_editor"
-    const val BOOK_PAGE_COUNT = PREFIX + "book_page_count"
     const val BOOK_TAG = PREFIX + "book_tag"
     const val BOOK_IS_COPIES = PREFIX + "book_is_copies"
     const val BOOK_IS_MANUSCRIPT = PREFIX + "book_is_manuscript"

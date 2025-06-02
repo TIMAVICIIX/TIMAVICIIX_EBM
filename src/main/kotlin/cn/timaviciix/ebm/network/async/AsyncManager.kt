@@ -24,8 +24,8 @@ object AsyncManager {
     fun <E> publish(
         id: String,
         task: AsyncSubscriber<E>,
-        coolDownMs: Long = 2000L,
-        timeoutMs: Long = 1000L
+        coolDownMs: Long = 20000L,
+        timeoutMs: Long = 10000L
     ): Boolean {
         if (QUEUE.containsKey(id)) return false
 
@@ -33,15 +33,12 @@ object AsyncManager {
         scope.launch {
             try {
                 task.onUploading()
-
                 withTimeoutOrNull(timeoutMs) {
                     task.startUpload()
                 }
-
                 if (task.response == null) {
                     task.onTimeout()
                 }
-
             } catch (e: Exception) {
                 task.onFailed(task.response)
                 GlobalData.LOGGER.error("Upload Error: ${e.message}")

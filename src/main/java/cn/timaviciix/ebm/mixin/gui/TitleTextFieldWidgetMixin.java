@@ -1,7 +1,7 @@
 package cn.timaviciix.ebm.mixin.gui;
 
 
-import cn.timaviciix.ebm.client.gui.GUIConfig;
+import cn.timaviciix.ebm.client.gui.config.GUIConfig;
 import cn.timaviciix.ebm.util.GlobalData;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;

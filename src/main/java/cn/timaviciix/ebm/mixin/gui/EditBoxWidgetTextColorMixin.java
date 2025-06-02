@@ -1,6 +1,6 @@
 package cn.timaviciix.ebm.mixin.gui;
 
-import cn.timaviciix.ebm.client.gui.GUIConfig;
+import cn.timaviciix.ebm.client.gui.config.GUIConfig;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.EditBoxWidget;

@@ -1,6 +1,6 @@
 package cn.timaviciix.ebm.util
 
-import cn.timaviciix.ebm.client.gui.GUIConfig
+import cn.timaviciix.ebm.client.gui.config.GUIConfig
 import net.minecraft.text.Style
 import software.bernie.geckolib.core.`object`.Color
 

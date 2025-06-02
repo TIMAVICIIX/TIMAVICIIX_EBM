@@ -12,11 +12,14 @@
 package cn.timaviciix.ebm.client.gui.writing
 
 import cn.timaviciix.ebm.client.gui.BaseScreen
-import cn.timaviciix.ebm.client.gui.GUIConfig
+import cn.timaviciix.ebm.client.gui.config.GUIConfig
+import cn.timaviciix.ebm.client.gui.config.NoticeTexts
 import cn.timaviciix.ebm.client.gui.widgets.*
 import cn.timaviciix.ebm.client.gui.widgets.screenmusk.FramePlayWidget
 import cn.timaviciix.ebm.client.gui.widgets.screenmusk.ScreenMuskWidget
 import cn.timaviciix.ebm.data.templates.package_templates.WarpedBookData
+import cn.timaviciix.ebm.network.async.AsyncID
+import cn.timaviciix.ebm.network.async.AsyncManager
 import cn.timaviciix.ebm.network.async.AsyncSubscriber
 import cn.timaviciix.ebm.network.channels.BookExternalNbtChannel
 import cn.timaviciix.ebm.network.channels.ReadingStateChannel
@@ -121,7 +124,7 @@ class WritingScreen(
         GUIConfig.NETWORK_BUTTON_TEXTURE_SET.let {
             networkBtn = addDrawableChild(
                 ImageButtonWidget(it, width - 75, 5, it.sizeWidth, it.sizeHeight) {
-                    topSlideNoticeWidget.show(Text.literal("模块未开放,敬请期待") to GUIConfig.INFO_NOTICE_ICON_TEXTURE_SET)
+                    topSlideNoticeWidget.show(NoticeTexts.INFO_UN_OPEN to GUIConfig.INFO_NOTICE_ICON_TEXTURE_SET)
                 }
             )
         }
@@ -202,8 +205,7 @@ class WritingScreen(
                 36, 20,
                 textInterpreter("gui.timaviciix_ebm.save_btn", true)
             ) {
-                topSlideNoticeWidget.show(Text.literal("保存成功") to GUIConfig.SAVE_NOTICE_ICON_TEXTURE_SET)
-                doneOperations()
+                saveBook()
             }
         )
 
@@ -252,30 +254,29 @@ class WritingScreen(
 
     private fun saveBook(otherOperation: (d: WarpedBookData) -> Unit = {}) {
         warpedBookData.apply {
-            val subscriber = AsyncSubscriber<Boolean>(
-                startUpload = {
-                    BookExternalNbtChannel.sendUploadBookExternalNbtRequest(
-                        user,
-                        this.bookId.valueToString(),
-                        readExternal()
-                    )
-                },
-                onUploading = {},
-                complete = {},
-                onFailed = {},
-                onTimeout = {},
-            )
-
             otherOperation(this)
-            if (warpedBookData.bookId.getValue() != null)
+            if (warpedBookData.bookId.getValue() != null) {
                 saveInline(stack)
-            //@Imp: 变量测试
-            /*val publish = AsyncManager.publish(AsyncID.UPLOAD_EXTERNAL_BOOK_REQUEST, subscriber)
-            if(publish){
-                //TODO
-            }else{
-                //TODO
-            }*/
+
+                val subscriber = AsyncSubscriber<Boolean>(
+                    startUpload = {
+                        BookExternalNbtChannel.sendUploadBookExternalNbtRequest(
+                            user,
+                            this.bookId.valueToString(),
+                            readExternal()
+                        )
+                    },
+                    onUploading = {},
+                    onSuccess = { topSlideNoticeWidget.show(NoticeTexts.SAVE_SUCCESS to GUIConfig.SUCCESS_NOTICE_ICON_TEXTURE_SET) },
+                    onFailed = { topSlideNoticeWidget.show(NoticeTexts.SAVE_FAILED to GUIConfig.FAILED_NOTICE_ICON_TEXTURE_SET) },
+                    onTimeout = {},
+                )
+                //@Imp: 变量测试
+                val publish = AsyncManager.publish(AsyncID.UPLOAD_EXTERNAL_BOOK_REQUEST, subscriber)
+                if (!publish) {
+                    topSlideNoticeWidget.show(NoticeTexts.INFO_UN_OPEN to GUIConfig.WAIT_NOTICE_ICON_TEXTURE_SET)
+                }
+            }
         }
     }
 

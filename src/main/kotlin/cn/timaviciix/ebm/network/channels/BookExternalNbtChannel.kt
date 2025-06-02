@@ -9,11 +9,12 @@
 
 package cn.timaviciix.ebm.network.channels
 
-import cn.timaviciix.ebm.data.file.StorageOperator
 import cn.timaviciix.ebm.network.async.AsyncID
 import cn.timaviciix.ebm.network.async.AsyncManager
 import cn.timaviciix.ebm.network.delegates.PacketID
 import cn.timaviciix.ebm.network.interfaces.ChannelModule
+import cn.timaviciix.ebm.storage.StorageCategory
+import cn.timaviciix.ebm.storage.StorageManager
 import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -72,7 +73,7 @@ object BookExternalNbtChannel : ChannelModule {
             val bookNbt = buf.readNbt()
             bookNbt?.let {
                 server.playerManager.getPlayer(playerUUID)?.let { player ->
-                    val saveResult = StorageOperator.writePlayerExternalBook(playerUUID, bookId, it)
+                    val saveResult = StorageManager.writeNbtData(playerUUID, StorageCategory.BOOK_DATA, bookId, it)
                     val responseBuf = PacketByteBuf(Unpooled.buffer()).apply { writeBoolean(saveResult) }
                     ServerPlayNetworking.send(player, NBT_UPLOAD_RESPONSE_FROM_SERVER, responseBuf)
                 }
@@ -85,7 +86,7 @@ object BookExternalNbtChannel : ChannelModule {
             val playerUUID = buf.readUuid()
             val bookId = buf.readString()
             server.playerManager.getPlayer(playerUUID)?.let {
-                val bookNbt = StorageOperator.readPlayerExternalBook(playerUUID, bookId)
+                val bookNbt = StorageManager.readNbtData(playerUUID, StorageCategory.BOOK_DATA, bookId)
                 val responseBuf = PacketByteBuf(Unpooled.buffer()).apply { writeNbt(bookNbt) }
                 ServerPlayNetworking.send(player, NBT_DOWNLOAD_RESPONSE_FROM_SERVER, responseBuf)
             }
@@ -94,8 +95,9 @@ object BookExternalNbtChannel : ChannelModule {
 
     private fun receiveUploadResponseFromServer() {
         ClientPlayNetworking.registerGlobalReceiver(NBT_UPLOAD_RESPONSE_FROM_SERVER) { client, _, buf, _ ->
+            val result = buf.readBoolean()
             client.execute {
-                AsyncManager.findAsyncTask<Boolean>(AsyncID.UPLOAD_EXTERNAL_BOOK_REQUEST)?.complete?.invoke(buf.readBoolean())
+                AsyncManager.findAsyncTask<Boolean>(AsyncID.UPLOAD_EXTERNAL_BOOK_REQUEST)?.complete(result)
             }
         }
     }

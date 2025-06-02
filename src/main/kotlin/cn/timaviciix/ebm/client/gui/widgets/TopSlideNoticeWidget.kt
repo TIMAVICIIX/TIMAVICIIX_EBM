@@ -11,8 +11,7 @@
 
 package cn.timaviciix.ebm.client.gui.widgets
 
-import cn.timaviciix.ebm.client.gui.GUIConfig
-import cn.timaviciix.ebm.client.gui.GUIConfig.NormalTextureConfig
+import cn.timaviciix.ebm.client.gui.config.GUIConfig
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
@@ -28,8 +27,8 @@ class TopSlideNoticeWidget(
 ) : ClickableWidget(0, targetY, 0, 0, Text.empty()) {
 
     // 消息队列
-    private val noticeQueue: Queue<Pair<Text, NormalTextureConfig>> = LinkedList()
-    private lateinit var currentNotice: Pair<Text, NormalTextureConfig>
+    private val noticeQueue: Queue<Pair<Text, GUIConfig.NormalTextureConfig>> = LinkedList()
+    private lateinit var currentNotice: Pair<Text, GUIConfig.NormalTextureConfig>
 
     // 动画参数
     private var defaultDuringTime = 500
@@ -66,7 +65,7 @@ class TopSlideNoticeWidget(
      * @param slideSpeed 滑动速度（像素/帧）
      */
     fun show(
-        noticeContent: Pair<Text, NormalTextureConfig>,
+        noticeContent: Pair<Text, GUIConfig.NormalTextureConfig>,
         duringTime: Int = defaultDuringTime,
         slideSpeed: Int = defaultSlideSpeed
     ) {

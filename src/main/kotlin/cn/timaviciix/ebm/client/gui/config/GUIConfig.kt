@@ -1,4 +1,4 @@
-package cn.timaviciix.ebm.client.gui
+package cn.timaviciix.ebm.client.gui.config
 
 import cn.timaviciix.ebm.util.GlobalData
 import net.minecraft.text.Text
@@ -50,6 +50,9 @@ object GUIConfig {
         val TOP_SLIDE_NOTICE_WIDGET_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/background_notice.png")
         val NOTICE_SAVE_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/save_notice.png")
         val NOTICE_INFO_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/info_notice.png")
+        val NOTICE_SUCCESS_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/success_notice.png")
+        val NOTICE_fAILED_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/failed_notice.png")
+        val NOTICE_WAIT_ICON_TEXTURE = Identifier(GlobalData.MOD_ID, "textures/gui/notice/wait_notice.png")
 
         val READ_LEVEL_WIDGET_TEXTURE =
             Identifier(GlobalData.MOD_ID, "textures/gui/widget/component/read_level_widget.png")
@@ -214,6 +217,24 @@ object GUIConfig {
     )
     val INFO_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
         Textures.NOTICE_INFO_ICON_TEXTURE,
+        0, 0,
+        12, 12,
+        12, 12
+    )
+    val SUCCESS_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
+        Textures.NOTICE_SUCCESS_ICON_TEXTURE,
+        0, 0,
+        12, 12,
+        12, 12
+    )
+    val FAILED_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
+        Textures.NOTICE_fAILED_ICON_TEXTURE,
+        0, 0,
+        12, 12,
+        12, 12
+    )
+    val WAIT_NOTICE_ICON_TEXTURE_SET = NormalTextureConfig(
+        Textures.NOTICE_WAIT_ICON_TEXTURE,
         0, 0,
         12, 12,
         12, 12

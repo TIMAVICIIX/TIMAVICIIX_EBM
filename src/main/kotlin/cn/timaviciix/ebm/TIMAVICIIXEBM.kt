@@ -1,7 +1,6 @@
 package cn.timaviciix.ebm
 
-import cn.timaviciix.ebm.config.ConfigCreator
-import cn.timaviciix.ebm.data.file.StorageOperator
+import cn.timaviciix.ebm.config.ModConfig
 import cn.timaviciix.ebm.network.NetworkInit
 import cn.timaviciix.ebm.registers.blocks.blocks.CopierRegister
 import cn.timaviciix.ebm.registers.blocks.blocks.OtherBlocksRegister
@@ -13,6 +12,7 @@ import cn.timaviciix.ebm.registers.items.registers.OtherItemRegister
 import cn.timaviciix.ebm.registers.items.registers.StuffRegister
 import cn.timaviciix.ebm.registers.others.AnimationIBsRegister
 import cn.timaviciix.ebm.registers.others.SoundRegister
+import cn.timaviciix.ebm.storage.StorageManager
 import cn.timaviciix.ebm.tooltip.ToolTipBus
 import cn.timaviciix.ebm.util.GlobalData
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
@@ -60,8 +60,8 @@ object TIMAVICIIXEBM : ModInitializer {
 
         //load Config And Create Data Storage Folder
         addRegistrySortPair(89) {
-            ConfigCreator.loadConfig()
-            StorageOperator.createStorageFolder()
+            ModConfig.load()
+            StorageManager.initStorageFolders()
         }
 
         //Animation Blocks Register
