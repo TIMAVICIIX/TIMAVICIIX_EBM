@@ -9,12 +9,14 @@
 
 package cn.timaviciix.ebm.network.channels
 
+import cn.timaviciix.ebm.data.templates.package_templates.WarpedBookData
 import cn.timaviciix.ebm.network.async.AsyncID
 import cn.timaviciix.ebm.network.async.AsyncManager
 import cn.timaviciix.ebm.network.delegates.PacketID
 import cn.timaviciix.ebm.network.interfaces.ChannelModule
 import cn.timaviciix.ebm.storage.StorageCategory
 import cn.timaviciix.ebm.storage.StorageManager
+import cn.timaviciix.ebm.util.GlobalData
 import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -74,6 +76,17 @@ object BookExternalNbtChannel : ChannelModule {
             bookNbt?.let {
                 server.playerManager.getPlayer(playerUUID)?.let { player ->
                     val saveResult = StorageManager.writeNbtData(playerUUID, StorageCategory.BOOK_DATA, bookId, it)
+                    //进行存储完整性验证
+                    StorageManager.readNbtData(playerUUID, StorageCategory.BOOK_DATA, bookId)?.let {
+                        val maxPage = it.getInt("maxPage")
+                        val typeCode = it.getInt("typeCode")
+                        WarpedBookData(maxPage, typeCode).apply {
+                            readAll(it)
+                            printElements()
+                            GlobalData.LOGGER.info("Book ID:${this.bookId.riskyGetValue()}")
+                        }
+
+                    }
                     val responseBuf = PacketByteBuf(Unpooled.buffer()).apply { writeBoolean(saveResult) }
                     ServerPlayNetworking.send(player, NBT_UPLOAD_RESPONSE_FROM_SERVER, responseBuf)
                 }

@@ -75,5 +75,4 @@ class WarpedBookData(
     val lastReadingPage by template(NbtStorageType.ALL, Companion.IntResolver(), DefaultData.START_PAGE_COUNT)
 
     val content by template(NbtStorageType.ONLY_EXTERNAL, Companion.StringResolver(), "")
-
 }

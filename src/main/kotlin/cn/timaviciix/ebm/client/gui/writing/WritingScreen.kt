@@ -150,9 +150,8 @@ class WritingScreen(
                 textRenderer,
                 10, 5, width - 100, 20,
                 checkSaveOperation = {
-                    saveBook {
-                        it.bookName.injectValue(bufferTitleFieldString)
-                    }
+                    warpedBookData.bookName.injectValue(bufferTitleFieldString)
+                    doneOperations()
                 },
                 bufferStringChecker = {
                     bufferTitleFieldString = it
@@ -205,6 +204,7 @@ class WritingScreen(
                 36, 20,
                 textInterpreter("gui.timaviciix_ebm.save_btn", true)
             ) {
+                doneOperations()
                 saveBook()
             }
         )
@@ -256,25 +256,31 @@ class WritingScreen(
         warpedBookData.apply {
             otherOperation(this)
             if (warpedBookData.bookId.getValue() != null) {
-                saveInline(stack)
+                writeInline(stack.orCreateNbt)
 
                 val subscriber = AsyncSubscriber<Boolean>(
                     startUpload = {
                         BookExternalNbtChannel.sendUploadBookExternalNbtRequest(
                             user,
                             this.bookId.valueToString(),
-                            readExternal()
+                            writeExternal()
                         )
                     },
                     onUploading = {},
-                    onSuccess = { topSlideNoticeWidget.show(NoticeTexts.SAVE_SUCCESS to GUIConfig.SUCCESS_NOTICE_ICON_TEXTURE_SET) },
+                    onSuccess = {
+                        if (it) {
+                            topSlideNoticeWidget.show(NoticeTexts.SAVE_SUCCESS to GUIConfig.SUCCESS_NOTICE_ICON_TEXTURE_SET)
+                        } else {
+                            topSlideNoticeWidget.show(NoticeTexts.SAVE_FAILED to GUIConfig.FAILED_NOTICE_ICON_TEXTURE_SET)
+                        }
+                    },
                     onFailed = { topSlideNoticeWidget.show(NoticeTexts.SAVE_FAILED to GUIConfig.FAILED_NOTICE_ICON_TEXTURE_SET) },
-                    onTimeout = {},
+                    onTimeout = { topSlideNoticeWidget.show(NoticeTexts.SAVE_TIMEOUT to GUIConfig.WAIT_NOTICE_ICON_TEXTURE_SET) },
                 )
                 //@Imp: 变量测试
                 val publish = AsyncManager.publish(AsyncID.UPLOAD_EXTERNAL_BOOK_REQUEST, subscriber)
                 if (!publish) {
-                    topSlideNoticeWidget.show(NoticeTexts.INFO_UN_OPEN to GUIConfig.WAIT_NOTICE_ICON_TEXTURE_SET)
+                    topSlideNoticeWidget.show(NoticeTexts.SAVE_WAIT to GUIConfig.WAIT_NOTICE_ICON_TEXTURE_SET)
                 }
             }
         }
@@ -316,6 +322,7 @@ class WritingScreen(
     }
 
     override fun close() {
+        saveBook()
         closeOperations()
         super.close()
     }

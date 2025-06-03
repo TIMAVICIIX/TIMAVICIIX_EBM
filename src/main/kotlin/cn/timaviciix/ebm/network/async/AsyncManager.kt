@@ -28,16 +28,19 @@ object AsyncManager {
         timeoutMs: Long = 10000L
     ): Boolean {
         if (QUEUE.containsKey(id)) return false
-
         QUEUE[id] = task
         scope.launch {
             try {
                 task.onUploading()
-                withTimeoutOrNull(timeoutMs) {
+
+                val uploadJob = launch {
                     task.startUpload()
                 }
+
+                delay(timeoutMs)
                 if (task.response == null) {
                     task.onTimeout()
+                    uploadJob.cancel("Timeout reached")
                 }
             } catch (e: Exception) {
                 task.onFailed(task.response)
@@ -50,4 +53,5 @@ object AsyncManager {
 
         return true
     }
+
 }

@@ -86,6 +86,7 @@
   "data.timaviciix_ebm.author_name_unknown": "Unknown Author",
   "notice.timaviciix_ebm.save_success": "Save Success",
   "notice.timaviciix_ebm.save_failed": "Save Failed",
+  "notice.timaviciix_ebm.save_timeout": "Save Timeout",
   "notice.timaviciix_ebm.save_wait": "Please Wait For a Moment.",
   "notice.timaviciix_ebm.info_un_open": "Function not available yet,Please look forward to!"
 }
