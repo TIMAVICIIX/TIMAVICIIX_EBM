@@ -24,7 +24,6 @@ class EditTextWidget(
     private val positionY: Int,
     private val widgetWidth: Int,
     private val widgetHeight: Int,
-    private val onClipboard: (String,List<EditBoxPuppet.Substring>) -> Unit,
     private val maxLines: Int = 18,
     private val placeholder: Text = Text.empty(),
     private val message: Text = Text.empty(),
@@ -43,18 +42,14 @@ class EditTextWidget(
     override fun keyPressed(keyCode: Int, scanCode: Int, modifiers: Int): Boolean {
         //GlobalData.LOGGER.info("KeyPressed")
         return if (this.editBox.linesCount > maxLines && isFocused) {
-            //GlobalData.LOGGER.info("[keyPressed]Can't Type More Chars!!!")
-            //GlobalData.LOGGER.info("Now Text:$text")
             false
         } else if (this.editBox.linesCount == maxLines && (keyCode == 257 || keyCode == 335)) {
-            //GlobalData.LOGGER.info("[keyPressed]Can't Type More Chars!!!")
-            //GlobalData.LOGGER.info("Now Text:$text")
             false
         } else if (Screen.isPaste(keyCode)) {
             //@Imp: 应返回组件信息与文本粘贴项到UI界面进行文本粘贴预演处理
             //reWrapLines(MinecraftClient.getInstance().keyboard.clipboard)
-            val contentString = text + MinecraftClient.getInstance().keyboard.clipboard
-            onClipboard(contentString,this.editBox.reWrapBeforeLines(contentString))
+//            val contentString = text + MinecraftClient.getInstance().keyboard.clipboard
+//            onClipboard(contentString,this.editBox.reWrapBeforeLines(contentString))
             false
         } else {
             super.keyPressed(keyCode, scanCode, modifiers)

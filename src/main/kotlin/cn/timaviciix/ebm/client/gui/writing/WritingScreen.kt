@@ -25,19 +25,19 @@ import cn.timaviciix.ebm.network.channels.BookExternalNbtChannel
 import cn.timaviciix.ebm.network.channels.ReadingStateChannel
 import cn.timaviciix.ebm.registers.others.SoundRegister
 import cn.timaviciix.ebm.util.StyleUtil
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
 
+@Environment(EnvType.CLIENT)
 class WritingScreen(
     private val warpedBookData: WarpedBookData,
     private val user: PlayerEntity,
     private val stack: ItemStack
 ) : BaseScreen(Text.literal("TIMAVICIIX_EBM:WRITE_AND_READ_GUI")) {
-
-    //内容缓存处理器
-    private val bufferResolver = WritingBufferResolver(warpedBookData)
 
     /*组件们*/
     // 关闭，设置，网络，上一页，下一页
@@ -74,9 +74,6 @@ class WritingScreen(
 
 
     init {
-        warpedBookData.readInline(stack)
-        //@Imp: 实验调用，后期更改为文章解析器
-        bufferTitleFieldString = warpedBookData.bookName.riskyGetValue() ?: ""
         openOperations()
     }
 
@@ -175,9 +172,9 @@ class WritingScreen(
             EditTextWidget(
                 textRenderer,
                 textLeftFieldPosition.first, textLeftFieldPosition.second,
-                116, 170, { s, l -> bufferResolver.onClipboard(s, l) }
-            ))
-        bufferResolver.injectLeftWidget(textLeftContentFieldWidget)
+                116, 170,
+            )
+        )
 
 
         val textRightFieldPosition = Pair(
@@ -188,9 +185,9 @@ class WritingScreen(
             EditTextWidget(
                 textRenderer,
                 textRightFieldPosition.first, textRightFieldPosition.second,
-                116, 170, { s, l -> bufferResolver.onClipboard(s, l) }
-            ))
-        bufferResolver.injectRightWidget(textRightContentFieldWidget)
+                116, 170,
+            )
+        )
 
         val operationsBtnPosition = Pair(
             width - 45, height - 25
@@ -297,6 +294,10 @@ class WritingScreen(
         GUIConfig.BufferFromMixin.toggleMixin()
         SoundRegister.BookSounds.playOpenSounds(user)
         ReadingStateChannel.sendReadingPlayerUUid(user)
+
+        //@Imp: 实验调用，后期更改为异步请求与文章解析器
+        warpedBookData.readInline(stack)
+        bufferTitleFieldString = warpedBookData.bookName.riskyGetValue() ?: ""
     }
 
     override fun changeOperations() {
