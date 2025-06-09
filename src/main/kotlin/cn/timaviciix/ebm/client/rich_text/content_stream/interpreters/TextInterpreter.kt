@@ -10,99 +10,68 @@
 package cn.timaviciix.ebm.client.rich_text.content_stream.interpreters
 
 import cn.timaviciix.ebm.client.rich_text.content_stream.interfaces.BlockInterpreter
-import net.minecraft.text.MutableText
-import net.minecraft.text.Text
 
-object TextInterpreter :
-    BlockInterpreter<String, List<Pair<IntRange, MutableText>>, Text>("text", FormatInterpreters.textFormat) {
+object TextInterpreter : BlockInterpreter<String, TextInterpreter.TextData>("text") {
 
-    /**
-     * @param originContent 压缩源文本
-     * @param resolvedValueTaker 出口文本携带器，此函数将抛出处理后的源文本
-     * @return 返回Text块列表，first为块再源文本中范围索引，second为块本身
-     *
-     * 1.得到文本后先获得text闭包的源文本段,并删除源文本段中该段
-     * 2.在每个源text段中获取具有格式声明的文本段，通过格式解释器进行迭代解释并删除删除格式声明
-     * 3.获得text中具有格式声明的Text列表并记录范围
-     * 4.最后处理不带有格式的字符串，并组装为列表记录范围
-     * 5.最后将两个列表交叉拼合，顺序与源text段中内容不变
-     * */
-    override fun interpret(
-        originContent: String,
-        resolvedValueTaker: (String) -> Unit
-    ): List<Pair<IntRange, MutableText>> {
+    data class TextData(
+        val textContent: String,
+        val boldPositions: List<Int>,
+        val italicPositions: List<Int>,
+        val underLinePositions: List<Int>
+    )
 
-        val tagRegex = getTagRegex()
-
-        var resolvedString = originContent
-        val resultList: MutableList<Pair<IntRange, MutableText>> = mutableListOf()
-
-        tagRegex.findAll(originContent).forEach {
-
-            //1.源字符串中删除段，建立文本列表
-            resolvedString = resolvedString.replaceRange(it.range, "")
-
-            //2.段内删除段tag
-            val textSegment = cancelTag(it.value)
-
-            // 3. 调用递归格式处理器
-            val resolvedText = applyFormatInterpreters(
-                textSegment,
-                baseBuilder = { str -> Text.literal(str) }
-            )
-
-            // 4. 保存结果，范围仍然是原始字符串中的 range
-            resultList += (it.range to resolvedText)
-
-        }
-
-        // 5. 把删除后的字符串抛出（例如用于下一个处理器链）
-        resolvedValueTaker(resolvedString)
-
-        return resultList
+    override fun resolveContent(segment: String): TextData {
+        val (plain, bold, italic, underline) = parseFormatTags(segment)
+        return TextData(plain, bold.toList(), italic.toList(), underline.toList())
     }
 
-    private fun applyFormatInterpreters(
-        content: String,
-        baseBuilder: (String) -> MutableText,
-    ): MutableText {
-        for (formatter in formatInterpreters) {
-            val regex = formatter.getRegex()
-            if (regex.containsMatchIn(content)) {
-                val output = mutableListOf<MutableText>()
-                var lastIndex = 0
+    private fun parseFormatTags(content: String): Quad<String, Set<Int>, Set<Int>, Set<Int>> {
+        val boldRegex = Regex("<bold>(.*?)</bold>")
+        val italicRegex = Regex("<italic>(.*?)</italic>")
+        val underlineRegex = Regex("<underline>(.*?)</underline>")
 
-                regex.findAll(content).forEach { match ->
-                    // 处理前段未匹配部分
-                    if (match.range.first > lastIndex) {
-                        val prefix = content.substring(lastIndex, match.range.first)
-                        output += baseBuilder(prefix)
-                    }
+        val formatRanges = mutableListOf<Triple<Regex, String, MutableSet<Int>>>()
+        formatRanges += Triple(boldRegex, "bold", mutableSetOf())
+        formatRanges += Triple(italicRegex, "italic", mutableSetOf())
+        formatRanges += Triple(underlineRegex, "underline", mutableSetOf())
 
-                    // 递归处理中间部分
-                    val inner = applyFormatInterpreters(
-                        match.groupValues[1],
-                        baseBuilder
-                    )
+        val cleanBuilder = StringBuilder()
+        var indexOffset = 0
 
-                    // 应用格式操作
-                    val styled = formatter.formatOperation(inner as Text)
-                    output += styled as MutableText
+        fun processRecursive(input: String, globalOffset: Int): String {
+            var localInput = input
+            formatRanges.forEach { (regex, _, indexSet) ->
+                regex.findAll(localInput).forEach { match ->
+                    val innerStart = match.range.first
+                    val innerEnd = match.range.last + 1
 
-                    lastIndex = match.range.last + 1
+                    val rawInner = match.groupValues[1]
+                    val parsed =
+                        processRecursive(rawInner, globalOffset + cleanBuilder.length + innerStart - indexOffset)
+
+                    val start = cleanBuilder.length
+                    cleanBuilder.append(parsed)
+                    val end = cleanBuilder.length
+                    indexSet += (start until end)
+
+                    indexOffset += innerEnd - innerStart - parsed.length
+                    localInput = localInput.replaceRange(match.range, parsed)
                 }
-
-                // 处理最后的尾部
-                if (lastIndex < content.length) {
-                    output += baseBuilder(content.substring(lastIndex))
-                }
-
-                // 拼接所有子段
-                return output.fold(Text.literal("")) { acc, t -> acc.append(t) }
             }
+            return localInput
         }
 
-        // 没有格式匹配，返回纯文本
-        return baseBuilder(content)
+        val stripped = processRecursive(content, 0)
+        cleanBuilder.clear()
+        cleanBuilder.append(stripped)
+
+        return Quad(
+            cleanBuilder.toString(),
+            formatRanges[0].third,
+            formatRanges[1].third,
+            formatRanges[2].third
+        )
     }
+
+    data class Quad<A, B, C, D>(val first: A, val second: B, val third: C, val fourth: D)
 }

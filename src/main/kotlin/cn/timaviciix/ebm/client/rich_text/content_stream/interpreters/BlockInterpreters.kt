@@ -12,8 +12,10 @@ package cn.timaviciix.ebm.client.rich_text.content_stream.interpreters
 import cn.timaviciix.ebm.client.rich_text.content_stream.interfaces.BlockInterpreter
 
 object BlockInterpreters {
-    val all: MutableList<BlockInterpreter<*, *, *>> = mutableListOf<BlockInterpreter<*, *, *>>().apply {
+    val all: MutableList<BlockInterpreter<*, *>> = mutableListOf<BlockInterpreter<*, *>>().apply {
         add(TextInterpreter)
+        add(ImageInterpreter)
+        add(CodeLineInterpreter)
     }
 }
 
