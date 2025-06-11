@@ -4,7 +4,7 @@ package cn.timaviciix.ebm.client.rich_text.content_stream.interfaces
  *@param T 源解释类型
  *@param E 解释输出类型
  * */
-abstract class BlockInterpreter<T, E>(private val elementTagName: String) {
+abstract class BlockInterpreter<T, E>(elementTagName: String) {
 
     abstract fun resolveContent(segment: String): E
 
@@ -23,7 +23,7 @@ abstract class BlockInterpreter<T, E>(private val elementTagName: String) {
         return resultList
     }
 
-    val regex = Regex("<$elementTagName>(.*?)</$elementTagName>")
-    val tag = "<$elementTagName>" to "</$elementTagName>"
-    fun cancelTag(segment: String): String = segment.removePrefix(tag.first).removeSuffix(tag.second)
+    private val regex = Regex("<$elementTagName>(.*?)</$elementTagName>")
+    private val tag = "<$elementTagName>" to "</$elementTagName>"
+    private fun cancelTag(segment: String): String = segment.removePrefix(tag.first).removeSuffix(tag.second)
 }
