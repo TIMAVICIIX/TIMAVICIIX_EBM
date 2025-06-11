@@ -16,6 +16,8 @@ object BlockInterpreters {
         add(TextInterpreter)
         add(ImageInterpreter)
         add(CodeLineInterpreter)
+        add(CodeBlockInterpreter)
+        add(CatalogBlockInterpreter)
     }
 }
 

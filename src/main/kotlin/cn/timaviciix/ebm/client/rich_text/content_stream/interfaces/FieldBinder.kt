@@ -20,13 +20,16 @@ data class FieldBinder<T, F>(
 ) {
     val regex = Regex("<$tagName>(.*?)</$tagName>")
 
+    fun cancelTag(content: String) = content.replace("<$tagName>", "").replace("</$tagName>", "")
+
     fun apply(segment: String, instance: T) {
         if (customResolver != null) {
             customResolver.invoke(segment, instance)
             return
         }
 
-        val match = regex.find(segment)?.groupValues?.get(1) ?: return
+        var match = regex.find(segment)?.groupValues?.get(1) ?: return
+        match = cancelTag(match)
         val value = parser(match)
         property.set(instance, value)
     }
